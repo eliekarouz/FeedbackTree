@@ -1,4 +1,4 @@
-# TreeFeedback
+# FeedbackTree
 
 Unidirectional data flow architecture for Android.\
 The API is not yet stable as the code we are still experimenting the concept.\
