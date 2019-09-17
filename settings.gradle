@@ -1,0 +1,2 @@
+include ':app', ':feedbacktree'
+rootProject.name='FeedbackTree'
