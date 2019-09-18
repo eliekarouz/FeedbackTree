@@ -9,8 +9,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 
-class FlowNode<State : StateCompletable<*>, Event, Rendering>(
-    val flow: Flow<State, Event, *, Rendering>,
+class FlowNode<Input, State : StateCompletable<*>, Rendering>(
+    val input: Input,
+    val flow: Flow<Input, State, *, *, Rendering>,
     val id: String,
     var disposable: Disposable? = null,
     internal var children: MutableList<FlowNode<*, *, *>> = mutableListOf(),
@@ -18,7 +19,7 @@ class FlowNode<State : StateCompletable<*>, Event, Rendering>(
 ) : Disposable {
 
     fun render(context: RenderingContext): Rendering {
-        return flow.render(flow.state.value ?: flow.initialState, context)
+        return flow.render(flow.state.value ?: flow.initialState(input), context)
     }
 
     override fun isDisposed(): Boolean = disposable == null
@@ -40,67 +41,87 @@ class RenderingContext(private val treeStackTraversedNodes: MutableList<FlowNode
         get() = treeStackTraversedNodes.last()
 
     @SuppressLint("CheckResult")
-    fun <ChildState, ChildEvent, ChildResult, ChildRendering, Event> renderChild(
-        flow: Flow<ChildState, ChildEvent, ChildResult, ChildRendering>,
-        toEvent: (FlowResult<ChildResult>) -> Event
+    fun <ChildState, ChildResult, ChildRendering> renderChild(
+        flow: Flow<Unit, ChildState, *, ChildResult, ChildRendering>,
+        id: String? = null,
+        onResult: (FlowResult<ChildResult>) -> Unit
+    ): ChildRendering
+            where ChildState : StateCompletable<ChildResult> =
+        renderChild(Unit, flow, id, onResult)
+
+    @SuppressLint("CheckResult")
+    fun <Input, ChildState, ChildResult, ChildRendering> renderChild(
+        input: Input,
+        flow: Flow<Input, ChildState, *, ChildResult, ChildRendering>,
+        id: String? = null,
+        onResult: (FlowResult<ChildResult>) -> Unit
     ): ChildRendering
             where ChildState : StateCompletable<ChildResult> {
-        println("renderChild: ${flow.key}, currentLeafNode = ${currentLeafNode.flow.key}, currentLeafNode.children= ${currentLeafNode.children.size}")
-        val existingNode = currentLeafNode.children.firstOrNull { it.flow.key == flow.key }
+        val flowId = id ?: flow::class.toString()
+
+        println("renderChild: $flowId, currentLeafNode = ${currentLeafNode.id}, currentLeafNode.children= ${currentLeafNode.children.size}")
+        val existingNode = currentLeafNode.children.firstOrNull { it.id == flowId }
         return if (existingNode != null) {
             val castedNode = existingNode as FlowNode<*, *, ChildRendering>
             currentLeafNode.tempChildren.add(castedNode)
             renderNode(castedNode)
         } else {
-            val parentNode = currentLeafNode as FlowNode<*, Event, *>
-            println("renderChild - Create new node ${flow.key}")
-            val disposable = flow.run().map { childResult ->
-                toEvent(childResult)
-            }.subscribe {
-                parentNode
-                    .flow
-                    .childrenResultPublishSubject
-                    .onNext(it)
+            println("renderChild - Create new node $flowId")
+            val disposable = flow.run().subscribe { result ->
+                onResult(result)
             }
-
-            val newNode = FlowNode(flow, id = flow.key, disposable = disposable)
+            val newNode =
+                FlowNode(
+                    input = input,
+                    flow = flow,
+                    id = flowId,
+                    disposable = disposable
+                )
             currentLeafNode.tempChildren.add(newNode)
             renderNode(newNode)
         }
     }
 
     internal fun <Rendering> renderNode(node: FlowNode<*, *, Rendering>): Rendering {
-        println("Rendering node - start ${node.flow.key}")
+        println("Rendering node - start ${node.id}")
         treeStackTraversedNodes.add(node)
         node.tempChildren.clear()
 
         val rendering = node.render(this)
         println("Rendering - $rendering")
-        val currentChildrenFlowKeys = node.tempChildren.map { it.flow.key }
+        val currentChildrenFlowKeys = node.tempChildren.map { it.id }
 
         val childrenToRemove =
-            node.children.filter { !currentChildrenFlowKeys.contains(it.flow.key) }
+            node.children.filter { !currentChildrenFlowKeys.contains(it.id) }
         childrenToRemove.forEach {
-            println("Rendering node - removing children ${node.flow.key}")
+            println("Rendering node - removing children ${node.id}")
             it.dispose()
         }
 
         node.children = node.tempChildren.toMutableList() //
         treeStackTraversedNodes.remove(node)
-        println("Rendering node - end ${node.flow.key}, node.children = ${node.children.size}")
+        println("Rendering node - end ${node.id}, node.children = ${node.children.size}")
         return rendering
     }
 }
 
-fun <State : StateCompletable<Result>, Event, Result>
+fun <State : StateCompletable<Result>, Result>
         FragmentActivity.startFlow(
-    flow: Flow<State, Event, Result, *>,
+    flow: Flow<Unit, State, *, Result, *>,
+    onResult: (FlowResult<Result>) -> Unit,
+    viewRegistry: ViewRegistry
+): Disposable = startFlow(Unit, flow, onResult, viewRegistry)
+
+fun <Input, State : StateCompletable<Result>, Result>
+        FragmentActivity.startFlow(
+    input: Input,
+    flow: Flow<Input, State, *, Result, *>,
     onResult: (FlowResult<Result>) -> Unit,
     viewRegistry: ViewRegistry
 ): Disposable {
 
     val disposeBag = CompositeDisposable()
-    val rootNode = FlowNode(flow, id = flow.key, disposable = disposeBag)
+    val rootNode = FlowNode(input = input, flow = flow, id = "RootFlow", disposable = disposeBag)
 
     flow.run()
         .subscribe {
@@ -115,9 +136,7 @@ fun <State : StateCompletable<Result>, Event, Result>
         id = R.id.workflow_layout
         start(renderings, viewRegistry)
     }
-
     setContentView(layout)
-
     return rootNode // Disposable
 }
 

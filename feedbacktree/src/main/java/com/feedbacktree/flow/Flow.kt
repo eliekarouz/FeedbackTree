@@ -7,8 +7,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import org.notests.rxfeedback.*
-import org.notests.rxfeedback.Optional
-import java.util.*
 
 private val screenChangedPublishSubject = PublishSubject.create<Unit>()
 val screenChanged: Observable<Unit> = screenChangedPublishSubject
@@ -16,32 +14,22 @@ val screenChanged: Observable<Unit> = screenChangedPublishSubject
 
 typealias Feedback<State, Event> = (ObservableSchedulerContext<State>) -> Observable<Event>
 
-sealed class FlowResult<out Result> {
-    object Aborted : FlowResult<Nothing>()
-    data class Completed<out Result>(val result: Result) : FlowResult<Result>()
-}
-
 interface StateCompletable<Result> {
     val flowResult: FlowResult<Result>?
 }
 
-fun <Result> completed(result: Result): FlowResult<Result> = FlowResult.Completed(result)
-fun <Result> aborted(): FlowResult<Result> = FlowResult.Aborted
-
-abstract class Flow<State, Event, Result, Rendering>(
-    val initialState: State,
+abstract class Flow<Input, State, Event, Output, Rendering>(
+    val input: Input,
     private val reduce: (State, Event) -> State,
     private val scheduler: Scheduler,
     val feedbacks: List<Feedback<State, Event>>
-) where State : StateCompletable<Result> {
+) : IFlow<Input, Output> where State : StateCompletable<Output> {
 
     internal val childrenResultPublishSubject = PublishSubject.create<Event>()
 
-    var key = UUID.randomUUID().toString()
-
     private val publishSubjectEvents = PublishSubject.create<Event>()
 
-    private val abortedResultPublishSubject = PublishSubject.create<FlowResult<Result>>()
+    private val abortedResultPublishSubject = PublishSubject.create<FlowResult<Output>>()
 
     /**
      * This prevents [attachFeedbacks] from starting the workflow by mistake.
@@ -70,12 +58,14 @@ abstract class Flow<State, Event, Result, Rendering>(
         )
     }
 
-    fun run(): Observable<FlowResult<Result>> {
+    abstract fun initialState(input: Input): State
+
+    override fun run(): Observable<FlowResult<Output>> {
         if (active.value == true) {
             error("Attempting to start a flow that is already running")
         }
         val system = Observables.system(
-            initialState = initialState,
+            initialState = initialState(input),
             reduce = reduce,
             scheduler = scheduler,
             scheduledFeedback = feedbacks + listOf(backdoorFeedback())
