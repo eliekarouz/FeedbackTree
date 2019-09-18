@@ -3,6 +3,7 @@ package com.feedbacktree.flow
 import asOptional
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -19,9 +20,8 @@ interface StateCompletable<Result> {
 }
 
 abstract class Flow<Input, State, Event, Output, Rendering>(
-    val input: Input,
     private val reduce: (State, Event) -> State,
-    private val scheduler: Scheduler,
+    private val scheduler: Scheduler = AndroidSchedulers.mainThread(),
     val feedbacks: List<Feedback<State, Event>>
 ) : IFlow<Input, Output> where State : StateCompletable<Output> {
 
@@ -60,7 +60,7 @@ abstract class Flow<Input, State, Event, Output, Rendering>(
 
     abstract fun initialState(input: Input): State
 
-    override fun run(): Observable<FlowResult<Output>> {
+    override fun run(input: Input): Observable<FlowResult<Output>> {
         if (active.value == true) {
             error("Attempting to start a flow that is already running")
         }

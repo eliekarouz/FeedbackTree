@@ -67,7 +67,7 @@ class RenderingContext(private val treeStackTraversedNodes: MutableList<FlowNode
             renderNode(castedNode)
         } else {
             println("renderChild - Create new node $flowId")
-            val disposable = flow.run().subscribe { result ->
+            val disposable = flow.run(input).subscribe { result ->
                 onResult(result)
             }
             val newNode =
@@ -123,7 +123,7 @@ fun <Input, State : StateCompletable<Result>, Result>
     val disposeBag = CompositeDisposable()
     val rootNode = FlowNode(input = input, flow = flow, id = "RootFlow", disposable = disposeBag)
 
-    flow.run()
+    flow.run(input)
         .subscribe {
             onResult(it)
         }

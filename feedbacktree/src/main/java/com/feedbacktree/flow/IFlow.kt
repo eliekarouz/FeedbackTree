@@ -11,5 +11,5 @@ fun <Result> completed(result: Result): FlowResult<Result> = FlowResult.Complete
 fun <Result> aborted(): FlowResult<Result> = FlowResult.Aborted
 
 interface IFlow<Input, Output> {
-    fun run(): Observable<FlowResult<Output>>
+    fun run(input: Input): Observable<FlowResult<Output>>
 }
