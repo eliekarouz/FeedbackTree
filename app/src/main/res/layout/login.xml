@@ -4,62 +4,67 @@
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
 
-    <!--    <LinearLayout-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:paddingTop="56dp"-->
-    <!--        android:paddingLeft="24dp"-->
-    <!--        android:paddingRight="24dp">-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
 
-    <!--        <ImageView android:src="@drawable/logo"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="72dp"-->
-    <!--            android:layout_marginBottom="24dp"-->
-    <!--            android:layout_gravity="center_horizontal" />-->
+        <!--        <ImageView android:src="@drawable/logo"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="72dp"-->
+        <!--            android:layout_marginBottom="24dp"-->
+        <!--            android:layout_gravity="center_horizontal" />-->
 
-    <!--        &lt;!&ndash;  Email Label &ndash;&gt;-->
-    <!--        <android.support.design.widget.TextInputLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="8dp"-->
-    <!--            android:layout_marginBottom="8dp">-->
-    <!--            <EditText android:id="@+id/input_email"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:inputType="textEmailAddress"-->
-    <!--                android:hint="Email" />-->
-    <!--        </android.support.design.widget.TextInputLayout>-->
+        <!--  Email Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    <!--        &lt;!&ndash;  Password Label &ndash;&gt;-->
-    <!--        <android.support.design.widget.TextInputLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="8dp"-->
-    <!--            android:layout_marginBottom="8dp">-->
-    <!--            <EditText android:id="@+id/input_password"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:inputType="textPassword"-->
-    <!--                android:hint="Password"/>-->
-    <!--        </android.support.design.widget.TextInputLayout>-->
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <!--        <android.support.v7.widget.AppCompatButton-->
-    <!--            android:id="@+id/btn_login"-->
-    <!--            android:layout_width="fill_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginTop="24dp"-->
-    <!--            android:layout_marginBottom="24dp"-->
-    <!--            android:padding="12dp"-->
-    <!--            android:text="Login"/>-->
+        <!--  Password Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    <!--        <TextView android:id="@+id/link_signup"-->
-    <!--            android:layout_width="fill_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginBottom="24dp"-->
-    <!--            android:text="No account yet? Create one"-->
-    <!--            android:gravity="center"-->
-    <!--            android:textSize="16dip"/>-->
+            <EditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Password" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <!--    </LinearLayout>-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="@string/login" />
+
+        <TextView
+            android:id="@+id/linkSignUp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/no_account_yet_create_one"
+            android:gravity="center"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 </ScrollView>

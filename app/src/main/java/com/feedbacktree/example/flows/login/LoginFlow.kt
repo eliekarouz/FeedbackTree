@@ -36,5 +36,3 @@ object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, LoginScree
         }
     }
 }
-
-data class LoginScreen(val flow: LoginFlow)
