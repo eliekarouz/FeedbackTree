@@ -21,8 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.feedbacktree.flow.ui.LayoutRunner.Companion.bind
-import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
 import kotlin.reflect.KClass
 
 /**
@@ -61,13 +59,13 @@ import kotlin.reflect.KClass
  * nested renderings to be displayed via nested calls to [ViewRegistry.buildView].
  */
 interface LayoutRunner<RenderingT : Any> {
-    fun attachFeedbacks(): Disposable
+    fun showRendering(rendering: RenderingT)
 
     class Binding<RenderingT : Any>
     constructor(
         override val type: KClass<RenderingT>,
         @LayoutRes private val layoutId: Int,
-        private val runnerConstructor: (View, RenderingT, ViewRegistry) -> LayoutRunner<RenderingT>
+        private val runnerConstructor: (View, ViewRegistry) -> LayoutRunner<RenderingT>
     ) : ViewBinding<RenderingT> {
         override fun buildView(
             registry: ViewRegistry,
@@ -79,32 +77,10 @@ interface LayoutRunner<RenderingT : Any> {
                 .cloneInContext(contextForNewView)
                 .inflate(layoutId, container, false)
                 .apply {
-
                     bindShowRendering(
                         initialRendering,
-                        {}
+                        runnerConstructor.invoke(this, registry)::showRendering
                     )
-                    val layoutRunner = runnerConstructor.invoke(this, initialRendering, registry)
-                    this.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
-                        var disposable: Disposable? = null
-
-                        override fun onViewAttachedToWindow(p0: View?) {
-                            if (this@apply == p0) {
-                                println("LayoutRunner - Attached screen: $type")
-                                disposable = layoutRunner.attachFeedbacks()
-                            }
-
-                        }
-
-                        override fun onViewDetachedFromWindow(p0: View?) {
-                            if (this@apply == p0) {
-                                println("LayoutRunner - Detached screen: $type")
-                                disposable?.dispose()
-                                disposable = null
-                            }
-                        }
-
-                    })
                 }
         }
     }
@@ -116,7 +92,7 @@ interface LayoutRunner<RenderingT : Any> {
          */
         inline fun <reified RenderingT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View, RenderingT, ViewRegistry) -> LayoutRunner<RenderingT>
+            noinline constructor: (View, ViewRegistry) -> LayoutRunner<RenderingT>
         ): ViewBinding<RenderingT> = Binding(RenderingT::class, layoutId, constructor)
 
         /**
@@ -125,9 +101,8 @@ interface LayoutRunner<RenderingT : Any> {
          */
         inline fun <reified RenderingT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View, RenderingT) -> LayoutRunner<RenderingT>
-        ): ViewBinding<RenderingT> =
-            bind(layoutId) { view, rendering, _ -> constructor.invoke(view, rendering) }
+            noinline constructor: (View) -> LayoutRunner<RenderingT>
+        ): ViewBinding<RenderingT> = bind(layoutId) { view, _ -> constructor.invoke(view) }
 
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to "show" renderings of type [RenderingT],
@@ -135,9 +110,9 @@ interface LayoutRunner<RenderingT : Any> {
          */
         inline fun <reified RenderingT : Any> bindNoRunner(
             @LayoutRes layoutId: Int
-        ): ViewBinding<RenderingT> = bind(layoutId) { _, _ ->
+        ): ViewBinding<RenderingT> = bind(layoutId) { _ ->
             object : LayoutRunner<RenderingT> {
-                override fun attachFeedbacks(): Disposable = Disposables.empty()
+                override fun showRendering(rendering: RenderingT) = Unit
             }
         }
     }

@@ -31,6 +31,8 @@ abstract class Flow<Input, State, Event, Output, Rendering>(
 
     private val abortedResultPublishSubject = PublishSubject.create<FlowResult<Output>>()
 
+    private val className = javaClass.simpleName
+
     /**
      * This prevents [attachFeedbacks] from starting the workflow by mistake.
      * You need first to [run] the state machine first.
@@ -64,9 +66,13 @@ abstract class Flow<Input, State, Event, Output, Rendering>(
         if (active.value == true) {
             error("Attempting to start a flow that is already running")
         }
+        val reducerWithLog: (State, Event) -> State = { state, event ->
+            println("$className: $event")
+            reduce(state, event)
+        }
         val system = Observables.system(
             initialState = initialState(input),
-            reduce = reduce,
+            reduce = reducerWithLog,
             scheduler = scheduler,
             scheduledFeedback = feedbacks + listOf(backdoorFeedback())
         )

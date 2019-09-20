@@ -1,26 +1,32 @@
 package com.feedbacktree.example.ui
 
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import com.feedbacktree.example.R
-import com.feedbacktree.example.flows.login.LoginFlow
+import com.feedbacktree.example.flows.login.LoginFlow.Event
 import com.feedbacktree.example.flows.login.LoginScreen
 import com.feedbacktree.flow.ui.LayoutRunner
 import com.feedbacktree.flow.ui.ViewBinding
-import io.reactivex.disposables.Disposable
-import org.notests.rxfeedback.Bindings
-import org.notests.rxfeedback.bind
+import kotlinx.android.synthetic.main.login.view.*
 
-class LoginLayout(val view: View, val screen: LoginScreen) : LayoutRunner<LoginScreen> {
+class LoginLayout(private val view: View) : LayoutRunner<LoginScreen> {
 
-    override fun attachFeedbacks(): Disposable = with(view) {
-        fun bindUI() = bind<LoginFlow.State, LoginFlow.Event> { state ->
-            Bindings(listOf(), listOf())
+    private var subscribedToEvents = false
+
+    override fun showRendering(rendering: LoginScreen) = with(view) {
+        // Subscriptions
+        btnLogin.isEnabled = rendering.isLoginButtonEnabled
+
+        // Events
+        if (!subscribedToEvents) {
+            inputEmail.doAfterTextChanged { rendering.onEvent(Event.EnteredEmail(it.toString())) }
+            inputPassword.doAfterTextChanged { rendering.onEvent(Event.EnteredPassword(it.toString())) }
+            btnLogin.setOnClickListener { rendering.onEvent(Event.ClickedLogin) }
+            subscribedToEvents = true
         }
-        return screen.flow.attachFeedbacks(bindUI())
     }
 
     companion object : ViewBinding<LoginScreen> by LayoutRunner.bind(
         R.layout.login, ::LoginLayout
     )
-
 }
