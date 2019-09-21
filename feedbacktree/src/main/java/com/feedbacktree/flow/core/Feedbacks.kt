@@ -20,7 +20,7 @@ import io.reactivex.Observable
  */
 fun <State, Query, Event> react(
     query: (State) -> Query?,
-    areEqual: (lhs: Query, rhs: Query) -> Boolean,
+    areEqual: (lhs: Query, rhs: Query) -> Boolean = { lhs, rhs -> lhs == rhs },
     effects: (Query) -> Observable<Event>
 ) = org.notests.rxfeedback.react(
     query = { state: State -> query(state).asOptional },
