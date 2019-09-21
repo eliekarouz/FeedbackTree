@@ -13,24 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.core
+package com.feedbacktree.flow.ui.core
 
 /**
- * May show a stack of [AlertScreen] over a [baseScreen].
- *
- * @param B the type of [baseScreen]
+ * Interface implemented by screen classes that represent a stack of
+ * zero or more [modal][M] screens above a [baseScreen]. Use of this
+ * interface allows platform specific containers to share base classes,
+ * like `ModalContainer` in the `workflow-ui-android` module.
  */
-data class AlertContainerScreen<B : Any>(
-    override val baseScreen: B,
-    override val modals: List<AlertScreen> = emptyList()
-) : HasModals<B, AlertScreen> {
-    constructor(
-        baseScreen: B,
-        alert: AlertScreen
-    ) : this(baseScreen, listOf(alert))
-
-    constructor(
-        baseScreen: B,
-        vararg alerts: AlertScreen
-    ) : this(baseScreen, alerts.toList())
+interface HasModals<out B : Any, out M : Any> {
+    val baseScreen: B
+    val modals: List<M>
 }

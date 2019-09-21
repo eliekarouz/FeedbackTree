@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views
 
 import android.content.Context
 import android.os.Parcel
@@ -23,6 +23,7 @@ import android.util.AttributeSet
 import android.util.SparseArray
 import android.view.View
 import android.widget.FrameLayout
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.squareup.coordinators.Coordinator
 import com.squareup.coordinators.Coordinators
 import io.reactivex.Observable

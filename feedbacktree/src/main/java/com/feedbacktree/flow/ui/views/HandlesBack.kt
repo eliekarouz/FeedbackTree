@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views
 
 import android.view.View
 import com.feedbacktree.R
-import com.feedbacktree.flow.ui.HandlesBack.Helper
-import com.feedbacktree.flow.ui.HandlesBack.Helper.setConditionalBackHandler
+import com.feedbacktree.flow.ui.views.HandlesBack.Helper
+import com.feedbacktree.flow.ui.views.HandlesBack.Helper.setConditionalBackHandler
 import io.reactivex.Observable
 
 /**

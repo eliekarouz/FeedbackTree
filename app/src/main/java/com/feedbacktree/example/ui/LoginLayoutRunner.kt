@@ -5,11 +5,12 @@ import androidx.core.widget.doAfterTextChanged
 import com.feedbacktree.example.R
 import com.feedbacktree.example.flows.login.LoginFlow.Event
 import com.feedbacktree.example.flows.login.LoginScreen
-import com.feedbacktree.flow.ui.LayoutRunner
-import com.feedbacktree.flow.ui.ViewBinding
+import com.feedbacktree.flow.ui.views.LayoutRunner
+import com.feedbacktree.flow.ui.views.core.ViewBinding
 import kotlinx.android.synthetic.main.login.view.*
 
-class LoginLayoutRunner(private val view: View) : LayoutRunner<LoginScreen> {
+class LoginLayoutRunner(private val view: View) :
+    LayoutRunner<LoginScreen> {
 
     private var subscribedToEvents = false
 

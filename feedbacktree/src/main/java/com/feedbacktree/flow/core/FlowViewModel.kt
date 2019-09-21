@@ -1,4 +1,4 @@
-package com.feedbacktree.flow
+package com.feedbacktree.flow.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +12,7 @@ class FlowViewModel<Input, Output>(
     flow: Flow<Input, *, *, Output, *>
 ) : ViewModel() {
 
-    private val _output = BehaviorSubject.create<FlowResult<Output>>()
+    private val _output = BehaviorSubject.create<FlowOutput<Output>>()
 
     private val rootNode: FlowNode<*, *, *> = {
         val disposeBag = CompositeDisposable()
@@ -31,7 +31,7 @@ class FlowViewModel<Input, Output>(
     }()
 
 
-    val output: Observable<FlowResult<Output>> = _output
+    val output: Observable<FlowOutput<Output>> = _output
     val screens: Observable<Any> = screenChanged.startWith(Unit).map {
         RenderingContext().renderNode(rootNode) as Any
     }

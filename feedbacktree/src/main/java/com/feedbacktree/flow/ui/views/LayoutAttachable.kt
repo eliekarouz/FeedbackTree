@@ -1,10 +1,12 @@
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import com.feedbacktree.flow.ui.views.core.ViewBinding
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
@@ -73,7 +75,11 @@ interface LayoutAttachable {
         inline fun <reified RenderingT : Any> bind(
             @LayoutRes layoutId: Int,
             noinline constructor: (View, RenderingT, ViewRegistry) -> LayoutAttachable
-        ): ViewBinding<RenderingT> = Binding(RenderingT::class, layoutId, constructor)
+        ): ViewBinding<RenderingT> = Binding(
+            RenderingT::class,
+            layoutId,
+            constructor
+        )
 
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to show renderings of type [RenderingT],
@@ -83,7 +89,12 @@ interface LayoutAttachable {
             @LayoutRes layoutId: Int,
             noinline constructor: (View, RenderingT) -> LayoutAttachable
         ): ViewBinding<RenderingT> =
-            bind(layoutId) { view, rendering, _ -> constructor.invoke(view, rendering) }
+            bind(layoutId) { view, rendering, _ ->
+                constructor.invoke(
+                    view,
+                    rendering
+                )
+            }
 
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to "show" renderings of type [RenderingT],
@@ -91,10 +102,11 @@ interface LayoutAttachable {
          */
         inline fun <reified RenderingT : Any> bindNoRunner(
             @LayoutRes layoutId: Int
-        ): ViewBinding<RenderingT> = bind(layoutId) { _, _ ->
-            object : LayoutAttachable {
-                override fun attachFeedbacks(): Disposable = Disposables.empty()
+        ): ViewBinding<RenderingT> =
+            bind(layoutId) { _, _ ->
+                object : LayoutAttachable {
+                    override fun attachFeedbacks(): Disposable = Disposables.empty()
+                }
             }
-        }
     }
 }

@@ -1,4 +1,4 @@
-package com.feedbacktree.flow
+package com.feedbacktree.flow.core
 
 import com.feedbacktree.flow.utils.logVerbose
 

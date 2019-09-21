@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.core
+package com.feedbacktree.flow.ui.core
 
 /**
  * Allows renderings that do not implement [Compatible] themselves to be distinguished
@@ -28,7 +28,8 @@ data class Named<W : Any>(
         require(name.isNotBlank()) { "name must not be blank." }
     }
 
-    override val compatibilityKey: String = keyFor(wrapped, name)
+    override val compatibilityKey: String =
+        keyFor(wrapped, name)
 
     override fun toString(): String {
         return "${super.toString()}: $compatibilityKey"

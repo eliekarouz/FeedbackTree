@@ -1,7 +1,7 @@
 package com.feedbacktree.example.flows.login
 
 import com.feedbacktree.example.flows.login.LoginFlow.reduce
-import com.feedbacktree.flow.*
+import com.feedbacktree.flow.core.*
 
 object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, LoginScreen>(
     reduce = ::reduce,
@@ -19,7 +19,7 @@ object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, LoginScree
         val email: String = "",
         val password: String = "",
         val isLoggingIn: Boolean = false,
-        override val flowResult: FlowResult<Unit>? = null
+        override val flowOuput: FlowOutput<Unit>? = null
     ) : StateCompletable<Unit>
 
     sealed class Event {
@@ -34,7 +34,9 @@ object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, LoginScree
             is Event.EnteredEmail -> state.copy(email = event.email)
             is Event.EnteredPassword -> state.copy(password = event.password)
             LoginFlow.Event.ClickedLogin -> state.copy(isLoggingIn = true)
-            is Event.ReceivedLogInResponse -> state.copy(flowResult = completed(Unit))
+            is Event.ReceivedLogInResponse -> state.copy(
+                flowOuput = completed(Unit)
+            )
         }
     }
 }

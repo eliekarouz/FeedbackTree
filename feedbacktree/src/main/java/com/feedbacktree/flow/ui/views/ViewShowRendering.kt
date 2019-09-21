@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views
 
 import android.view.View
 import com.feedbacktree.R
-import com.feedbacktree.flow.core.compatible
+import com.feedbacktree.flow.ui.core.compatible
 
 /**
  * Function attached to a view created by [ViewRegistry], to allow it
@@ -41,7 +41,10 @@ fun <RenderingT : Any> View.bindShowRendering(
     initialRendering: RenderingT,
     showRendering: ViewShowRendering<RenderingT>
 ) {
-    setTag(R.id.view_show_rendering_function, ShowRenderingTag(initialRendering, showRendering))
+    setTag(
+        R.id.view_show_rendering_function,
+        ShowRenderingTag(initialRendering, showRendering)
+    )
     showRendering.invoke(initialRendering)
 }
 

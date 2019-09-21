@@ -1,19 +1,19 @@
-package com.feedbacktree.flow
+package com.feedbacktree.flow.core
 
 import android.annotation.SuppressLint
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 
-internal class FlowNode<Input, State : StateCompletable<*>, Rendering>(
+internal class FlowNode<Input, State : StateCompletable<*>, Screen>(
     val input: Input,
-    val flow: Flow<Input, State, *, *, Rendering>,
+    val flow: Flow<Input, State, *, *, Screen>,
     val id: String,
     var disposable: Disposable? = null,
     internal var children: MutableList<FlowNode<*, *, *>> = mutableListOf(),
     internal var tempChildren: MutableList<FlowNode<*, *, *>> = mutableListOf()
 ) : Disposable {
 
-    fun render(context: RenderingContext): Rendering {
+    fun render(context: RenderingContext): Screen {
         return flow.render(flow.state.value ?: flow.initialState(input), context)
     }
 
@@ -38,22 +38,22 @@ class RenderingContext {
         get() = treeStackTraversedNodes.last()
 
     @SuppressLint("CheckResult")
-    fun <ChildState, ChildResult, ChildRendering> renderChild(
-        flow: Flow<Unit, ChildState, *, ChildResult, ChildRendering>,
+    fun <ChildState, ChildOutput, ChildScreen> renderChild(
+        flow: Flow<Unit, ChildState, *, ChildOutput, ChildScreen>,
         id: String? = null,
-        onResult: (FlowResult<ChildResult>) -> Unit
-    ): ChildRendering
-            where ChildState : StateCompletable<ChildResult> =
+        onResult: (FlowOutput<ChildOutput>) -> Unit
+    ): ChildScreen
+            where ChildState : StateCompletable<ChildOutput> =
         renderChild(Unit, flow, id, onResult)
 
     @SuppressLint("CheckResult")
-    fun <Input, ChildState, ChildResult, ChildRendering> renderChild(
+    fun <Input, ChildState, ChildOutput, ChildScreen> renderChild(
         input: Input,
-        flow: Flow<Input, ChildState, *, ChildResult, ChildRendering>,
+        flow: Flow<Input, ChildState, *, ChildOutput, ChildScreen>,
         id: String? = null,
-        onResult: (FlowResult<ChildResult>) -> Unit
-    ): ChildRendering
-            where ChildState : StateCompletable<ChildResult> {
+        onResult: (FlowOutput<ChildOutput>) -> Unit
+    ): ChildScreen
+            where ChildState : StateCompletable<ChildOutput> {
         val flowId = id ?: flow::class.toString()
 
         logVerbose("renderChild: $flowId, currentLeafNode = ${currentLeafNode.id}, currentLeafNode.children= ${currentLeafNode.children.size}")
@@ -61,7 +61,7 @@ class RenderingContext {
         return if (existingNode != null) {
 
             @Suppress("UNCHECKED_CAST")
-            val castedNode = existingNode as FlowNode<*, *, ChildRendering>
+            val castedNode = existingNode as FlowNode<*, *, ChildScreen>
 
             currentLeafNode.tempChildren.add(castedNode)
             renderNode(castedNode)
@@ -82,25 +82,25 @@ class RenderingContext {
         }
     }
 
-    internal fun <Rendering> renderNode(node: FlowNode<*, *, Rendering>): Rendering {
-        logVerbose("Rendering node - start ${node.id}")
+    internal fun <Screen> renderNode(node: FlowNode<*, *, Screen>): Screen {
+        logVerbose("Screen node - start ${node.id}")
         treeStackTraversedNodes.add(node)
         node.tempChildren.clear()
 
         val rendering = node.render(this)
-        logVerbose("Rendering - $rendering")
+        logVerbose("Screen - $rendering")
         val currentChildrenFlowKeys = node.tempChildren.map { it.id }
 
         val childrenToRemove =
             node.children.filter { !currentChildrenFlowKeys.contains(it.id) }
         childrenToRemove.forEach {
-            logVerbose("Rendering node - removing children ${node.id}")
+            logVerbose("Screen node - removing children ${node.id}")
             it.dispose()
         }
 
         node.children = node.tempChildren.toMutableList() //
         treeStackTraversedNodes.remove(node)
-        logVerbose("Rendering node - end ${node.id}, node.children = ${node.children.size}")
+        logVerbose("Screen node - end ${node.id}, node.children = ${node.children.size}")
         return rendering
     }
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views
 
 import android.app.Dialog
 import android.content.Context
@@ -32,12 +32,14 @@ import androidx.lifecycle.Lifecycle.Event.ON_DESTROY
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
-import com.feedbacktree.flow.core.AlertContainerScreen
-import com.feedbacktree.flow.core.HasModals
-import com.feedbacktree.flow.core.Named
-import com.feedbacktree.flow.core.compatible
-import com.feedbacktree.flow.ui.ModalContainer.Companion.forAlertContainerScreen
-import com.feedbacktree.flow.ui.ModalContainer.Companion.forContainerScreen
+import com.feedbacktree.flow.ui.core.AlertContainerScreen
+import com.feedbacktree.flow.ui.core.HasModals
+import com.feedbacktree.flow.ui.core.Named
+import com.feedbacktree.flow.ui.core.compatible
+import com.feedbacktree.flow.ui.views.ModalContainer.Companion.forAlertContainerScreen
+import com.feedbacktree.flow.ui.views.ModalContainer.Companion.forContainerScreen
+import com.feedbacktree.flow.ui.views.core.ViewBinding
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
 
 /**
  * Base class for containers that show [HasModals.modals] in [Dialog]s.
@@ -76,7 +78,11 @@ abstract class ModalContainer<ModalRenderingT : Any>
 
         val newDialogs = mutableListOf<DialogRef<ModalRenderingT>>()
         for ((i, modal) in newScreen.modals.withIndex()) {
-            newDialogs += if (i < dialogs.size && compatible(dialogs[i].modalRendering, modal)) {
+            newDialogs += if (i < dialogs.size && compatible(
+                    dialogs[i].modalRendering,
+                    modal
+                )
+            ) {
                 dialogs[i].copy(modalRendering = modal)
                     .also { updateDialog(it) }
             } else {
@@ -162,7 +168,11 @@ abstract class ModalContainer<ModalRenderingT : Any>
     ) {
         internal fun save(): KeyAndBundle {
             val saved = dialog.window!!.saveHierarchyState()
-            return KeyAndBundle(Named.keyFor(modalRendering), saved)
+            return KeyAndBundle(
+                Named.keyFor(
+                    modalRendering
+                ), saved
+            )
         }
 
         internal fun restore(keyAndBundle: KeyAndBundle) {
@@ -198,7 +208,10 @@ abstract class ModalContainer<ModalRenderingT : Any>
         constructor(source: Parcel) : super(source) {
             @Suppress("UNCHECKED_CAST")
             this.dialogBundles = mutableListOf<KeyAndBundle>().apply {
-                source.readTypedList(this, KeyAndBundle)
+                source.readTypedList(
+                    this,
+                    KeyAndBundle
+                )
             }
         }
 
@@ -230,7 +243,8 @@ abstract class ModalContainer<ModalRenderingT : Any>
          */
         fun forAlertContainerScreen(
             @StyleRes dialogThemeResId: Int = 0
-        ): ViewBinding<AlertContainerScreen<*>> = AlertContainer.Binding(dialogThemeResId)
+        ): ViewBinding<AlertContainerScreen<*>> =
+            AlertContainer.Binding(dialogThemeResId)
 
         /**
          * Creates a [ViewBinding] for modal container screens of type [H].

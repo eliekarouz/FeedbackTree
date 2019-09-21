@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views
 
 import android.app.Dialog
 import android.content.Context
@@ -25,7 +25,10 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.annotation.IdRes
 import androidx.annotation.StyleRes
-import com.feedbacktree.flow.core.HasModals
+import com.feedbacktree.flow.ui.core.HasModals
+import com.feedbacktree.flow.ui.views.core.BuilderBinding
+import com.feedbacktree.flow.ui.views.core.ViewBinding
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import kotlin.reflect.KClass
 
 /**
@@ -54,7 +57,9 @@ internal class ModalViewContainer
                     if (keyEvent.action != KeyEvent.ACTION_DOWN) {
                         true
                     } else {
-                        keyCode == KeyEvent.KEYCODE_BACK && HandlesBack.Helper.onBackPressed(view)
+                        keyCode == KeyEvent.KEYCODE_BACK && HandlesBack.Helper.onBackPressed(
+                            view
+                        )
                     }
                 }
 
@@ -68,7 +73,11 @@ internal class ModalViewContainer
                 }
             }
             .run {
-                DialogRef(initialModalRendering, this, view)
+                DialogRef(
+                    initialModalRendering,
+                    this,
+                    view
+                )
             }
     }
 

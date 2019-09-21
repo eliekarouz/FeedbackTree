@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views
 
 import android.content.Context
 import android.content.DialogInterface
@@ -24,8 +24,11 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
 import com.feedbacktree.R
-import com.feedbacktree.flow.core.AlertContainerScreen
-import com.feedbacktree.flow.core.AlertScreen
+import com.feedbacktree.flow.ui.core.AlertContainerScreen
+import com.feedbacktree.flow.ui.core.AlertScreen
+import com.feedbacktree.flow.ui.views.core.BuilderBinding
+import com.feedbacktree.flow.ui.views.core.ViewBinding
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
 
 /**
  * Class returned by [ModalContainer.forAlertContainerScreen], qv for details.
@@ -43,7 +46,8 @@ internal class AlertContainer
     ): DialogRef<AlertScreen> {
         val dialog = AlertDialog.Builder(context, dialogThemeResId)
             .create()
-        val ref = DialogRef(initialModalRendering, dialog)
+        val ref =
+            DialogRef(initialModalRendering, dialog)
         updateDialog(ref)
         return ref
     }
@@ -88,7 +92,10 @@ internal class AlertContainer
     by BuilderBinding(
         type = AlertContainerScreen::class,
         viewConstructor = { viewRegistry, initialRendering, context, _ ->
-            AlertContainer(context, dialogThemeResId = dialogThemeResId)
+            AlertContainer(
+                context,
+                dialogThemeResId = dialogThemeResId
+            )
                 .apply {
                     id = R.id.workflow_alert_container
                     layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)

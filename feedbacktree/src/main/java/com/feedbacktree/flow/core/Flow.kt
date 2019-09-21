@@ -1,4 +1,4 @@
-package com.feedbacktree.flow
+package com.feedbacktree.flow.core
 
 import com.feedbacktree.flow.utils.collect
 import com.feedbacktree.flow.utils.logInfo
@@ -10,14 +10,15 @@ import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import org.notests.rxfeedback.*
 
+// TODO Remove these global variables
 private val screenChangedPublishSubject = PublishSubject.create<Unit>()
 val screenChanged: Observable<Unit> = screenChangedPublishSubject
 
 
 typealias Feedback<State, Event> = (ObservableSchedulerContext<State>) -> Observable<Event>
 
-interface StateCompletable<Result> {
-    val flowResult: FlowResult<Result>?
+interface StateCompletable<Ouput> {
+    val flowOuput: FlowOutput<Ouput>?
 }
 
 abstract class Flow<Input, State, Event, Output, Screen>(
@@ -26,11 +27,11 @@ abstract class Flow<Input, State, Event, Output, Screen>(
     val feedbacks: List<Feedback<State, Event>>
 ) : IFlow<Input, Output> where State : StateCompletable<Output> {
 
-    internal val childrenResultPublishSubject = PublishSubject.create<Event>()
+    internal val childrenOutputPublishSubject = PublishSubject.create<Event>()
 
     private val publishSubjectEvents = PublishSubject.create<Event>()
 
-    private val abortedResultPublishSubject = PublishSubject.create<FlowResult<Output>>()
+    private val outputPublishSubject = PublishSubject.create<FlowOutput<Output>>()
 
     private val className = javaClass.simpleName
 
@@ -55,7 +56,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
                 osc.source.skip(1).subscribe { screenChangedPublishSubject.onNext(Unit) }
             ),
             events = listOf(
-                childrenResultPublishSubject,
+                childrenOutputPublishSubject,
                 publishSubjectEvents
             )
         )
@@ -63,7 +64,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
 
     abstract fun initialState(input: Input): State
 
-    override fun run(input: Input): Observable<FlowResult<Output>> {
+    override fun run(input: Input): Observable<FlowOutput<Output>> {
         if (active.value == true) {
             error("Attempting to start a flow that is already running")
         }
@@ -78,10 +79,10 @@ abstract class Flow<Input, State, Event, Output, Screen>(
             scheduledFeedback = feedbacks + listOf(backdoorFeedback())
         )
 
-        val completedResult = system
-            .collect { state -> state.flowResult }
+        val stateEncodedOuput = system
+            .collect { state -> state.flowOuput }
 
-        return Observable.merge(completedResult, abortedResultPublishSubject)
+        return Observable.merge(stateEncodedOuput, outputPublishSubject)
             .doOnSubscribe { active.onNext(true) }
             .doFinally { active.onNext(false) }
             .take(1)
@@ -94,7 +95,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
             val feedbackState = active.switchMap { isActive ->
                 if (isActive) {
                     // Push states as long as the flow is didn't complete.
-                    state.filter { it.flowResult == null }
+                    state.filter { it.flowOuput == null }
                 } else Observable.empty<State>()
             }
             val observableSchedulerContext = ObservableSchedulerContext(feedbackState, scheduler)
@@ -111,10 +112,10 @@ abstract class Flow<Input, State, Event, Output, Screen>(
     }
 
     fun abort() {
-        abortedResultPublishSubject.onNext(aborted())
+        outputPublishSubject.onNext(aborted())
     }
 
     fun complete(output: Output) {
-        abortedResultPublishSubject.onNext(completed(output))
+        outputPublishSubject.onNext(completed(output))
     }
 }

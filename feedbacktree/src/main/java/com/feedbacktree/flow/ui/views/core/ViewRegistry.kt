@@ -13,13 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views.core
 
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import com.feedbacktree.flow.core.Named
-import com.feedbacktree.flow.ui.backstack.BackStackContainer
+import com.feedbacktree.flow.ui.core.Named
+import com.feedbacktree.flow.ui.views.ModalContainer
+import com.feedbacktree.flow.ui.views.backstack.BackStackContainer
+import com.feedbacktree.flow.ui.views.bindShowRendering
+import com.feedbacktree.flow.ui.views.showRenderingTag
 import kotlin.reflect.KClass
 
 /**
@@ -130,7 +133,8 @@ class ViewRegistry private constructor(
     }
 
     private companion object {
-        val defaultAlertBinding = ModalContainer.forAlertContainerScreen()
+        val defaultAlertBinding =
+            ModalContainer.forAlertContainerScreen()
     }
 }
 

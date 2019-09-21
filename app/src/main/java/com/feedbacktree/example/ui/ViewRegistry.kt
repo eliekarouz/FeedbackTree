@@ -1,5 +1,5 @@
 package com.feedbacktree.example.ui
 
-import com.feedbacktree.flow.ui.ViewRegistry
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
 
 val appViewRegistry = ViewRegistry(LoginLayoutRunner)

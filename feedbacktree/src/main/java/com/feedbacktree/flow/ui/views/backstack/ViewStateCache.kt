@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui.backstack
+package com.feedbacktree.flow.ui.views.backstack
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -21,9 +21,9 @@ import android.os.Parcelable.Creator
 import android.util.SparseArray
 import android.view.View
 import android.view.View.BaseSavedState
-import com.feedbacktree.flow.core.Named
-import com.feedbacktree.flow.ui.backstack.ViewStateCache.SavedState
-import com.feedbacktree.flow.ui.showRenderingTag
+import com.feedbacktree.flow.ui.core.Named
+import com.feedbacktree.flow.ui.views.backstack.ViewStateCache.SavedState
+import com.feedbacktree.flow.ui.views.showRenderingTag
 
 /**
  * Handles persistence chores for container views that manage a set of [Named] renderings,

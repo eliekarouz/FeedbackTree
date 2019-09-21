@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui
+package com.feedbacktree.flow.ui.views
 
 import android.content.Context
 import android.graphics.Color
@@ -24,7 +24,8 @@ import android.view.View.MeasureSpec.EXACTLY
 import android.view.View.MeasureSpec.makeMeasureSpec
 import android.widget.FrameLayout
 import com.feedbacktree.R
-import com.feedbacktree.flow.core.PanelContainerScreen
+import com.feedbacktree.flow.ui.core.PanelContainerScreen
+import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.utils.display
 import com.feedbacktree.flow.utils.isTablet
 import kotlin.math.min
@@ -41,7 +42,8 @@ object PanelContainer : ViewBinding<PanelContainerScreen<*, *>>
 by ModalContainer.forContainerScreen(
     R.id.main_panel,
     modalDecorator = { panelBody ->
-        PanelBodyWrapper(panelBody.context).apply { addView(panelBody) }
+        PanelBodyWrapper(panelBody.context)
+            .apply { addView(panelBody) }
     })
 
 /**

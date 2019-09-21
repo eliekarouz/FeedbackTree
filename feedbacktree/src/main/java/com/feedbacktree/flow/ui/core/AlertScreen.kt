@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.core
+package com.feedbacktree.flow.ui.core
 
 /**
  * Models a typical "You sure about that?" alert box.

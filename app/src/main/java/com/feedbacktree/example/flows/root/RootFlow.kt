@@ -2,10 +2,10 @@ package com.feedbacktree.example.flows.root
 
 import com.feedbacktree.example.flows.login.LoginFlow
 import com.feedbacktree.example.flows.root.RootFlow.reduce
-import com.feedbacktree.flow.Flow
-import com.feedbacktree.flow.FlowResult
-import com.feedbacktree.flow.RenderingContext
-import com.feedbacktree.flow.StateCompletable
+import com.feedbacktree.flow.core.Flow
+import com.feedbacktree.flow.core.FlowOutput
+import com.feedbacktree.flow.core.RenderingContext
+import com.feedbacktree.flow.core.StateCompletable
 
 object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
     reduce = ::reduce,
@@ -25,7 +25,7 @@ object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
     }
 
     sealed class State : StateCompletable<Nothing> {
-        override val flowResult: FlowResult<Nothing>? = null
+        override val flowOuput: FlowOutput<Nothing>? = null
 
         object LoggedOut : State()
         object LoggedIn : State()
