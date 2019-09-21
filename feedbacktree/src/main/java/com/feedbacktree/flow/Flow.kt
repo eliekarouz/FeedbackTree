@@ -93,7 +93,8 @@ abstract class Flow<Input, State, Event, Output, Rendering>(
         val events = feedbacks.map {
             val feedbackState = active.switchMap { isActive ->
                 if (isActive) {
-                    state
+                    // Push states as long as the flow is didn't complete.
+                    state.filter { it.flowResult == null }
                 } else Observable.empty<State>()
             }
             val observableSchedulerContext = ObservableSchedulerContext(feedbackState, scheduler)
