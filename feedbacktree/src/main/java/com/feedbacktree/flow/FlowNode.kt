@@ -1,6 +1,7 @@
 package com.feedbacktree.flow
 
 import android.annotation.SuppressLint
+import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 
 internal class FlowNode<Input, State : StateCompletable<*>, Rendering>(
@@ -55,14 +56,14 @@ class RenderingContext {
             where ChildState : StateCompletable<ChildResult> {
         val flowId = id ?: flow::class.toString()
 
-        println("renderChild: $flowId, currentLeafNode = ${currentLeafNode.id}, currentLeafNode.children= ${currentLeafNode.children.size}")
+        logVerbose("renderChild: $flowId, currentLeafNode = ${currentLeafNode.id}, currentLeafNode.children= ${currentLeafNode.children.size}")
         val existingNode = currentLeafNode.children.firstOrNull { it.id == flowId }
         return if (existingNode != null) {
             val castedNode = existingNode as FlowNode<*, *, ChildRendering>
             currentLeafNode.tempChildren.add(castedNode)
             renderNode(castedNode)
         } else {
-            println("renderChild - Create new node $flowId")
+            logVerbose("renderChild - Create new node $flowId")
             val disposable = flow.run(input).subscribe { result ->
                 onResult(result)
             }
@@ -79,24 +80,24 @@ class RenderingContext {
     }
 
     internal fun <Rendering> renderNode(node: FlowNode<*, *, Rendering>): Rendering {
-        println("Rendering node - start ${node.id}")
+        logVerbose("Rendering node - start ${node.id}")
         treeStackTraversedNodes.add(node)
         node.tempChildren.clear()
 
         val rendering = node.render(this)
-        println("Rendering - $rendering")
+        logVerbose("Rendering - $rendering")
         val currentChildrenFlowKeys = node.tempChildren.map { it.id }
 
         val childrenToRemove =
             node.children.filter { !currentChildrenFlowKeys.contains(it.id) }
         childrenToRemove.forEach {
-            println("Rendering node - removing children ${node.id}")
+            logVerbose("Rendering node - removing children ${node.id}")
             it.dispose()
         }
 
         node.children = node.tempChildren.toMutableList() //
         treeStackTraversedNodes.remove(node)
-        println("Rendering node - end ${node.id}, node.children = ${node.children.size}")
+        logVerbose("Rendering node - end ${node.id}, node.children = ${node.children.size}")
         return rendering
     }
 }

@@ -1,5 +1,7 @@
 package com.feedbacktree.flow
 
+import com.feedbacktree.flow.utils.logVerbose
+
 /**
  * [Reducer.create] allows you to build a reducer (State, Event) -> State using DSL syntax.
  *
@@ -120,6 +122,7 @@ class Reducer<State, Event> private constructor() {
                     it.key.matches(state)
                 }.values.firstOrNull()
                 transition?.transition(state, event) ?: run {
+                    logVerbose("WARNING: Transition not found")
                     state // stay on the same state
                 }
             }

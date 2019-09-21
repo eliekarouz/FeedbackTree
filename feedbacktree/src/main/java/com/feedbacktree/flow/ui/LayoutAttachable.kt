@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables
 import kotlin.reflect.KClass
@@ -45,7 +46,7 @@ interface LayoutAttachable {
 
                         override fun onViewAttachedToWindow(p0: View?) {
                             if (this@apply == p0) {
-                                println("LayoutAttachable - Attached screen: $type")
+                                logVerbose("LayoutAttachable - Attached screen: $type")
                                 disposable = layoutAttachable.attachFeedbacks()
                             }
 
@@ -53,7 +54,7 @@ interface LayoutAttachable {
 
                         override fun onViewDetachedFromWindow(p0: View?) {
                             if (this@apply == p0) {
-                                println("LayoutAttachable - Detached screen: $type")
+                                logVerbose("LayoutAttachable - Detached screen: $type")
                                 disposable?.dispose()
                                 disposable = null
                             }

@@ -1,6 +1,7 @@
 package com.feedbacktree.flow
 
-import asOptional
+import com.feedbacktree.flow.utils.collect
+import com.feedbacktree.flow.utils.logInfo
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +20,7 @@ interface StateCompletable<Result> {
     val flowResult: FlowResult<Result>?
 }
 
-abstract class Flow<Input, State, Event, Output, Rendering>(
+abstract class Flow<Input, State, Event, Output, Screen>(
     private val reduce: (State, Event) -> State,
     private val scheduler: Scheduler = AndroidSchedulers.mainThread(),
     val feedbacks: List<Feedback<State, Event>>
@@ -67,7 +68,7 @@ abstract class Flow<Input, State, Event, Output, Rendering>(
             error("Attempting to start a flow that is already running")
         }
         val reducerWithLog: (State, Event) -> State = { state, event ->
-            println("$className: $event")
+            logInfo("$className: $event")
             reduce(state, event)
         }
         val system = Observables.system(
@@ -78,16 +79,15 @@ abstract class Flow<Input, State, Event, Output, Rendering>(
         )
 
         val completedResult = system
-            .map { childState -> childState.flowResult.asOptional }
-            .filter { it is Optional.Some }
-            .map { it as Optional.Some; it.data }
+            .collect { state -> state.flowResult }
+
+        return Observable.merge(completedResult, abortedResultPublishSubject)
             .doOnSubscribe { active.onNext(true) }
             .doFinally { active.onNext(false) }
-        return Observable.merge(completedResult, abortedResultPublishSubject)
             .take(1)
     }
 
-    abstract fun render(state: State, context: RenderingContext): Rendering
+    abstract fun render(state: State, context: RenderingContext): Screen
 
     fun attachFeedbacks(feedbacks: List<Feedback<State, Event>>): Disposable {
         val events = feedbacks.map {
@@ -112,5 +112,9 @@ abstract class Flow<Input, State, Event, Output, Rendering>(
 
     fun abort() {
         abortedResultPublishSubject.onNext(aborted())
+    }
+
+    fun complete(output: Output) {
+        abortedResultPublishSubject.onNext(completed(output))
     }
 }
