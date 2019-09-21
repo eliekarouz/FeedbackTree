@@ -12,12 +12,12 @@ object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
     feedbacks = listOf()
 ) {
     override fun initialState(input: Unit): State {
-        return State.LoggingIn
+        return State.LoggedOut
     }
 
     override fun render(state: State, context: RenderingContext): Any {
         return when (state) {
-            RootFlow.State.LoggingIn -> context.renderChild(LoginFlow, onResult = {
+            RootFlow.State.LoggedOut -> context.renderChild(LoginFlow, onResult = {
                 send(Event.SuccessfullyLoggedIn)
             })
             RootFlow.State.LoggedIn -> TODO()
@@ -27,7 +27,7 @@ object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
     sealed class State : StateCompletable<Nothing> {
         override val flowResult: FlowResult<Nothing>? = null
 
-        object LoggingIn : State()
+        object LoggedOut : State()
         object LoggedIn : State()
     }
 
@@ -40,7 +40,7 @@ object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
     fun reduce(state: State, event: Event): State {
         return when (event) {
             RootFlow.Event.SuccessfullyLoggedIn -> State.LoggedIn
-            RootFlow.Event.LogOut -> State.LoggingIn
+            RootFlow.Event.LogOut -> State.LoggedOut
         }
     }
 }
