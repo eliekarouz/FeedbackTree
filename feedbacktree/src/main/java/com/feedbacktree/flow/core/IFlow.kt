@@ -7,8 +7,8 @@ sealed class FlowOutput<out Output> {
     data class Completed<out Output>(val result: Output) : FlowOutput<Output>()
 }
 
-fun <Output> completed(success: Output): FlowOutput<Output> =
-    FlowOutput.Completed(success)
+fun <Output> completed(result: Output): FlowOutput<Output> =
+    FlowOutput.Completed(result)
 
 fun <Output> aborted(): FlowOutput<Output> =
     FlowOutput.Aborted

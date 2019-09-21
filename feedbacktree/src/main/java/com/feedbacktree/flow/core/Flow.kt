@@ -115,7 +115,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
         outputPublishSubject.onNext(aborted())
     }
 
-    fun complete(output: Output) {
-        outputPublishSubject.onNext(completed(output))
+    fun complete(result: Output) {
+        outputPublishSubject.onNext(completed(result))
     }
 }
