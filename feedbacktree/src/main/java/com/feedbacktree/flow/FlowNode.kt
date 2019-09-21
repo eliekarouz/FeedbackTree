@@ -59,7 +59,10 @@ class RenderingContext {
         logVerbose("renderChild: $flowId, currentLeafNode = ${currentLeafNode.id}, currentLeafNode.children= ${currentLeafNode.children.size}")
         val existingNode = currentLeafNode.children.firstOrNull { it.id == flowId }
         return if (existingNode != null) {
+
+            @Suppress("UNCHECKED_CAST")
             val castedNode = existingNode as FlowNode<*, *, ChildRendering>
+
             currentLeafNode.tempChildren.add(castedNode)
             renderNode(castedNode)
         } else {

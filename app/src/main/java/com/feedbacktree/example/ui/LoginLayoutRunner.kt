@@ -9,7 +9,7 @@ import com.feedbacktree.flow.ui.LayoutRunner
 import com.feedbacktree.flow.ui.ViewBinding
 import kotlinx.android.synthetic.main.login.view.*
 
-class LoginLayout(private val view: View) : LayoutRunner<LoginScreen> {
+class LoginLayoutRunner(private val view: View) : LayoutRunner<LoginScreen> {
 
     private var subscribedToEvents = false
 
@@ -27,6 +27,6 @@ class LoginLayout(private val view: View) : LayoutRunner<LoginScreen> {
     }
 
     companion object : ViewBinding<LoginScreen> by LayoutRunner.bind(
-        R.layout.login, ::LoginLayout
+        R.layout.login, ::LoginLayoutRunner
     )
 }
