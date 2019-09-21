@@ -25,7 +25,7 @@ object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
     }
 
     sealed class State : StateCompletable<Nothing> {
-        override val flowOuput: FlowOutput<Nothing>? = null
+        override val flowOutput: FlowOutput<Nothing>? = null
 
         object LoggedOut : State()
         object LoggedIn : State()

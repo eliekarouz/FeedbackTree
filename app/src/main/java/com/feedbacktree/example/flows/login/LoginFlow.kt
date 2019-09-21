@@ -19,7 +19,7 @@ object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, LoginScree
         val email: String = "",
         val password: String = "",
         val isLoggingIn: Boolean = false,
-        override val flowOuput: FlowOutput<Unit>? = null
+        override val flowOutput: FlowOutput<Unit>? = null
     ) : StateCompletable<Unit>
 
     sealed class Event {
@@ -35,7 +35,7 @@ object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, LoginScree
             is Event.EnteredPassword -> state.copy(password = event.password)
             LoginFlow.Event.ClickedLogin -> state.copy(isLoggingIn = true)
             is Event.ReceivedLogInResponse -> state.copy(
-                flowOuput = completed(Unit)
+                flowOutput = completed(Unit)
             )
         }
     }

@@ -12,13 +12,13 @@ import org.notests.rxfeedback.*
 
 // TODO Remove these global variables
 private val screenChangedPublishSubject = PublishSubject.create<Unit>()
-val screenChanged: Observable<Unit> = screenChangedPublishSubject
+internal val screenChanged: Observable<Unit> = screenChangedPublishSubject
 
 
 typealias Feedback<State, Event> = (ObservableSchedulerContext<State>) -> Observable<Event>
 
 interface StateCompletable<Ouput> {
-    val flowOuput: FlowOutput<Ouput>?
+    val flowOutput: FlowOutput<Ouput>?
 }
 
 abstract class Flow<Input, State, Event, Output, Screen>(
@@ -80,7 +80,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
         )
 
         val stateEncodedOuput = system
-            .collect { state -> state.flowOuput }
+            .collect { state -> state.flowOutput }
 
         return Observable.merge(stateEncodedOuput, outputPublishSubject)
             .doOnSubscribe { active.onNext(true) }
@@ -95,7 +95,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
             val feedbackState = active.switchMap { isActive ->
                 if (isActive) {
                     // Push states as long as the flow is didn't complete.
-                    state.filter { it.flowOuput == null }
+                    state.filter { it.flowOutput == null }
                 } else Observable.empty<State>()
             }
             val observableSchedulerContext = ObservableSchedulerContext(feedbackState, scheduler)
