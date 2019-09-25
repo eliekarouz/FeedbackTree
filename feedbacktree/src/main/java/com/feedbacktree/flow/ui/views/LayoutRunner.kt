@@ -23,6 +23,7 @@ import androidx.annotation.LayoutRes
 import com.feedbacktree.flow.ui.views.LayoutRunner.Companion.bind
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.ui.views.core.bindShowRendering
 import kotlin.reflect.KClass
 
 /**

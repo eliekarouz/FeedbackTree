@@ -1,9 +1,11 @@
 package com.feedbacktree.example.flows.login
 
+import com.feedbacktree.example.flows.fingerprint.FingerprintFlow
 import com.feedbacktree.example.flows.login.LoginFlow.reduce
 import com.feedbacktree.flow.core.*
+import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
 
-object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, LoginScreen>(
+object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, ModalContainerScreen<*, *>>(
     reduce = ::reduce,
     feedbacks = listOf()
 ) {
@@ -11,8 +13,10 @@ object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, LoginScree
 
     // This more clear to start with the architecture: LoginScreen(state, onEvent = { event -> send(event) })
     // A shorted version would be LoginScreen(state, onEvent = ::send)
-    override fun render(state: State, context: RenderingContext): LoginScreen {
-        return LoginScreen(state, onEvent = { event -> send(event) })
+    override fun render(state: State, context: RenderingContext): ModalContainerScreen<*, *> {
+        val loginScreen = LoginScreen(state, onEvent = { event -> send(event) })
+        val fingerprintScreen = context.renderChild(FingerprintFlow, onResult = {})
+        return ModalContainerScreen(loginScreen, fingerprintScreen)
     }
 
     data class State(

@@ -10,6 +10,7 @@ import com.feedbacktree.R
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.FlowOutput
 import com.feedbacktree.flow.core.FlowViewModel
+import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FeedbackTree</string>
+    <string name="fingerprint_for">Fingerprint for</string>
+    <string name="sign_in_using_your_fingerprint">Sign in using your fingerprint</string>
 </resources>

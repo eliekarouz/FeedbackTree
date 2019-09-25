@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feedbacktree.flow.ui.views
+package com.feedbacktree.flow.ui.views.core
 
 import android.view.View
 import com.feedbacktree.R

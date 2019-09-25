@@ -25,13 +25,7 @@ import android.widget.FrameLayout
 import com.feedbacktree.R
 import com.feedbacktree.flow.ui.core.BackStackScreen
 import com.feedbacktree.flow.ui.core.Named
-import com.feedbacktree.flow.ui.views.HandlesBack
-import com.feedbacktree.flow.ui.views.bindShowRendering
-import com.feedbacktree.flow.ui.views.canShowRendering
-import com.feedbacktree.flow.ui.views.core.BuilderBinding
-import com.feedbacktree.flow.ui.views.core.ViewBinding
-import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.showRendering
+import com.feedbacktree.flow.ui.views.core.*
 
 /**
  * A container view that can display a stream of [BackStackScreen] instances.

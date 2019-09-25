@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.ui.views.core.bindShowRendering
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 import io.reactivex.disposables.Disposables

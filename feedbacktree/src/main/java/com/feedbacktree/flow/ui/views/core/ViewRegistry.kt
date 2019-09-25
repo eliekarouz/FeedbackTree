@@ -19,10 +19,9 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import com.feedbacktree.flow.ui.core.Named
-import com.feedbacktree.flow.ui.views.ModalContainer
 import com.feedbacktree.flow.ui.views.backstack.BackStackContainer
-import com.feedbacktree.flow.ui.views.bindShowRendering
-import com.feedbacktree.flow.ui.views.showRenderingTag
+import com.feedbacktree.flow.ui.views.modals.DialogRegistry
+import com.feedbacktree.flow.ui.views.modals.ModalContainer
 import kotlin.reflect.KClass
 
 /**
@@ -65,13 +64,16 @@ class ViewRegistry private constructor(
     private val bindings: Map<KClass<*>, ViewBinding<*>>
 ) {
     /** [bindings] plus any built-ins. Segregated to keep dup checking simple. */
-    private val allBindings = bindings +
-            (NamedBinding.type to NamedBinding) +
-            (BackStackContainer.type to BackStackContainer) +
-            (defaultAlertBinding.type to defaultAlertBinding)
+    private val allBindings = mapOf<KClass<*>, ViewBinding<*>>(
+        BackStackContainer.type to BackStackContainer,
+        NamedBinding.type to NamedBinding,
+        modalContainerViewViewBinding.type to modalContainerViewViewBinding
+    ) + bindings
 
     constructor(vararg bindings: ViewBinding<*>) : this(
-        bindings.map { it.type to it }.toMap().apply {
+        bindings.map
+        { it.type to it }.toMap().apply
+        {
             check(keys.size == bindings.size) {
                 "${bindings.map { it.type }} must not have duplicate entries."
             }
@@ -133,8 +135,7 @@ class ViewRegistry private constructor(
     }
 
     private companion object {
-        val defaultAlertBinding =
-            ModalContainer.forAlertContainerScreen()
+        val modalContainerViewViewBinding = ModalContainer.Binding(DialogRegistry.registry())
     }
 }
 

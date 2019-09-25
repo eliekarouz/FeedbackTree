@@ -23,7 +23,7 @@ import android.view.View
 import android.view.View.BaseSavedState
 import com.feedbacktree.flow.ui.core.Named
 import com.feedbacktree.flow.ui.views.backstack.ViewStateCache.SavedState
-import com.feedbacktree.flow.ui.views.showRenderingTag
+import com.feedbacktree.flow.ui.views.core.showRenderingTag
 
 /**
  * Handles persistence chores for container views that manage a set of [Named] renderings,
