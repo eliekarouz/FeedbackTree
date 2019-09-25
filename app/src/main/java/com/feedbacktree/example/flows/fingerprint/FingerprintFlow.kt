@@ -1,3 +1,8 @@
+/*
+ * Created by eliek on 9/26/2019
+ * Copyright (c) 2019 eliekarouz. All rights reserved.
+ */
+
 package com.feedbacktree.example.flows.fingerprint
 
 import com.feedbacktree.example.flows.fingerprint.FingerprintFlow.reduce
@@ -5,9 +10,10 @@ import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.FlowOutput
 import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.StateCompletable
-import com.feedbacktree.flow.ui.core.modals.AlertModal
+import com.feedbacktree.flow.ui.core.modals.FullScreenModal
 import com.feedbacktree.flow.ui.core.modals.Modal
-import com.feedbacktree.flow.ui.core.modals.withView
+import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
+import com.feedbacktree.flow.ui.core.modals.asViewModal
 
 class EnterFingerprintScreen
 
@@ -20,13 +26,18 @@ object FingerprintFlow : Flow<Unit, FingerprintFlow.State, FingerprintFlow.Event
     }
 
     override fun render(state: State, context: RenderingContext): Modal {
-        return AlertModal(title = "",
-            message = "",
-            buttons = mapOf(AlertModal.Button.POSITIVE to "Cancel"),
-            onEvent = { event ->
-
-            })
-            .withView(EnterFingerprintScreen())
+//        val fingerPrintAlert = AlertModal(title = "",
+//            message = "",
+//            buttons = mapOf(AlertModal.Button.POSITIVE to "Cancel"),
+//            onEvent = { event ->
+//
+//            }).withView(EnterFingerprintScreen())
+        return FullScreenModal(
+            ModalContainerScreen(
+                EnterFingerprintScreen(),
+                EnterFingerprintScreen().asViewModal()
+            )
+        )
     }
 
     sealed class State : StateCompletable<Unit> {

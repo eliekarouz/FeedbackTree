@@ -1,17 +1,6 @@
 /*
- * Copyright 2019 Square Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Created by eliek on 9/26/2019
+ * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 package com.feedbacktree.flow.ui.views.core
 
@@ -24,42 +13,7 @@ import com.feedbacktree.flow.ui.views.modals.DialogRegistry
 import com.feedbacktree.flow.ui.views.modals.ModalContainer
 import kotlin.reflect.KClass
 
-/**
- * A collection of [ViewBinding]s that can be used to display the stream of renderings
- * from a workflow tree.
- *
- * Two concrete [ViewBinding] implementations are provided:
- *
- *  - [LayoutRunner.Binding], allowing the easy pairing of Android XML layout resources with
- *    [LayoutRunner]s to drive them.
- *
- *  - [BuilderBinding], which can build views from code.
- *
- *  Registries can be assembled via concatenation, making it easy to snap together screen sets.
- *  For example:
- *
- *     val AuthViewBindings = ViewRegistry(
- *         AuthorizingLayoutRunner, LoginLayoutRunner, SecondFactorLayoutRunner
- *     )
- *
- *     val TicTacToeViewBindings = ViewRegistry(
- *         NewGameLayoutRunner, GamePlayLayoutRunner, GameOverLayoutRunner
- *     )
- *
- *     val ApplicationViewBindings = ViewRegistry(ApplicationLayoutRunner) +
- *         AuthViewBindings + TicTacToeViewBindings
- *
- * In the above example, note that the `companion object`s of the various [LayoutRunner] classes
- * honor a convention of implementing [ViewBinding], in aid of this kind of assembly. See the
- * class doc on [LayoutRunner] for details.
- *
- * Default bindings for the following types are provided, but can be overridden:
- *
- *  - [Named]`<*>` (Delegates to the registered binding for [Named.wrapped].)
- *  - [BackStackScreen]`<*>`
- *  - [AlertContainerScreen]`<*>` (Use [ModalContainer.forAlertContainerScreen] to set
- *    a different dialog theme.)
- */
+
 class ViewRegistry private constructor(
     private val bindings: Map<KClass<*>, ViewBinding<*>>
 ) {

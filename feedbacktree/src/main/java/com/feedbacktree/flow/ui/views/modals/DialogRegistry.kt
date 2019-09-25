@@ -1,3 +1,8 @@
+/*
+ * Created by eliek on 9/26/2019
+ * Copyright (c) 2019 eliekarouz. All rights reserved.
+ */
+
 package com.feedbacktree.flow.ui.views.modals
 
 import android.content.Context
@@ -6,7 +11,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.StyleRes
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.zippyyum.subtemp.signinviews.feedbacktree.alert.DialogBinding
 import kotlin.reflect.KClass
 
 class DialogRegistry private constructor(

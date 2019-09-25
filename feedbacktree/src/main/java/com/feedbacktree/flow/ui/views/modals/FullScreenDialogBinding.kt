@@ -1,3 +1,8 @@
+/*
+ * Created by eliek on 9/26/2019
+ * Copyright (c) 2019 eliekarouz. All rights reserved.
+ */
+
 package com.feedbacktree.flow.ui.views.modals
 
 import android.app.Dialog
@@ -19,7 +24,6 @@ import com.feedbacktree.flow.ui.views.core.showRendering
 import com.feedbacktree.flow.utils.display
 import com.feedbacktree.flow.utils.isTablet
 import com.feedbacktree.flow.utils.logAndShow
-import com.zippyyum.subtemp.signinviews.feedbacktree.alert.DialogBinding
 import kotlin.math.min
 import kotlin.reflect.KClass
 

@@ -1,7 +1,12 @@
+/*
+ * Created by eliek on 9/26/2019
+ * Copyright (c) 2019 eliekarouz. All rights reserved.
+ */
+
 package com.feedbacktree.flow.core
 
-import com.feedbacktree.flow.utils.collect
 import com.feedbacktree.flow.utils.logInfo
+import com.feedbacktree.flow.utils.mapNotNull
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -80,7 +85,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
         )
 
         val stateEncodedOuput = system
-            .collect { state -> state.flowOutput }
+            .mapNotNull { state -> state.flowOutput }
 
         return Observable.merge(stateEncodedOuput, outputPublishSubject)
             .doOnSubscribe { active.onNext(true) }

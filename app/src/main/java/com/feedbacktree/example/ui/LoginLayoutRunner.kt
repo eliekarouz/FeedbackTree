@@ -1,3 +1,8 @@
+/*
+ * Created by eliek on 9/26/2019
+ * Copyright (c) 2019 eliekarouz. All rights reserved.
+ */
+
 package com.feedbacktree.example.ui
 
 import android.view.View

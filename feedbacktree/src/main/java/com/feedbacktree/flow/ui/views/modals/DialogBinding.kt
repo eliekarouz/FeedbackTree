@@ -1,10 +1,13 @@
-package com.zippyyum.subtemp.signinviews.feedbacktree.alert
+/*
+ * Created by eliek on 9/26/2019
+ * Copyright (c) 2019 eliekarouz. All rights reserved.
+ */
+
+package com.feedbacktree.flow.ui.views.modals
 
 import android.content.Context
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.modals.DialogRef
-import com.feedbacktree.flow.ui.views.modals.DialogRegistry
 import kotlin.reflect.KClass
 
 interface DialogBinding<RenderingT : Modal> {
