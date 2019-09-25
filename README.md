@@ -19,6 +19,6 @@ allprojects {
 Add the dependency
 ```
 dependencies {
-  implementation 'com.github.eliekarouz:feedbacktree:0.3'
+  implementation 'com.github.eliekarouz:feedbacktree:0.5'
 }
 ```
