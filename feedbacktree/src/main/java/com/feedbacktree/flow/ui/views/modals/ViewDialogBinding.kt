@@ -4,11 +4,13 @@ import android.app.Dialog
 import android.content.Context
 import android.view.KeyEvent
 import android.view.View
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.annotation.StyleRes
 import com.feedbacktree.flow.ui.core.modals.ViewModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.ui.views.core.showRendering
+import com.feedbacktree.flow.utils.logAndShow
 import com.zippyyum.subtemp.signinviews.feedbacktree.alert.DialogBinding
 import kotlin.reflect.KClass
 
@@ -37,6 +39,8 @@ class ViewDialogBinding(
                         )
                     }
                 }
+                window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
+                logAndShow("ViewModal")
                 setCancelable(false)
                 setContentView(view)
             }

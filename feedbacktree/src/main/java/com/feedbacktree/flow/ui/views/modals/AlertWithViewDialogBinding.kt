@@ -9,6 +9,7 @@ import com.feedbacktree.flow.ui.core.modals.AlertModal
 import com.feedbacktree.flow.ui.core.modals.AlertModalWithView
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.ui.views.core.showRendering
+import com.feedbacktree.flow.utils.logAndShow
 import com.zippyyum.subtemp.signinviews.feedbacktree.alert.DialogBinding
 import kotlin.reflect.KClass
 
@@ -28,8 +29,8 @@ class AlertWithViewDialogBinding(
         val dialog = AlertDialog.Builder(context, dialogThemeResId)
             .setView(contentView)
             .create()
-        val ref =
-            DialogRef(initialRenderingT, dialog, contentView)
+        dialog.logAndShow("AlertModalWithView")
+        val ref = DialogRef(initialRenderingT, dialog, contentView)
         updateDialog(ref)
         return ref
     }

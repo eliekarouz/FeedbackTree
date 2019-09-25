@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import com.feedbacktree.flow.ui.core.modals.AlertModal
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.utils.logAndShow
 import com.zippyyum.subtemp.signinviews.feedbacktree.alert.DialogBinding
 import kotlin.reflect.KClass
 
@@ -27,6 +28,7 @@ class AlertScreenDialogBinding(
             .create()
         val ref = DialogRef(initialRenderingT, dialog)
         updateDialog(ref)
+        dialog.logAndShow("AlertModal")
         return ref
     }
 

@@ -66,7 +66,6 @@ class ModalContainer
                     .also { dialogRegistry.updateDialog(it) }
             } else {
                 dialogRegistry.buildDialog(modal, context, registry).apply {
-                    dialog.show()
                     // Android makes a lot of logcat noise if it has to close the window for us. :/
                     // https://github.com/square/workflow/issues/51
                     dialog.lifecycleOrNull()

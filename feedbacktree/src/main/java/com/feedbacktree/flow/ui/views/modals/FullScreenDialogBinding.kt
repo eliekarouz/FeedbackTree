@@ -9,6 +9,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.View.MeasureSpec.EXACTLY
 import android.view.View.MeasureSpec.makeMeasureSpec
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import com.feedbacktree.flow.ui.core.modals.FullScreenModal
@@ -17,6 +18,7 @@ import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.ui.views.core.showRendering
 import com.feedbacktree.flow.utils.display
 import com.feedbacktree.flow.utils.isTablet
+import com.feedbacktree.flow.utils.logAndShow
 import com.zippyyum.subtemp.signinviews.feedbacktree.alert.DialogBinding
 import kotlin.math.min
 import kotlin.reflect.KClass
@@ -34,10 +36,9 @@ class FullScreenDialogBinding(
     ): DialogRef<FullScreenModal<*>> {
         val viewRendering = initialRenderingT.screen
 
-        val view = viewRegistry.buildView(viewRendering, context)
+        val view by lazy { viewRegistry.buildView(viewRendering, context) }
         val panel = PanelBodyWrapper(context).apply {
             background = ColorDrawable(backgroundColor)
-            addView(view)
         }
         return Dialog(context, 0)
             .apply {
@@ -52,8 +53,10 @@ class FullScreenDialogBinding(
                 }
                 setCancelable(false)
                 setContentView(panel)
-
+                window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
                 window!!.setBackgroundDrawable(null)
+                logAndShow("FullScreen")
+                panel.addView(view)
             }
             .run {
                 DialogRef(

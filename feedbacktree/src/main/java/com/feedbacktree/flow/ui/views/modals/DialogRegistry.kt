@@ -68,7 +68,7 @@ class DialogRegistry private constructor(
     companion object {
         fun registry(
             @StyleRes dialogThemeResId: Int = 0,
-            @ColorInt fullScreenBackgroundColor: Int = Color.WHITE
+            @ColorInt fullScreenBackgroundColor: Int = Color.RED
         ): DialogRegistry {
             return DialogRegistry(
                 AlertScreenDialogBinding(dialogThemeResId = dialogThemeResId),

@@ -18,7 +18,7 @@ enum class LogLevel {
     Error, Info, Debug, Verbose
 }
 
-var logLevel: LogLevel = LogLevel.Info
+var logLevel: LogLevel = LogLevel.Verbose
 var logger: Logger = ConsoleLogger()
 
 
