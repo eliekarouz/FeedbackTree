@@ -13,33 +13,8 @@ import android.view.View
 import com.feedbacktree.flow.ui.core.Named
 import com.feedbacktree.flow.ui.core.modals.Modal
 
-internal data class KeyAndBundle(
-    val compatibilityKey: String,
-    val bundle: Bundle
-) : Parcelable {
-    override fun describeContents(): Int = 0
-
-    override fun writeToParcel(
-        parcel: Parcel,
-        flags: Int
-    ) {
-        parcel.writeString(compatibilityKey)
-        parcel.writeBundle(bundle)
-    }
-
-    companion object CREATOR : Parcelable.Creator<KeyAndBundle> {
-        override fun createFromParcel(parcel: Parcel): KeyAndBundle {
-            val key = parcel.readString()!!
-            val bundle = parcel.readBundle(KeyAndBundle::class.java.classLoader)!!
-            return KeyAndBundle(key, bundle)
-        }
-
-        override fun newArray(size: Int): Array<KeyAndBundle?> = arrayOfNulls(size)
-    }
-}
-
 /**
- * @param extra optional hook to allow subclasses to associate extra data with this dialog,
+ * @param extra optional hook to allow [DialogRegistry]s to associate extra data with this dialog,
  * e.g. its content view. Not considered for equality.
  */
 data class DialogRef<ModalRenderingT : Modal>(
@@ -75,6 +50,31 @@ data class DialogRef<ModalRenderingT : Modal>(
 
     override fun hashCode(): Int {
         return dialog.hashCode()
+    }
+}
+
+internal data class KeyAndBundle(
+    val compatibilityKey: String,
+    val bundle: Bundle
+) : Parcelable {
+    override fun describeContents(): Int = 0
+
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int
+    ) {
+        parcel.writeString(compatibilityKey)
+        parcel.writeBundle(bundle)
+    }
+
+    companion object CREATOR : Parcelable.Creator<KeyAndBundle> {
+        override fun createFromParcel(parcel: Parcel): KeyAndBundle {
+            val key = parcel.readString()!!
+            val bundle = parcel.readBundle(KeyAndBundle::class.java.classLoader)!!
+            return KeyAndBundle(key, bundle)
+        }
+
+        override fun newArray(size: Int): Array<KeyAndBundle?> = arrayOfNulls(size)
     }
 }
 
