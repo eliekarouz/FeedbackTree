@@ -61,10 +61,13 @@ abstract class Flow<Input, State, Event, Output, Screen>(
                 osc.source.skip(1).subscribe { screenChangedPublishSubject.onNext(Unit) }
             ),
             events = listOf(
-                childrenOutputPublishSubject,
                 publishSubjectEvents
             )
         )
+    }
+
+    private fun childrenResultEventFeedback(): Feedback<State, Event> = {
+        childrenOutputPublishSubject
     }
 
     abstract fun initialState(input: Input): State
@@ -81,7 +84,10 @@ abstract class Flow<Input, State, Event, Output, Screen>(
             initialState = initialState(input),
             reduce = reducerWithLog,
             scheduler = scheduler,
-            scheduledFeedback = feedbacks + listOf(backdoorFeedback())
+            scheduledFeedback = feedbacks + listOf(
+                backdoorFeedback(),
+                childrenResultEventFeedback()
+            )
         )
 
         val stateEncodedOuput = system
@@ -118,6 +124,10 @@ abstract class Flow<Input, State, Event, Output, Screen>(
 
     fun abort() {
         outputPublishSubject.onNext(aborted())
+    }
+
+    fun sendResultEvent(event: Event) {
+        childrenOutputPublishSubject.onNext(event)
     }
 
     fun complete(result: Output) {
