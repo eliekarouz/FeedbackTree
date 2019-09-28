@@ -17,7 +17,7 @@ class FlowViewModel<Input, Output>(
     flow: Flow<Input, *, *, Output, *>
 ) : ViewModel() {
 
-    private val _output = BehaviorSubject.create<FlowOutput<Output>>()
+    private val _output = BehaviorSubject.create<Output>()
 
     private val rootNode: FlowNode<*, *, *> = {
         val disposeBag = CompositeDisposable()
@@ -36,7 +36,7 @@ class FlowViewModel<Input, Output>(
     }()
 
 
-    val output: Observable<FlowOutput<Output>> = _output
+    val output: Observable<Output> = _output
     val screens: Observable<Any> = screenChanged.startWith(Unit).map {
         RenderingContext().renderNode(rootNode) as Any
     }

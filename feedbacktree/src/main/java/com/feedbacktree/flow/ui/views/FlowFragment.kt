@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.feedbacktree.R
 import com.feedbacktree.flow.core.Flow
-import com.feedbacktree.flow.core.FlowOutput
 import com.feedbacktree.flow.core.FlowViewModel
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
@@ -26,8 +25,8 @@ abstract class FlowFragment<Input, Output> : Fragment() {
 
     private val disposeBag = CompositeDisposable()
 
-    private val _output = PublishSubject.create<FlowOutput<Output>>()
-    val output: Observable<FlowOutput<Output>> = _output
+    private val _output = PublishSubject.create<Output>()
+    val output: Observable<Output> = _output
 
     abstract fun input(): Input
     abstract fun flow(): Flow<Input, *, *, Output, *>

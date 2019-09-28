@@ -17,7 +17,7 @@ import io.reactivex.rxkotlin.addTo
 fun <State : StateCompletable<Output>, Output>
         FragmentActivity.startFlow(
     flow: Flow<Unit, State, *, Output, *>,
-    onOutput: (FlowOutput<Output>) -> Unit,
+    onOutput: (Output) -> Unit,
     viewRegistry: ViewRegistry
 ): Disposable = startFlow(Unit, flow, onOutput, viewRegistry)
 
@@ -25,7 +25,7 @@ fun <Input, State : StateCompletable<Output>, Output>
         FragmentActivity.startFlow(
     input: Input,
     flow: Flow<Input, State, *, Output, *>,
-    onOutput: (FlowOutput<Output>) -> Unit,
+    onOutput: (Output) -> Unit,
     viewRegistry: ViewRegistry
 ): Disposable {
 

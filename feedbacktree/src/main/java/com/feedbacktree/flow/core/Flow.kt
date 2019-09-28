@@ -23,7 +23,7 @@ internal val screenChanged: Observable<Unit> = screenChangedPublishSubject
 typealias Feedback<State, Event> = (ObservableSchedulerContext<State>) -> Observable<Event>
 
 interface StateCompletable<Ouput> {
-    val flowOutput: FlowOutput<Ouput>?
+    val flowOutput: Ouput?
 }
 
 abstract class Flow<Input, State, Event, Output, Screen>(
@@ -36,7 +36,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
 
     private val publishSubjectEvents = PublishSubject.create<Event>()
 
-    private val outputPublishSubject = PublishSubject.create<FlowOutput<Output>>()
+    private val outputPublishSubject = PublishSubject.create<Output>()
 
     private val className = javaClass.simpleName
 
@@ -72,7 +72,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
 
     abstract fun initialState(input: Input): State
 
-    override fun run(input: Input): Observable<FlowOutput<Output>> {
+    override fun run(input: Input): Observable<Output> {
         if (active.value == true) {
             error("Attempting to start a flow that is already running")
         }
@@ -122,15 +122,11 @@ abstract class Flow<Input, State, Event, Output, Screen>(
         publishSubjectEvents.onNext(event)
     }
 
-    fun abort() {
-        outputPublishSubject.onNext(aborted())
-    }
-
     fun sendResultEvent(event: Event) {
         childrenOutputPublishSubject.onNext(event)
     }
 
     fun complete(result: Output) {
-        outputPublishSubject.onNext(completed(result))
+        outputPublishSubject.onNext(result)
     }
 }

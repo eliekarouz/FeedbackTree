@@ -46,7 +46,7 @@ class RenderingContext {
     fun <ChildState, ChildOutput, ChildScreen> renderChild(
         flow: Flow<Unit, ChildState, *, ChildOutput, ChildScreen>,
         id: String? = null,
-        onResult: (FlowOutput<ChildOutput>) -> Unit
+        onResult: (ChildOutput) -> Unit
     ): ChildScreen
             where ChildState : StateCompletable<ChildOutput> =
         renderChild(Unit, flow, id, onResult)
@@ -56,7 +56,7 @@ class RenderingContext {
         input: Input,
         flow: Flow<Input, ChildState, *, ChildOutput, ChildScreen>,
         id: String? = null,
-        onResult: (FlowOutput<ChildOutput>) -> Unit
+        onResult: (ChildOutput) -> Unit
     ): ChildScreen
             where ChildState : StateCompletable<ChildOutput> {
         val flowId = id ?: flow::class.toString()

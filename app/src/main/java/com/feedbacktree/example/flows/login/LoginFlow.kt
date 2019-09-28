@@ -7,7 +7,9 @@ package com.feedbacktree.example.flows.login
 
 import com.feedbacktree.example.flows.fingerprint.FingerprintFlow
 import com.feedbacktree.example.flows.login.LoginFlow.reduce
-import com.feedbacktree.flow.core.*
+import com.feedbacktree.flow.core.Flow
+import com.feedbacktree.flow.core.RenderingContext
+import com.feedbacktree.flow.core.StateCompletable
 import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
 
 object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, ModalContainerScreen<*, *>>(
@@ -21,14 +23,14 @@ object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, ModalConta
     override fun render(state: State, context: RenderingContext): ModalContainerScreen<*, *> {
         val loginScreen = LoginScreen(state, onEvent = { event -> send(event) })
         val fingerprintScreen = context.renderChild(FingerprintFlow, onResult = {})
-        return ModalContainerScreen(loginScreen, fingerprintScreen)
+        return ModalContainerScreen(loginScreen, listOf())
     }
 
     data class State(
         val email: String = "",
         val password: String = "",
         val isLoggingIn: Boolean = false,
-        override val flowOutput: FlowOutput<Unit>? = null
+        override val flowOutput: Unit? = null
     ) : StateCompletable<Unit>
 
     sealed class Event {
@@ -42,9 +44,9 @@ object LoginFlow : Flow<Unit, LoginFlow.State, LoginFlow.Event, Unit, ModalConta
         return when (event) {
             is Event.EnteredEmail -> state.copy(email = event.email)
             is Event.EnteredPassword -> state.copy(password = event.password)
-            LoginFlow.Event.ClickedLogin -> state.copy(isLoggingIn = true)
+            LoginFlow.Event.ClickedLogin -> state.copy(flowOutput = Unit)
             is Event.ReceivedLogInResponse -> state.copy(
-                flowOutput = completed(Unit)
+                flowOutput = Unit
             )
         }
     }

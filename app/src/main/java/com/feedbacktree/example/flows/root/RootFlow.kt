@@ -8,7 +8,6 @@ package com.feedbacktree.example.flows.root
 import com.feedbacktree.example.flows.login.LoginFlow
 import com.feedbacktree.example.flows.root.RootFlow.reduce
 import com.feedbacktree.flow.core.Flow
-import com.feedbacktree.flow.core.FlowOutput
 import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.StateCompletable
 
@@ -23,14 +22,14 @@ object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
     override fun render(state: State, context: RenderingContext): Any {
         return when (state) {
             RootFlow.State.LoggedOut -> context.renderChild(LoginFlow, onResult = {
-                send(Event.SuccessfullyLoggedIn)
+                sendResultEvent(Event.SuccessfullyLoggedIn)
             })
             RootFlow.State.LoggedIn -> TODO()
         }
     }
 
     sealed class State : StateCompletable<Nothing> {
-        override val flowOutput: FlowOutput<Nothing>? = null
+        override val flowOutput: Nothing? = null
 
         object LoggedOut : State()
         object LoggedIn : State()
