@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.feedbacktree.R
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.FlowViewModel
+import com.feedbacktree.flow.core.StateCompletable
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import io.reactivex.Observable
@@ -21,7 +22,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
 
-abstract class FlowFragment<Input, Output> : Fragment() {
+abstract class FlowFragment<Input, State : StateCompletable<Output>, Output> : Fragment() {
 
     private val disposeBag = CompositeDisposable()
 
@@ -29,7 +30,7 @@ abstract class FlowFragment<Input, Output> : Fragment() {
     val output: Observable<Output> = _output
 
     abstract fun input(): Input
-    abstract fun flow(): Flow<Input, *, *, Output, *>
+    abstract fun flow(): Flow<Input, State, *, Output, *>
     abstract fun viewRegisry(): ViewRegistry
 
     final override fun onCreateView(
@@ -48,7 +49,7 @@ abstract class FlowFragment<Input, Output> : Fragment() {
         val viewModel = ViewModelProviders.of(
             this,
             factory
-        )[FlowViewModel::class.java] as FlowViewModel<Input, Output>
+        )[FlowViewModel::class.java] as FlowViewModel<Input, State, Output>
 
         viewModel.output
             .subscribe {

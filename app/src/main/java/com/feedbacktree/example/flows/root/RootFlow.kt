@@ -6,12 +6,11 @@
 package com.feedbacktree.example.flows.root
 
 import com.feedbacktree.example.flows.login.LoginFlow
-import com.feedbacktree.example.flows.root.RootFlow.reduce
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.StateCompletable
 
-object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
+object RootFlow : Flow<Unit, State, Event, Nothing, Any>(
     reduce = ::reduce,
     feedbacks = listOf()
 ) {
@@ -21,30 +20,28 @@ object RootFlow : Flow<Unit, RootFlow.State, RootFlow.Event, Nothing, Any>(
 
     override fun render(state: State, context: RenderingContext): Any {
         return when (state) {
-            RootFlow.State.LoggedOut -> context.renderChild(LoginFlow, onResult = {
-                sendResultEvent(Event.SuccessfullyLoggedIn)
+            State.LoggedOut -> context.renderChild(LoginFlow, onResult = {
+                enterState(State.LoggedIn)
             })
-            RootFlow.State.LoggedIn -> TODO()
+            State.LoggedIn -> TODO()
         }
     }
+}
 
-    sealed class State : StateCompletable<Nothing> {
-        override val flowOutput: Nothing? = null
+sealed class State : StateCompletable<Nothing> {
+    override val flowOutput: Nothing? = null
 
-        object LoggedOut : State()
-        object LoggedIn : State()
-    }
+    object LoggedOut : State()
+    object LoggedIn : State()
+}
 
 
-    sealed class Event {
-        object SuccessfullyLoggedIn : Event()
-        object LogOut : Event()
-    }
+sealed class Event {
+    object LogOut : Event()
+}
 
-    fun reduce(state: State, event: Event): State {
-        return when (event) {
-            RootFlow.Event.SuccessfullyLoggedIn -> State.LoggedIn
-            RootFlow.Event.LogOut -> State.LoggedOut
-        }
+fun reduce(state: State, event: Event): State {
+    return when (event) {
+        Event.LogOut -> State.LoggedOut
     }
 }

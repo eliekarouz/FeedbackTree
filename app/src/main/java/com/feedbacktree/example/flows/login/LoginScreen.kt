@@ -6,8 +6,8 @@
 package com.feedbacktree.example.flows.login
 
 data class LoginScreen(
-    val state: LoginFlow.State,
-    val onEvent: (LoginFlow.Event) -> Unit
+    val state: State,
+    val onEvent: (Event) -> Unit
 ) {
     val isLoginButtonEnabled: Boolean
         get() = state.email.isNotEmpty() && state.password.isNotEmpty()

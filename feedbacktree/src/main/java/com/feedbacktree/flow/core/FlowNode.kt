@@ -9,14 +9,21 @@ import android.annotation.SuppressLint
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 
-internal class FlowNode<Input, State : StateCompletable<*>, Screen>(
+internal class FlowNode<Input, State : StateCompletable<Output>, Output, Screen>(
     val input: Input,
-    val flow: Flow<Input, State, *, *, Screen>,
+    val flow: Flow<Input, State, *, Output, Screen>,
     val id: String,
     var disposable: Disposable? = null,
-    internal var children: MutableList<FlowNode<*, *, *>> = mutableListOf(),
-    internal var tempChildren: MutableList<FlowNode<*, *, *>> = mutableListOf()
+    internal var children: MutableList<FlowNode<*, *, *, *>> = mutableListOf(),
+    internal var tempChildren: MutableList<FlowNode<*, *, *, *>> = mutableListOf(),
+    var onResult: (Output) -> Unit
 ) : Disposable {
+
+    fun run() {
+        disposable = flow.run(input).subscribe { result ->
+            onResult(result)
+        }
+    }
 
     fun render(context: RenderingContext): Screen {
         return flow.render(flow.state.value ?: flow.initialState(input), context)
@@ -37,7 +44,7 @@ internal class FlowNode<Input, State : StateCompletable<*>, Screen>(
 
 class RenderingContext {
 
-    private val treeStackTraversedNodes: MutableList<FlowNode<*, *, *>> = mutableListOf()
+    private val treeStackTraversedNodes: MutableList<FlowNode<*, *, *, *>> = mutableListOf()
 
     private val currentLeafNode
         get() = treeStackTraversedNodes.last()
@@ -66,28 +73,28 @@ class RenderingContext {
         return if (existingNode != null) {
 
             @Suppress("UNCHECKED_CAST")
-            val castedNode = existingNode as FlowNode<*, *, ChildScreen>
-
+            val castedNode = existingNode as FlowNode<*, *, ChildOutput, ChildScreen>
+            // We update the onResult block with the new block provided block that will be called when the child output ends.
+            // In fact, it could be that the Parent State captured inside the onResult block when the child flow was started
+            // is not valid anymore.
+            castedNode.onResult = onResult
             currentLeafNode.tempChildren.add(castedNode)
             renderNode(castedNode)
         } else {
             logVerbose("renderChild - Create new node $flowId")
-            val disposable = flow.run(input).subscribe { result ->
-                onResult(result)
-            }
-            val newNode =
-                FlowNode(
-                    input = input,
-                    flow = flow,
-                    id = flowId,
-                    disposable = disposable
-                )
+            val newNode = FlowNode(
+                input = input,
+                flow = flow,
+                id = flowId,
+                onResult = onResult
+            )
+            newNode.run()
             currentLeafNode.tempChildren.add(newNode)
             renderNode(newNode)
         }
     }
 
-    internal fun <Screen> renderNode(node: FlowNode<*, *, Screen>): Screen {
+    internal fun <Screen> renderNode(node: FlowNode<*, *, *, Screen>): Screen {
         logVerbose("Screen node - start ${node.id}")
         treeStackTraversedNodes.add(node)
         node.tempChildren.clear()

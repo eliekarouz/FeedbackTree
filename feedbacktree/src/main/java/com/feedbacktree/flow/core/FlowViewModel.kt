@@ -12,27 +12,24 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.BehaviorSubject
 
-class FlowViewModel<Input, Output>(
+class FlowViewModel<Input, State : StateCompletable<Output>, Output>(
     input: Input,
-    flow: Flow<Input, *, *, Output, *>
+    flow: Flow<Input, State, *, Output, *>
 ) : ViewModel() {
 
     private val _output = BehaviorSubject.create<Output>()
 
-    private val rootNode: FlowNode<*, *, *> = {
-        val disposeBag = CompositeDisposable()
-        flow.run(input)
-            .subscribe {
-                _output.onNext(it)
-            }
-            .addTo(disposeBag)
-
+    private val rootNode: FlowNode<*, *, *, *> = {
         FlowNode(
             input = input,
             flow = flow,
             id = "RootFlow",
-            disposable = disposeBag
-        )
+            onResult = {
+                _output.onNext(it)
+            }
+        ).apply {
+            run()
+        }
     }()
 
 
@@ -46,9 +43,9 @@ class FlowViewModel<Input, Output>(
         rootNode.dispose()
     }
 
-    class Factory<Input, Output>(
+    class Factory<Input, State : StateCompletable<Output>, Output>(
         private val input: Input,
-        private val flow: Flow<Input, *, *, Output, *>
+        private val flow: Flow<Input, State, *, Output, *>
     ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

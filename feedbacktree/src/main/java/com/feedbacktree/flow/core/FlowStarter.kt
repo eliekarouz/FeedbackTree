@@ -35,7 +35,7 @@ fun <Input, State : StateCompletable<Output>, Output>
     val viewModel = ViewModelProviders.of(
         this,
         factory
-    )[FlowViewModel::class.java] as FlowViewModel<Input, Output>
+    )[FlowViewModel::class.java] as FlowViewModel<Input, State, Output>
 
 
     val disposeBag = CompositeDisposable()

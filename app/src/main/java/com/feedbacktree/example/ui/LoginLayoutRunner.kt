@@ -8,7 +8,7 @@ package com.feedbacktree.example.ui
 import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import com.feedbacktree.example.R
-import com.feedbacktree.example.flows.login.LoginFlow.Event
+import com.feedbacktree.example.flows.login.Event
 import com.feedbacktree.example.flows.login.LoginScreen
 import com.feedbacktree.flow.ui.views.LayoutRunner
 import com.feedbacktree.flow.ui.views.core.ViewBinding
