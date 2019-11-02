@@ -143,6 +143,14 @@ abstract class Flow<Input, State, Event, Output, Screen>(
     fun attachFeedbacks(vararg feedbacks: Feedback<State, Event>): Disposable =
         attachFeedbacks(feedbacks.toList())
 
+    protected fun sink(): Sink<Event> {
+        val lastState = state.value
+        return Sink(
+            flowHasCompleted = lastState?.flowOutput != null,
+            eventSink = ::send
+        )
+    }
+
     protected fun send(event: Event) {
         publishSubjectEvents.onNext(event)
     }

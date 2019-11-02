@@ -20,7 +20,7 @@ object LoginFlow : Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
     // This more clear to start with the architecture: LoginScreen(state, onEvent = { event -> send(event) })
     // A shorted version would be LoginScreen(state, onEvent = ::send)
     override fun render(state: State, context: RenderingContext): ModalContainerScreen<*, *> {
-        val loginScreen = LoginScreen(state, onEvent = { event -> send(event) })
+        val loginScreen = LoginScreen(state, sink())
         val fingerprintScreen = context.renderChild(FingerprintFlow, onResult = {})
         return ModalContainerScreen(loginScreen, listOf())
     }

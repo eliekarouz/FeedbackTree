@@ -6,29 +6,34 @@
 package com.feedbacktree.example.ui
 
 import android.view.View
-import androidx.core.widget.doAfterTextChanged
 import com.feedbacktree.example.R
 import com.feedbacktree.example.flows.login.Event
 import com.feedbacktree.example.flows.login.LoginScreen
 import com.feedbacktree.flow.ui.views.LayoutRunner
 import com.feedbacktree.flow.ui.views.core.ViewBinding
+import com.jakewharton.rxbinding3.view.clicks
+import com.jakewharton.rxbinding3.widget.textChanges
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.login.view.*
+import org.notests.rxfeedback.Bindings
+import org.notests.rxfeedback.bind
 
-class LoginLayoutRunner(private val view: View) :
-    LayoutRunner<LoginScreen> {
+class LoginLayoutRunner(private val view: View) : LayoutRunner<LoginScreen, Event> {
+    override fun feedbacks() = listOf(bindUI())
 
-    private var subscribedToEvents = false
-
-    override fun showRendering(rendering: LoginScreen) = with(view) {
-        // Subscriptions
-        btnLogin.isEnabled = rendering.isLoginButtonEnabled
-
-        // Events
-        if (!subscribedToEvents) {
-            inputEmail.doAfterTextChanged { rendering.onEvent(Event.EnteredEmail(it.toString())) }
-            inputPassword.doAfterTextChanged { rendering.onEvent(Event.EnteredPassword(it.toString())) }
-            btnLogin.setOnClickListener { rendering.onEvent(Event.ClickedLogin) }
-            subscribedToEvents = true
+    private fun bindUI() = bind<LoginScreen, Event> {
+        with(view) {
+            val screen = it.source
+            Bindings(
+                subscriptions = listOf(
+                    screen.map { it.isLoginButtonEnabled }.subscribe { btnLogin.isEnabled = it }
+                ),
+                events = listOf<Observable<Event>>(
+                    inputEmail.textChanges().map { Event.EnteredEmail(it.toString()) },
+                    inputPassword.textChanges().map { Event.EnteredPassword(it.toString()) },
+                    btnLogin.clicks().map { Event.ClickedLogin }
+                )
+            )
         }
     }
 
