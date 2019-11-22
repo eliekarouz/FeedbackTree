@@ -14,18 +14,18 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 
-fun <State : StateCompletable<Output>, Output>
+fun <StateT : StateCompletable<OutputT>, OutputT>
         FragmentActivity.startFlow(
-    flow: Flow<Unit, State, *, Output, *>,
-    onOutput: (Output) -> Unit,
+    flow: Flow<Unit, StateT, *, OutputT, *>,
+    onOutput: (OutputT) -> Unit,
     viewRegistry: ViewRegistry
 ): Disposable = startFlow(Unit, flow, onOutput, viewRegistry)
 
-fun <Input, State : StateCompletable<Output>, Output>
+fun <InputT, StateT : StateCompletable<OutputT>, OutputT>
         FragmentActivity.startFlow(
-    input: Input,
-    flow: Flow<Input, State, *, Output, *>,
-    onOutput: (Output) -> Unit,
+    input: InputT,
+    flow: Flow<InputT, StateT, *, OutputT, *>,
+    onOutput: (OutputT) -> Unit,
     viewRegistry: ViewRegistry
 ): Disposable {
 
@@ -35,7 +35,7 @@ fun <Input, State : StateCompletable<Output>, Output>
     val viewModel = ViewModelProviders.of(
         this,
         factory
-    )[FlowViewModel::class.java] as FlowViewModel<Input, State, Output>
+    )[FlowViewModel::class.java] as FlowViewModel<InputT, StateT, OutputT>
 
 
     val disposeBag = CompositeDisposable()
@@ -48,7 +48,7 @@ fun <Input, State : StateCompletable<Output>, Output>
 
     val layout = WorkflowLayout(this).apply {
         id = R.id.workflow_layout
-        start(viewModel.screens, viewRegistry)
+        start(viewModel.viewModels, viewRegistry)
     }
     setContentView(layout)
     return disposeBag

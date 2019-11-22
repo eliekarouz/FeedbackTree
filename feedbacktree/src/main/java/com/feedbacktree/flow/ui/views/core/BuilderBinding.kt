@@ -31,15 +31,15 @@ import kotlin.reflect.KClass
  *      context: Context,
  *      attributeSet: AttributeSet?
  *    ) : FrameLayout(context, attributeSet) {
- *      private fun update(rendering:  MyRendering) { ... }
+ *      private fun update(viewModel:  MyViewModel) { ... }
  *
  *      companion object : ViewBuilder<MyScreen>
  *      by BuilderBinding(
  *          type = MyScreen::class,
- *          builder = { _, initialRendering, context, _ ->
+ *          builder = { _, initialViewModel, context, _ ->
  *            MyView(context).apply {
  *              layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
- *              bindShowRendering(initialRendering, ::update)
+ *              bindShowViewModel(initialViewModel, ::update)
  *            }
  *      )
  *    }
@@ -52,21 +52,21 @@ import kotlin.reflect.KClass
  *    )
  *
  * Note in particular the [ViewRegistry] argument to the [viewConstructor] lambda. This allows
- * nested renderings to be displayed via nested calls to [ViewRegistry.buildView].
+ * nested viewModels to be displayed via nested calls to [ViewRegistry.buildView].
  */
-class BuilderBinding<RenderingT : Any>(
-    override val type: KClass<RenderingT>,
+class BuilderBinding<ViewModelT : Any>(
+    override val type: KClass<ViewModelT>,
     private val viewConstructor: (
         viewRegistry: ViewRegistry,
-        initialRendering: RenderingT,
+        initialViewModel: ViewModelT,
         contextForNewView: Context,
         container: ViewGroup?
     ) -> View
-) : ViewBinding<RenderingT> {
+) : ViewBinding<ViewModelT> {
     override fun buildView(
         registry: ViewRegistry,
-        initialRendering: RenderingT,
+        initialViewModel: ViewModelT,
         contextForNewView: Context,
         container: ViewGroup?
-    ): View = viewConstructor.invoke(registry, initialRendering, contextForNewView, container)
+    ): View = viewConstructor.invoke(registry, initialViewModel, contextForNewView, container)
 }

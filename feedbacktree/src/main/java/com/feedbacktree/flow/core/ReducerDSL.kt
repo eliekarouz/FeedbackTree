@@ -85,20 +85,20 @@ import com.feedbacktree.flow.utils.logVerbose
  * </code>
  * </pre>
  *
- * @param State
- * @param Event
+ * @param StateT
+ * @param EventT
  */
-class Reducer<State, Event> private constructor() {
+class Reducer<StateT, EventT> private constructor() {
 
-    val stateTransitions = mutableMapOf<Matcher<State, State>, SubStateReducers<out State, Event>>()
+    val stateTransitions = mutableMapOf<Matcher<StateT, StateT>, SubStateReducers<out StateT, EventT>>()
 
-    inner class SubStateReducers<S : State, Event>(val transitions: MutableMap<Matcher<Event, Event>, S.(Event) -> State> = mutableMapOf()) {
-        inline fun <reified E : Event> on(noinline transition: S.(E) -> State) {
-            val matcher = Matcher<Event, E>(E::class.java)
+    inner class SubStateReducers<S : StateT, EventT>(val transitions: MutableMap<Matcher<EventT, EventT>, S.(EventT) -> StateT> = mutableMapOf()) {
+        inline fun <reified E : EventT> on(noinline transition: S.(E) -> StateT) {
+            val matcher = Matcher<EventT, E>(E::class.java)
             transitions[matcher] = { event -> transition(event as E) }
         }
 
-        fun transition(state: State, event: Event): State? {
+        fun transition(state: StateT, event: EventT): StateT? {
             val transition = transitions.filter {
                 it.key.matches(event)
             }.values.firstOrNull()
@@ -107,9 +107,9 @@ class Reducer<State, Event> private constructor() {
         }
     }
 
-    inline fun <reified S : State> state(build: SubStateReducers<S, Event>.() -> Unit) {
-        val substateReducers = SubStateReducers<S, Event>()
-        val matcher = Matcher<State, S>(S::class.java)
+    inline fun <reified S : StateT> state(build: SubStateReducers<S, EventT>.() -> Unit) {
+        val substateReducers = SubStateReducers<S, EventT>()
+        val matcher = Matcher<StateT, S>(S::class.java)
         stateTransitions[matcher] = substateReducers
         substateReducers.build()
     }
@@ -119,8 +119,8 @@ class Reducer<State, Event> private constructor() {
     }
 
     companion object {
-        fun <State, Event> create(build: Reducer<State, Event>.() -> Unit): (State, Event) -> State {
-            val reducer = Reducer<State, Event>()
+        fun <StateT, EventT> create(build: Reducer<StateT, EventT>.() -> Unit): (StateT, EventT) -> StateT {
+            val reducer = Reducer<StateT, EventT>()
             reducer.build()
             return { state, event ->
                 val transition = reducer.stateTransitions.filter {

@@ -45,28 +45,21 @@ open class BackStackContainer(
 
     private lateinit var registry: ViewRegistry
 
-    private var onGoBack: ((Unit) -> Unit)? = null
-
-    private fun update(newRendering: BackStackScreen<*>) {
-        onGoBack = newRendering.onGoBack
-
+    private fun update(newBackstack: BackStackScreen<*>) {
         // ViewStateCache requires that everything be Named, for ease of comparison and
         // serialization (that Named.key string is very handy). It's fine if client code is
         // already using Named for its own purposes, recursion works.
         val named: BackStackScreen<Named<*>> =
-            BackStackScreen(
-                newRendering.stack.map { Named(it, "backstack") },
-                newRendering.onGoBack
-            )
+            BackStackScreen(newBackstack.stack.map { Named(it, "backstack") })
 
         val oldViewMaybe = showing
 
         // If existing view is compatible, just update it.
         oldViewMaybe
-            ?.takeIf { it.canShowRendering(named.top) }
+            ?.takeIf { it.canShowViewModel(named.top) }
             ?.let {
                 viewStateCache.prune(named.stack)
-                it.showRendering(named.top)
+                it.showViewModel(named.top)
                 return
             }
 
@@ -77,15 +70,15 @@ open class BackStackContainer(
     }
 
     /**
-     * Called from [View.showRendering] to swap between views.
+     * Called from [View.showViewModel] to swap between views.
      * Subclasses can override to customize visual effects. There is no need to call super.
-     * Note that views are showing renderings of type [Named]`<BackStackScreen<*>>`.
+     * Note that views are showing viewModels of type [Named]`<BackStackScreen<*>>`.
      *
-     * @param oldViewMaybe the outgoing view, or null if this is the initial rendering.
+     * @param oldViewMaybe the outgoing view, or null if this is the initial viewModel.
      * @param newView the view that should replace [oldViewMaybe] (if it exists), and become
      * this view's only child
-     * @param popped true if we should give the appearance of popping "back" to a previous rendering,
-     * false if a new rendering is being "pushed". Should be ignored if [oldViewMaybe] is null.
+     * @param popped true if we should give the appearance of popping "back" to a previous viewModel,
+     * false if a new viewModel is being "pushed". Should be ignored if [oldViewMaybe] is null.
      */
     protected open fun performTransition(
         oldViewMaybe: View?,
@@ -121,15 +114,8 @@ open class BackStackContainer(
     }
 
     override fun onBackPressed(): Boolean {
-        val viewHandledBack = showing
+        return showing
             ?.let { HandlesBack.Helper.onBackPressed(it) } ?: false
-        if (viewHandledBack) {
-            return true
-        }
-        return onGoBack?.let {
-            it(Unit)
-            true
-        } ?: false
     }
 
     override fun onSaveInstanceState(): Parcelable {
@@ -147,13 +133,13 @@ open class BackStackContainer(
 
     companion object : ViewBinding<BackStackScreen<*>> by BuilderBinding(
         type = BackStackScreen::class,
-        viewConstructor = { viewRegistry, initialRendering, context, _ ->
+        viewConstructor = { viewRegistry, initialViewModel, context, _ ->
             BackStackContainer(context)
                 .apply {
                     id = R.id.workflow_back_stack_container
                     layoutParams = (ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT))
                     registry = viewRegistry
-                    bindShowRendering(initialRendering, ::update)
+                    bindShowViewModel(initialViewModel, ::update)
                 }
         }
     )

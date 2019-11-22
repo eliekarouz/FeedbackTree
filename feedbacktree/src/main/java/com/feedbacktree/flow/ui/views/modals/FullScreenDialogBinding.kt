@@ -17,10 +17,10 @@ import android.view.View.MeasureSpec.makeMeasureSpec
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
-import com.feedbacktree.flow.ui.core.modals.FullScreenModal
+import com.feedbacktree.flow.ui.core.modals.FullscreenModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.core.showRendering
+import com.feedbacktree.flow.ui.views.core.showViewModel
 import com.feedbacktree.flow.utils.display
 import com.feedbacktree.flow.utils.isTablet
 import com.feedbacktree.flow.utils.logAndShow
@@ -29,18 +29,18 @@ import kotlin.reflect.KClass
 
 class FullScreenDialogBinding(
     @ColorInt private val backgroundColor: Int,
-    override val type: KClass<FullScreenModal<*>> = FullScreenModal::class
-) : DialogBinding<FullScreenModal<*>> {
+    override val type: KClass<FullscreenModal<*>> = FullscreenModal::class
+) : DialogBinding<FullscreenModal<*>> {
 
     override fun buildDialog(
-        initialRenderingT: FullScreenModal<*>,
+        initialModal: FullscreenModal<*>,
         dialogRegistry: DialogRegistry,
         viewRegistry: ViewRegistry,
         context: Context
-    ): DialogRef<FullScreenModal<*>> {
-        val viewRendering = initialRenderingT.screen
+    ): DialogRef<FullscreenModal<*>> {
+        val contentViewModel = initialModal.contentViewModel
 
-        val view by lazy { viewRegistry.buildView(viewRendering, context) }
+        val view by lazy { viewRegistry.buildView(contentViewModel, context) }
         val panel = PanelBodyWrapper(context).apply {
             background = ColorDrawable(backgroundColor)
         }
@@ -64,15 +64,15 @@ class FullScreenDialogBinding(
             }
             .run {
                 DialogRef(
-                    initialRenderingT,
+                    initialModal,
                     this,
                     view
                 )
             }
     }
 
-    override fun updateDialog(dialogRef: DialogRef<FullScreenModal<*>>) {
-        with(dialogRef) { (extra as View).showRendering(modalRendering.screen) }
+    override fun updateDialog(dialogRef: DialogRef<FullscreenModal<*>>) {
+        with(dialogRef) { (extra as View).showViewModel(modal.contentViewModel) }
     }
 }
 

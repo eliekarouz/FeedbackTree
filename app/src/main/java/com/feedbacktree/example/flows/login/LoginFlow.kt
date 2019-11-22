@@ -17,10 +17,10 @@ object LoginFlow : Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
 ) {
     override fun initialState(input: Unit): State = State()
 
-    // This more clear to start with the architecture: LoginScreen(state, onEvent = { event -> send(event) })
-    // A shorted version would be LoginScreen(state, onEvent = ::send)
+    // This more clear to start with the architecture: LoginViewModel(state, onEvent = { event -> send(event) })
+    // A shorted version would be LoginViewModel(state, onEvent = ::send)
     override fun render(state: State, context: RenderingContext): ModalContainerScreen<*, *> {
-        val loginScreen = LoginScreen(state, sink())
+        val loginScreen = LoginViewModel(state, sink())
         val fingerprintScreen = context.renderChild(FingerprintFlow, onResult = {})
         return ModalContainerScreen(loginScreen, listOf())
     }

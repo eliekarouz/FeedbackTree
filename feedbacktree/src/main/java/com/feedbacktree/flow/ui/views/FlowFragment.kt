@@ -22,15 +22,15 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
 
-abstract class FlowFragment<Input, State : StateCompletable<Output>, Output> : Fragment() {
+abstract class FlowFragment<InputT, StateT : StateCompletable<OutputT>, OutputT> : Fragment() {
 
     private val disposeBag = CompositeDisposable()
 
-    private val _output = PublishSubject.create<Output>()
-    val output: Observable<Output> = _output
+    private val _output = PublishSubject.create<OutputT>()
+    val output: Observable<OutputT> = _output
 
-    abstract fun input(): Input
-    abstract fun flow(): Flow<Input, State, *, Output, *>
+    abstract fun input(): InputT
+    abstract fun flow(): Flow<InputT, StateT, *, OutputT, *>
     abstract fun viewRegisry(): ViewRegistry
 
     final override fun onCreateView(
@@ -49,7 +49,7 @@ abstract class FlowFragment<Input, State : StateCompletable<Output>, Output> : F
         val viewModel = ViewModelProviders.of(
             this,
             factory
-        )[FlowViewModel::class.java] as FlowViewModel<Input, State, Output>
+        )[FlowViewModel::class.java] as FlowViewModel<InputT, StateT, OutputT>
 
         viewModel.output
             .subscribe {
@@ -59,7 +59,7 @@ abstract class FlowFragment<Input, State : StateCompletable<Output>, Output> : F
 
         (view as WorkflowLayout).apply {
             id = R.id.workflow_layout
-            start(viewModel.screens, viewRegisry())
+            start(viewModel.viewModels, viewRegisry())
         }
     }
 
@@ -70,9 +70,9 @@ abstract class FlowFragment<Input, State : StateCompletable<Output>, Output> : F
      * e.g.:
      *
      *    override fun onBackPressed() {
-     *      val workflowFragment =
-     *        supportFragmentManager.findFragmentByTag(MY_WORKFLOW) as? WorkflowFragment<*, *>
-     *      if (workflowFragment?.onBackPressed() != true) super.onBackPressed()
+     *      val flowFragment =
+     *        supportFragmentManager.findFragmentByTag(MY_WORKFLOW) as? FlowFragment<*, *, *>
+     *      if (flowFragment?.onBackPressed() != true) super.onBackPressed()
      *    }
      */
     fun onBackPressed(): Boolean {

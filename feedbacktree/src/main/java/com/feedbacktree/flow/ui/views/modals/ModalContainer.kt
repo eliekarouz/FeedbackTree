@@ -52,8 +52,8 @@ class ModalContainer
     }
 
     private fun update(newScreen: ModalContainerScreen<*, *>) {
-        base?.takeIf { it.canShowRendering(newScreen.baseScreen) }
-            ?.showRendering(newScreen.baseScreen)
+        base?.takeIf { it.canShowViewModel(newScreen.baseScreen) }
+            ?.showViewModel(newScreen.baseScreen)
             ?: run {
                 removeAllViews()
                 val newBase = registry.buildView(newScreen.baseScreen, this)
@@ -63,11 +63,11 @@ class ModalContainer
         val newDialogs = mutableListOf<DialogRef<Modal>>()
         for ((i, modal) in newScreen.modals.withIndex()) {
             newDialogs += if (i < dialogs.size && compatible(
-                    dialogs[i].modalRendering,
+                    dialogs[i].modal,
                     modal
                 )
             ) {
-                dialogs[i].copy(modalRendering = modal)
+                dialogs[i].copy(modal = modal)
                     .also { dialogRegistry.updateDialog(it) }
             } else {
                 dialogRegistry.buildDialog(modal, context, registry).apply {
@@ -110,7 +110,7 @@ class ModalContainer
     ) : ViewBinding<ModalContainerScreen<*, *>>
     by BuilderBinding(
         type = ModalContainerScreen::class,
-        viewConstructor = { viewRegistry, initialRendering, contextForNewView, container ->
+        viewConstructor = { viewRegistry, initialViewModel, contextForNewView, container ->
             ModalContainer(
                 contextForNewView,
                 dialogRegistry
@@ -120,7 +120,7 @@ class ModalContainer
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
                 registry = viewRegistry
-                bindShowRendering(initialRendering, ::update)
+                bindShowViewModel(initialViewModel, ::update)
             }
         }
     )

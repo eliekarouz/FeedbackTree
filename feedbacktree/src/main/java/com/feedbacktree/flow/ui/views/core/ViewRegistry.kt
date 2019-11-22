@@ -44,40 +44,40 @@ class ViewRegistry private constructor(
     )
 
     /**
-     * Creates a [View] to display [initialRendering], which can be updated via calls
-     * to [View.showRendering].
+     * Creates a [View] to display [initialViewModel], which can be updated via calls
+     * to [View.showViewModel].
      */
-    fun <RenderingT : Any> buildView(
-        initialRendering: RenderingT,
+    fun <ViewModelT : Any> buildView(
+        initialViewModel: ViewModelT,
         contextForNewView: Context,
         container: ViewGroup? = null
     ): View {
         @Suppress("UNCHECKED_CAST")
-        return (allBindings[initialRendering::class] as? ViewBinding<RenderingT>)
-            ?.buildView(this, initialRendering, contextForNewView, container)
+        return (allBindings[initialViewModel::class] as? ViewBinding<ViewModelT>)
+            ?.buildView(this, initialViewModel, contextForNewView, container)
             ?.apply {
-                checkNotNull(showRenderingTag?.showing) {
-                    "View.bindShowRendering must be called for $this."
+                checkNotNull(showViewModelTag?.showing) {
+                    "View.bindShowViewModel must be called for $this."
                 }
             }
             ?: throw IllegalArgumentException(
-                "A binding for ${initialRendering::class.java.name} must be registered " +
-                        "to display $initialRendering."
+                "A binding for ${initialViewModel::class.java.name} must be registered " +
+                        "to display $initialViewModel."
             )
     }
 
     /**
-     * Creates a [View] to display [initialRendering], and which can handle calls
-     * to [View.showRendering].
+     * Creates a [View] to display [initialViewModel], and which can handle calls
+     * to [View.showViewModel].
      */
-    fun <RenderingT : Any> buildView(
-        initialRendering: RenderingT,
+    fun <ViewModelT : Any> buildView(
+        initialViewModel: ViewModelT,
         container: ViewGroup
     ): View {
-        return buildView(initialRendering, container.context, container)
+        return buildView(initialViewModel, container.context, container)
     }
 
-    operator fun <RenderingT : Any> plus(binding: ViewBinding<RenderingT>): ViewRegistry {
+    operator fun <ViewModelT : Any> plus(binding: ViewBinding<ViewModelT>): ViewRegistry {
         check(binding.type !in bindings.keys) {
             "Already registered ${bindings[binding.type]} for ${binding.type}, cannot accept $binding."
         }
@@ -96,11 +96,11 @@ class ViewRegistry private constructor(
 private object NamedBinding : ViewBinding<Named<*>>
 by BuilderBinding(
     type = Named::class,
-    viewConstructor = { viewRegistry, initialRendering, contextForNewView, container ->
-        val view = viewRegistry.buildView(initialRendering.wrapped, contextForNewView, container)
+    viewConstructor = { viewRegistry, initialViewModel, contextForNewView, container ->
+        val view = viewRegistry.buildView(initialViewModel.wrapped, contextForNewView, container)
         view.apply {
-            val wrappedUpdater = showRenderingTag!!.showRendering
-            bindShowRendering(initialRendering) {
+            val wrappedUpdater = showViewModelTag!!.showViewModel
+            bindShowViewModel(initialViewModel) {
                 wrappedUpdater.invoke(it.wrapped)
             }
         }

@@ -5,11 +5,11 @@
 
 package com.feedbacktree.flow.ui.core.modals
 
-data class AlertModalWithView<ContentScreen : Any>(
+data class AlertModalWithView<ContentViewModelT : Any>(
     val alertModal: AlertModal,
-    val contentScreen: ContentScreen
+    val contentViewModel: ContentViewModelT
 ) : Modal
 
-fun <ContentScreen : Any> AlertModal.withView(contentScreen: ContentScreen): AlertModalWithView<ContentScreen> {
+fun <ContentViewModelT : Any> AlertModal.withView(contentScreen: ContentViewModelT): AlertModalWithView<ContentViewModelT> {
     return AlertModalWithView(this, contentScreen)
 }

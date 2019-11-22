@@ -23,14 +23,14 @@ class AlertScreenDialogBinding(
     DialogBinding<AlertModal> {
 
     override fun buildDialog(
-        initialRenderingT: AlertModal,
+        initialModal: AlertModal,
         dialogRegistry: DialogRegistry,
         viewRegistry: ViewRegistry,
         context: Context
     ): DialogRef<AlertModal> {
         val dialog = AlertDialog.Builder(context, dialogThemeResId)
             .create()
-        val ref = DialogRef(initialRenderingT, dialog)
+        val ref = DialogRef(initialModal, dialog)
         updateDialog(ref)
         dialog.logAndShow("AlertModal")
         return ref
@@ -38,20 +38,20 @@ class AlertScreenDialogBinding(
 
     override fun updateDialog(dialogRef: DialogRef<AlertModal>) {
         val dialog = dialogRef.dialog as AlertDialog
-        val rendering = dialogRef.modalRendering
+        val modal = dialogRef.modal
 
-        if (rendering.cancelable) {
-            dialog.setOnCancelListener { rendering.onEvent(AlertModal.Event.Canceled) }
+        if (modal.cancelable) {
+            dialog.setOnCancelListener { modal.onEvent(AlertModal.Event.Canceled) }
             dialog.setCancelable(true)
         } else {
             dialog.setCancelable(false)
         }
 
         for (button in AlertModal.Button.values()) {
-            rendering.buttons[button]
+            modal.buttons[button]
                 ?.let { name ->
                     dialog.setButton(button.toId(), name) { _, _ ->
-                        rendering.onEvent(
+                        modal.onEvent(
                             AlertModal.Event.ButtonClicked(
                                 button
                             )
@@ -64,12 +64,12 @@ class AlertScreenDialogBinding(
                 }
         }
 
-        if (rendering.message.isNotEmpty()) {
-            dialog.setMessage(rendering.message)
+        if (modal.message.isNotEmpty()) {
+            dialog.setMessage(modal.message)
         }
 
-        if (rendering.title.isNotEmpty()) {
-            dialog.setTitle(rendering.title)
+        if (modal.title.isNotEmpty()) {
+            dialog.setTitle(modal.title)
         }
     }
 

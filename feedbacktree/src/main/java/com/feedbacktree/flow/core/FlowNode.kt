@@ -9,14 +9,14 @@ import android.annotation.SuppressLint
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 
-internal class FlowNode<Input, State : StateCompletable<Output>, Output, Screen>(
-    val input: Input,
-    val flow: Flow<Input, State, *, Output, Screen>,
+internal class FlowNode<InputT, StateT : StateCompletable<OutputT>, OutputT, ViewModelT>(
+    val input: InputT,
+    val flow: Flow<InputT, StateT, *, OutputT, ViewModelT>,
     val id: String,
     var disposable: Disposable? = null,
     internal var children: MutableList<FlowNode<*, *, *, *>> = mutableListOf(),
     internal var tempChildren: MutableList<FlowNode<*, *, *, *>> = mutableListOf(),
-    var onResult: (Output) -> Unit
+    var onResult: (OutputT) -> Unit
 ) : Disposable {
 
     fun run() {
@@ -25,7 +25,7 @@ internal class FlowNode<Input, State : StateCompletable<Output>, Output, Screen>
         }
     }
 
-    fun render(context: RenderingContext): Screen {
+    fun render(context: RenderingContext): ViewModelT {
         return flow.render(flow.state.value ?: flow.initialState(input), context)
     }
 
@@ -50,22 +50,22 @@ class RenderingContext {
         get() = treeStackTraversedNodes.last()
 
     @SuppressLint("CheckResult")
-    fun <ChildState, ChildOutput, ChildScreen> renderChild(
-        flow: Flow<Unit, ChildState, *, ChildOutput, ChildScreen>,
+    fun <ChildStateT, ChildOutputT, ChildViewModelT> renderChild(
+        flow: Flow<Unit, ChildStateT, *, ChildOutputT, ChildViewModelT>,
         id: String? = null,
-        onResult: (ChildOutput) -> Unit
-    ): ChildScreen
-            where ChildState : StateCompletable<ChildOutput> =
+        onResult: (ChildOutputT) -> Unit
+    ): ChildViewModelT
+            where ChildStateT : StateCompletable<ChildOutputT> =
         renderChild(Unit, flow, id, onResult)
 
     @SuppressLint("CheckResult")
-    fun <Input, ChildState, ChildOutput, ChildScreen> renderChild(
-        input: Input,
-        flow: Flow<Input, ChildState, *, ChildOutput, ChildScreen>,
+    fun <InputT, ChildStateT, ChildOutputT, ChildViewModelT> renderChild(
+        input: InputT,
+        flow: Flow<InputT, ChildStateT, *, ChildOutputT, ChildViewModelT>,
         id: String? = null,
-        onResult: (ChildOutput) -> Unit
-    ): ChildScreen
-            where ChildState : StateCompletable<ChildOutput> {
+        onResult: (ChildOutputT) -> Unit
+    ): ChildViewModelT
+            where ChildStateT : StateCompletable<ChildOutputT> {
         val flowId = id ?: flow::class.toString()
 
         logVerbose("renderChild: $flowId, currentLeafNode = ${currentLeafNode.id}, currentLeafNode.children= ${currentLeafNode.children.size}")
@@ -73,7 +73,7 @@ class RenderingContext {
         return if (existingNode != null) {
 
             @Suppress("UNCHECKED_CAST")
-            val castedNode = existingNode as FlowNode<*, *, ChildOutput, ChildScreen>
+            val castedNode = existingNode as FlowNode<*, *, ChildOutputT, ChildViewModelT>
             // We update the onResult block with the new block provided block that will be called when the child output ends.
             // In fact, it could be that the Parent State captured inside the onResult block when the child flow was started
             // is not valid anymore.
@@ -94,26 +94,26 @@ class RenderingContext {
         }
     }
 
-    internal fun <Screen> renderNode(node: FlowNode<*, *, *, Screen>): Screen {
-        logVerbose("Screen node - start ${node.id}")
+    internal fun <ViewModelT> renderNode(node: FlowNode<*, *, *, ViewModelT>): ViewModelT {
+        logVerbose("ViewModel node - start ${node.id}")
         treeStackTraversedNodes.add(node)
         node.tempChildren.clear()
 
-        val rendering = node.render(this)
-        logVerbose("Screen - $rendering")
+        val viewModel = node.render(this)
+        logVerbose("ViewModel - $viewModel")
         val currentChildrenFlowKeys = node.tempChildren.map { it.id }
 
         val childrenToRemove =
             node.children.filter { !currentChildrenFlowKeys.contains(it.id) }
         childrenToRemove.forEach {
-            logVerbose("Screen node - removing children ${node.id}")
+            logVerbose("ViewModel node - removing children ${node.id}")
             it.dispose()
         }
 
         node.children = node.tempChildren.toMutableList() //
         treeStackTraversedNodes.remove(node)
-        logVerbose("Screen node - end ${node.id}, node.children = ${node.children.size}")
-        return rendering
+        logVerbose("ViewModel node - end ${node.id}, node.children = ${node.children.size}")
+        return viewModel
     }
 }
 

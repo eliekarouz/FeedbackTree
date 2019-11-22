@@ -5,8 +5,8 @@
 
 package com.feedbacktree.flow.ui.core.modals
 
-data class ViewModal<out Rendering : Any>(
-    val rendering: Rendering
+data class ViewModal<out ViewModelT : Any>(
+    val viewModel: ViewModelT
 ) : Modal
 
-fun <T : Any> T.asViewModal() = ViewModal(this)
+fun <ViewModelT : Any> ViewModelT.asViewModal() = ViewModal(this)

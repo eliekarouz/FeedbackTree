@@ -1,6 +1,6 @@
 package com.feedbacktree.flow.core
 
-data class Sink<Event>(
+data class Sink<EventT>(
     internal val flowHasCompleted: Boolean,
-    internal val eventSink: (Event) -> Unit
+    internal val eventSink: (EventT) -> Unit
 )

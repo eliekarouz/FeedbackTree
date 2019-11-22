@@ -10,16 +10,16 @@ import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import kotlin.reflect.KClass
 
-interface DialogBinding<RenderingT : Modal> {
+interface DialogBinding<ModalT : Modal> {
 
-    val type: KClass<RenderingT>
+    val type: KClass<ModalT>
 
     fun buildDialog(
-        initialRenderingT: RenderingT,
+        initialModal: ModalT,
         dialogRegistry: DialogRegistry,
         viewRegistry: ViewRegistry,
         context: Context
-    ): DialogRef<RenderingT>
+    ): DialogRef<ModalT>
 
-    fun updateDialog(dialogRef: DialogRef<RenderingT>)
+    fun updateDialog(dialogRef: DialogRef<ModalT>)
 }

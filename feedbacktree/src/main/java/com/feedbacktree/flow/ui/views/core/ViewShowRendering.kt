@@ -21,65 +21,65 @@ import com.feedbacktree.flow.ui.core.compatible
 
 /**
  * Function attached to a view created by [ViewRegistry], to allow it
- * to respond to [View.showRendering].
+ * to respond to [View.showViewModel].
  */
-typealias ViewShowRendering<RenderingT> = (@UnsafeVariance RenderingT) -> Unit
+typealias ShowViewModel<ViewModelT> = (@UnsafeVariance ViewModelT) -> Unit
 
-data class ShowRenderingTag<out RenderingT : Any>(
-    val showing: RenderingT,
-    val showRendering: ViewShowRendering<RenderingT>
+data class ShowViewModelTag<out ViewModelT : Any>(
+    val showing: ViewModelT,
+    val showViewModel: ShowViewModel<ViewModelT>
 )
 
 /**
- * Establishes [showRendering] as the implementation of [View.showRendering]
- * for the receiver, possibly replacing the existing one. Calls [showRendering]
- * to display [initialRendering].
+ * Establishes [showViewModel] as the implementation of [View.showViewModel]
+ * for the receiver, possibly replacing the existing one. Calls [showViewModel]
+ * to display [initialViewModel].
  *
  * Intended for use by implementations of [ViewBinding.buildView].
  */
-fun <RenderingT : Any> View.bindShowRendering(
-    initialRendering: RenderingT,
-    showRendering: ViewShowRendering<RenderingT>
+fun <ViewModelT : Any> View.bindShowViewModel(
+    initialViewModel: ViewModelT,
+    showViewModel: ShowViewModel<ViewModelT>
 ) {
     setTag(
         R.id.view_show_rendering_function,
-        ShowRenderingTag(initialRendering, showRendering)
+        ShowViewModelTag(initialViewModel, showViewModel)
     )
-    showRendering.invoke(initialRendering)
+    showViewModel.invoke(initialViewModel)
 }
 
 /**
- * True if this view is able to show [rendering].
+ * True if this view is able to show [viewModel].
  *
- * Returns `false` if [bindShowRendering] has not been called, so it is always safe to
+ * Returns `false` if [bindShowViewModel] has not been called, so it is always safe to
  * call this method. Otherwise returns the [compatibility][compatible] of the new
- * [rendering] and the current one.
+ * [viewModel] and the current one.
  */
-fun View.canShowRendering(rendering: Any): Boolean {
-    return showRenderingTag?.showing?.matches(rendering) == true
+fun View.canShowViewModel(viewModel: Any): Boolean {
+    return showViewModelTag?.showing?.matches(viewModel) == true
 }
 
 /**
- * Shows [rendering] in a view that has been initialized by [bindShowRendering].
+ * Shows [viewModel] in a view that has been initialized by [bindShowViewModel].
  */
-fun <RenderingT : Any> View.showRendering(rendering: RenderingT) {
-    showRenderingTag
+fun <ViewModelT : Any> View.showViewModel(viewModel: ViewModelT) {
+    showViewModelTag
         ?.let { tag ->
-            check(tag.showing.matches(rendering)) {
-                "Expected $this to be able to update of ${tag.showing} from $rendering"
+            check(tag.showing.matches(viewModel)) {
+                "Expected $this to be able to update of ${tag.showing} from $viewModel"
             }
 
             @Suppress("UNCHECKED_CAST")
-            (tag.showRendering as ViewShowRendering<RenderingT>).invoke(rendering)
+            (tag.showViewModel as ShowViewModel<ViewModelT>).invoke(viewModel)
         }
-        ?: error("Expected $this to have a showRendering function for $rendering.")
+        ?: error("Expected $this to have a showViewModel function for $viewModel.")
 }
 
 /**
- * Returns the [ShowRenderingTag] established by the last call to [View.bindShowRendering],
+ * Returns the [ShowViewModelTag] established by the last call to [View.bindShowViewModel],
  * or null if none has been set.
  */
-val View.showRenderingTag: ShowRenderingTag<*>?
-    get() = getTag(R.id.view_show_rendering_function) as? ShowRenderingTag<*>
+val View.showViewModelTag: ShowViewModelTag<*>?
+    get() = getTag(R.id.view_show_rendering_function) as? ShowViewModelTag<*>
 
 private fun Any.matches(other: Any) = compatible(this, other)

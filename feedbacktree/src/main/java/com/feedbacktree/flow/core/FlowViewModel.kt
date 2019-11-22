@@ -8,16 +8,14 @@ package com.feedbacktree.flow.core
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.BehaviorSubject
 
-class FlowViewModel<Input, State : StateCompletable<Output>, Output>(
-    input: Input,
-    flow: Flow<Input, State, *, Output, *>
+class FlowViewModel<InputT, StateT : StateCompletable<OutputT>, OutputT>(
+    input: InputT,
+    flow: Flow<InputT, StateT, *, OutputT, *>
 ) : ViewModel() {
 
-    private val _output = BehaviorSubject.create<Output>()
+    private val _output = BehaviorSubject.create<OutputT>()
 
     private val rootNode: FlowNode<*, *, *, *> = {
         FlowNode(
@@ -33,8 +31,8 @@ class FlowViewModel<Input, State : StateCompletable<Output>, Output>(
     }()
 
 
-    val output: Observable<Output> = _output
-    val screens: Observable<Any> = screenChanged.startWith(Unit).map {
+    val output: Observable<OutputT> = _output
+    val viewModels: Observable<Any> = newViewModelTrigger.startWith(Unit).map {
         RenderingContext().renderNode(rootNode) as Any
     }
 
@@ -43,9 +41,9 @@ class FlowViewModel<Input, State : StateCompletable<Output>, Output>(
         rootNode.dispose()
     }
 
-    class Factory<Input, State : StateCompletable<Output>, Output>(
-        private val input: Input,
-        private val flow: Flow<Input, State, *, Output, *>
+    class Factory<InputT, StateT : StateCompletable<OutputT>, OutputT>(
+        private val input: InputT,
+        private val flow: Flow<InputT, StateT, *, OutputT, *>
     ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

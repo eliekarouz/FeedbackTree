@@ -25,16 +25,15 @@ import android.view.View
 import android.widget.FrameLayout
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.core.canShowRendering
-import com.feedbacktree.flow.ui.views.core.showRendering
+import com.feedbacktree.flow.ui.views.core.canShowViewModel
+import com.feedbacktree.flow.ui.views.core.showViewModel
 import com.squareup.coordinators.Coordinator
 import com.squareup.coordinators.Coordinators
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
 /**
- * A view that can be driven by a [WorkflowRunner]. In most cases you'll use
- * [Activity.setContentWorkflow][setContentWorkflow] or subclass [WorkflowFragment]
+ * In most, if not all, you will be using [startFlow] or subclass [FlowFragment]
  * rather than manage this class directly.
  */
 class WorkflowLayout(
@@ -45,18 +44,18 @@ class WorkflowLayout(
     private val showing: View? get() = if (childCount > 0) getChildAt(0) else null
 
     /**
-     * Subscribes to [renderings], and uses [registry] to
-     * [build a new view][ViewRegistry.buildView] each time a new type of rendering is received,
+     * Subscribes to [viewModels], and uses [registry] to
+     * [build a new view][ViewRegistry.buildView] each time a new type of viewModel is received,
      * making that view the only child of this one.
      *
      * Views created this way may make recursive calls to [ViewRegistry.buildView] to make
-     * children of their own to handle nested renderings.
+     * children of their own to handle nested viewModels.
      */
     fun start(
-        renderings: Observable<out Any>,
+        viewModels: Observable<out Any>,
         registry: ViewRegistry
     ) {
-        takeWhileAttached(renderings) { show(it, registry) }
+        takeWhileAttached(viewModels) { show(it, registry) }
     }
 
     override fun onBackPressed(): Boolean {
@@ -66,17 +65,17 @@ class WorkflowLayout(
     }
 
     private fun show(
-        newRendering: Any,
+        newViewModel: Any,
         registry: ViewRegistry
     ) {
-        showing?.takeIf { it.canShowRendering(newRendering) }
+        showing?.takeIf { it.canShowViewModel(newViewModel) }
             ?.let { it ->
-                it.showRendering(newRendering)
+                it.showViewModel(newViewModel)
                 return
             }
 
         removeAllViews()
-        val newView = registry.buildView(newRendering, this)
+        val newView = registry.buildView(newViewModel, this)
         restoredChildState?.let { restoredState ->
             restoredChildState = null
             newView.restoreHierarchyState(restoredState)

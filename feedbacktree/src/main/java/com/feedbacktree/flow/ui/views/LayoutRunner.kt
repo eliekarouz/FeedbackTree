@@ -14,7 +14,7 @@ import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.core.Sink
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.core.bindShowRendering
+import com.feedbacktree.flow.ui.views.core.bindShowViewModel
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,26 +23,26 @@ import io.reactivex.subjects.BehaviorSubject
 import org.notests.rxfeedback.ObservableSchedulerContext
 import kotlin.reflect.KClass
 
-interface Screen<Event> {
-    val sink: Sink<Event>
+interface ViewModel<EventT> {
+    val sink: Sink<EventT>
 }
 
 /**
  * (Experimental)
  */
-interface LayoutRunner<RenderingT : Screen<Event>, Event> {
+interface LayoutRunner<ViewModelT : ViewModel<EventT>, EventT> {
 
-    fun feedbacks(): List<Feedback<RenderingT, Event>>
+    fun feedbacks(): List<Feedback<ViewModelT, EventT>>
 
-    class Binding<RenderingT : Screen<Event>, Event>
+    class Binding<ViewModelT : ViewModel<EventT>, EventT>
     constructor(
-        override val type: KClass<RenderingT>,
+        override val type: KClass<ViewModelT>,
         @LayoutRes private val layoutId: Int,
-        private val runnerConstructor: (View, ViewRegistry) -> LayoutRunner<RenderingT, Event>
-    ) : ViewBinding<RenderingT> {
+        private val runnerConstructor: (View, ViewRegistry) -> LayoutRunner<ViewModelT, EventT>
+    ) : ViewBinding<ViewModelT> {
         override fun buildView(
             registry: ViewRegistry,
-            initialRendering: RenderingT,
+            initialViewModel: ViewModelT,
             contextForNewView: Context,
             container: ViewGroup?
         ): View {
@@ -51,12 +51,12 @@ interface LayoutRunner<RenderingT : Screen<Event>, Event> {
                 .inflate(layoutId, container, false)
                 .apply {
 
-                    val screenBehaviorSubject = BehaviorSubject.createDefault(initialRendering)
-                    bindShowRendering(
-                        initialRendering
-                    ) { rendering ->
-                        if (!rendering.sink.flowHasCompleted) {
-                            screenBehaviorSubject.onNext(rendering)
+                    val screenBehaviorSubject = BehaviorSubject.createDefault(initialViewModel)
+                    bindShowViewModel(
+                        initialViewModel
+                    ) { viewModel ->
+                        if (!viewModel.sink.flowHasCompleted) {
+                            screenBehaviorSubject.onNext(viewModel)
                         }
                     }
 
@@ -79,7 +79,7 @@ interface LayoutRunner<RenderingT : Screen<Event>, Event> {
                             if (this@apply == p0) {
                                 logVerbose("LayoutRunner - Attached screen: $type")
                                 disposable = mergedEvents.subscribe {
-                                    initialRendering.sink.eventSink.invoke(it)
+                                    initialViewModel.sink.eventSink.invoke(it)
                                 }
                             }
 
@@ -100,27 +100,27 @@ interface LayoutRunner<RenderingT : Screen<Event>, Event> {
 
     companion object {
         /**
-         * Creates a [ViewBinding] that inflates [layoutId] to show renderings of type [RenderingT],
+         * Creates a [ViewBinding] that inflates [layoutId] to show viewModels of type [ViewModelT],
          * using a [LayoutRunner] created by [constructor].
          */
-        inline fun <reified RenderingT : Screen<Event>, Event> bind(
+        inline fun <reified ViewModelT : ViewModel<EventT>, EventT> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View, ViewRegistry) -> LayoutRunner<RenderingT, Event>
-        ): ViewBinding<RenderingT> = Binding(
-            RenderingT::
+            noinline constructor: (View, ViewRegistry) -> LayoutRunner<ViewModelT, EventT>
+        ): ViewBinding<ViewModelT> = Binding(
+            ViewModelT::
             class,
             layoutId,
             constructor
         )
 
         /**
-         * Creates a [ViewBinding] that inflates [layoutId] to show renderings of type [RenderingT],
+         * Creates a [ViewBinding] that inflates [layoutId] to show viewModels of type [ViewModelT],
          * using a [LayoutRunner] created by [constructor].
          */
-        inline fun <reified RenderingT : Screen<Event>, Event> bind(
+        inline fun <reified ViewModelT : ViewModel<EventT>, EventT> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View) -> LayoutRunner<RenderingT, Event>
-        ): ViewBinding<RenderingT> =
+            noinline constructor: (View) -> LayoutRunner<ViewModelT, EventT>
+        ): ViewBinding<ViewModelT> =
             bind(layoutId) { view, _ ->
                 constructor.invoke(
                     view
@@ -128,15 +128,15 @@ interface LayoutRunner<RenderingT : Screen<Event>, Event> {
             }
 
         /**
-         * Creates a [ViewBinding] that inflates [layoutId] to "show" renderings of type [RenderingT],
+         * Creates a [ViewBinding] that inflates [layoutId] to "show" viewModels of type [ViewModelT],
          * with a no-op [LayoutRunner]. Handy for showing static views.
          */
-        inline fun <reified RenderingT : Screen<Event>, Event> bindNoRunner(
+        inline fun <reified ViewModelT : ViewModel<EventT>, EventT> bindNoRunner(
             @LayoutRes layoutId: Int
-        ): ViewBinding<RenderingT> =
+        ): ViewBinding<ViewModelT> =
             bind(layoutId) { _, _ ->
-                object : LayoutRunner<RenderingT, Event> {
-                    override fun feedbacks() = listOf<Feedback<RenderingT, Event>>()
+                object : LayoutRunner<ViewModelT, EventT> {
+                    override fun feedbacks() = listOf<Feedback<ViewModelT, EventT>>()
                 }
             }
     }

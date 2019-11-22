@@ -17,8 +17,8 @@ import com.feedbacktree.flow.ui.core.modals.Modal
  * @param extra optional hook to allow [DialogRegistry]s to associate extra data with this dialog,
  * e.g. its content view. Not considered for equality.
  */
-data class DialogRef<ModalRenderingT : Modal>(
-    val modalRendering: ModalRenderingT,
+data class DialogRef<ModalT : Modal>(
+    val modal: ModalT,
     val dialog: Dialog,
     val extra: Any? = null
 ) {
@@ -26,13 +26,13 @@ data class DialogRef<ModalRenderingT : Modal>(
         val saved = dialog.window!!.saveHierarchyState()
         return KeyAndBundle(
             Named.keyFor(
-                modalRendering
+                modal
             ), saved
         )
     }
 
     internal fun restore(keyAndBundle: KeyAndBundle) {
-        if (Named.keyFor(modalRendering) == keyAndBundle.compatibilityKey) {
+        if (Named.keyFor(modal) == keyAndBundle.compatibilityKey) {
             dialog.window!!.restoreHierarchyState(keyAndBundle.bundle)
         }
     }

@@ -21,22 +21,22 @@ import android.view.ViewGroup
 import kotlin.reflect.KClass
 
 /**
- * Factory for [View] instances that can show renderings of type[RenderingT].
+ * Factory for [View] instances that can show viewModels of type[ViewModelT].
  * Use [LayoutRunner.bind] to work with XML layout resources, or
  * [BuilderBinding] to create views from code.
  *
  * Sets of bindings are gathered in [ViewRegistry] instances.
  */
-interface ViewBinding<RenderingT : Any> {
-    val type: KClass<RenderingT>
+interface ViewBinding<ViewModelT : Any> {
+    val type: KClass<ViewModelT>
 
     /**
-     * Returns a View ready to display [initialRendering] (and any succeeding values)
-     * via [View.showRendering].
+     * Returns a View ready to display [initialViewModel] (and any succeeding values)
+     * via [View.showViewModel].
      */
     fun buildView(
         registry: ViewRegistry,
-        initialRendering: RenderingT,
+        initialViewModel: ViewModelT,
         contextForNewView: Context,
         container: ViewGroup? = null
     ): View

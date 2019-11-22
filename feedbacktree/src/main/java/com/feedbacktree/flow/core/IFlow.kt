@@ -7,6 +7,6 @@ package com.feedbacktree.flow.core
 
 import io.reactivex.Observable
 
-interface IFlow<Input, Output> {
-    fun run(input: Input): Observable<Output>
+interface IFlow<InputT, OutputT> {
+    fun run(input: InputT): Observable<OutputT>
 }

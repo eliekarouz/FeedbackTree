@@ -9,13 +9,13 @@ import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.Sink
 import com.feedbacktree.flow.core.StateCompletable
-import com.feedbacktree.flow.ui.core.modals.FullScreenModal
+import com.feedbacktree.flow.ui.core.modals.FullscreenModal
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
 import com.feedbacktree.flow.ui.core.modals.asViewModal
-import com.feedbacktree.flow.ui.views.Screen
+import com.feedbacktree.flow.ui.views.ViewModel
 
-class EnterFingerprintScreen(override val sink: Sink<Event>) : Screen<Event>
+class EnterFingerprintViewModel(override val sink: Sink<Event>) : ViewModel<Event>
 
 object FingerprintFlow : Flow<Unit, State, Event, Unit, Modal>(
     reduce = ::reduce,
@@ -31,11 +31,11 @@ object FingerprintFlow : Flow<Unit, State, Event, Unit, Modal>(
 //            buttons = mapOf(AlertModal.Button.POSITIVE to "Cancel"),
 //            onEvent = { event ->
 //
-//            }).withView(EnterFingerprintScreen())
-        return FullScreenModal(
+//            }).withView(EnterFingerprintViewModel())
+        return FullscreenModal(
             ModalContainerScreen(
-                EnterFingerprintScreen(sink()),
-                EnterFingerprintScreen(sink()).asViewModal()
+                EnterFingerprintViewModel(sink()),
+                EnterFingerprintViewModel(sink()).asViewModal()
             )
         )
     }

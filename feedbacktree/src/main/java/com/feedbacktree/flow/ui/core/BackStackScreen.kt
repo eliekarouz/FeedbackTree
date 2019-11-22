@@ -17,23 +17,13 @@ package com.feedbacktree.flow.ui.core
 
 /**
  * @param stack: screens that have are / have been displayed, ending in the current screen
- *
- * @param onGoBack: function to call for a "go back" gesture. Null indicates such gestures
- * should be disabled.
  */
 data class BackStackScreen<StackedT : Any>(
-    val stack: List<StackedT>,
-    val onGoBack: ((Unit) -> Unit)? = null
+    val stack: List<StackedT>
 ) {
     constructor(
-        only: StackedT,
-        onGoBack: ((Unit) -> Unit)? = null
-    ) : this(listOf(only), onGoBack)
-
-    constructor(
-        vararg stack: StackedT,
-        onGoBack: ((Unit) -> Unit)? = null
-    ) : this(stack.toList(), onGoBack)
+        vararg stack: StackedT
+    ) : this(stack.toList())
 
     init {
         require(stack.isNotEmpty()) { "Empty stacks are not allowed." }

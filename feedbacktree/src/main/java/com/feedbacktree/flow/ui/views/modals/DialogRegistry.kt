@@ -35,30 +35,30 @@ class DialogRegistry private constructor(
     )
 
     /**
-     * Creates a [DialogRef] (aka [Dialog]) to display [initialRendering], which can be updated via calls
+     * Creates a [DialogRef] (aka [Dialog]) to display [initialModal], which can be updated via calls
      * to [updateDialog].
      */
-    fun <RenderingT : Modal> buildDialog(
-        initialRendering: RenderingT,
+    fun <ModalT : Modal> buildDialog(
+        initialModal: ModalT,
         context: Context,
         viewRegistry: ViewRegistry
-    ): DialogRef<RenderingT> {
+    ): DialogRef<ModalT> {
         @Suppress("UNCHECKED_CAST")
-        return (bindings[initialRendering::class] as? DialogBinding<RenderingT>)
-            ?.buildDialog(initialRendering, this, viewRegistry, context)
+        return (bindings[initialModal::class] as? DialogBinding<ModalT>)
+            ?.buildDialog(initialModal, this, viewRegistry, context)
             ?: throw IllegalArgumentException(
-                "A binding for ${initialRendering::class.java.name} must be registered " +
-                        "to display $initialRendering."
+                "A binding for ${initialModal::class.java.name} must be registered " +
+                        "to display $initialModal."
             )
     }
 
-    fun <RenderingT : Modal> updateDialog(dialogRef: DialogRef<RenderingT>) {
+    fun <ModalT : Modal> updateDialog(dialogRef: DialogRef<ModalT>) {
         @Suppress("UNCHECKED_CAST")
-        (bindings[dialogRef.modalRendering::class] as? DialogBinding<RenderingT>)
+        (bindings[dialogRef.modal::class] as? DialogBinding<ModalT>)
             ?.updateDialog(dialogRef)
     }
 
-    operator fun <RenderingT : Modal> plus(binding: DialogBinding<RenderingT>): DialogRegistry {
+    operator fun <ModalT : Modal> plus(binding: DialogBinding<ModalT>): DialogRegistry {
         check(binding.type !in bindings.keys) {
             "Already registered ${bindings[binding.type]} for ${binding.type}, cannot accept $binding."
         }

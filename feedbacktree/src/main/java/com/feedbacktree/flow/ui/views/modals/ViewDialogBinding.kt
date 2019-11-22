@@ -14,7 +14,7 @@ import androidx.annotation.StyleRes
 import com.feedbacktree.flow.ui.core.modals.ViewModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.core.showRendering
+import com.feedbacktree.flow.ui.views.core.showViewModel
 import com.feedbacktree.flow.utils.logAndShow
 import kotlin.reflect.KClass
 
@@ -25,13 +25,13 @@ class ViewDialogBinding(
 ) : DialogBinding<ViewModal<Any>> {
 
     override fun buildDialog(
-        initialRenderingT: ViewModal<*>,
+        initialModal: ViewModal<*>,
         dialogRegistry: DialogRegistry,
         viewRegistry: ViewRegistry,
         context: Context
     ): DialogRef<ViewModal<*>> {
-        val viewRendering = initialRenderingT.rendering
-        val view = viewRegistry.buildView(viewRendering, context)
+        val viewModel = initialModal.viewModel
+        val view = viewRegistry.buildView(viewModel, context)
         return Dialog(context, dialogThemeResId)
             .apply {
                 setOnKeyListener { _, keyCode, keyEvent ->
@@ -50,7 +50,7 @@ class ViewDialogBinding(
             }
             .run {
                 DialogRef(
-                    initialRenderingT,
+                    initialModal,
                     this,
                     view
                 )
@@ -58,7 +58,7 @@ class ViewDialogBinding(
     }
 
     override fun updateDialog(dialogRef: DialogRef<ViewModal<*>>) {
-        with(dialogRef) { (extra as View).showRendering(modalRendering.rendering) }
+        with(dialogRef) { (extra as View).showViewModel(modal.viewModel) }
     }
 
 }

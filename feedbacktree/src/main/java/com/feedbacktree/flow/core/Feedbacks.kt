@@ -23,12 +23,12 @@ import io.reactivex.Observable
  * @param effects Chooses which effects to perform for certain query result.
  * @return Feedback loop performing the effects.
  */
-fun <State, Query, Event> react(
-    query: (State) -> Query?,
-    areEqual: (lhs: Query, rhs: Query) -> Boolean = { lhs, rhs -> lhs == rhs },
-    effects: (Query) -> Observable<Event>
+fun <StateT, QueryT, EventT> react(
+    query: (StateT) -> QueryT?,
+    areEqual: (lhs: QueryT, rhs: QueryT) -> Boolean = { lhs, rhs -> lhs == rhs },
+    effects: (QueryT) -> Observable<EventT>
 ) = org.notests.rxfeedback.react(
-    query = { state: State -> query(state).asOptional },
+    query = { state: StateT -> query(state).asOptional },
     areEqual = areEqual,
     effects = effects
 )

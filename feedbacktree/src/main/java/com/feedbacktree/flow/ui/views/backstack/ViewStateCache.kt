@@ -23,10 +23,10 @@ import android.view.View
 import android.view.View.BaseSavedState
 import com.feedbacktree.flow.ui.core.Named
 import com.feedbacktree.flow.ui.views.backstack.ViewStateCache.SavedState
-import com.feedbacktree.flow.ui.views.core.showRenderingTag
+import com.feedbacktree.flow.ui.views.core.showViewModelTag
 
 /**
- * Handles persistence chores for container views that manage a set of [Named] renderings,
+ * Handles persistence chores for container views that manage a set of [Named] viewModels,
  * showing a view for one at a time -- think back stacks or tab sets.
  *
  * This class implements [Parcelable] so that it can be preserved from
@@ -40,7 +40,7 @@ class ViewStateCache private constructor(
 
     /**
      * To be called when the set of hidden views changes but the visible view remains
-     * the same. Any cached view state held for renderings that are not
+     * the same. Any cached view state held for viewModels that are not
      * [compatible][com.squareup.workflow.ui.compatible] those in [retaining] will be dropped.
      */
     fun prune(retaining: Collection<Named<*>>) {
@@ -53,33 +53,33 @@ class ViewStateCache private constructor(
     }
 
     /**
-     * @param retainedRenderings the renderings to be considered hidden after this update. Any
+     * @param retainedViewModels the viewModels to be considered hidden after this update. Any
      * associated view state will be retained in the cache, possibly to be restored to [newView]
      * on a succeeding call to his method. Any other cached view state will be dropped.
      *
      * @param oldViewMaybe the view that is being removed, if any, which is expected to be showing
-     * a [Named] rendering. If that rendering is
+     * a [Named] viewModel. If that viewModel is
      * [compatible with][com.squareup.workflow.ui.compatible] a member of
-     * [retainedRenderings], its state will be [saved][View.saveHierarchyState].
+     * [retainedViewModels], its state will be [saved][View.saveHierarchyState].
      *
      * @param newView the view that is about to be displayed, which must be showing a
-     * [Named] rendering. If [compatible][com.squareup.workflow.ui.compatible]
+     * [Named] viewModel. If [compatible][com.squareup.workflow.ui.compatible]
      * view state is found in the cache, it is [restored][View.restoreHierarchyState].
      *
      * @return true if [newView] has been restored.
      */
     fun update(
-        retainedRenderings: Collection<Named<*>>,
+        retainedViewModels: Collection<Named<*>>,
         oldViewMaybe: View?,
         newView: View
     ): Boolean {
         val newKey = newView.namedKey
-        val hiddenKeys = retainedRenderings.asSequence()
+        val hiddenKeys = retainedViewModels.asSequence()
             .map { it.compatibilityKey }
             .toSet()
             .apply {
-                require(retainedRenderings.size == size) {
-                    "Duplicate entries not allowed in $retainedRenderings."
+                require(retainedViewModels.size == size) {
+                    "Duplicate entries not allowed in $retainedViewModels."
                 }
             }
 
@@ -175,6 +175,6 @@ class ViewStateCache private constructor(
 }
 
 private val View.namedKey: String
-    get() = checkNotNull((showRenderingTag?.showing as? Named<*>)?.compatibilityKey) {
-        "Expected $this to be showing a Named rendering, found ${showRenderingTag?.showing}"
+    get() = checkNotNull((showViewModelTag?.showing as? Named<*>)?.compatibilityKey) {
+        "Expected $this to be showing a Named ViewModel, found ${showViewModelTag?.showing}"
     }
