@@ -33,8 +33,11 @@ import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
 /**
- * In most, if not all, you will be using [startFlow] or subclass [FlowFragment]
+ * In most cases, if not all, you will be using [com.feedbacktree.flow.core.startFlow] or subclass [FlowFragment]
  * rather than manage this class directly.
+ *
+ * [WorkflowLayout] is the root [View] container that will be responsible of rendering the viewModels produced by
+ * the root [Flow].
  */
 class WorkflowLayout(
     context: Context,

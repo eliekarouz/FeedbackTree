@@ -22,16 +22,36 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
 
+/**
+ * Extend this class in order to launch a flow inside a fragment.
+ * This would allow you to smoothly integrate FeedbackTree to your project.
+ */
 abstract class FlowFragment<InputT, StateT : StateCompletable<OutputT>, OutputT> : Fragment() {
+
+    inner class Parameters(
+        val input: InputT,
+        val flow: Flow<InputT, StateT, *, OutputT, *>,
+        val viewRegistry: ViewRegistry
+    )
 
     private val disposeBag = CompositeDisposable()
 
     private val _output = PublishSubject.create<OutputT>()
+
+    /**
+     * You an subscribe to this variable to collect the output produced by the flow.
+     */
     val output: Observable<OutputT> = _output
 
-    abstract fun input(): InputT
-    abstract fun flow(): Flow<InputT, StateT, *, OutputT, *>
-    abstract fun viewRegisry(): ViewRegistry
+    /**
+     * You will have to provide the different parameters [input][Parameters.input],
+     * the [flow][Parameters.flow], and, the [viewRegistry][Parameters.viewRegistry].
+     *
+     * The fragment will use the different parameters provided to start the flow when the activity is
+     * created.
+     *
+     */
+    abstract fun parameters(): Parameters
 
     final override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +63,8 @@ abstract class FlowFragment<InputT, StateT : StateCompletable<OutputT>, OutputT>
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val factory = FlowViewModel.Factory(input(), flow())
+        val parameters = parameters()
+        val factory = FlowViewModel.Factory(parameters.input, parameters.flow)
 
         @Suppress("UNCHECKED_CAST")
         val viewModel = ViewModelProviders.of(
@@ -59,7 +80,7 @@ abstract class FlowFragment<InputT, StateT : StateCompletable<OutputT>, OutputT>
 
         (view as WorkflowLayout).apply {
             id = R.id.workflow_layout
-            start(viewModel.viewModels, viewRegisry())
+            start(viewModel.viewModels, parameters.viewRegistry)
         }
     }
 
