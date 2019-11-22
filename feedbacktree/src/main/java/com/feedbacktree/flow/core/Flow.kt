@@ -22,8 +22,8 @@ internal val screenChanged: Observable<Unit> = screenChangedPublishSubject
 
 typealias Feedback<State, Event> = (ObservableSchedulerContext<State>) -> Observable<Event>
 
-interface StateCompletable<Ouput> {
-    val flowOutput: Ouput?
+interface StateCompletable<Output> {
+    val flowOutput: Output?
 }
 
 abstract class Flow<Input, State, Event, Output, Screen>(
@@ -32,7 +32,7 @@ abstract class Flow<Input, State, Event, Output, Screen>(
     val feedbacks: List<Feedback<State, Event>>
 ) : IFlow<Input, Output> where State : StateCompletable<Output> {
 
-    internal val enterStatePublishSubject = PublishSubject.create<FlowEvent<State, Event>>()
+    private val enterStatePublishSubject = PublishSubject.create<FlowEvent<State, Event>>()
 
     private val publishSubjectEvents = PublishSubject.create<Event>()
 
