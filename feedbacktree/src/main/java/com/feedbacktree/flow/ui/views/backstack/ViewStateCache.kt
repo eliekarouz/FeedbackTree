@@ -41,7 +41,7 @@ class ViewStateCache private constructor(
     /**
      * To be called when the set of hidden views changes but the visible view remains
      * the same. Any cached view state held for viewModels that are not
-     * [compatible][com.squareup.workflow.ui.compatible] those in [retaining] will be dropped.
+     * [com.feedbacktree.flow.ui.core.compatible] those in [retaining] will be dropped.
      */
     fun prune(retaining: Collection<Named<*>>) {
         pruneKeys(retaining.map { it.compatibilityKey })
@@ -59,11 +59,11 @@ class ViewStateCache private constructor(
      *
      * @param oldViewMaybe the view that is being removed, if any, which is expected to be showing
      * a [Named] viewModel. If that viewModel is
-     * [compatible with][com.squareup.workflow.ui.compatible] a member of
+     * [compatible with][com.feedbacktree.flow.ui.core.compatible] a member of
      * [retainedViewModels], its state will be [saved][View.saveHierarchyState].
      *
      * @param newView the view that is about to be displayed, which must be showing a
-     * [Named] viewModel. If [compatible][com.squareup.workflow.ui.compatible]
+     * [Named] viewModel. If [compatible][com.feedbacktree.flow.ui.core.compatible]
      * view state is found in the cache, it is [restored][View.restoreHierarchyState].
      *
      * @return true if [newView] has been restored.
