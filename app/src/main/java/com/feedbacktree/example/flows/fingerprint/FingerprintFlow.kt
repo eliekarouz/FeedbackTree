@@ -9,9 +9,7 @@ import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.Sink
 import com.feedbacktree.flow.core.StateCompletable
-import com.feedbacktree.flow.ui.core.modals.FullscreenModal
 import com.feedbacktree.flow.ui.core.modals.Modal
-import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
 import com.feedbacktree.flow.ui.core.modals.asViewModal
 import com.feedbacktree.flow.ui.views.ViewModel
 
@@ -26,18 +24,7 @@ object FingerprintFlow : Flow<Unit, State, Event, Unit, Modal>(
     }
 
     override fun render(state: State, context: RenderingContext): Modal {
-//        val fingerPrintAlert = AlertModal(title = "",
-//            message = "",
-//            buttons = mapOf(AlertModal.Button.POSITIVE to "Cancel"),
-//            onEvent = { event ->
-//
-//            }).withView(EnterFingerprintViewModel())
-        return FullscreenModal(
-            ModalContainerScreen(
-                EnterFingerprintViewModel(sink()),
-                EnterFingerprintViewModel(sink()).asViewModal()
-            )
-        )
+        return EnterFingerprintViewModel(sink()).asViewModal()
     }
 }
 

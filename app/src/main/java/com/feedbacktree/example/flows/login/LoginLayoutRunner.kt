@@ -3,12 +3,10 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.example.ui
+package com.feedbacktree.example.flows.login
 
 import android.view.View
 import com.feedbacktree.example.R
-import com.feedbacktree.example.flows.login.Event
-import com.feedbacktree.example.flows.login.LoginViewModel
 import com.feedbacktree.flow.ui.views.LayoutRunner
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.jakewharton.rxbinding3.view.clicks
