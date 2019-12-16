@@ -151,6 +151,16 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
         )
     }
 
+    protected fun <E> sink(transform: (E) -> EventT?): Sink<E> {
+        val lastState = state.value
+        return Sink(
+            flowHasCompleted = lastState?.flowOutput != null,
+            eventSink = { e ->
+                transform(e)?.let { send(it) }
+            }
+        )
+    }
+
     protected fun send(event: EventT) {
         publishSubjectEvents.onNext(event)
     }
@@ -165,8 +175,11 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
 }
 
 internal sealed class FlowEvent<StateT, EventT> {
-    internal data class StandardEvent<StateT, EventT>(val event: EventT) : FlowEvent<StateT, EventT>()
-    internal data class EnterStateEvent<StateT, EventT>(val state: StateT) : FlowEvent<StateT, EventT>()
+    internal data class StandardEvent<StateT, EventT>(val event: EventT) :
+        FlowEvent<StateT, EventT>()
+
+    internal data class EnterStateEvent<StateT, EventT>(val state: StateT) :
+        FlowEvent<StateT, EventT>()
 }
 
 
