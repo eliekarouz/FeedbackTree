@@ -5,7 +5,7 @@
 FeedbackTree is a unidirectional data flow architecture for Android which relies heavily on state mahines to perform all types of side effects, like network calls, bluetooth, UI updates as well as navigation.
 It was highly inspired by [RxFeedback.swift](www.github.com/notests/rxfeedback.swift) and by [Square Workflows](www.github.com/square/workflow)
 
-####Introduction
+#### Introduction
 Most UI architectural patterns out there are screen-based meaning that the code is always organized around a particular screen or part of a screen. For instance, in MVVM (i.e. MVP) you have a View-Model (i.e. Presenter) driving a particular View telling how to update the different UI components as the state in the ViewModel (i.e. Presenter) is progressing. 
 
 As you hit more complex flows that span over multiple screens, organising the shared area gets harder.
@@ -26,7 +26,7 @@ FeedbackTree:
 - Built-in navigation 
 - Reactive UI
 
-####Installation
+#### Installation
 
 Add it in your root build.gradle at the end of repositories:
 ```
@@ -41,6 +41,6 @@ allprojects {
 Add the dependency
 ```
 dependencies {
-  implementation 'com.github.eliekarouz:feedbacktree:0.7'
+  implementation 'com.github.eliekarouz:feedbacktree:0.8'
 }
 ```
