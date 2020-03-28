@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.core.Sink
+import com.feedbacktree.flow.ui.views.core.BuilderBinding
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.ui.views.core.bindShowViewModel
@@ -128,16 +129,18 @@ interface LayoutRunner<ViewModelT : ViewModel<EventT>, EventT> {
             }
 
         /**
-         * Creates a [ViewBinding] that inflates [layoutId] to "show" viewModels of type [ViewModelT],
-         * with a no-op [LayoutRunner]. Handy for showing static views.
+         * Creates a [ViewBinding] that inflates [layoutId] to "show" viewModels of type [ViewModelT].
+         * Handy for showing static views.
          */
-        inline fun <reified ViewModelT : ViewModel<EventT>, EventT> bindNoRunner(
+        inline fun <reified ViewModelT : Any> bindStatic(
             @LayoutRes layoutId: Int
-        ): ViewBinding<ViewModelT> =
-            bind(layoutId) { _, _ ->
-                object : LayoutRunner<ViewModelT, EventT> {
-                    override fun feedbacks() = listOf<Feedback<ViewModelT, EventT>>()
-                }
+        ): ViewBinding<ViewModelT> = BuilderBinding(
+            type = ViewModelT::class,
+            viewConstructor = { _, _, contextForNewView, container ->
+                LayoutInflater.from(container?.context ?: contextForNewView)
+                    .cloneInContext(contextForNewView)
+                    .inflate(layoutId, container, false)
             }
+        )
     }
 }
