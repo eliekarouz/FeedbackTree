@@ -136,10 +136,12 @@ interface LayoutRunner<ViewModelT : ViewModel<EventT>, EventT> {
             @LayoutRes layoutId: Int
         ): ViewBinding<ViewModelT> = BuilderBinding(
             type = ViewModelT::class,
-            viewConstructor = { _, _, contextForNewView, container ->
+            viewConstructor = { _, initialViewModel, contextForNewView, container ->
                 LayoutInflater.from(container?.context ?: contextForNewView)
                     .cloneInContext(contextForNewView)
-                    .inflate(layoutId, container, false)
+                    .inflate(layoutId, container, false).apply {
+                        bindShowViewModel(initialViewModel) { }
+                    }
             }
         )
     }
