@@ -7,12 +7,18 @@ package com.feedbacktree.flow.core
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
+import asOptional
 import com.feedbacktree.R
+import com.feedbacktree.flow.ui.core.modals.Modal
+import com.feedbacktree.flow.ui.views.DialogFlowRenderer
 import com.feedbacktree.flow.ui.views.WorkflowLayout
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.ui.views.modals.DialogRegistry
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
+import org.notests.rxfeedback.Optional
 
 fun <StateT : StateCompletable<OutputT>, OutputT>
         FragmentActivity.startFlow(
@@ -55,3 +61,47 @@ fun <InputT, StateT : StateCompletable<OutputT>, OutputT>
 }
 
 
+/**
+ * Utility that can be used to start [Flow]s which produce [Modal]s.
+ * It's useful when you need to use FeedbackTree in a areas that are not using it yet.
+ */
+fun <InputT, StateT : StateCompletable<OutputT>, OutputT> FragmentActivity.startModalsFlow(
+    input: InputT,
+    flow: Flow<InputT, StateT, *, OutputT, *>,
+    viewRegistry: ViewRegistry,
+    dialogRegistry: DialogRegistry
+): Observable<OutputT> {
+    return Observable.create<OutputT> { emitter ->
+        val rootNode: FlowNode<*, *, *, *> = {
+            FlowNode(
+                input = input,
+                flow = flow,
+                id = "RootFlow",
+                onResult = {
+                    emitter.onNext(it)
+                }
+            ).apply {
+                run()
+            }
+        }()
+
+        val viewModels: Observable<Optional<Any>> = newViewModelTrigger.startWith(Unit).map {
+            RenderingContext().renderNode(rootNode).asOptional
+        }
+
+        val renderer = DialogFlowRenderer(this, viewRegistry, dialogRegistry)
+
+        val screenDisposable = viewModels
+            .doFinally { renderer.update(listOf()) }
+            .subscribe { screen ->
+                when (screen) {
+                    is Optional.Some -> renderer.update(listOfNotNull(screen.data as? Modal))
+                    is Optional.None -> renderer.update(listOf())
+                }
+            }
+        emitter.setCancellable {
+            rootNode.dispose()
+            screenDisposable.dispose()
+        }
+    }.take(1)
+}
