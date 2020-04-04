@@ -100,9 +100,14 @@ by BuilderBinding(
         val view = viewRegistry.buildView(initialViewModel.wrapped, contextForNewView, container)
         view.apply {
             val wrappedUpdater = showViewModelTag!!.showViewModel
-            bindShowViewModel(initialViewModel) {
-                wrappedUpdater.invoke(it.wrapped)
-            }
+            val cleanupViewModel = cleanupViewModelTag
+            bindShowViewModel(initialViewModel,
+                showViewModel = {
+                    wrappedUpdater.invoke(it.wrapped)
+                },
+                cleanupViewModel = {
+                    cleanupViewModel?.invoke()
+                })
         }
     }
 )

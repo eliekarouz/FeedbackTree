@@ -20,6 +20,7 @@ import androidx.annotation.ColorInt
 import com.feedbacktree.flow.ui.core.modals.FullscreenModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.ui.views.core.cleanupViewModel
 import com.feedbacktree.flow.ui.views.core.showViewModel
 import com.feedbacktree.flow.utils.display
 import com.feedbacktree.flow.utils.isTablet
@@ -73,6 +74,11 @@ class FullScreenDialogBinding(
 
     override fun updateDialog(dialogRef: DialogRef<FullscreenModal<*>>) {
         with(dialogRef) { (extra as View).showViewModel(modal.contentViewModel) }
+    }
+
+    override fun cleanUpDialog(dialogRef: DialogRef<FullscreenModal<*>>) {
+        super.cleanUpDialog(dialogRef)
+        with(dialogRef) { (extra as View).cleanupViewModel() }
     }
 }
 

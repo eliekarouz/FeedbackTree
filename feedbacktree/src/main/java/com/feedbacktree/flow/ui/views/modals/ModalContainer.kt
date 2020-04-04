@@ -55,6 +55,7 @@ class ModalContainer
         base?.takeIf { it.canShowViewModel(newScreen.baseScreen) }
             ?.showViewModel(newScreen.baseScreen)
             ?: run {
+                base?.cleanupViewModel()
                 removeAllViews()
                 val newBase = registry.buildView(newScreen.baseScreen, this)
                 addView(newBase)
@@ -79,8 +80,19 @@ class ModalContainer
             }
         }
 
-        (dialogs - newDialogs).forEach { it.dialog.dismiss() }
+        (dialogs - newDialogs).forEach {
+            dialogRegistry.cleanUp(it)
+            it.dialog.dismiss()
+        }
         dialogs = newDialogs
+    }
+
+    private fun cleanUp() {
+        base?.cleanupViewModel()
+        dialogs.forEach {
+            dialogRegistry.cleanUp(it)
+            it.dialog.dismiss()
+        }
     }
 
     override fun onSaveInstanceState(): Parcelable {
@@ -120,7 +132,7 @@ class ModalContainer
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
                 registry = viewRegistry
-                bindShowViewModel(initialViewModel, ::update)
+                bindShowViewModel(initialViewModel, ::update, ::cleanUp)
             }
         }
     )

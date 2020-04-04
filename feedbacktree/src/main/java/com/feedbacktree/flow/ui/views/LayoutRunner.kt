@@ -53,48 +53,38 @@ interface LayoutRunner<ViewModelT : ViewModel<EventT>, EventT> {
                 .apply {
 
                     val screenBehaviorSubject = BehaviorSubject.createDefault(initialViewModel)
+                    val mergedEvents by lazy {
+                        // create the view
+                        val layoutAttachable = runnerConstructor.invoke(this, registry)
+                        val feedbacks = layoutAttachable.feedbacks()
+                        val events = feedbacks.map {
+                            val observableSchedulerContext = ObservableSchedulerContext(
+                                screenBehaviorSubject,
+                                AndroidSchedulers.mainThread()
+                            )
+                            it(observableSchedulerContext)
+                        }
+                        Observable.merge(events)
+                    }
+
+                    var disposable: Disposable? = mergedEvents.subscribe {
+                        initialViewModel.sink.eventSink.invoke(it)
+                    }
+                    logVerbose("LayoutRunner - Attached screen: $type")
+
                     bindShowViewModel(
-                        initialViewModel
-                    ) { viewModel ->
-                        if (!viewModel.sink.flowHasCompleted) {
-                            screenBehaviorSubject.onNext(viewModel)
-                        }
-                    }
-
-                    val layoutAttachable =
-                        runnerConstructor.invoke(this, registry)
-                    val feedbacks = layoutAttachable.feedbacks()
-                    val events = feedbacks.map {
-                        val observableSchedulerContext = ObservableSchedulerContext(
-                            screenBehaviorSubject,
-                            AndroidSchedulers.mainThread()
-                        )
-                        it(observableSchedulerContext)
-                    }
-                    val mergedEvents = Observable.merge(events)
-
-                    this.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
-                        var disposable: Disposable? = null
-
-                        override fun onViewAttachedToWindow(p0: View?) {
-                            if (this@apply == p0) {
-                                logVerbose("LayoutRunner - Attached screen: $type")
-                                disposable = mergedEvents.subscribe {
-                                    initialViewModel.sink.eventSink.invoke(it)
-                                }
+                        initialViewModel,
+                        showViewModel = { viewModel ->
+                            if (!viewModel.sink.flowHasCompleted) {
+                                screenBehaviorSubject.onNext(viewModel)
                             }
-
+                        },
+                        cleanupViewModel = {
+                            logVerbose("LayoutRunner - Detached screen: $type")
+                            disposable?.dispose()
+                            disposable = null
                         }
-
-                        override fun onViewDetachedFromWindow(p0: View?) {
-                            if (this@apply == p0) {
-                                logVerbose("LayoutRunner - Detached screen: $type")
-                                disposable?.dispose()
-                                disposable = null
-                            }
-                        }
-
-                    })
+                    )
                 }
         }
     }
@@ -140,9 +130,13 @@ interface LayoutRunner<ViewModelT : ViewModel<EventT>, EventT> {
                 LayoutInflater.from(container?.context ?: contextForNewView)
                     .cloneInContext(contextForNewView)
                     .inflate(layoutId, container, false).apply {
-                        bindShowViewModel(initialViewModel) { }
+                        bindShowViewModel(initialViewModel,
+                            showViewModel = { },
+                            cleanupViewModel = { }
+                        )
                     }
             }
         )
+
     }
 }

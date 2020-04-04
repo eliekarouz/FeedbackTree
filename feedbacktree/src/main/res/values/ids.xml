@@ -16,6 +16,8 @@
 <resources>
     <!-- View Tag that holds the function to update a view created via ViewRegistry. -->
     <item type="id" name="view_show_rendering_function" />
+    <!-- View Tag that holds the function to clean up the view resource once it is removed from the hierarchy. -->
+    <item type="id" name="view_cleanup_rendering_function" />
     <!-- View Tag used for back button handlers. See HandlesBack.Helper -->
     <item type="id" name="workflow_back_handler" />
     <!-- View Tag holding the BackStackScreen.Key associated with a view. -->

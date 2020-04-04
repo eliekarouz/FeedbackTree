@@ -58,6 +58,12 @@ class DialogRegistry private constructor(
             ?.updateDialog(dialogRef)
     }
 
+    fun <ModalT : Modal> cleanUp(dialogRef: DialogRef<ModalT>) {
+        @Suppress("UNCHECKED_CAST")
+        (bindings[dialogRef.modal::class] as? DialogBinding<ModalT>)
+            ?.cleanUpDialog(dialogRef)
+    }
+
     operator fun <ModalT : Modal> plus(binding: DialogBinding<ModalT>): DialogRegistry {
         check(binding.type !in bindings.keys) {
             "Already registered ${bindings[binding.type]} for ${binding.type}, cannot accept $binding."

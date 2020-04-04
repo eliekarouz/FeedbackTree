@@ -25,6 +25,13 @@ import com.feedbacktree.flow.ui.core.compatible
  */
 typealias ShowViewModel<ViewModelT> = (@UnsafeVariance ViewModelT) -> Unit
 
+/**
+ *  Function attached to aview created by [ViewRegistry], to allow cleanup of resources
+ *  when the view is removed from the window hierarchy.
+ */
+typealias CleanupViewModel = () -> Unit
+
+
 data class ShowViewModelTag<out ViewModelT : Any>(
     val showing: ViewModelT,
     val showViewModel: ShowViewModel<ViewModelT>
@@ -39,12 +46,20 @@ data class ShowViewModelTag<out ViewModelT : Any>(
  */
 fun <ViewModelT : Any> View.bindShowViewModel(
     initialViewModel: ViewModelT,
-    showViewModel: ShowViewModel<ViewModelT>
+    showViewModel: ShowViewModel<ViewModelT>,
+    cleanupViewModel: CleanupViewModel? = null
 ) {
     setTag(
         R.id.view_show_rendering_function,
         ShowViewModelTag(initialViewModel, showViewModel)
     )
+    if (cleanupViewModel != null) {
+        setTag(
+            R.id.view_cleanup_rendering_function,
+            cleanupViewModel
+        )
+    }
+
     showViewModel.invoke(initialViewModel)
 }
 
@@ -76,10 +91,27 @@ fun <ViewModelT : Any> View.showViewModel(viewModel: ViewModelT) {
 }
 
 /**
+ * Invokes cleanup code installed by [bindShowViewModel]
+ */
+fun View.cleanupViewModel() {
+    cleanupViewModelTag?.invoke()
+}
+
+/**
  * Returns the [ShowViewModelTag] established by the last call to [View.bindShowViewModel],
  * or null if none has been set.
  */
 val View.showViewModelTag: ShowViewModelTag<*>?
     get() = getTag(R.id.view_show_rendering_function) as? ShowViewModelTag<*>
+
+
+/**
+ * Returns the [CleanupViewModel] established by the last call to [View.bindShowViewModel],
+ * or null if none has been set.
+ */
+@Suppress("UNCHECKED_CAST")
+val View.cleanupViewModelTag: CleanupViewModel?
+    get() = getTag(R.id.view_cleanup_rendering_function) as? CleanupViewModel
+
 
 private fun Any.matches(other: Any) = compatible(this, other)

@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import com.feedbacktree.flow.ui.core.modals.AlertModal
 import com.feedbacktree.flow.ui.core.modals.AlertModalWithView
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.ui.views.core.cleanupViewModel
 import com.feedbacktree.flow.ui.views.core.showViewModel
 import com.feedbacktree.flow.utils.logAndShow
 import kotlin.reflect.KClass
@@ -73,9 +74,15 @@ class AlertWithViewDialogBinding(
         contentViewUpdate(dialogRef)
     }
 
+    override fun cleanUpDialog(dialogRef: DialogRef<AlertModalWithView<*>>) {
+        super.cleanUpDialog(dialogRef)
+        (dialogRef.extra as View).cleanupViewModel()
+    }
+    
     private fun contentViewUpdate(dialogRef: DialogRef<AlertModalWithView<*>>) {
         (dialogRef.extra as View).showViewModel(dialogRef.modal.contentViewModel)
     }
+
 
     private fun AlertModal.Button.toId(): Int = when (this) {
         AlertModal.Button.POSITIVE -> DialogInterface.BUTTON_POSITIVE
