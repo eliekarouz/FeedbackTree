@@ -7,21 +7,20 @@ package com.feedbacktree.example.flows.login
 
 import android.view.View
 import com.feedbacktree.example.R
+import com.feedbacktree.flow.core.Bindings
+import com.feedbacktree.flow.core.bind
 import com.feedbacktree.flow.ui.views.LayoutRunner
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.login.view.*
-import org.notests.rxfeedback.Bindings
-import org.notests.rxfeedback.bind
 
 class LoginLayoutRunner(private val view: View) : LayoutRunner<LoginViewModel, Event> {
     override fun feedbacks() = listOf(bindUI())
 
-    private fun bindUI() = bind<LoginViewModel, Event> {
+    private fun bindUI() = bind<LoginViewModel, Event> { screen ->
         with(view) {
-            val screen = it.source
             Bindings(
                 subscriptions = listOf(
                     screen.map { it.isLoginButtonEnabled }.subscribe { btnLogin.isEnabled = it }

@@ -34,7 +34,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'com.squareup.coordinators:coordinators:0.4'
-    api 'com.github.NoTests:RxFeedback.kt:0.1.7'
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
     implementation "io.reactivex.rxjava2:rxkotlin:2.3.0"
     testImplementation 'junit:junit:4.12'

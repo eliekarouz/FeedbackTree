@@ -5,9 +5,7 @@
 
 package com.feedbacktree.flow.utils
 
-import asOptional
 import io.reactivex.Observable
-import org.notests.rxfeedback.Optional
 
 /**
  * The returned stream will emit value(T) if value(T) is not null.

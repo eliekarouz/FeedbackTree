@@ -1,9 +1,15 @@
+package com.feedbacktree.flow.utils
+
 /*
  * Created by eliek on 9/26/2019
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-import org.notests.rxfeedback.Optional
+sealed class Optional<T> {
+    data class Some<T>(val data: T) : Optional<T>()
+    class None<T> : Optional<T>()
+}
+
 
 val <T> T?.asOptional: Optional<T>
     get() {
