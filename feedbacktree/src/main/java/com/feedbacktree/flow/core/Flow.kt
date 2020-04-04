@@ -13,14 +13,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
-import org.notests.rxfeedback.*
 
 // TODO Remove these global variables
 private val viewModelChangedPublishSubject = PublishSubject.create<Unit>()
 internal val newViewModelTrigger: Observable<Unit> = viewModelChangedPublishSubject
 
-
-typealias Feedback<StateT, EventT> = (ObservableSchedulerContext<StateT>) -> Observable<EventT>
 
 interface StateCompletable<OutputT> {
     val flowOutput: OutputT?
@@ -48,8 +45,8 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
     var state = BehaviorSubject.create<StateT>()
     private var active = BehaviorSubject.create<Boolean>()
 
-    private fun backdoorFeedback(): Feedback<StateT, EventT> = bind { osc ->
-        return@bind Bindings(
+    private fun backdoorFeedback(): Feedback<StateT, EventT> = bindWithScheduler { osc ->
+        return@bindWithScheduler Bindings(
             subscriptions = listOf(
                 osc.source.subscribe { state.onNext(it) },
                 // Why skip(1)

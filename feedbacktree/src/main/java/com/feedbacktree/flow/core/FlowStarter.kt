@@ -7,18 +7,18 @@ package com.feedbacktree.flow.core
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
-import asOptional
 import com.feedbacktree.R
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.views.DialogFlowRenderer
 import com.feedbacktree.flow.ui.views.WorkflowLayout
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.ui.views.modals.DialogRegistry
+import com.feedbacktree.flow.utils.Optional
+import com.feedbacktree.flow.utils.asOptional
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
-import org.notests.rxfeedback.Optional
 
 fun <StateT : StateCompletable<OutputT>, OutputT>
         FragmentActivity.startFlow(
