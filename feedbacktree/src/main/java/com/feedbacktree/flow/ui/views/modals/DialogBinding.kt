@@ -22,4 +22,6 @@ interface DialogBinding<ModalT : Modal> {
     ): DialogRef<ModalT>
 
     fun updateDialog(dialogRef: DialogRef<ModalT>)
+
+    fun cleanUpDialog(dialogRef: DialogRef<ModalT>) {}
 }

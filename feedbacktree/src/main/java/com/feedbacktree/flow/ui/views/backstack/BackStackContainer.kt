@@ -69,6 +69,10 @@ open class BackStackContainer(
         performTransition(oldViewMaybe, newView, popped)
     }
 
+    private fun cleanUp() {
+        showing?.cleanupViewModel()
+    }
+
     /**
      * Called from [View.showViewModel] to swap between views.
      * Subclasses can override to customize visual effects. There is no need to call super.
@@ -89,6 +93,7 @@ open class BackStackContainer(
         oldViewMaybe
             ?.let { oldView ->
                 addView(newView)
+                oldView.cleanupViewModel()
                 removeView(oldView)
 //                    val newScene = Scene(this, newView)
 //
@@ -139,7 +144,7 @@ open class BackStackContainer(
                     id = R.id.workflow_back_stack_container
                     layoutParams = (ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT))
                     registry = viewRegistry
-                    bindShowViewModel(initialViewModel, ::update)
+                    bindShowViewModel(initialViewModel, ::update, ::cleanUp)
                 }
         }
     )

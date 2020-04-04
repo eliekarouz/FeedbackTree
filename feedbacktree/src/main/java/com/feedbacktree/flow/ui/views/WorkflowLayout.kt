@@ -23,10 +23,7 @@ import android.util.AttributeSet
 import android.util.SparseArray
 import android.view.View
 import android.widget.FrameLayout
-import com.feedbacktree.flow.ui.views.core.HandlesBack
-import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.core.canShowViewModel
-import com.feedbacktree.flow.ui.views.core.showViewModel
+import com.feedbacktree.flow.ui.views.core.*
 import com.squareup.coordinators.Coordinator
 import com.squareup.coordinators.Coordinators
 import io.reactivex.Observable
@@ -77,6 +74,7 @@ class WorkflowLayout(
                 return
             }
 
+        showing?.cleanupViewModel()
         removeAllViews()
         val newView = registry.buildView(newViewModel, this)
         restoredChildState?.let { restoredState ->
@@ -151,6 +149,7 @@ class WorkflowLayout(
 
                 override fun detach(view: View) {
                     sub?.let {
+                        showing?.cleanupViewModel()
                         it.dispose()
                         sub = null
                     }
