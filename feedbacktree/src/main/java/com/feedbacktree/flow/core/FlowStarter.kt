@@ -20,14 +20,14 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 
-fun <StateT : StateCompletable<OutputT>, OutputT>
+fun <StateT, OutputT>
         FragmentActivity.startFlow(
     flow: Flow<Unit, StateT, *, OutputT, *>,
     onOutput: (OutputT) -> Unit,
     viewRegistry: ViewRegistry
 ): Disposable = startFlow(Unit, flow, onOutput, viewRegistry)
 
-fun <InputT, StateT : StateCompletable<OutputT>, OutputT>
+fun <InputT, StateT, OutputT>
         FragmentActivity.startFlow(
     input: InputT,
     flow: Flow<InputT, StateT, *, OutputT, *>,
@@ -65,7 +65,7 @@ fun <InputT, StateT : StateCompletable<OutputT>, OutputT>
  * Utility that can be used to start [Flow]s which produce [Modal]s.
  * It's useful when you need to use FeedbackTree in a areas that are not using it yet.
  */
-fun <InputT, StateT : StateCompletable<OutputT>, OutputT> FragmentActivity.startModalsFlow(
+fun <InputT, StateT, OutputT> FragmentActivity.startModalsFlow(
     input: InputT,
     flow: Flow<InputT, StateT, *, OutputT, *>,
     viewRegistry: ViewRegistry,

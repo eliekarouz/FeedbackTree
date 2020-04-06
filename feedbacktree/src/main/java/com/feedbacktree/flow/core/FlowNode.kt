@@ -9,7 +9,7 @@ import android.annotation.SuppressLint
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 
-internal class FlowNode<InputT, StateT : StateCompletable<OutputT>, OutputT, ViewModelT>(
+internal class FlowNode<InputT, StateT, OutputT, ViewModelT>(
     val input: InputT,
     val flow: Flow<InputT, StateT, *, OutputT, ViewModelT>,
     val id: String,
@@ -26,7 +26,7 @@ internal class FlowNode<InputT, StateT : StateCompletable<OutputT>, OutputT, Vie
     }
 
     fun render(context: RenderingContext): ViewModelT {
-        return flow.render(flow.state.value ?: flow.initialState(input), context)
+        return flow.render(flow.currentState ?: flow.initialState(input), context)
     }
 
     override fun isDisposed(): Boolean = disposable == null
@@ -54,8 +54,7 @@ class RenderingContext {
         flow: Flow<Unit, ChildStateT, *, ChildOutputT, ChildViewModelT>,
         id: String? = null,
         onResult: (ChildOutputT) -> Unit
-    ): ChildViewModelT
-            where ChildStateT : StateCompletable<ChildOutputT> =
+    ): ChildViewModelT =
         renderChild(Unit, flow, id, onResult)
 
     @SuppressLint("CheckResult")
@@ -64,8 +63,7 @@ class RenderingContext {
         flow: Flow<InputT, ChildStateT, *, ChildOutputT, ChildViewModelT>,
         id: String? = null,
         onResult: (ChildOutputT) -> Unit
-    ): ChildViewModelT
-            where ChildStateT : StateCompletable<ChildOutputT> {
+    ): ChildViewModelT {
         val flowId = id ?: flow::class.toString()
 
         logVerbose("renderChild: $flowId, currentLeafNode = ${currentLeafNode.id}, currentLeafNode.children= ${currentLeafNode.children.size}")

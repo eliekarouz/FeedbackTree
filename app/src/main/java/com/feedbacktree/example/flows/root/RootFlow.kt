@@ -8,10 +8,11 @@ package com.feedbacktree.example.flows.root
 import com.feedbacktree.example.flows.login.LoginFlow
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.RenderingContext
-import com.feedbacktree.flow.core.StateCompletable
+import com.feedbacktree.flow.core.Step
+import com.feedbacktree.flow.core.enterState
 
 object RootFlow : Flow<Unit, State, Event, Nothing, Any>(
-    reduce = ::reduce,
+    stepper = ::reduce,
     feedbacks = listOf()
 ) {
     override fun initialState(input: Unit): State {
@@ -28,9 +29,7 @@ object RootFlow : Flow<Unit, State, Event, Nothing, Any>(
     }
 }
 
-sealed class State : StateCompletable<Nothing> {
-    override val flowOutput: Nothing? = null
-
+sealed class State {
     object LoggedOut : State()
     object LoggedIn : State()
 }
@@ -40,8 +39,8 @@ sealed class Event {
     object LogOut : Event()
 }
 
-fun reduce(state: State, event: Event): State {
+fun reduce(state: State, event: Event): Step<State, Nothing> {
     return when (event) {
-        Event.LogOut -> State.LoggedOut
+        Event.LogOut -> State.LoggedOut.enterState()
     }
 }

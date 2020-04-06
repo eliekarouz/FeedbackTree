@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.feedbacktree.R
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.FlowViewModel
-import com.feedbacktree.flow.core.StateCompletable
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import io.reactivex.Observable
@@ -26,7 +25,7 @@ import io.reactivex.subjects.PublishSubject
  * Extend this class in order to launch a flow inside a fragment.
  * This would allow you to smoothly integrate FeedbackTree to your project.
  */
-abstract class FlowFragment<InputT, StateT : StateCompletable<OutputT>, OutputT> : Fragment() {
+abstract class FlowFragment<InputT, StateT, OutputT> : Fragment() {
 
     inner class Parameters(
         val input: InputT,

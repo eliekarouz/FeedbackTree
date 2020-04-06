@@ -5,10 +5,7 @@
 
 package com.feedbacktree.example.flows.fingerprint
 
-import com.feedbacktree.flow.core.Flow
-import com.feedbacktree.flow.core.RenderingContext
-import com.feedbacktree.flow.core.Sink
-import com.feedbacktree.flow.core.StateCompletable
+import com.feedbacktree.flow.core.*
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.core.modals.asViewModal
 import com.feedbacktree.flow.ui.views.ViewModel
@@ -16,7 +13,7 @@ import com.feedbacktree.flow.ui.views.ViewModel
 class EnterFingerprintViewModel(override val sink: Sink<Event>) : ViewModel<Event>
 
 object FingerprintFlow : Flow<Unit, State, Event, Unit, Modal>(
-    reduce = ::reduce,
+    stepper = ::reduce,
     feedbacks = listOf()
 ) {
     override fun initialState(input: Unit): State {
@@ -28,9 +25,7 @@ object FingerprintFlow : Flow<Unit, State, Event, Unit, Modal>(
     }
 }
 
-sealed class State : StateCompletable<Unit> {
-    override val flowOutput: Unit? = null
-
+sealed class State {
     data class AskingForFingerprint(val x: Int = 0) : State()
 }
 
@@ -38,6 +33,6 @@ sealed class Event {
 
 }
 
-fun reduce(state: State, event: Event): State {
-    return state
+fun reduce(state: State, event: Event): Step<State, Unit> {
+    return state.enterState()
 }

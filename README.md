@@ -21,7 +21,7 @@ In FeedbackTree, you create a `PaymentFlow`, and, depending on which state you a
 FeedbackTree:
 - Organizes the code around the business rules.
 - Logic can be easily unit tested
-	- Most logic is placed in the `reducer` which is pure function.
+	- Most logic is placed in the `Stepper` which is pure function.
 	- Side effect are isolated and testing can be done with a TestScheduler.
 - Built-in navigation 
 - Reactive UI
