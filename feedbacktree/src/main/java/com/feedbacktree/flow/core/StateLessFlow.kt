@@ -5,22 +5,12 @@
 
 package com.feedbacktree.flow.core
 
-class StateLess<InputT, OutputT>(
-    val input: InputT,
-    override val flowOutput: OutputT? = null
-) : StateCompletable<OutputT>
 
 abstract class StatelessFlow<InputT, OutputT, ViewModelT> :
-    Flow<InputT, StateLess<InputT, OutputT>, Unit, OutputT, ViewModelT>(
-        reduce = { state, _ -> state },
+    Flow<InputT, InputT, Unit, OutputT, ViewModelT>(
+        stepper = { state, _ -> state.enterState() },
         feedbacks = listOf()
     ) {
-    override fun initialState(input: InputT) = StateLess<InputT, OutputT>(input)
-
-    override fun render(state: StateLess<InputT, OutputT>, context: RenderingContext): ViewModelT {
-        return render(state.input, context)
-    }
-
-    abstract fun render(input: InputT, context: RenderingContext): ViewModelT
+    override fun initialState(input: InputT) = input
 }
 

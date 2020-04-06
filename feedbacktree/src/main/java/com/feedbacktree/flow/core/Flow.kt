@@ -10,7 +10,6 @@ import com.feedbacktree.flow.utils.mapNotNull
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
@@ -18,16 +17,11 @@ import io.reactivex.subjects.PublishSubject
 private val viewModelChangedPublishSubject = PublishSubject.create<Unit>()
 internal val newViewModelTrigger: Observable<Unit> = viewModelChangedPublishSubject
 
-
-interface StateCompletable<OutputT> {
-    val flowOutput: OutputT?
-}
-
 abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
-    private val reduce: (StateT, EventT) -> StateT,
+    private val stepper: (StateT, EventT) -> Step<StateT, OutputT>,
     private val scheduler: Scheduler = AndroidSchedulers.mainThread(),
     val feedbacks: List<Feedback<StateT, EventT>>
-) : IFlow<InputT, OutputT> where StateT : StateCompletable<OutputT> {
+) : IFlow<InputT, OutputT> {
 
     private val enterStatePublishSubject = PublishSubject.create<FlowEvent<StateT, EventT>>()
 
@@ -38,46 +32,55 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
     private val className = javaClass.simpleName
 
     /**
-     * This prevents [attachFeedbacks] from starting the workflow by mistake.
      * You need first to [run] the state machine first.
      * In other terms, if the flow isn't running, [attachFeedbacks] will not run it.
      */
-    var state = BehaviorSubject.create<StateT>()
+    private var flowState = BehaviorSubject.create<FlowState<StateT, OutputT>>()
+
+    val currentState: StateT?
+        get() = flowState.value?.state
+
     private var active = BehaviorSubject.create<Boolean>()
 
-    private fun backdoorFeedback(): Feedback<StateT, EventT> = bindWithScheduler { osc ->
-        return@bindWithScheduler Bindings(
-            subscriptions = listOf(
-                osc.source.subscribe { state.onNext(it) },
-                // Why skip(1)
-                // We skip the first element because all flows are started inside the render method.
-                // We already know the initial state and we have rendered it.
-                // There is no need to render again.
-                // skip(1) guarantees that we don't have re-entrancy: we start children flows inside the [render] method,
-                // we should not request another render pass while we rendering.
-                osc.source.skip(1).subscribe { state ->
-                    // We will only trigger a rendering pass when the flow doesn't emit an output and ends.
-                    // The output will be propagated synchronously to the parent flows. Once a parent/grandparent captures the output,
-                    // its state will be updated and it's at that time that we will trigger the rendering pass.
-                    if (state.flowOutput == null) {
-                        viewModelChangedPublishSubject.onNext(Unit)
+    private fun backdoorFeedback(): Feedback<FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>> =
+        bindWithScheduler { osc ->
+            return@bindWithScheduler Bindings(
+                subscriptions = listOf(
+                    osc.source.subscribe { flowState.onNext(it) },
+                    // Why skip(1)
+                    // We skip the first element because all flows are started inside the render method.
+                    // We already know the initial state and we have rendered it.
+                    // There is no need to render again.
+                    // skip(1) guarantees that we don't have re-entrancy: we start children flows inside the [render] method,
+                    // we should not request another render pass while we rendering.
+                    osc.source.skip(1).subscribe { state ->
+                        // We will only trigger a rendering pass when the flow doesn't emit an output and ends.
+                        // The output will be propagated synchronously to the parent flows. Once a parent/grandparent captures the output,
+                        // its state will be updated and it's at that time that we will trigger the rendering pass.
+                        if (state.flowOutput == null) {
+                            viewModelChangedPublishSubject.onNext(Unit)
+                        }
+                    },
+                    // Observables.system in RxFeedback adds an observeOn(scheduler) before returning the stream of states.
+                    // This means the if we collect the flow output directly from the system, the output will be delayed.
+                    // We are using this feedback loop to do that because we don't have an observerOn(scheduler) and the state is emitted instantly
+                    // as soon as it goes out of the stepper.
+                    osc.source.mapNotNull { it.flowOutput }.subscribe { flowOutput ->
+                        outputPublishSubject.onNext(flowOutput)
                     }
-                },
-                // Observables.system in RxFeedback adds an observeOn(scheduler) before returning the stream of states.
-                // This means the if we collect the flow output directly from the system, the output will be delayed.
-                // We are using this feedback loop to do that because we don't have an observerOn(scheduler) and the state is emitted instantly
-                // as soon as it goes out of the reducer.
-                osc.source.mapNotNull { it.flowOutput }.subscribe { flowOutput ->
-                    outputPublishSubject.onNext(flowOutput)
-                }
-            ),
-            events = listOf(
-                publishSubjectEvents
+                ),
+                events = listOf(
+                    publishSubjectEvents.map<FlowEvent<StateT, EventT>> { event ->
+                        FlowEvent.StandardEvent(
+                            event
+                        )
+                    }
+                )
             )
-        )
-    }
+        }
 
-    private fun childrenResultEventFeedback(): Feedback<StateT, FlowEvent<StateT, EventT>> = {
+    private fun childrenResultEventFeedback(): Feedback<FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>> =
+        {
         // This is a custom a feedback that actually forwards the events immediately.
         // This will only be used to forward outputs from the children flows into this flow.
         // No need to add observeOn(scheduler) because all the flows will be running on the main-thread.
@@ -92,18 +95,20 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
         if (active.value == true) {
             error("Attempting to start a flow that is already running")
         }
-        val reducerWithLog: (StateT, EventT) -> StateT = { state, event ->
+        val stepperWithLog: (StateT, EventT) -> Step<StateT, OutputT> = { state, event ->
             logInfo("$className: $event")
-            reduce(state, event)
+            stepper(state, event)
         }
-        val wrappedFeedbacks = (feedbacks + backdoorFeedback())
-            .map { feedback ->
-                wrapFeedback<StateT, EventT>(feedback)
-            }
+        val wrappedFeedbacks = feedbacks.map { feedback ->
+            wrapFeedback<StateT, EventT, OutputT>(feedback)
+        } + backdoorFeedback()
 
         val system = Observables.system(
-            initialState = initialState(input),
-            reduce = wrapReduce(reducerWithLog),
+            initialState = FlowState<StateT, OutputT>(
+                state = initialState(input),
+                flowOutput = null
+            ),
+            reduce = wrapStepper(stepperWithLog),
             scheduler = scheduler,
             scheduledFeedback = wrappedFeedbacks + childrenResultEventFeedback()
         )
@@ -123,25 +128,8 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
 
     abstract fun render(state: StateT, context: RenderingContext): ViewModelT
 
-    fun attachFeedbacks(feedbacks: List<Feedback<StateT, EventT>>): Disposable {
-        val events = feedbacks.map {
-            val feedbackState = active.switchMap { isActive ->
-                if (isActive) {
-                    // Push states as long as the flow is didn't complete.
-                    state.filter { it.flowOutput == null }
-                } else Observable.empty<StateT>()
-            }
-            val observableSchedulerContext = ObservableSchedulerContext(feedbackState, scheduler)
-            it(observableSchedulerContext)
-        }
-        return Observable.merge(events).subscribe { publishSubjectEvents.onNext(it) }
-    }
-
-    fun attachFeedbacks(vararg feedbacks: Feedback<StateT, EventT>): Disposable =
-        attachFeedbacks(feedbacks.toList())
-
     protected fun sink(): Sink<EventT> {
-        val lastState = state.value
+        val lastState = flowState.value
         return Sink(
             flowHasCompleted = lastState?.flowOutput != null,
             eventSink = ::send
@@ -149,7 +137,7 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
     }
 
     protected fun <E> sink(transform: (E) -> EventT?): Sink<E> {
-        val lastState = state.value
+        val lastState = flowState.value
         return Sink(
             flowHasCompleted = lastState?.flowOutput != null,
             eventSink = { e ->
@@ -171,6 +159,12 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
     }
 }
 
+private data class FlowState<StateT, OutputT>(
+    internal val state: StateT,
+    internal val flowOutput: OutputT?
+)
+
+
 internal sealed class FlowEvent<StateT, EventT> {
     internal data class StandardEvent<StateT, EventT>(val event: EventT) :
         FlowEvent<StateT, EventT>()
@@ -180,19 +174,29 @@ internal sealed class FlowEvent<StateT, EventT> {
 }
 
 
-private fun <StateT, EventT> wrapReduce(reduce: (StateT, EventT) -> StateT): (StateT, FlowEvent<StateT, EventT>) -> StateT {
-    return { state, flowEvent ->
+private fun <StateT, EventT, OutputT> wrapStepper(reduce: (StateT, EventT) -> Step<StateT, OutputT>)
+        : (FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>) -> FlowState<StateT, OutputT> {
+    return { flowState, flowEvent ->
         when (flowEvent) {
-            is FlowEvent.StandardEvent -> reduce(state, flowEvent.event)
-            is FlowEvent.EnterStateEvent -> flowEvent.state
+            is FlowEvent.StandardEvent -> {
+                when (val stateOutputT = reduce(flowState.state, flowEvent.event)) {
+                    is Step.State -> flowState.copy(state = stateOutputT.state)
+                    is Step.Output -> flowState.copy(flowOutput = stateOutputT.output)
+                }
+            }
+            is FlowEvent.EnterStateEvent -> flowState.copy(state = flowEvent.state)
         }
     }
 }
 
 
-private fun <StateT, EventT> wrapFeedback(feedback: Feedback<StateT, EventT>): Feedback<StateT, FlowEvent<StateT, EventT>> {
-    return { soc ->
-        val observableEvents = feedback(soc)
+private fun <StateT, EventT, OutputT> wrapFeedback(feedback: Feedback<StateT, EventT>): Feedback<FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>> {
+    return { flowStateObservableSchedulerContext ->
+        val stateObservableSchedulerContext = ObservableSchedulerContext(
+            source = flowStateObservableSchedulerContext.source.map { it.state },
+            scheduler = flowStateObservableSchedulerContext.scheduler
+        )
+        val observableEvents = feedback(stateObservableSchedulerContext)
         observableEvents.map { event ->
             FlowEvent.StandardEvent<StateT, EventT>(event)
         }
