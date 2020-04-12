@@ -39,8 +39,8 @@ sealed class Event {
 
 fun reduce(state: State, event: Event): Step<State, Unit> {
     return when (event) {
-        is Event.EnteredEmail -> state.copy(email = event.email).enterState()
-        is Event.EnteredPassword -> state.copy(password = event.password).enterState()
+        is Event.EnteredEmail -> state.copy(email = event.email).advance()
+        is Event.EnteredPassword -> state.copy(password = event.password).advance()
         Event.ClickedLogin -> endFlowWith(Unit)
         is Event.ReceivedLogInResponse -> endFlowWith(Unit)
     }

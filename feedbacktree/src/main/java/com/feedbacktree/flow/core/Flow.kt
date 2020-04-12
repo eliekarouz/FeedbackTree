@@ -17,7 +17,7 @@ import io.reactivex.subjects.PublishSubject
 private val viewModelChangedPublishSubject = PublishSubject.create<Unit>()
 internal val newViewModelTrigger: Observable<Unit> = viewModelChangedPublishSubject
 
-abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
+abstract class Flow<InputT : Any, StateT : Any, EventT : Any, OutputT : Any, ViewModelT>(
     private val stepper: (StateT, EventT) -> Step<StateT, OutputT>,
     private val scheduler: Scheduler = AndroidSchedulers.mainThread(),
     val feedbacks: List<Feedback<StateT, EventT>>
@@ -31,10 +31,6 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
 
     private val className = javaClass.simpleName
 
-    /**
-     * You need first to [run] the state machine first.
-     * In other terms, if the flow isn't running, [attachFeedbacks] will not run it.
-     */
     private var flowState = BehaviorSubject.create<FlowState<StateT, OutputT>>()
 
     val currentState: StateT?
@@ -136,7 +132,7 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
         )
     }
 
-    protected fun <E> sink(transform: (E) -> EventT?): Sink<E> {
+    protected fun <E : Any> sink(transform: (E) -> EventT?): Sink<E> {
         val lastState = flowState.value
         return Sink(
             flowHasCompleted = lastState?.flowOutput != null,
@@ -174,14 +170,14 @@ internal sealed class FlowEvent<StateT, EventT> {
 }
 
 
-private fun <StateT, EventT, OutputT> wrapStepper(reduce: (StateT, EventT) -> Step<StateT, OutputT>)
+private fun <StateT : Any, EventT : Any, OutputT : Any> wrapStepper(reduce: (StateT, EventT) -> Step<StateT, OutputT>)
         : (FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>) -> FlowState<StateT, OutputT> {
     return { flowState, flowEvent ->
         when (flowEvent) {
             is FlowEvent.StandardEvent -> {
                 when (val stateOutputT = reduce(flowState.state, flowEvent.event)) {
-                    is Step.State -> flowState.copy(state = stateOutputT.state)
-                    is Step.Output -> flowState.copy(flowOutput = stateOutputT.output)
+                    is Step.Advance -> flowState.copy(state = stateOutputT.newState)
+                    is Step.End -> flowState.copy(flowOutput = stateOutputT.output)
                 }
             }
             is FlowEvent.EnterStateEvent -> flowState.copy(state = flowEvent.state)

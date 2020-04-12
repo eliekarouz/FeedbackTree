@@ -1,4 +1,4 @@
-package com.eliek.feedbacktree
+package com.feedbacktree.feedbacktree
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

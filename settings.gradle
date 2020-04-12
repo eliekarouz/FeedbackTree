@@ -1,2 +1,2 @@
-include ':app', ':feedbacktree'
+include ':app', ':feedbacktree', ':feedbacktreecommon'
 rootProject.name='FeedbackTree'

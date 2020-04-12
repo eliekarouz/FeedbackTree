@@ -5,6 +5,13 @@
       <module fileurl="file://$PROJECT_DIR$/FeedbackTree.iml" filepath="$PROJECT_DIR$/FeedbackTree.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/feedbacktree/feedbacktree.iml" filepath="$PROJECT_DIR$/feedbacktree/feedbacktree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon.iml" filepath="$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_androidMain.iml" filepath="$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_androidMain.iml" group="feedbacktreecommon" />
+      <module fileurl="file://$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_androidTest.iml" filepath="$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_androidTest.iml" group="feedbacktreecommon" />
+      <module fileurl="file://$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_commonMain.iml" filepath="$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_commonMain.iml" group="feedbacktreecommon" />
+      <module fileurl="file://$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_commonTest.iml" filepath="$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_commonTest.iml" group="feedbacktreecommon" />
+      <module fileurl="file://$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_iosMain.iml" filepath="$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_iosMain.iml" group="feedbacktreecommon" />
+      <module fileurl="file://$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_iosTest.iml" filepath="$PROJECT_DIR$/feedbacktreecommon/feedbacktreecommon_iosTest.iml" group="feedbacktreecommon" />
     </modules>
   </component>
 </project>

@@ -6,9 +6,9 @@
 package com.feedbacktree.flow.core
 
 
-abstract class StatelessFlow<InputT, OutputT, ViewModelT> :
+abstract class StatelessFlow<InputT : Any, OutputT : Any, ViewModelT> :
     Flow<InputT, InputT, Unit, OutputT, ViewModelT>(
-        stepper = { state, _ -> state.enterState() },
+        stepper = { state, _ -> state.advance() },
         feedbacks = listOf()
     ) {
     override fun initialState(input: InputT) = input
