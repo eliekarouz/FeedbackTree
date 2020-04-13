@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
+group = project.property("GROUP") as String
+
 plugins {
     kotlin("multiplatform")
     `maven-publish`
