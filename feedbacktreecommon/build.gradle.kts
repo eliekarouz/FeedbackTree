@@ -5,6 +5,8 @@ plugins {
     `maven-publish`
 }
 
+configurations.create("compileClasspath")
+
 kotlin {
     //select iOS target platform depending on the Xcode environment variables
     val iOSTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
