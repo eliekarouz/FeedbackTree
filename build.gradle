@@ -1,10 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-group 'com.github.eliekarouz.feedbacktree'
 
 allprojects {
-    version = "0.9"
-
     repositories {
         google()
         jcenter()

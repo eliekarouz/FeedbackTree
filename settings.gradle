@@ -1,2 +1,4 @@
 include ':app', ':feedbacktree', ':feedbacktreecommon'
 rootProject.name='FeedbackTree'
+
+enableFeaturePreview('GRADLE_METADATA')
