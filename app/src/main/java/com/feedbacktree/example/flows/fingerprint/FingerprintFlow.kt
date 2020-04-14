@@ -8,7 +8,6 @@ package com.feedbacktree.example.flows.fingerprint
 import com.feedbacktree.flow.core.*
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.core.modals.asViewModal
-import com.feedbacktree.flow.ui.views.ViewModel
 
 class EnterFingerprintViewModel(override val sink: Sink<Event>) : ViewModel<Event>
 

@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.core.ObservableSchedulerContext
-import com.feedbacktree.flow.core.Sink
+import com.feedbacktree.flow.core.ViewModel
 import com.feedbacktree.flow.ui.views.core.BuilderBinding
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
@@ -23,10 +23,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import kotlin.reflect.KClass
-
-interface ViewModel<EventT : Any> {
-    val sink: Sink<EventT>
-}
 
 /**
  * (Experimental)

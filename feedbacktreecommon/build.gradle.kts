@@ -1,10 +1,9 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
-group = project.property("GROUP") as String
 
 plugins {
     kotlin("multiplatform")
-    `maven-publish`
+
 }
 
 configurations.create("compileClasspath")
@@ -68,3 +67,5 @@ val packForXcode by tasks.creating(Sync::class) {
 }
 
 tasks.getByName("build").dependsOn(packForXcode)
+
+apply(from = rootProject.file("gradle/gradle-mvn-push.gradle"))

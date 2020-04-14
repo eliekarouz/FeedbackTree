@@ -6,7 +6,7 @@
 package com.feedbacktree.example.flows.login
 
 import com.feedbacktree.flow.core.Sink
-import com.feedbacktree.flow.ui.views.ViewModel
+import com.feedbacktree.flow.core.ViewModel
 
 data class LoginViewModel(
     val state: State,

@@ -1,0 +1,41 @@
+//https://proandroiddev.com/publishing-a-maven-artifact-3-3-step-by-step-instructions-to-mavencentral-publishing-bd661081645d
+apply plugin: 'com.vanniktech.maven.publish'
+
+group = GROUP
+version = VERSION_NAME
+
+mavenPublish {
+    useLegacyMode = !project.plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')
+
+    targets {
+        installArchives {
+            def url = file("${rootProject.buildDir}/localMaven").toURI().toString()
+            releaseRepositoryUrl = url
+            snapshotRepositoryUrl = url
+        }
+    }
+}
+
+if (project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+    apply plugin: 'org.jetbrains.dokka'
+
+    dokka {
+        outputDirectory = "$buildDir/dokka"
+        outputFormat = 'html'
+
+        multiplatform {
+            android { // The same name as in Kotlin Multiplatform plugin, so the sources are fetched automatically
+                targets = ["JVM"]
+                platform = "jvm"
+            }
+
+            differentName { // Different name, so source roots, classpath and platform must be passed explicitly.
+                targets = ["JVM"]
+                platform = "jvm"
+                sourceRoot {
+                    path = kotlin.sourceSets.commonMain.kotlin.srcDirs[0]
+                }
+            }
+        }
+    }
+}
