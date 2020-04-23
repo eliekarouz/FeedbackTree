@@ -14,6 +14,7 @@ import androidx.annotation.StyleRes
 import com.feedbacktree.flow.ui.core.modals.ViewModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.ui.views.core.cleanupViewModel
 import com.feedbacktree.flow.ui.views.core.showViewModel
 import com.feedbacktree.flow.utils.logAndShow
 import kotlin.reflect.KClass
@@ -61,4 +62,8 @@ class ViewDialogBinding(
         with(dialogRef) { (extra as View).showViewModel(modal.viewModel) }
     }
 
+    override fun cleanUpDialog(dialogRef: DialogRef<ViewModal<*>>) {
+        super.cleanUpDialog(dialogRef)
+        (dialogRef.extra as View).cleanupViewModel()
+    }
 }
