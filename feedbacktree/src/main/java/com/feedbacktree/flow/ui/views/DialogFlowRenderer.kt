@@ -48,6 +48,7 @@ internal class DialogFlowRenderer(
 
         (dialogs - newDialogs).forEach {
             logVerbose("FT Modals Dismiss ${it.modal}")
+            dialogRegistry.cleanUp(it)
             it.dialog.dismiss()
         }
         dialogs = newDialogs
