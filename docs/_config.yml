@@ -30,6 +30,7 @@ github_username:  eliekarouz
 
 # Build settings
 theme: minima
+markdown: kramdown
 plugins:
   - jekyll-feed
 
