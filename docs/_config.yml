@@ -27,12 +27,13 @@ baseurl: "/FeedbackTree" # the subpath of your site, e.g. /blog
 url: "https://eliekarouz.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  eliekarouz
+show_full_navigation: true
 
 # Build settings
-theme: minima
 markdown: kramdown
 plugins:
-  - jekyll-feed
+ - jekyll-seo-tag
+ - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -53,3 +54,41 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+collections:
+  docs:
+    title: Documentation
+    permalink: /:path/
+    output: true
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: default
+  -
+    scope:
+      path: ""
+      type: "docs"
+    values:
+      seo:
+        type: Article
+      _comments:
+        category: Group navigation links with this field
+        order: Used to sort links in the navigation
+      _options:
+        content:
+          width: 800
+          height: 2000
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      _comments:
+        type: Marks the impact of this release
+        
+types:
+- minor
+- major
