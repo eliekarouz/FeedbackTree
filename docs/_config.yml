@@ -23,8 +23,8 @@ email: eliekarouz@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   FeedbackTree is a unidirectional declarative architecture for Android.
   It relies on state machines to generate UIs and perform other side effects like network calls, bluetooth...
-baseurl: "/FeedbackTree" # the subpath of your site, e.g. /blog
-url: "https://eliekarouz.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://eliekarouz.github.io/FeedbackTree" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  eliekarouz
 show_full_navigation: true
