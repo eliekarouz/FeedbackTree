@@ -20,7 +20,7 @@ import com.feedbacktree.flow.ui.core.modals.Modal
 data class DialogRef<ModalT : Modal>(
     val modal: ModalT,
     val dialog: Dialog,
-    val extra: Any? = null
+    var extra: Any? = null
 ) {
     internal fun save(): KeyAndBundle {
         val saved = dialog.window!!.saveHierarchyState()

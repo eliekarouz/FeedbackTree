@@ -10,7 +10,7 @@ import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.Sink
 import com.feedbacktree.flow.core.StateCompletable
 import com.feedbacktree.flow.ui.core.modals.Modal
-import com.feedbacktree.flow.ui.core.modals.asViewModal
+import com.feedbacktree.flow.ui.core.modals.asModal
 import com.feedbacktree.flow.ui.views.ViewModel
 
 class EnterFingerprintViewModel(override val sink: Sink<Event>) : ViewModel<Event>
@@ -24,7 +24,7 @@ object FingerprintFlow : Flow<Unit, State, Event, Unit, Modal>(
     }
 
     override fun render(state: State, context: RenderingContext): Modal {
-        return EnterFingerprintViewModel(sink()).asViewModal()
+        return EnterFingerprintViewModel(sink()).asModal()
     }
 }
 

@@ -6,8 +6,6 @@
 package com.feedbacktree.flow.ui.views.modals
 
 import android.content.Context
-import android.graphics.Color
-import androidx.annotation.ColorInt
 import androidx.annotation.StyleRes
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
@@ -77,14 +75,12 @@ class DialogRegistry private constructor(
 
     companion object {
         fun registry(
-            @StyleRes dialogThemeResId: Int = 0,
-            @ColorInt fullScreenBackgroundColor: Int = Color.RED
+            @StyleRes dialogThemeResId: Int = 0
         ): DialogRegistry {
             return DialogRegistry(
                 AlertScreenDialogBinding(dialogThemeResId = dialogThemeResId),
-                ViewDialogBinding(dialogThemeResId = dialogThemeResId),
                 AlertWithViewDialogBinding(dialogThemeResId = dialogThemeResId),
-                FullScreenDialogBinding(fullScreenBackgroundColor)
+                ViewModalDialogBinding()
             )
         }
     }

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FeedbackTree.iml" filepath="$PROJECT_DIR$/FeedbackTree.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/feedbacktree/feedbacktree.iml" filepath="$PROJECT_DIR$/feedbacktree/feedbacktree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FeedbackTree.iml" filepath="$PROJECT_DIR$/FeedbackTree.iml" group="FeedbackTree" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="FeedbackTree/app" />
+      <module fileurl="file://$PROJECT_DIR$/feedbacktree/feedbacktree.iml" filepath="$PROJECT_DIR$/feedbacktree/feedbacktree.iml" group="FeedbackTree/feedbacktree" />
     </modules>
   </component>
 </project>
