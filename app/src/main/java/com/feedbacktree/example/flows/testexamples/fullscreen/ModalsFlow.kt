@@ -3,10 +3,10 @@ package com.feedbacktree.example.flows.testexamples.fullscreen
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.StateCompletable
-import com.feedbacktree.flow.ui.core.modals.FullScreenModal
 import com.feedbacktree.flow.ui.core.modals.Modal
+import com.feedbacktree.flow.ui.core.modals.ViewModal
 
-object FullScreenModalFlow : Flow<Unit, State, Event, Unit, Modal>(
+object ModalsFlow : Flow<Unit, State, Event, Unit, Modal>(
     reduce = ::reduce,
     feedbacks = listOf()
 ) {
@@ -14,7 +14,7 @@ object FullScreenModalFlow : Flow<Unit, State, Event, Unit, Modal>(
         State()
 
     override fun render(state: State, context: RenderingContext): Modal {
-        return FullScreenModal(content = HelloWorldViewModel(sink()))
+        return ViewModal(content = HelloWorldViewModel(sink()))
     }
 }
 

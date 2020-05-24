@@ -7,7 +7,7 @@ package com.feedbacktree.example
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.feedbacktree.example.flows.testexamples.fullscreen.FullScreenModalFlow
+import com.feedbacktree.example.flows.testexamples.fullscreen.ModalsFlow
 import com.feedbacktree.example.flows.testexamples.testExamplesViewRegistry
 import com.feedbacktree.flow.core.startModalsFlow
 import com.feedbacktree.flow.ui.views.core.HandlesBack
@@ -20,13 +20,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.hello_world_top_bottom)
 //        disposable = startFlow(RootFlow, onOutput = {
 //            finish()
 //        }, viewRegistry = appViewRegistry)
 
         disposable = startModalsFlow(
             Unit,
-            FullScreenModalFlow,
+            ModalsFlow,
             testExamplesViewRegistry,
             DialogRegistry.registry()
         )

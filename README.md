@@ -28,12 +28,13 @@ FeedbackTree:
 
 #### Installation
 
-Add it in your root build.gradle at the end of repositories:
+The project recently migrated from `jitpack` to `Maven Central`
+
+Add it in your root build.gradle:
 ```
 allprojects {
   repositories {
-    ...
-    maven { url 'https://jitpack.io' }
+    mavenCentral()
   }
 }
 ```
@@ -41,6 +42,6 @@ allprojects {
 Add the dependency
 ```
 dependencies {
-  implementation 'com.github.eliekarouz:feedbacktree:0.8'
+  implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.8.5"
 }
 ```
