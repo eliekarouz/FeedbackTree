@@ -40,53 +40,74 @@ class ViewModalDialogBinding(
         viewRegistry: ViewRegistry,
         context: Context
     ): DialogRef<ViewModal<*>> {
-        val contentViewModel = initialModal.content
-
-        val panel = PanelBodyWrapper(context).apply {
-            background = ColorDrawable(Color.TRANSPARENT)
-        }
-        val view by lazy { viewRegistry.buildView(contentViewModel, context) }
 
         return Dialog(context, 0)
-            .apply {
+            .run {
+                setCancelable(false)
+                val view =
+                    if (initialModal.widthLayout == Layout.Wrap && initialModal.heightLayout == Layout.Wrap) {
+                        addWrapContentView(viewRegistry, initialModal)
+                    } else {
+                        addFullScreenView(viewRegistry, initialModal)
+                    }
+
+
                 setOnKeyListener { _, keyCode, keyEvent ->
                     if (keyEvent.action != KeyEvent.ACTION_DOWN) {
                         true
                     } else {
-                        keyCode == KeyEvent.KEYCODE_BACK && HandlesBack.Helper.onBackPressed(
-                            view
-                        )
+                        keyCode == KeyEvent.KEYCODE_BACK && HandlesBack.Helper.onBackPressed(view)
                     }
                 }
-                setCancelable(false)
-                setContentView(panel)
-                window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
-                window!!.setBackgroundDrawable(null)
-                val windowManager = window!!.windowManager
-                logAndShow("FullScreen")
-                val dimensions = Point()
-                val statusBarHeight =
-                    context.resources.getIdentifier("status_bar_height", "dimen", "android")
-                        .takeIf { it > 0 }
-                        ?.let { context.resources.getDimensionPixelSize(it) } ?: 0
-
-                windowManager.defaultDisplay.getSize(dimensions)
-                view.layoutParams = FrameLayout.LayoutParams(
-                    layoutParams(initialModal.widthLayout, dimensions.x),
-                    layoutParams(initialModal.heightLayout, dimensions.y - statusBarHeight)
-                ).apply {
-                    gravity = Gravity.CENTER
-                }
-
-                panel.addView(view)
-            }
-            .run {
                 DialogRef(
                     initialModal,
                     this,
                     view
                 )
             }
+    }
+
+    private fun <ContentViewModel : Any> Dialog.addFullScreenView(
+        viewRegistry: ViewRegistry,
+        viewModal: ViewModal<ContentViewModel>
+    ): View {
+        val view by lazy { viewRegistry.buildView(viewModal.content, context) }
+        val panel = PanelBodyWrapper(context).apply {
+            background = ColorDrawable(Color.TRANSPARENT)
+        }
+        setContentView(panel)
+        window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
+        window!!.setBackgroundDrawable(null)
+        val windowManager = window!!.windowManager
+        logAndShow("FullScreen")
+
+        val dimensions = Point()
+        val statusBarHeight =
+            context.resources.getIdentifier("status_bar_height", "dimen", "android")
+                .takeIf { it > 0 }
+                ?.let { context.resources.getDimensionPixelSize(it) } ?: 0
+
+        windowManager.defaultDisplay.getSize(dimensions)
+        val scale = context.resources.displayMetrics.density
+        view.layoutParams = FrameLayout.LayoutParams(
+            layoutParams(viewModal.widthLayout, dimensions.x, scale),
+            layoutParams(viewModal.heightLayout, dimensions.y - statusBarHeight, scale)
+        ).apply {
+            gravity = Gravity.CENTER
+        }
+        panel.addView(view)
+        return view
+    }
+
+    private fun <ContentViewModel : Any> Dialog.addWrapContentView(
+        viewRegistry: ViewRegistry,
+        viewModal: ViewModal<ContentViewModel>
+    ): View {
+        window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
+        logAndShow("ViewModal")
+        val view = viewRegistry.buildView(viewModal.content, context)
+        setContentView(view)
+        return view
     }
 
     override fun updateDialog(dialogRef: DialogRef<ViewModal<*>>) {
@@ -127,11 +148,11 @@ internal class PanelBodyWrapper
     }
 }
 
-private fun layoutParams(layout: Layout, screenDimension: Int): Int {
+private fun layoutParams(layout: Layout, screenDimension: Int, scale: Float): Int {
     return when (layout) {
         Layout.Wrap -> WRAP_CONTENT
         Layout.FullScreen -> MATCH_PARENT
-        is Layout.Pixels -> layout.pixels
+        is Layout.DPs -> (layout.dps * scale).toInt()
         is Layout.Percentage -> (screenDimension.toFloat() * layout.percentage.toFloat() * 0.01).toInt()
     }
 }

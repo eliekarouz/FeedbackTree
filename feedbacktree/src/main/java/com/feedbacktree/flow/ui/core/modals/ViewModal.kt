@@ -20,7 +20,7 @@ class ViewModal<ContentViewModelT : Any>(
 sealed class Layout {
     object Wrap : Layout()
     object FullScreen : Layout()
-    data class Pixels(val pixels: Int) : Layout()
+    data class DPs(val dps: Int) : Layout()
     data class Percentage(val percentage: Int) : Layout() {
         init {
             check(percentage in 0..100) { "Percentage value must be between 0 and 100" }
