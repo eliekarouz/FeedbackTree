@@ -9,7 +9,7 @@ import com.feedbacktree.example.flows.login.LoginFlow
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.Step
-import com.feedbacktree.flow.core.enterState
+import com.feedbacktree.flow.core.advance
 
 object RootFlow : Flow<Unit, State, Event, Nothing, Any>(
     stepper = ::reduce,
@@ -41,6 +41,6 @@ sealed class Event {
 
 fun reduce(state: State, event: Event): Step<State, Nothing> {
     return when (event) {
-        Event.LogOut -> State.LoggedOut.enterState()
+        Event.LogOut -> State.LoggedOut.advance()
     }
 }

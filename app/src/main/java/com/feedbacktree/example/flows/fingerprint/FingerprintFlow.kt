@@ -34,5 +34,5 @@ sealed class Event {
 }
 
 fun reduce(state: State, event: Event): Step<State, Unit> {
-    return state.enterState()
+    return state.advance()
 }

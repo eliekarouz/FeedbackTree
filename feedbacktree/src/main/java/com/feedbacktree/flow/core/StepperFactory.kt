@@ -8,7 +8,7 @@ package com.feedbacktree.flow.core
 import com.feedbacktree.flow.utils.logVerbose
 
 /**
- * [StepperBuilder.create] allows you to build a [Stepper] ([StateT], [EventT]) -> [Step] using DSL syntax.
+ * [StepperFactory.create] allows you to build a [Stepper] ([StateT], [EventT]) -> [Step] using DSL syntax.
  *
  * Below is a simple example on how to use this DSL to build [Stepper]s. There is also an example on
  * you would have done it without this DSL.
@@ -85,7 +85,7 @@ import com.feedbacktree.flow.utils.logVerbose
  * @param StateT
  * @param EventT
  */
-class StepperBuilder<StateT, EventT, OutputT> private constructor() {
+class StepperFactory<StateT, EventT, OutputT> private constructor() {
 
     val stateTransitions =
         mutableMapOf<Matcher<StateT, StateT>, SubStateSteppers<out StateT, EventT, OutputT>>()
@@ -117,8 +117,8 @@ class StepperBuilder<StateT, EventT, OutputT> private constructor() {
     }
 
     companion object {
-        fun <StateT, EventT, OutputT> create(build: StepperBuilder<StateT, EventT, OutputT>.() -> Unit): (StateT, EventT) -> Step<StateT, OutputT> {
-            val stepper = StepperBuilder<StateT, EventT, OutputT>()
+        fun <StateT, EventT, OutputT> create(build: StepperFactory<StateT, EventT, OutputT>.() -> Unit): (StateT, EventT) -> Step<StateT, OutputT> {
+            val stepper = StepperFactory<StateT, EventT, OutputT>()
             stepper.build()
             return { state, event ->
                 val transition = stepper.stateTransitions.filter {
