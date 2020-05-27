@@ -27,7 +27,7 @@ import io.reactivex.subjects.BehaviorSubject
  * @param effects Chooses which effects to perform for certain query result.
  * @return Feedback loop performing the effects.
  */
-fun <State, Query, Event> react(
+fun <State, Query : Any, Event> react(
     query: (State) -> Query?,
     areEqual: (Query, Query) -> Boolean,
     effects: (Query) -> Observable<Event>
@@ -54,7 +54,7 @@ fun <State, Query, Event> react(
  * @param effects Chooses which effects to perform for certain query result.
  * @return Feedback loop performing the effects.
  */
-fun <State, Query, Event> react(
+fun <State, Query : Any, Event> react(
     query: (State) -> Query?,
     effects: (Query) -> Observable<Event>
 ): (ObservableSchedulerContext<State>) -> Observable<Event> =
@@ -75,7 +75,7 @@ fun <State, Query, Event> react(
  * @param effects Chooses which effects to perform for certain query element.
  * @return Feedback loop performing the effects.
  */
-fun <State, Query, Event> reactSet(
+fun <State, Query : Any, Event> reactSet(
     query: (State) -> Set<Query>,
     effects: (Query) -> Observable<Event>
 ): (ObservableSchedulerContext<State>) -> Observable<Event> = react(
@@ -92,7 +92,7 @@ fun <State, Query, Event> reactSet(
  * The purpose of QueryLifetimeTracking is to activate, deactivate,
  * as well as update already activated effects with the new Query that was returned.
  */
-private class QueryLifetimeTracking<Query, QueryID, Event>(
+private class QueryLifetimeTracking<Query : Any, QueryID, Event>(
     val effects: (intialQuery: Query, state: Observable<Query>) -> Observable<Event>,
     val scheduler: Scheduler,
     val emitter: Emitter<Event>
@@ -203,18 +203,19 @@ private class QueryLifetimeTracking<Query, QueryID, Event>(
 
 
 /**
- * [State] State type of the system.
- * [Query] Subset of state used to control the feedback loop.
  * For every uniquely identifiable [Query], [effects] closure is invoked with the initial value of the [Query] and future [Query]s corresponding to the same identifier.
  * Subsequent equal values of [Query] are not emitted from the effects state parameter.
  *
- * @param queries: queries to perform some effects.
- * @param effects: The query effects.
- * @param initial: Initial qyery.
- * @param queryObservable: Subsequent [Query]s with the same [QueryID]
- * @return The feedback loop performing the effects.
+ * @param State State type of the system
+ * @param Query Query that is passed to the effects
+ * @param QueryID Subset of state used to control the feedback loop
+ * @param Event Event produced and passed to the system
+ * @param queries queries to perform some effects
+ * @param effects The query effects (initial is the initial query
+ * and queryObservable: Subsequent [Query]s with the same [QueryID]
+ * @return
  */
-fun <State, Query, QueryID, Event> react(
+fun <State, Query : Any, QueryID, Event> react(
     queries: (State) -> Map<QueryID, Query>,
     effects: (initial: Query, queryObservable: Observable<Query>) -> Observable<Event>
 ): (ObservableSchedulerContext<State>) -> Observable<Event> {

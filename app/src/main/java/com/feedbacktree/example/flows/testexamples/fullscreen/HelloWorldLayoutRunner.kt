@@ -2,12 +2,12 @@ package com.feedbacktree.example.flows.testexamples.fullscreen
 
 import android.view.View
 import com.feedbacktree.example.R
+import com.feedbacktree.flow.core.Bindings
+import com.feedbacktree.flow.core.bind
 import com.feedbacktree.flow.ui.views.LayoutRunner
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.backPresses
 import io.reactivex.Observable
-import org.notests.rxfeedback.Bindings
-import org.notests.rxfeedback.bind
 
 class HelloWorldLayoutRunner(private val view: View) : LayoutRunner<HelloWorldViewModel, Event> {
 
