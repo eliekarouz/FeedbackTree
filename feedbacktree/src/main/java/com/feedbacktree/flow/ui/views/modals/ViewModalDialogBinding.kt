@@ -11,7 +11,7 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
-import android.util.DisplayMetrics
+import android.view.Display
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
@@ -26,9 +26,10 @@ import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.ui.views.core.cleanupViewModel
 import com.feedbacktree.flow.ui.views.core.showViewModel
-import com.feedbacktree.flow.utils.display
 import com.feedbacktree.flow.utils.logAndShow
+import com.feedbacktree.flow.utils.windowManager
 import kotlin.reflect.KClass
+
 
 class ViewModalDialogBinding(
     override val type: KClass<ViewModal<*>> = ViewModal::class
@@ -78,20 +79,13 @@ class ViewModalDialogBinding(
         setContentView(panel)
         window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
         window!!.setBackgroundDrawable(null)
-        val windowManager = window!!.windowManager
         logAndShow("FullScreen")
 
-        val dimensions = Point()
-        val statusBarHeight =
-            context.resources.getIdentifier("status_bar_height", "dimen", "android")
-                .takeIf { it > 0 }
-                ?.let { context.resources.getDimensionPixelSize(it) } ?: 0
-
-        windowManager.defaultDisplay.getSize(dimensions)
+        val screenSize = context.screenSize
         val scale = context.resources.displayMetrics.density
         view.layoutParams = FrameLayout.LayoutParams(
-            layoutParams(viewModal.widthLayout, dimensions.x, scale),
-            layoutParams(viewModal.heightLayout, dimensions.y - statusBarHeight, scale)
+            layoutParams(viewModal.widthLayout, screenSize.x, scale),
+            layoutParams(viewModal.heightLayout, screenSize.y, scale)
         ).apply {
             gravity = Gravity.CENTER
         }
@@ -126,27 +120,62 @@ internal class PanelBodyWrapper
     attributeSet: AttributeSet? = null
 ) : FrameLayout(context, attributeSet) {
 
-
-    /** For use only by [onMeasure]. Instantiated here to avoid allocation during measure. */
-    private val displayMetrics = DisplayMetrics()
-    private val statusBarId =
-        resources.getIdentifier("status_bar_height", "dimen", "android").takeIf { it > 0 }
-
     override fun onMeasure(
         widthMeasureSpec: Int,
         heightMeasureSpec: Int
     ) {
-        val statusBarHeight = statusBarId?.let {
-            resources.getDimensionPixelSize(it)
-        } ?: 0
-
-        context.display.getMetrics(displayMetrics)
-        val calculatedWidthSpec: Int = makeMeasureSpec(displayMetrics.widthPixels, EXACTLY)
+        val screenSize = context.screenSize
+        val calculatedWidthSpec: Int = makeMeasureSpec(screenSize.x, EXACTLY)
         val calculatedHeightSpec: Int =
-            makeMeasureSpec(displayMetrics.heightPixels - statusBarHeight, EXACTLY)
+            makeMeasureSpec(screenSize.y, EXACTLY)
         super.onMeasure(calculatedWidthSpec, calculatedHeightSpec)
     }
 }
+
+private val Context.screenSize: Point
+    get() {
+        // Get the size between the status & the navigation bars
+
+        // Get the size between the status & the navigation bars
+        val display: Display = windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+
+        // Real size of the screen (full screen)
+
+        // Real size of the screen (full screen)
+        val realSize = Point()
+        val realDisplay: Display = windowManager.defaultDisplay
+        realDisplay.getRealSize(realSize)
+
+        // Get the screen dimensions
+
+        fun getStatusBarSize(): Int {
+            val statusBarId =
+                resources.getIdentifier("status_bar_height", "dimen", "android")
+            if (statusBarId > 0) {
+                return resources.getDimensionPixelSize(statusBarId)
+            }
+            return 0
+        }
+
+        fun getNavigationBarHeight(): Int {
+            val navigationBarId =
+                resources.getIdentifier("navigation_bar_height", "dimen", "android")
+            if (navigationBarId > 0) {
+                return resources.getDimensionPixelSize(navigationBarId)
+            }
+            return 0
+        }
+
+        // Get the screen dimensions
+        val maxWidth = size.x
+        val maxHeight =
+            if (realSize.y - getNavigationBarHeight() == size.y || realSize.y == size.y) {
+                size.y - getStatusBarSize()
+            } else size.y
+        return Point(maxWidth, maxHeight)
+    }
 
 private fun layoutParams(layout: Layout, screenDimension: Int, scale: Float): Int {
     return when (layout) {
