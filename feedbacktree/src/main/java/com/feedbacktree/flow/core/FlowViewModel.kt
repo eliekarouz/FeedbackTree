@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
-class FlowViewModel<InputT, StateT, OutputT>(
+class FlowViewModel<InputT : Any, StateT : Any, OutputT : Any>(
     input: InputT,
     flow: Flow<InputT, StateT, *, OutputT, *>
 ) : ViewModel() {
@@ -41,7 +41,7 @@ class FlowViewModel<InputT, StateT, OutputT>(
         rootNode.dispose()
     }
 
-    class Factory<InputT, StateT, OutputT>(
+    class Factory<InputT : Any, StateT : Any, OutputT : Any>(
         private val input: InputT,
         private val flow: Flow<InputT, StateT, *, OutputT, *>
     ) : ViewModelProvider.Factory {

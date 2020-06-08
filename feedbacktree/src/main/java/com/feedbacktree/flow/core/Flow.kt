@@ -17,7 +17,7 @@ import io.reactivex.subjects.PublishSubject
 private val viewModelChangedPublishSubject = PublishSubject.create<Unit>()
 internal val newViewModelTrigger: Observable<Unit> = viewModelChangedPublishSubject
 
-abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
+abstract class Flow<InputT : Any, StateT : Any, EventT : Any, OutputT : Any, ViewModelT>(
     private val stepper: (StateT, EventT) -> Step<StateT, OutputT>,
     private val scheduler: Scheduler = AndroidSchedulers.mainThread(),
     val feedbacks: List<Feedback<StateT, EventT>>
@@ -136,7 +136,7 @@ abstract class Flow<InputT, StateT, EventT, OutputT, ViewModelT>(
         )
     }
 
-    protected fun <E> sink(transform: (E) -> EventT?): Sink<E> {
+    protected fun <E : Any> sink(transform: (E) -> EventT?): Sink<E> {
         val lastState = flowState.value
         return Sink(
             flowHasCompleted = lastState?.flowOutput != null,
@@ -174,7 +174,7 @@ internal sealed class FlowEvent<StateT, EventT> {
 }
 
 
-private fun <StateT, EventT, OutputT> wrapStepper(reduce: (StateT, EventT) -> Step<StateT, OutputT>)
+private fun <StateT : Any, EventT : Any, OutputT : Any> wrapStepper(reduce: (StateT, EventT) -> Step<StateT, OutputT>)
         : (FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>) -> FlowState<StateT, OutputT> {
     return { flowState, flowEvent ->
         when (flowEvent) {
@@ -190,7 +190,7 @@ private fun <StateT, EventT, OutputT> wrapStepper(reduce: (StateT, EventT) -> St
 }
 
 
-private fun <StateT, EventT, OutputT> wrapFeedback(feedback: Feedback<StateT, EventT>): Feedback<FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>> {
+private fun <StateT : Any, EventT : Any, OutputT : Any> wrapFeedback(feedback: Feedback<StateT, EventT>): Feedback<FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>> {
     return { flowStateObservableSchedulerContext ->
         val stateObservableSchedulerContext = ObservableSchedulerContext(
             source = flowStateObservableSchedulerContext.source.map { it.state },

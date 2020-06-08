@@ -6,7 +6,7 @@
 package com.feedbacktree.flow.core
 
 
-abstract class StatelessFlow<InputT, OutputT, ViewModelT> :
+abstract class StatelessFlow<InputT : Any, OutputT : Any, ViewModelT : Any> :
     Flow<InputT, InputT, Unit, OutputT, ViewModelT>(
         stepper = { state, _ -> state.advance() },
         feedbacks = listOf()

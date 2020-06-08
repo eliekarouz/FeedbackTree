@@ -1,0 +1,102 @@
+apply plugin: 'kotlin-multiplatform'
+
+kotlin {
+    jvm('android')
+
+    final def iosTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos")  \
+                               ? presets.iosArm64 : presets.iosX64
+
+    iosX64('ios')
+    iosArm32('iosArm32')
+    iosArm64('iosArm64')
+
+    targets {
+        configure([ios, iosArm32, iosArm64]) {
+            binaries {
+                framework('NomeMp') {
+                    freeCompilerArgs += "-Xobjc-generics"
+                }
+            }
+        }
+    }
+    sourceSets {
+        commonMain {
+            dependencies {
+                // KOTLIN
+                implementation kotlin('stdlib-common')
+            }
+        }
+
+        commonTest {
+            dependencies {
+                implementation kotlin('test-common')
+                implementation kotlin('test-annotations-common')
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation kotlin('stdlib')
+            }
+        }
+
+        androidTest {
+            dependencies {
+
+            }
+        }
+
+        iosMain {
+            dependencies {
+                implementation kotlin('stdlib-common')
+            }
+        }
+
+        configure([iosArm32Main, iosArm64Main]) {
+            dependsOn iosMain
+        }
+    }
+}
+
+// workaround for https://youtrack.jetbrains.com/issue/KT-27170
+configurations {
+    compileClasspath
+}
+
+task packForXCode(type: Sync) {
+    final File frameworkDir = new File(buildDir, "xcode-frameworks")
+
+    final String mode =  System.getenv("CONFIGURATION")?.toUpperCase() ?: "DEBUG"
+    final String arch = System.getenv("ARCHS") ?: "x86_64"
+
+    inputs.property("mode", mode)
+    println("Architecture: $arch")
+    if (arch == "x86_64") {
+        def framework = kotlin.targets."ios".binaries.findFramework("NomeMp", mode)
+        dependsOn framework.linkTask
+        from { framework.outputDirectory }
+    } else if (arch == "arm32") {
+        def framework = kotlin.targets."iosArm32".binaries.findFramework("NomeMp", mode)
+        dependsOn framework.linkTask
+        from { framework.outputDirectory }
+    } else if (arch == "arm64") {
+        def framework = kotlin.targets."iosArm64".binaries.findFramework("NomeMp", mode)
+        dependsOn framework.linkTask
+        from { framework.outputDirectory }
+    }
+
+    into frameworkDir
+
+    doLast {
+        def gradlew = new File(frameworkDir, "gradlew")
+        gradlew.write("#!/bin/bash\n" +
+                "export 'JAVA_HOME=${System.getProperty("java.home")}'\n" +
+                "cd ${rootProject.rootDir}\n" +
+                "./gradlew \$@\n")
+        gradlew.executable = true
+    }
+}
+
+tasks.build.dependsOn packForXCode
+
+apply from: rootProject.file('gradle/gradle-mvn-publish.gradle')

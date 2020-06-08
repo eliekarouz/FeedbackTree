@@ -10,7 +10,8 @@ import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.core.modals.asModal
 import com.feedbacktree.flow.ui.views.ViewModel
 
-class EnterFingerprintViewModel(override val sink: Sink<Event>) : ViewModel<Event>
+class EnterFingerprintViewModel(override val sink: Sink<Event>) :
+    ViewModel<Event>
 
 object FingerprintFlow : Flow<Unit, State, Event, Unit, Modal>(
     stepper = ::reduce,

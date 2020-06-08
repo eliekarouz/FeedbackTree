@@ -9,7 +9,7 @@ import android.annotation.SuppressLint
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.disposables.Disposable
 
-internal class FlowNode<InputT, StateT, OutputT, ViewModelT>(
+internal class FlowNode<InputT : Any, StateT : Any, OutputT : Any, ViewModelT>(
     val input: InputT,
     val flow: Flow<InputT, StateT, *, OutputT, ViewModelT>,
     val id: String,
@@ -50,7 +50,7 @@ class RenderingContext {
         get() = treeStackTraversedNodes.last()
 
     @SuppressLint("CheckResult")
-    fun <ChildStateT, ChildOutputT, ChildViewModelT> renderChild(
+    fun <ChildStateT : Any, ChildOutputT : Any, ChildViewModelT> renderChild(
         flow: Flow<Unit, ChildStateT, *, ChildOutputT, ChildViewModelT>,
         id: String? = null,
         onResult: (ChildOutputT) -> Unit
@@ -58,7 +58,7 @@ class RenderingContext {
         renderChild(Unit, flow, id, onResult)
 
     @SuppressLint("CheckResult")
-    fun <InputT, ChildStateT, ChildOutputT, ChildViewModelT> renderChild(
+    fun <InputT : Any, ChildStateT : Any, ChildOutputT : Any, ChildViewModelT> renderChild(
         input: InputT,
         flow: Flow<InputT, ChildStateT, *, ChildOutputT, ChildViewModelT>,
         id: String? = null,
