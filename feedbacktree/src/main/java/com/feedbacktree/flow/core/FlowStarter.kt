@@ -19,6 +19,7 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.subjects.PublishSubject
 
 fun <StateT : Any, OutputT : Any>
         FragmentActivity.startFlow(
@@ -71,12 +72,14 @@ fun <InputT : Any, StateT : Any, OutputT : Any> FragmentActivity.startModalsFlow
     viewRegistry: ViewRegistry,
     dialogRegistry: DialogRegistry
 ): Observable<OutputT> {
+    val renderingTrigger = PublishSubject.create<Unit>()
     return Observable.create<OutputT> { emitter ->
-        val rootNode: FlowNode<*, *, *, *> = {
+        val rootNode: FlowNode<*, *, *, *, *> = {
             FlowNode(
                 input = input,
                 flow = flow,
                 id = "RootFlow",
+                renderingTrigger = renderingTrigger,
                 onResult = {
                     emitter.onNext(it)
                 }
@@ -85,8 +88,8 @@ fun <InputT : Any, StateT : Any, OutputT : Any> FragmentActivity.startModalsFlow
             }
         }()
 
-        val viewModels: Observable<Optional<Any>> = newViewModelTrigger.startWith(Unit).map {
-            RenderingContext().renderNode(rootNode).asOptional
+        val viewModels: Observable<Optional<Any>> = renderingTrigger.startWith(Unit).map {
+            rootNode.render().asOptional
         }
 
         val renderer = DialogFlowRenderer(this, viewRegistry, dialogRegistry)

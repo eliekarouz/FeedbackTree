@@ -50,7 +50,8 @@ open class BackStackContainer(
         // serialization (that Named.key string is very handy). It's fine if client code is
         // already using Named for its own purposes, recursion works.
         val named: BackStackScreen<Named<*>> =
-            BackStackScreen(newBackstack.stack.map { Named(it, "backstack") })
+            BackStackScreen(
+                newBackstack.stack.map { Named(it, "backstack") })
 
         val oldViewMaybe = showing
 

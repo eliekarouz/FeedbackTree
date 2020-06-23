@@ -1,22 +1,19 @@
 package com.feedbacktree.example.flows.testexamples.fullscreen
 
 import com.feedbacktree.flow.core.Flow
-import com.feedbacktree.flow.core.RenderingContext
 import com.feedbacktree.flow.core.Step
 import com.feedbacktree.flow.core.endFlow
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.core.modals.ViewModal
 
-object ModalsFlow : Flow<Unit, State, Event, Unit, Modal>(
+val ModalsFlow = Flow<Unit, State, Event, Unit, Modal>(
+    initialState = { State() },
     stepper = ::stepper,
     feedbacks = listOf()
-) {
-    override fun initialState(input: Unit) =
-        State()
-
-    override fun render(state: State, context: RenderingContext): Modal {
-        return ViewModal(content = HelloWorldViewModel(sink()))
-    }
+) { state, context ->
+    ViewModal(
+        content = HelloWorldViewModel(context.sink)
+    )
 }
 
 class State

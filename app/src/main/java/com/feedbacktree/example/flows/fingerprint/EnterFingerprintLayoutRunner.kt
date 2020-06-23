@@ -19,6 +19,8 @@ class EnterFingerprintLayoutRunner(val view: View) :
     override fun feedbacks(): List<Feedback<EnterFingerprintViewModel, Event>> = listOf()
 
     companion object : ViewBinding<EnterFingerprintViewModel> by LayoutRunner.bind(
-        R.layout.fingerprint_alert_dialog, ::EnterFingerprintLayoutRunner
+        R.layout.fingerprint_alert_dialog,
+        ::EnterFingerprintLayoutRunner,
+        EnterFingerprintViewModel::sink
     )
 }

@@ -23,6 +23,6 @@ class HelloWorldLayoutRunner(private val view: View) : LayoutRunner<HelloWorldVi
     }
 
     companion object : ViewBinding<HelloWorldViewModel> by LayoutRunner.bind(
-        R.layout.hello_world_top_bottom, ::HelloWorldLayoutRunner
+        R.layout.hello_world_top_bottom, ::HelloWorldLayoutRunner, HelloWorldViewModel::sink
     )
 }

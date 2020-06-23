@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 
 class FlowViewModel<InputT : Any, StateT : Any, OutputT : Any>(
     input: InputT,
@@ -16,12 +17,14 @@ class FlowViewModel<InputT : Any, StateT : Any, OutputT : Any>(
 ) : ViewModel() {
 
     private val _output = BehaviorSubject.create<OutputT>()
+    private val renderingTrigger = PublishSubject.create<Unit>()
 
-    private val rootNode: FlowNode<*, *, *, *> = {
+    private val rootNode: FlowNode<*, *, *, *, *> = {
         FlowNode(
             input = input,
             flow = flow,
             id = "RootFlow",
+            renderingTrigger = renderingTrigger,
             onResult = {
                 _output.onNext(it)
             }
@@ -32,8 +35,8 @@ class FlowViewModel<InputT : Any, StateT : Any, OutputT : Any>(
 
 
     val output: Observable<OutputT> = _output
-    val viewModels: Observable<Any> = newViewModelTrigger.startWith(Unit).map {
-        RenderingContext().renderNode(rootNode) as Any
+    val viewModels: Observable<Any> = renderingTrigger.startWith(Unit).map {
+        rootNode.render() as Any
     }
 
     override fun onCleared() {
