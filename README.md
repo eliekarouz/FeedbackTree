@@ -39,9 +39,27 @@ allprojects {
 }
 ```
 
-Add the dependency
+##### Android Projects
+Add this to your build.gradle (app)
 ```
 dependencies {
-  implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.9.1"
+  implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.10"
+}
+```
+
+##### Kotlin Multiplatform
+We are only supporting the concept of `Step` and `Stepper` in Kotlin multiplatform (iOS/Android only).  
+We might provide additional multiplatform support in the future.
+To include these concepts to a multipatform module, add this dependency to commonMain.
+```
+dependencies {
+    api "com.github.eliekarouz.feedbacktree:core:0.10"
+}
+```
+If you are targeting iOS you will also need to export the dependencies:
+```
+framework("Example") {
+    export "com.github.eliekarouz.feedbacktree:core:0.10"
+    transitiveExport = true
 }
 ```
