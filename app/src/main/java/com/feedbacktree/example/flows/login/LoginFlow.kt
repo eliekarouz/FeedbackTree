@@ -6,22 +6,25 @@
 package com.feedbacktree.example.flows.login
 
 import com.feedbacktree.example.flows.fingerprint.FingerprintFlow
-import com.feedbacktree.flow.core.*
+import com.feedbacktree.flow.core.Flow
+import com.feedbacktree.flow.core.Step
+import com.feedbacktree.flow.core.advance
+import com.feedbacktree.flow.core.endFlowWith
 import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
 
-object LoginFlow : Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
-    stepper = ::reduce,
+val LoginFlow = Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
+    initialState = { State() },
+    stepper = ::stepper,
     feedbacks = listOf()
-) {
-    override fun initialState(input: Unit): State = State()
-
+) { state, context ->
     // This more clear to start with the architecture: LoginViewModel(state, onEvent = { event -> send(event) })
     // A shorted version would be LoginViewModel(state, onEvent = ::send)
-    override fun render(state: State, context: RenderingContext): ModalContainerScreen<*, *> {
-        val loginScreen = LoginViewModel(state, sink())
-        val fingerprintScreen = context.renderChild(FingerprintFlow, onResult = {})
-        return ModalContainerScreen(loginScreen, listOf())
-    }
+    val loginScreen = LoginViewModel(state, context.sink)
+    val fingerprintScreen = context.renderChild(FingerprintFlow, onResult = {})
+    ModalContainerScreen(
+        loginScreen,
+        listOf()
+    )
 }
 
 data class State(
@@ -37,11 +40,13 @@ sealed class Event {
     data class ReceivedLogInResponse(val success: Boolean) : Event()
 }
 
-fun reduce(state: State, event: Event): Step<State, Unit> {
+fun stepper(state: State, event: Event): Step<State, Unit> {
     return when (event) {
         is Event.EnteredEmail -> state.copy(email = event.email).advance()
         is Event.EnteredPassword -> state.copy(password = event.password).advance()
         Event.ClickedLogin -> endFlowWith(Unit)
-        is Event.ReceivedLogInResponse -> endFlowWith(Unit)
+        is Event.ReceivedLogInResponse -> endFlowWith(
+            Unit
+        )
     }
 }

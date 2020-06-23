@@ -66,6 +66,13 @@ class ViewRegistry private constructor(
             )
     }
 
+    internal fun <ViewModelT : Any> viewBinding(viewModelT: ViewModelT): ViewBinding<ViewModelT> {
+        @Suppress("UNCHECKED_CAST")
+        return (allBindings[viewModelT::class] as? ViewBinding<ViewModelT>)
+            ?: throw IllegalArgumentException(
+                "A binding for ${viewModelT::class.java.name} must be registered."
+            )
+    }
     /**
      * Creates a [View] to display [initialViewModel], and which can handle calls
      * to [View.showViewModel].

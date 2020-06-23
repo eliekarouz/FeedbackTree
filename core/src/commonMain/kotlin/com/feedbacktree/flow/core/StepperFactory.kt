@@ -5,7 +5,7 @@
 
 package com.feedbacktree.flow.core
 
-import com.feedbacktree.flow.utils.logVerbose
+import kotlin.reflect.KClass
 
 /**
  * [StepperFactory.create] allows you to build a [Stepper] ([StateT], [EventT]) -> [Step] using DSL syntax.
@@ -85,14 +85,15 @@ import com.feedbacktree.flow.utils.logVerbose
  * @param StateT
  * @param EventT
  */
-class StepperFactory<StateT, EventT, OutputT> private constructor() {
+class StepperFactory<StateT : Any, EventT : Any, OutputT : Any> private constructor() {
 
     val stateTransitions =
         mutableMapOf<Matcher<StateT, StateT>, SubStateSteppers<out StateT, EventT, OutputT>>()
 
-    inner class SubStateSteppers<S : StateT, EventT, OutputT>(val transitions: MutableMap<Matcher<EventT, EventT>, S.(EventT) -> Step<StateT, OutputT>> = mutableMapOf()) {
+    inner class SubStateSteppers<S : StateT, EventT : Any, OutputT : Any>(val transitions: MutableMap<Matcher<EventT, EventT>, S.(EventT) -> Step<StateT, OutputT>> = mutableMapOf()) {
         inline fun <reified E : EventT> on(noinline transition: S.(E) -> Step<StateT, OutputT>) {
-            val matcher = Matcher<EventT, E>(E::class.java)
+            val matcher =
+                Matcher<EventT, E>(E::class)
             transitions[matcher] = { event -> transition(event as E) }
         }
 
@@ -107,25 +108,26 @@ class StepperFactory<StateT, EventT, OutputT> private constructor() {
 
     inline fun <reified S : StateT> state(build: SubStateSteppers<S, EventT, OutputT>.() -> Unit) {
         val substateSteppers = SubStateSteppers<S, EventT, OutputT>()
-        val matcher = Matcher<StateT, S>(S::class.java)
+        val matcher =
+            Matcher<StateT, S>(S::class)
         stateTransitions[matcher] = substateSteppers
         substateSteppers.build()
     }
 
-    class Matcher<T, out U : T>(private val clazz: Class<U>) {
+    class Matcher<T : Any, out U : T>(private val clazz: KClass<U>) {
         fun matches(state: T): Boolean = clazz.isInstance(state)
     }
 
     companion object {
-        fun <StateT, EventT, OutputT> create(build: StepperFactory<StateT, EventT, OutputT>.() -> Unit): (StateT, EventT) -> Step<StateT, OutputT> {
-            val stepper = StepperFactory<StateT, EventT, OutputT>()
+        fun <StateT : Any, EventT : Any, OutputT : Any> create(build: StepperFactory<StateT, EventT, OutputT>.() -> Unit): (StateT, EventT) -> Step<StateT, OutputT> {
+            val stepper =
+                StepperFactory<StateT, EventT, OutputT>()
             stepper.build()
             return { state, event ->
                 val transition = stepper.stateTransitions.filter {
                     it.key.matches(state)
                 }.values.firstOrNull()
                 transition?.transition(state, event) ?: run {
-                    logVerbose("WARNING: Transition not found")
                     Step.State<StateT, OutputT>(state = state) // stay on the same state
                 }
             }

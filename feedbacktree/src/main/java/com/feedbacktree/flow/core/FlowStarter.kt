@@ -19,15 +19,16 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.subjects.PublishSubject
 
-fun <StateT, OutputT>
+fun <StateT : Any, OutputT : Any>
         FragmentActivity.startFlow(
     flow: Flow<Unit, StateT, *, OutputT, *>,
     onOutput: (OutputT) -> Unit,
     viewRegistry: ViewRegistry
 ): Disposable = startFlow(Unit, flow, onOutput, viewRegistry)
 
-fun <InputT, StateT, OutputT>
+fun <InputT : Any, StateT : Any, OutputT : Any>
         FragmentActivity.startFlow(
     input: InputT,
     flow: Flow<InputT, StateT, *, OutputT, *>,
@@ -65,18 +66,20 @@ fun <InputT, StateT, OutputT>
  * Utility that can be used to start [Flow]s which produce [Modal]s.
  * It's useful when you need to use FeedbackTree in a areas that are not using it yet.
  */
-fun <InputT, StateT, OutputT> FragmentActivity.startModalsFlow(
+fun <InputT : Any, StateT : Any, OutputT : Any> FragmentActivity.startModalsFlow(
     input: InputT,
     flow: Flow<InputT, StateT, *, OutputT, *>,
     viewRegistry: ViewRegistry,
     dialogRegistry: DialogRegistry
 ): Observable<OutputT> {
+    val renderingTrigger = PublishSubject.create<Unit>()
     return Observable.create<OutputT> { emitter ->
-        val rootNode: FlowNode<*, *, *, *> = {
+        val rootNode: FlowNode<*, *, *, *, *> = {
             FlowNode(
                 input = input,
                 flow = flow,
                 id = "RootFlow",
+                renderingTrigger = renderingTrigger,
                 onResult = {
                     emitter.onNext(it)
                 }
@@ -85,8 +88,8 @@ fun <InputT, StateT, OutputT> FragmentActivity.startModalsFlow(
             }
         }()
 
-        val viewModels: Observable<Optional<Any>> = newViewModelTrigger.startWith(Unit).map {
-            RenderingContext().renderNode(rootNode).asOptional
+        val viewModels: Observable<Optional<Any>> = renderingTrigger.startWith(Unit).map {
+            rootNode.render().asOptional
         }
 
         val renderer = DialogFlowRenderer(this, viewRegistry, dialogRegistry)

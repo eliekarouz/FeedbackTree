@@ -5,8 +5,6 @@
 
 package com.feedbacktree.flow.ui.core.modals
 
-interface Modal
-
 data class ModalContainerScreen<BaseViewModelT : Any, ModalT : Modal>(
     val baseScreen: BaseViewModelT,
     val modals: List<ModalT>

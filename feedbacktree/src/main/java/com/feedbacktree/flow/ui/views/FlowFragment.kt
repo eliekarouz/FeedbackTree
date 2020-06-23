@@ -25,7 +25,7 @@ import io.reactivex.subjects.PublishSubject
  * Extend this class in order to launch a flow inside a fragment.
  * This would allow you to smoothly integrate FeedbackTree to your project.
  */
-abstract class FlowFragment<InputT, StateT, OutputT> : Fragment() {
+abstract class FlowFragment<InputT : Any, StateT : Any, OutputT : Any> : Fragment() {
 
     inner class Parameters(
         val input: InputT,

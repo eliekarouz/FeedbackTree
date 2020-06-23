@@ -14,7 +14,9 @@ typealias Stepper<StateT, EventT, OutputT> = (StateT, EventT) -> Step<StateT, Ou
  * @param nextStepper in the chain
  * @return A [Stepper] composed of the two [Stepper]s
  */
-operator fun <StateT, EventT, OutputT> (Stepper<StateT, EventT, OutputT>).plus(nextStepper: Stepper<StateT, EventT, OutputT>): Stepper<StateT, EventT, OutputT> {
+operator fun <StateT : Any, EventT : Any, OutputT : Any> (Stepper<StateT, EventT, OutputT>).plus(
+    nextStepper: Stepper<StateT, EventT, OutputT>
+): Stepper<StateT, EventT, OutputT> {
     return { state, event ->
         when (val newStep = this(state, event)) {
             is Step.State -> {

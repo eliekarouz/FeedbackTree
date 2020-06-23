@@ -5,13 +5,10 @@
 
 package com.feedbacktree.example.flows.login
 
-import com.feedbacktree.flow.core.Sink
-import com.feedbacktree.flow.ui.views.ViewModel
-
 data class LoginViewModel(
     val state: State,
-    override val sink: Sink<Event>
-) : ViewModel<Event> {
+    val sink: (Event) -> Unit
+) {
     val isLoginButtonEnabled: Boolean
         get() = state.email.isNotEmpty() && state.password.isNotEmpty()
 }

@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.core.ObservableSchedulerContext
-import com.feedbacktree.flow.core.Sink
 import com.feedbacktree.flow.ui.views.core.BuilderBinding
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
@@ -24,22 +23,19 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import kotlin.reflect.KClass
 
-interface ViewModel<EventT> {
-    val sink: Sink<EventT>
-}
-
 /**
  * (Experimental)
  */
-interface LayoutRunner<ViewModelT : ViewModel<EventT>, EventT> {
+interface LayoutRunner<ViewModelT : Any, EventT : Any> {
 
     fun feedbacks(): List<Feedback<ViewModelT, EventT>>
 
-    class Binding<ViewModelT : ViewModel<EventT>, EventT>
+    class Binding<ViewModelT : Any, EventT : Any>
     constructor(
         override val type: KClass<ViewModelT>,
         @LayoutRes private val layoutId: Int,
-        private val runnerConstructor: (View, ViewRegistry) -> LayoutRunner<ViewModelT, EventT>
+        private val runnerConstructor: (View, ViewRegistry) -> LayoutRunner<ViewModelT, EventT>,
+        private val sink: (ViewModelT) -> (EventT) -> Unit
     ) : ViewBinding<ViewModelT> {
         override fun buildView(
             registry: ViewRegistry,
@@ -68,16 +64,14 @@ interface LayoutRunner<ViewModelT : ViewModel<EventT>, EventT> {
                     }
 
                     var disposable: Disposable? = mergedEvents.subscribe {
-                        initialViewModel.sink.eventSink.invoke(it)
+                        sink(initialViewModel).invoke(it)
                     }
                     logVerbose("LayoutRunner - Attached screen: $type")
 
                     bindShowViewModel(
                         initialViewModel,
                         showViewModel = { viewModel ->
-                            if (!viewModel.sink.flowHasCompleted) {
-                                screenBehaviorSubject.onNext(viewModel)
-                            }
+                            screenBehaviorSubject.onNext(viewModel)
                         },
                         cleanupViewModel = {
                             logVerbose("LayoutRunner - Detached screen: $type")
@@ -94,29 +88,35 @@ interface LayoutRunner<ViewModelT : ViewModel<EventT>, EventT> {
          * Creates a [ViewBinding] that inflates [layoutId] to show viewModels of type [ViewModelT],
          * using a [LayoutRunner] created by [constructor].
          */
-        inline fun <reified ViewModelT : ViewModel<EventT>, EventT> bind(
+        inline fun <reified ViewModelT : Any, EventT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View, ViewRegistry) -> LayoutRunner<ViewModelT, EventT>
+            noinline constructor: (View, ViewRegistry) -> LayoutRunner<ViewModelT, EventT>,
+            noinline sink: (ViewModelT) -> (EventT) -> Unit
         ): ViewBinding<ViewModelT> = Binding(
-            ViewModelT::
-            class,
-            layoutId,
-            constructor
+            type = ViewModelT::class,
+            layoutId = layoutId,
+            runnerConstructor = constructor,
+            sink = sink
         )
 
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to show viewModels of type [ViewModelT],
          * using a [LayoutRunner] created by [constructor].
          */
-        inline fun <reified ViewModelT : ViewModel<EventT>, EventT> bind(
+        inline fun <reified ViewModelT : Any, EventT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View) -> LayoutRunner<ViewModelT, EventT>
+            noinline constructor: (View) -> LayoutRunner<ViewModelT, EventT>,
+            noinline sink: (ViewModelT) -> (EventT) -> Unit
         ): ViewBinding<ViewModelT> =
-            bind(layoutId) { view, _ ->
-                constructor.invoke(
-                    view
-                )
-            }
+            bind(
+                layoutId = layoutId,
+                constructor = { view, _ ->
+                    constructor.invoke(
+                        view
+                    )
+                },
+                sink = sink
+            )
 
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to "show" viewModels of type [ViewModelT].

@@ -35,6 +35,6 @@ class LoginLayoutRunner(private val view: View) : LayoutRunner<LoginViewModel, E
     }
 
     companion object : ViewBinding<LoginViewModel> by LayoutRunner.bind(
-        R.layout.login, ::LoginLayoutRunner
+        R.layout.login, ::LoginLayoutRunner, LoginViewModel::sink
     )
 }

@@ -1,4 +1,5 @@
 apply plugin: 'com.vanniktech.maven.publish'
+apply plugin: 'org.jetbrains.dokka'
 
 group = GROUP
 version = VERSION_NAME
@@ -16,25 +17,16 @@ mavenPublish {
 }
 
 if (project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
-    apply plugin: 'org.jetbrains.dokka'
-
     dokka {
         outputDirectory = "$buildDir/dokka"
         outputFormat = 'html'
 
         multiplatform {
-            android { // The same name as in Kotlin Multiplatform plugin, so the sources are fetched automatically
-                targets = ["JVM"]
-                platform = "jvm"
+            android {
+                // The same name as in Kotlin Multiplatform plugin, so the sources are fetched automatically
+
             }
 
-            differentName { // Different name, so source roots, classpath and platform must be passed explicitly.
-                targets = ["JVM"]
-                platform = "jvm"
-                sourceRoot {
-                    path = kotlin.sourceSets.commonMain.kotlin.srcDirs[0]
-                }
-            }
         }
     }
 }
