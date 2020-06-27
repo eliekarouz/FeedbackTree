@@ -1,7 +1,7 @@
 ---
-title: Setup
-category: Installation
-order: 1
+title: Starting Flows
+category: Flow
+order: 3
 ---
 
 Add it in your root build.gradle:
