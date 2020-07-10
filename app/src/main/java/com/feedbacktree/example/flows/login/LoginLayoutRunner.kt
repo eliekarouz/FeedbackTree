@@ -7,12 +7,12 @@ package com.feedbacktree.example.flows.login
 
 import android.view.View
 import com.feedbacktree.example.R
+import com.feedbacktree.example.util.ftTextChanges
 import com.feedbacktree.flow.core.Bindings
 import com.feedbacktree.flow.core.bind
 import com.feedbacktree.flow.ui.views.LayoutRunner
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.jakewharton.rxbinding3.view.clicks
-import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.login.view.*
 
@@ -23,11 +23,13 @@ class LoginLayoutRunner(private val view: View) : LayoutRunner<LoginViewModel, E
         with(view) {
             Bindings(
                 subscriptions = listOf(
+                    screen.map { it.email }.subscribe { inputEmail.updateText(it) },
+                    screen.map { it.loginButtonTitle }.subscribe { btnLogin.text = it },
                     screen.map { it.isLoginButtonEnabled }.subscribe { btnLogin.isEnabled = it }
                 ),
                 events = listOf<Observable<Event>>(
-                    inputEmail.textChanges().map { Event.EnteredEmail(it.toString()) },
-                    inputPassword.textChanges().map { Event.EnteredPassword(it.toString()) },
+                    inputEmail.ftTextChanges().map { Event.EnteredEmail(it) },
+                    inputPassword.ftTextChanges().map { Event.EnteredPassword(it) },
                     btnLogin.clicks().map { Event.ClickedLogin }
                 )
             )

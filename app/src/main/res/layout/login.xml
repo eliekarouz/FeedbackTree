@@ -25,12 +25,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
 
-            <EditText
+            <com.feedbacktree.example.util.FTEditText
                 android:id="@+id/inputEmail"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Email" />
+                android:hint="@string/email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--  Password Label -->
@@ -40,16 +41,18 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
 
-            <EditText
+            <com.feedbacktree.example.util.FTEditText
                 android:id="@+id/inputPassword"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="Password" />
+                android:hint="@string/password" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
+            android:background="@color/colorSecondary"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"

@@ -5,26 +5,18 @@
 
 package com.feedbacktree.example.flows.login
 
-import com.feedbacktree.example.flows.fingerprint.FingerprintFlow
-import com.feedbacktree.flow.core.Flow
-import com.feedbacktree.flow.core.Step
-import com.feedbacktree.flow.core.advance
-import com.feedbacktree.flow.core.endFlowWith
-import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
+import com.feedbacktree.flow.core.*
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 
-val LoginFlow = Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
-    initialState = { State() },
+val LoginFlow = Flow<String, State, Event, Unit, LoginViewModel>(
+    initialState = { email -> State(email = email) },
     stepper = ::stepper,
-    feedbacks = listOf()
+    feedbacks = listOf(loginFeedback())
 ) { state, context ->
     // This more clear to start with the architecture: LoginViewModel(state, onEvent = { event -> send(event) })
     // A shorted version would be LoginViewModel(state, onEvent = ::send)
-    val loginScreen = LoginViewModel(state, context.sink)
-    val fingerprintScreen = context.renderChild(FingerprintFlow, onResult = {})
-    ModalContainerScreen(
-        loginScreen,
-        listOf()
-    )
+    return@Flow LoginViewModel(state, context.sink)
 }
 
 data class State(
@@ -49,4 +41,32 @@ fun stepper(state: State, event: Event): Step<State, Unit> {
             Unit
         )
     }
+}
+
+typealias LoginQuery = Pair<String, String>
+
+fun loginFeedback() = react<State, LoginQuery, Event>(
+    query = { state ->
+        state
+            .takeIf {
+                it.isLoggingIn
+            }?.let {
+                it.email to it.password
+            }
+    },
+    effects = { (email, password) ->
+        login(
+            email = email,
+            password = password
+        ) // Observable<Boolean>, true when authentication succeeds
+            .map { loginSucceeded ->
+                Event.ReceivedLogInResponse(loginSucceeded)
+            }
+    }
+)
+
+private fun login(email: String, password: String): Observable<Boolean> {
+    // simulate network call here...
+    return Observable.just(true)
+        .delaySubscription(2, TimeUnit.SECONDS) // To simulate a network call
 }

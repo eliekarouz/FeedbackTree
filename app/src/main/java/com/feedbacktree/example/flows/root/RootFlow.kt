@@ -16,7 +16,10 @@ val RootFlow = Flow<Unit, State, Event, Nothing, Any>(
     feedbacks = listOf()
 ) { state, context ->
     when (state) {
-        State.LoggedOut -> context.renderChild(LoginFlow, onResult = {
+        State.LoggedOut -> context.renderChild(
+            input = "email@example.com",
+            flow = LoginFlow,
+            onResult = {
             context.sink(Event.LogInCompleted)
         })
         State.LoggedIn -> TODO()

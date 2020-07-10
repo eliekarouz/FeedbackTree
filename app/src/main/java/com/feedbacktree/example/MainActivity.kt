@@ -7,11 +7,10 @@ package com.feedbacktree.example
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.feedbacktree.example.flows.testexamples.fullscreen.ModalsFlow
-import com.feedbacktree.example.flows.testexamples.testExamplesViewRegistry
-import com.feedbacktree.flow.core.startModalsFlow
+import com.feedbacktree.example.flows.root.RootFlow
+import com.feedbacktree.example.ui.appViewRegistry
+import com.feedbacktree.flow.core.startFlow
 import com.feedbacktree.flow.ui.views.core.HandlesBack
-import com.feedbacktree.flow.ui.views.modals.DialogRegistry
 import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity() {
@@ -20,18 +19,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hello_world_top_bottom)
-//        disposable = startFlow(RootFlow, onOutput = {
-//            finish()
-//        }, viewRegistry = appViewRegistry)
+        disposable = startFlow(RootFlow, onOutput = {
+            finish()
+        }, viewRegistry = appViewRegistry)
 
-        disposable = startModalsFlow(
-            Unit,
-            ModalsFlow,
-            testExamplesViewRegistry,
-            DialogRegistry.registry()
-        )
-            .subscribe()
+//        setContentView(R.layout.hello_world_top_bottom)
+//        disposable = startModalsFlow(
+//            Unit,
+//            ModalsFlow,
+//            testExamplesViewRegistry,
+//            DialogRegistry.registry()
+//        )
+//            .subscribe()
     }
 
     override fun onPause() {

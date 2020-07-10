@@ -4,20 +4,10 @@ category: Flow
 order: 3
 ---
 
-Add it in your root build.gradle:
+#### From Activity
 
-```
-allprojects {
-  repositories {
-    mavenCentral()
-  }
-}
-```
+#### From Fragment
 
-Add the dependency to your build.gradle:
+#### As a Child Flow
 
-```
-dependencies {
-  implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.9.1"
-}
-```
+#### 
