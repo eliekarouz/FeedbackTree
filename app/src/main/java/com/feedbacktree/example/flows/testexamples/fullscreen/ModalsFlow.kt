@@ -1,30 +1,51 @@
 package com.feedbacktree.example.flows.testexamples.fullscreen
 
 import com.feedbacktree.flow.core.Flow
-import com.feedbacktree.flow.core.Step
+import com.feedbacktree.flow.core.StepperFactory
+import com.feedbacktree.flow.core.advance
 import com.feedbacktree.flow.core.endFlow
+import com.feedbacktree.flow.ui.core.BackStackScreen
+import com.feedbacktree.flow.ui.core.modals.FullScreenModal
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.core.modals.ViewModal
 
+// testing ViewModal compatibility
 val ModalsFlow = Flow<Unit, State, Event, Unit, Modal>(
-    initialState = { State() },
-    stepper = ::stepper,
+    initialState = { State.ShowingHelloWorld },
+    stepper = stepper(),
     feedbacks = listOf()
 ) { state, context ->
-    ViewModal(
-        content = HelloWorldViewModel(context.sink)
-    )
+    return@Flow when (state) {
+        State.ShowingHelloWorld -> ViewModal(
+            content = HelloWorldViewModel(context.sink)
+        )
+        State.ShowingBackstack -> FullScreenModal(
+            content = BackStackScreen(HelloWorldViewModel(context.sink))
+        )
+
+    }
+
 }
 
-class State
+sealed class State {
+    object ShowingHelloWorld : State()
+    object ShowingBackstack : State()
+}
 
 sealed class Event {
     object BackPressed : Event()
 }
 
 @Suppress("UNUSED_PARAMETER")
-fun stepper(state: State, event: Event): Step<State, Unit> {
-    return when (event) {
-        Event.BackPressed -> endFlow()
+fun stepper() = StepperFactory.create<State, Event, Unit>() {
+    state<State.ShowingHelloWorld> {
+        on<Event.BackPressed> {
+            State.ShowingBackstack.advance()
+        }
+    }
+    state<State.ShowingBackstack> {
+        on<Event.BackPressed> {
+            endFlow()
+        }
     }
 }

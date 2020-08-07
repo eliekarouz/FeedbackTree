@@ -5,16 +5,21 @@
 
 package com.feedbacktree.flow.ui.core.modals
 
+import com.feedbacktree.flow.ui.core.Compatible
+
 class ViewModal<ContentViewModelT : Any>(
     val content: ContentViewModelT,
     val widthLayout: Layout,
     val heightLayout: Layout
-) : Modal {
+) : Modal, Compatible {
     constructor(content: ContentViewModelT) : this(
         content,
         widthLayout = Layout.Wrap,
         heightLayout = Layout.Wrap
     )
+
+    override val compatibilityKey: String
+        get() = content::class.java.name
 }
 
 sealed class Layout {
