@@ -43,7 +43,7 @@ allprojects {
 Add this to your build.gradle (app)
 ```
 dependencies {
-  implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.10.1"
+  implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.11.1"
 }
 ```
 
@@ -53,13 +53,20 @@ We might provide additional multiplatform support in the future.
 To include these concepts to a multipatform module, add this dependency to commonMain.
 ```
 dependencies {
-    api "com.github.eliekarouz.feedbacktree:core:0.10.1"
+    api "com.github.eliekarouz.feedbacktree:core:0.11.1"
 }
 ```
 If you are targeting iOS you will also need to export the dependencies:
 ```
 framework("Example") {
-    export "com.github.eliekarouz.feedbacktree:core:0.10.1"
+    export "com.github.eliekarouz.feedbacktree:core:0.11.1"
     transitiveExport = true
 }
 ```
+
+##### Versions
+|Kotlin|FeedbackTree|
+|------:|------|
+|1.3.72|0.10.2|
+|1.4.0|0.11|
+|1.4.10|0.11.1|
