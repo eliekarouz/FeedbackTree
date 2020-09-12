@@ -18,6 +18,8 @@ package com.feedbacktree.flow.ui.views.core
 import android.view.View
 import com.feedbacktree.R
 import com.feedbacktree.flow.ui.views.core.HandlesBack.Helper
+import com.feedbacktree.flow.ui.views.core.HandlesBack.Helper.removeConditionalBackHandler
+import com.feedbacktree.flow.ui.views.core.HandlesBack.Helper.setBackHandler
 import com.feedbacktree.flow.ui.views.core.HandlesBack.Helper.setConditionalBackHandler
 import io.reactivex.Observable
 
@@ -70,6 +72,11 @@ interface HandlesBack {
             setTag(R.id.workflow_back_handler, handlesBack)
         }
 
+        @JvmStatic
+        internal fun View.removeConditionalBackHandler() {
+            setTag(R.id.workflow_back_handler, null)
+        }
+
         /**
          * To be called by a container when the back button is pressed. Calls the given
          * view's [HandlesBack.onBackPressed] method, or the handler registered on it
@@ -109,5 +116,8 @@ fun View.setBackHandler(handler: () -> Unit) {
 fun View.backPresses(): Observable<Unit> {
     return Observable.create { emitter ->
         setBackHandler { emitter.onNext(Unit) }
+        emitter.setCancellable {
+            this.removeConditionalBackHandler()
+        }
     }
 }
