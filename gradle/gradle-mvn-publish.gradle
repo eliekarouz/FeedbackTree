@@ -5,6 +5,8 @@ group = GROUP
 version = VERSION_NAME
 
 mavenPublish {
+    releaseSigningEnabled = !getGpgKey().isEmpty()
+
     useLegacyMode = !project.plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')
 
     targets {
@@ -13,6 +15,17 @@ mavenPublish {
             releaseRepositoryUrl = url
             snapshotRepositoryUrl = url
         }
+    }
+}
+
+def getGpgKey() {
+    return hasProperty('signingKey') ? signingKey : ""
+}
+
+signing {
+    def signingKey = getGpgKey()
+    if (!signingKey.isEmpty()) {
+        useInMemoryPgpKeys(signingKey, "")
     }
 }
 
