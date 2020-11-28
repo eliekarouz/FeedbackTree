@@ -23,12 +23,20 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
+      run: |
+        echo $gpg_private_key > secring.text
+        gpg --import --batch secring.text
+        echo "ossrhUsername=${nexus_username}" >> gradle.properties
+        echo "ossrhPassword=${nexus_password}" >> gradle.properties
+        echo "signing.keyId=${gpg_key_id}" >> gradle.properties
+        echo "signing.password=${gpg_passphrase}" >> gradle.properties
+        ./gradlew build
       env: 
+        gpg_key_id: ${{ secrets.gpg_key_id }}  
         gpg_private_key: ${{ secrets.gpg_private_key }}
         gpg_passphrase: ${{ secrets.gpg_passphrase }}
         nexus_username: ${{ secrets.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
-      run: ./gradlew build
     - name: publish
       env: 
         gpg_private_key: ${{ secrets.gpg_private_key }}
