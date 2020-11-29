@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
-      <module name="core_androidMain" target="1.6" />
-      <module name="core_androidTest" target="1.6" />
-      <module name="core_commonMain" target="1.6" />
-      <module name="core_commonTest" target="1.6" />
-      <module name="FeedbackTree.app" target="1.8" />
-      <module name="FeedbackTree.core" target="1.8" />
+    <bytecodeTargetLevel target="1.8">
       <module name="FeedbackTree.core.androidMain" target="1.6" />
       <module name="FeedbackTree.core.androidTest" target="1.6" />
       <module name="FeedbackTree.core.commonMain" target="1.6" />
       <module name="FeedbackTree.core.commonTest" target="1.6" />
-      <module name="FeedbackTree.docs" target="1.8" />
-      <module name="FeedbackTree.feedbacktree" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
