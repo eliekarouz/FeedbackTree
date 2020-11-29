@@ -23,6 +23,6 @@ repositories {
 // 4. Use the 'Editorial' theme, and set the URL it will have on Github Pages
 orchid {
     theme = "BsDoc"
-    baseUrl = "https://eliekarouz.github.io/feedbacktree"
+    baseUrl = "https://eliekarouz.github.io/FeedbackTree"
     version = "0.11.1"
 }

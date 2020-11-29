@@ -8,7 +8,7 @@ BsDoc:
   legacySearch: false
   avatar: 'assets/media/logo.png'
   social:
-    github: 'eliekarouz/feedbacktree'
+    github: 'eliekarouz/FeedbackTree'
   metaComponents:
     - type: 'orchidSearch'
   menu:
@@ -58,7 +58,7 @@ sitemap:
 services:
   publications:
     stages:
-      ghPages:
+      - type: githubPages
         branch: gh-pages
-        repo: 'feedbacktree'
         username: 'eliekarouz'
+        repo: 'FeedbackTree'
