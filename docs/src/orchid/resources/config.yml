@@ -1,0 +1,64 @@
+site:
+  about:
+    siteName: Feedback Tree
+    siteDescription: A unidirectional architecture for Android
+
+BsDoc:
+  primaryColor: '#971c8b'
+  legacySearch: false
+  avatar: 'assets/media/logo.png'
+  social:
+    github: 'eliekarouz/feedbacktree'
+  metaComponents:
+    - type: 'orchidSearch'
+  menu:
+    - type: 'wikiSections'
+      asSubmenu: false
+      submenuTitle: 'Tutorials1'
+
+    - type: 'page'
+      itemId: 'Changelog'
+
+    - type: 'separator'
+      title: ''
+
+    - type: 'separator'
+      title: 'API Docs'
+    - type: 'sourcedocPages'
+      moduleType: 'kotlindoc'
+
+kotlindoc:
+  homePagePermalink: ':moduleGroup/:module'
+  sourcePagePermalink: ':moduleType/:module/:sourceDocPath'
+  sourceDirs:
+    - '../../../../feedbacktree/src/main/java'
+
+allPages:
+  metaComponents:
+    - type: 'prism'
+      languages:
+        - 'java'
+        - 'kotlin'
+        - 'yaml'
+
+wiki:
+  sections:
+    - key: 'tutorials'
+      title: 'Tutorials'
+    - key: 'howtoguides'
+      title: 'How-To Guides'
+    - key: 'reference'
+      title: 'Reference'
+
+sitemap:
+  useRobots: true
+  useSitemaps: true
+
+
+services:
+  publications:
+    stages:
+      ghPages:
+        branch: gh-pages
+        repo: 'feedbacktree'
+        username: 'eliekarouz'

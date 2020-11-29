@@ -1,8 +1,3 @@
----
-title: Quick Start Guide
-order: 1 
----
-
 ### Introduction
 Feedback tree is a unidirectional reactive architecture that allows you to build Android UIs in Kotlin
 with the focus on organizing the code around business rules.
@@ -16,7 +11,7 @@ makes unit testing very straightforward
 
 ### Installation
 Add this in your project root build.gradle:
-```gradle
+```groovy
 allprojects {
   repositories {
     mavenCentral()
@@ -26,7 +21,7 @@ allprojects {
 
 ##### Android Projects
 Add this to your app build.gradle
-```gradle
+```groovy
 dependencies {
   implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.10.1"
 }
@@ -36,13 +31,13 @@ dependencies {
 We are only supporting the concept of `Step` and `Stepper` in Kotlin multiplatform (iOS/Android only).
 We might provide additional multiplatform support in the future.
 To include these concepts to a multipatform module, add this dependency to commonMain.
-```gradle
+```groovy
 dependencies {
     api "com.github.eliekarouz.feedbacktree:core:0.10.1"
 }
 ```
 If you are targeting iOS you will also need to export the dependencies:
-```gradle
+```groovy
 framework("Example") {
     export "com.github.eliekarouz.feedbacktree:core:0.10.1"
     transitiveExport = true
@@ -245,4 +240,4 @@ class LoginActivity : AppCompatActivity() {
 }
 ```
 
-No need to panic! You don't have to create an Activity for each flow. More about this in the sections [Starting Flows](/FeedbackTree/flow/StartingFlows/) and [Rendering](/FeedbackTree/rendering/Introduction/) 
+No need to panic! You don't have to create an Activity for each flow. More about this in the sections [Starting Flows](/wiki/reference/flow/StartingFlows/) and [Rendering](/wiki/reference/rendering/Introduction/)

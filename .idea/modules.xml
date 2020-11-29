@@ -3,6 +3,21 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FeedbackTree.iml" filepath="$PROJECT_DIR$/FeedbackTree.iml" group="FeedbackTree" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/FeedbackTree.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/FeedbackTree.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.androidMain.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.androidMain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.commonMain.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.commonMain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.commonTest.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.commonTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosArm32Main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosArm32Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosArm32Test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosArm32Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosArm64Main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosArm64Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosArm64Test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosArm64Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosMain.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosMain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosTest.iml" filepath="$PROJECT_DIR$/.idea/modules/core/FeedbackTree.core.iosTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/docs/FeedbackTree.docs.iml" filepath="$PROJECT_DIR$/.idea/modules/docs/FeedbackTree.docs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feedbacktree/FeedbackTree.feedbacktree.iml" filepath="$PROJECT_DIR$/.idea/modules/feedbacktree/FeedbackTree.feedbacktree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Github.FeedbackTree.iml" filepath="$PROJECT_DIR$/.idea/modules/Github.FeedbackTree.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="FeedbackTree/app" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" group="FeedbackTree/core" />
       <module fileurl="file://$PROJECT_DIR$/core/core_androidMain.iml" filepath="$PROJECT_DIR$/core/core_androidMain.iml" group="core" />
