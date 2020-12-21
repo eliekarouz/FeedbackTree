@@ -4,4 +4,6 @@
     <string name="sign_in_using_your_fingerprint">Sign in using your fingerprint</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="increment">Increment</string>
+    <string name="decrement">Decrement</string>
 </resources>

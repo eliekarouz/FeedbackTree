@@ -3,7 +3,7 @@ site:
     siteName: Feedback Tree
     siteDescription: A unidirectional architecture for Android
 
-BsDoc:
+Editorial:
   primaryColor: '#971c8b'
   legacySearch: false
   avatar: 'assets/media/logo.png'
@@ -14,13 +14,9 @@ BsDoc:
   menu:
     - type: 'wikiSections'
       asSubmenu: false
-      submenuTitle: 'Tutorials1'
 
     - type: 'page'
       itemId: 'Changelog'
-
-    - type: 'separator'
-      title: ''
 
     - type: 'separator'
       title: 'API Docs'

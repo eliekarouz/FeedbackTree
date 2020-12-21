@@ -5,41 +5,48 @@
 
 package com.feedbacktree.example.flows.root
 
-import com.feedbacktree.example.flows.login.LoginFlow
+import com.feedbacktree.example.flows.counter.CounterFlow
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.Step
 import com.feedbacktree.flow.core.advance
 
 val RootFlow = Flow<Unit, State, Event, Nothing, Any>(
-    initialState = { State.LoggedOut },
+    initialState = { State() },
     stepper = ::reduce,
     feedbacks = listOf()
 ) { state, context ->
-    when (state) {
-        State.LoggedOut -> context.renderChild(
-            input = "email@example.com",
-            flow = LoginFlow,
-            onResult = {
-            context.sink(Event.LogInCompleted)
+    when (state.selectedDemo) {
+        Demo.CounterExample -> context.renderChild(CounterFlow, onResult = {
+            context.sendEvent(Event.DemoCompleted)
         })
-        State.LoggedIn -> TODO()
+        null -> DemoScreen(state, context.sink)
     }
 }
 
-sealed class State {
-    object LoggedOut : State()
-    object LoggedIn : State()
+data class State(
+    val demoOptions: List<Demo> = listOf(
+        Demo.CounterExample
+    ),
+    val selectedDemo: Demo? = null
+)
+
+enum class Demo {
+    CounterExample;
+
+    val title: String
+        get() = when (this) {
+            CounterExample -> "Counter"
+        }
 }
 
-
 sealed class Event {
-    object LogInCompleted : Event()
-    object LogOut : Event()
+    object DemoCompleted : Event()
+    data class SelectedDemo(val demo: Demo) : Event()
 }
 
 fun reduce(state: State, event: Event): Step<State, Nothing> {
     return when (event) {
-        Event.LogInCompleted -> State.LoggedIn.advance()
-        Event.LogOut -> State.LoggedOut.advance()
+        Event.DemoCompleted -> state.copy(selectedDemo = null).advance()
+        is Event.SelectedDemo -> state.copy(selectedDemo = event.demo).advance()
     }
 }

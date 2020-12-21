@@ -8,7 +8,6 @@ dependencies {
     orchidRuntime "io.github.javaeden.orchid:OrchidKotlindoc:0.21.0"
     orchidRuntime "io.github.javaeden.orchid:OrchidPluginDocs:0.21.0"
     orchidRuntime("io.github.javaeden.orchid:OrchidGithub:0.21.0")
-    orchidRuntime("io.github.javaeden.orchid:OrchidBsDoc:0.21.0")
     orchidRuntime("io.github.javaeden.orchid:OrchidSyntaxHighlighter:0.21.0")
     orchidRuntime("io.github.javaeden.orchid:OrchidWiki:0.21.0")
 }
@@ -22,7 +21,7 @@ repositories {
 
 // 4. Use the 'Editorial' theme, and set the URL it will have on Github Pages
 orchid {
-    theme = "BsDoc"
+    theme = "Editorial"
     baseUrl = "https://eliekarouz.github.io/FeedbackTree"
     version = "0.11.1"
 }
