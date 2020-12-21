@@ -2,7 +2,7 @@ In this tutorial, you will learn the steps needed to set up a basic FeedbackTree
 You will build a screen that has a counter and two buttons to increment and decrement the counter.
 
 <div style:"text-align: center;"> 
-  <img style: src="/assets/media/counter_app_screenshot.jpeg" width="250"/> 
+  <img style: src="FeedbackTree/assets/media/counter_app_screenshot.jpeg" width="250"/> 
 </div>
 
 <br>
