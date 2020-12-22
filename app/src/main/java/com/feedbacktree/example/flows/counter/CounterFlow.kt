@@ -5,31 +5,42 @@
 
 package com.feedbacktree.example.flows.counter
 
-import com.feedbacktree.flow.core.*
+import com.feedbacktree.flow.core.Flow
+import com.feedbacktree.flow.core.advance
+import com.feedbacktree.flow.core.endFlow
 
-val CounterFlow = Flow<Unit, State, Event, Unit, Any>(
+val CounterFlow = Flow<Unit, State, Event, Unit, CounterScreen>(
     initialState = { State(counter = 0) },
-    stepper = ::stepper,
-    feedbacks = listOf()
-) { state, context ->
-    CounterScreen(state, context.sink)
-}
+    stepper = { state, event ->
+        when (event) {
+            Event.Increment -> state.copy(
+                counter = state.counter + 1
+            ).advance()
+            Event.Decrement -> state.copy(
+                counter = state.counter - 1
+            ).advance()
+            Event.BackPressed -> endFlow()
+        }
+    },
+    feedbacks = listOf(),
+    render = { state, context ->
+        CounterScreen(state, context.sink)
+    }
+)
 
 data class State(
     val counter: Int
 )
 
-
 sealed class Event {
     object Increment : Event()
     object Decrement : Event()
-    object BackPressed: Event()
+    object BackPressed : Event()
 }
 
-fun stepper(state: State, event: Event): Step<State, Unit> {
-    return when (event) {
-        Event.Increment -> state.copy(counter = state.counter + 1).advance()
-        Event.Decrement -> state.copy(counter = state.counter - 1).advance()
-        Event.BackPressed -> endFlow()
-    }
+data class CounterScreen(
+    private val state: State,
+    val sink: (Event) -> Unit
+) {
+    val counterText: String = state.counter.toString()
 }
