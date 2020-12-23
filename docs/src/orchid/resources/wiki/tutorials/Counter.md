@@ -294,10 +294,10 @@ class MainActivity : AppCompatActivity() {
 ```
 
 1. Use the `Activity.startFlow` method to start the `CounterFlow`.
-2.  Pass the `appViewRegistry` so that the FeedbackTree knows how to render the `CounterScreens` that will be produced by the `CounterFlow`.
+2. Pass the `appViewRegistry` so that the FeedbackTree knows how to render the `CounterScreens` that will be produced by the `CounterFlow`.
 3. Terminate the flow when the activity is finishing.
 
-*No need to panic! You don't have to create an Activity for each flow. We will see in the next tutorials that you can use only one Activity for the whole Application and your Activity will still never grow more than a few lines of code*.
+No need to panic! You don't have to create an Activity for each flow. We will see in the next tutorials that you can use only one Activity for the whole Application and your Activity will still never grow more than a few lines of code.
 
 ### Counter Cannot Go Negative:
 
@@ -344,7 +344,7 @@ Note that `isInvisible` is part of android kotlin extensions. So you will have t
 implementation 'androidx.core:core-ktx:1.3.2'
 ```
 
- ### Where to Go From Here?
+### Where to Go From Here?
 
 I hope that you were able to successfully digest the core ideas. It's fine if you still have a lot of question marks.
 You can check the next tutorial where you will learn more about the `Feedbacks`.

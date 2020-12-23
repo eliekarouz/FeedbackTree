@@ -4,7 +4,7 @@ site:
     siteDescription: A unidirectional architecture for Android
 
 Editorial:
-  primaryColor: '#971c8b'
+  primaryColor: '#c381c3'
   legacySearch: false
   avatar: 'assets/media/logo.png'
   social:
@@ -32,10 +32,12 @@ kotlindoc:
 allPages:
   metaComponents:
     - type: 'prism'
+      githubTheme: 'darcula'
       languages:
         - 'java'
         - 'kotlin'
         - 'yaml'
+        - 'groovy'
 
 wiki:
   sections:
