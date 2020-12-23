@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import com.feedbacktree.example.R
 import com.feedbacktree.flow.core.Bindings
 import com.feedbacktree.flow.core.Feedback
@@ -29,16 +30,19 @@ class CounterLayoutBinder(private val view: View) : LayoutRunner<CounterScreen, 
         return listOf(bindUI())
     }
 
-    private fun bindUI(): Feedback<CounterScreen, Event> = bind { screen ->
-        val subscriptions: List<Disposable> = listOf(
-            screen.map { it.counterText }.subscribe { counterTextView.text = it }
-        )
-        val events: List<Observable<Event>> = listOf(
-            incrementButton.clicks().map { Event.Increment },
-            decrementButton.clicks().map { Event.Decrement },
-            view.backPresses().map { Event.BackPressed },
-        )
-        return@bind Bindings(subscriptions, events)
+    private fun bindUI(): Feedback<CounterScreen, Event> =
+        bind { screens: Observable<CounterScreen> ->
+            val subscriptions: List<Disposable> = listOf(
+                screens.map { it.counterText }.subscribe { counterTextView.text = it },
+                screens.map { it.isDecrementButtonInvisible }
+                    .subscribe { decrementButton.isInvisible = it }
+            )
+            val events: List<Observable<Event>> = listOf(
+                incrementButton.clicks().map { Event.Increment },
+                decrementButton.clicks().map { Event.Decrement },
+                view.backPresses().map { Event.BackPressed },
+            )
+            return@bind Bindings(subscriptions, events)
     }
 
     companion object : ViewBinding<CounterScreen> by LayoutRunner.bind(

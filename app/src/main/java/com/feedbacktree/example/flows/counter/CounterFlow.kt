@@ -8,6 +8,7 @@ package com.feedbacktree.example.flows.counter
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.advance
 import com.feedbacktree.flow.core.endFlow
+import kotlin.math.max
 
 val CounterFlow = Flow<Unit, State, Event, Unit, CounterScreen>(
     initialState = { State(counter = 0) },
@@ -17,7 +18,7 @@ val CounterFlow = Flow<Unit, State, Event, Unit, CounterScreen>(
                 counter = state.counter + 1
             ).advance()
             Event.Decrement -> state.copy(
-                counter = state.counter - 1
+                counter = max(0, state.counter - 1)
             ).advance()
             Event.BackPressed -> endFlow()
         }
@@ -43,4 +44,5 @@ data class CounterScreen(
     val sink: (Event) -> Unit
 ) {
     val counterText: String = state.counter.toString()
+    val isDecrementButtonInvisible: Boolean = state.counter == 0
 }

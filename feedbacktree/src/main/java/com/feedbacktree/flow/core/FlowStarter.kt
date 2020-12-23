@@ -21,15 +21,24 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
 
-fun <StateT : Any, OutputT : Any>
-        FragmentActivity.startFlow(
+fun <StateT : Any, OutputT : Any> FragmentActivity.startFlow(
     flow: Flow<Unit, StateT, *, OutputT, *>,
     onOutput: (OutputT) -> Unit,
     viewRegistry: ViewRegistry
 ): Disposable = startFlow(Unit, flow, onOutput, viewRegistry)
 
-fun <InputT : Any, StateT : Any, OutputT : Any>
-        FragmentActivity.startFlow(
+fun <StateT : Any> FragmentActivity.startFlow(
+    flow: Flow<Unit, StateT, *, Nothing, *>,
+    viewRegistry: ViewRegistry
+): Disposable = startFlow(Unit, flow, onOutput = { }, viewRegistry)
+
+fun <InputT : Any, StateT : Any> FragmentActivity.startFlow(
+    input: InputT,
+    flow: Flow<InputT, StateT, *, Nothing, *>,
+    viewRegistry: ViewRegistry
+): Disposable = startFlow(input, flow, onOutput = { }, viewRegistry)
+
+fun <InputT : Any, StateT : Any, OutputT : Any> FragmentActivity.startFlow(
     input: InputT,
     flow: Flow<InputT, StateT, *, OutputT, *>,
     onOutput: (OutputT) -> Unit,
