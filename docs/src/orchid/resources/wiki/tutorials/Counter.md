@@ -214,10 +214,10 @@ class CounterLayoutBinder(private val view: View) : LayoutBinder<CounterScreen, 
     }
 
   	
-    private fun bindUI(): Feedback<CounterScreen, Event> = bind { screens: Observable<CounterScreen> -> // 4
+    private fun bindUI(): Feedback<CounterScreen, Event> = bind { screen: Observable<CounterScreen> -> // 4
 				// 5
         val subscriptions: List<Disposable> = listOf(
-            screens.map { it.counterText }.subscribe { counterTextView.text = it }
+            screen.map { it.counterText }.subscribe { counterTextView.text = it }
         )
         // 6
         val events: List<Observable<Event>> = listOf(
@@ -240,36 +240,24 @@ The breakdown of the code above:
 2. Extract the views using `findViewById`. Note that you have to use `view.findViewById`
 3. A `LayoutBinder` expects that you return a list of Feedbacks. A Feedback in a UI context is a way to say that you will observe each `CounterScreen` being emitted by the `Flow` and you will produce `Events` that will be pushed back to the `Flow`. 
 4. FeedbackTree provides "Feedback builders" like the `bind` method. We will see other operators in future tutorials.
-5. The bind gives you `screens`  which is an `Obsevable<CounterScreen>`. You can subscribe to the screens being produced by the Flow in order to update the UI elements. Just like here where we update the TextView from the CounterScreen.counterText:\
-   `screens.map { it.counterText }.subscribe { counterTextView.text = it }`
+5. The bind gives you `screen`  which is an `Obsevable<CounterScreen>`. You can subscribe to the screens being produced by the Flow in order to update the UI elements. Just like here where we update the TextView from the CounterScreen.counterText:\
+   `screen.map { it.counterText }.subscribe { counterTextView.text = it }`
 6. UI clicks are being mapped to `Events`.
 7. The `subcsriptions` and the `events` are being returned to the `bind` operator. This is needed to allow FeedbackTree to dispose the subscriptions when the `Flow` terminates or the `View` is not in window hierarchy anymore.
-8. It's a way to say that, when a Flow produces a `CounterScreen`:
+8. It's a way to say that, when some Flow produces a `CounterScreen`:
    1. Inflate `R.layout.counter`
    2. Use the `CounterLayoutBinder` to update the layout
    3. Use the `CounterScreen::sink` to send back the events to the `Flow`
 
 **Starting the Flow**
 
-Create a file called **AppViewRegistry.kt** and add to it the code below. You will have to import the classes `CounterLayoutBinder`.
-
-```kotlin
-import com.feedbacktree.flow.ui.views.core.ViewRegistry
-
-val appViewRegistry = ViewRegistry( // 1
-    CounterLayoutBinder // 2
-)
-```
-
-1. A `ViewRegistry` is a lookup table that FeedbackTree uses to create the corresponding layout when some `Screen` is produced by the `Flow` 
-2. We are registering the `CounterLayoutBinder` `companion object` from the previous section in the `appViewRegistry`. 
-
-Create a **MainActivity.kt** file to host the `CounterFlow`. Add this code to it, you will need to import the `CounterFlow` and the `appViewRegistry`
+Create a **MainActivity.kt** file to host the `CounterFlow`. Add this code to it, you will need to import the `CounterFlow` and the `CounterLayoutBinder`
 
 ```kotlin
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.feedbacktree.flow.core.startFlow
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity() {
@@ -278,8 +266,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        disposable = startFlow(flow = CounterFlow, // 1
-                               viewRegistry = appViewRegistry) // 2
+        val viewRegistry = ViewRegistry( // 1
+        	CounterLayoutBinder // 2
+				)
+        disposable = startFlow(flow = CounterFlow, // 3
+                               viewRegistry = viewRegistry) 
     }
 
     override fun onPause() {
@@ -293,9 +284,11 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-1. Use the `Activity.startFlow` method to start the `CounterFlow`.
-2. Pass the `appViewRegistry` so that the FeedbackTree knows how to render the `CounterScreens` that will be produced by the `CounterFlow`.
-3. Terminate the flow when the activity is finishing.
+1. A `ViewRegistry` is a lookup table that FeedbackTree uses to create the corresponding layout when some `Screen` is produced by the `Flow` 
+2. We are registering the `CounterLayoutBinder` `companion object` from the previous section to the `viewRegistry` variable. 
+3. Use the `Activity.startFlow` method to start the `CounterFlow`.
+4. Pass the `viewRegistry` so that the FeedbackTree knows how to render the `CounterScreens` that will be produced by the `CounterFlow`.
+5. Terminate the flow when the activity finishes.
 
 No need to panic! You don't have to create an Activity for each flow. We will see in the next tutorials that you can use only one Activity for the whole Application and your Activity will still never grow more than a few lines of code.
 
@@ -333,8 +326,8 @@ In the `CounterLayoutBinder` subscribe to `isDecrementButtonInvisible`
 
 ```kotlin
  val subscriptions: List<Disposable> = listOf(
-      screens.map { it.counterText }.subscribe { counterTextView.text = it },
-      screens.map { it.isDecrementButtonInvisible }.subscribe { decrementButton.isInvisible = it }
+      screen.map { it.counterText }.subscribe { counterTextView.text = it },
+      screen.map { it.isDecrementButtonInvisible }.subscribe { decrementButton.isInvisible = it }
   )
 ```
 

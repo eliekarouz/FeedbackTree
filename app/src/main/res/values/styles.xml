@@ -3,6 +3,7 @@
     <style name="AppTheme" parent="Theme.AppCompat">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:colorBackground">@color/white</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:textColor">@color/black</item>

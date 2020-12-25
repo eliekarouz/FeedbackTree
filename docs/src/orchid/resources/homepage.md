@@ -27,7 +27,7 @@ FeedbackTree is a unidirectional data flow architecture for Android which relies
 The project recently migrated from `jitpack` to `Maven Central`
 
 Add it in your root build.gradle:
-```
+```groovy
 allprojects {
   repositories {
     mavenCentral()
@@ -37,7 +37,7 @@ allprojects {
 
 ##### Android Projects
 Add this to your build.gradle (app)
-```
+```groovy
 dependencies {
   implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.11.1"
 }
@@ -47,7 +47,7 @@ dependencies {
 We are only supporting the concept of `Step` and `Stepper` in Kotlin multiplatform (iOS/Android only).  
 We might provide additional multiplatform support in the future.
 To include these concepts to a multipatform module, add this dependency to commonMain.
-```
+```groovy
 dependencies {
     api "com.github.eliekarouz.feedbacktree:core:0.11.1"
 }

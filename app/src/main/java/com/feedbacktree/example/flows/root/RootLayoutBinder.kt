@@ -11,13 +11,13 @@ import com.feedbacktree.example.R
 import com.feedbacktree.flow.core.Bindings
 import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.core.bind
-import com.feedbacktree.flow.ui.views.LayoutRunner
+import com.feedbacktree.flow.ui.views.LayoutBinder
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 
-class RootLayoutBinder(view: View) : LayoutRunner<DemoScreen, Event> {
+class RootLayoutBinder(view: View) : LayoutBinder<DemoScreen, Event> {
 
     private val adapter = RootAdapter()
     private val recyclerView: RecyclerView = view.findViewById(R.id.demosRecyclerView)
@@ -43,7 +43,7 @@ class RootLayoutBinder(view: View) : LayoutRunner<DemoScreen, Event> {
         return@bind Bindings(subscriptions, events)
     }
 
-    companion object : ViewBinding<DemoScreen> by LayoutRunner.bind(
+    companion object : ViewBinding<DemoScreen> by LayoutBinder.bind(
         R.layout.root_menu, ::RootLayoutBinder, DemoScreen::sink
     )
 }

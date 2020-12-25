@@ -9,14 +9,14 @@ import com.feedbacktree.example.R
 import com.feedbacktree.flow.core.Bindings
 import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.core.bind
-import com.feedbacktree.flow.ui.views.LayoutRunner
+import com.feedbacktree.flow.ui.views.LayoutBinder
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.backPresses
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
-class CounterLayoutBinder(private val view: View) : LayoutRunner<CounterScreen, Event> {
+class CounterLayoutBinder(private val view: View) : LayoutBinder<CounterScreen, Event> {
 
     private val counterTextView = view.findViewById<TextView>(R.id.counterTextView)
     private val incrementButton = view.findViewById<Button>(R.id.incrementButton)
@@ -31,10 +31,10 @@ class CounterLayoutBinder(private val view: View) : LayoutRunner<CounterScreen, 
     }
 
     private fun bindUI(): Feedback<CounterScreen, Event> =
-        bind { screens: Observable<CounterScreen> ->
+        bind { screen: Observable<CounterScreen> ->
             val subscriptions: List<Disposable> = listOf(
-                screens.map { it.counterText }.subscribe { counterTextView.text = it },
-                screens.map { it.isDecrementButtonInvisible }
+                screen.map { it.counterText }.subscribe { counterTextView.text = it },
+                screen.map { it.isDecrementButtonInvisible }
                     .subscribe { decrementButton.isInvisible = it }
             )
             val events: List<Observable<Event>> = listOf(
@@ -45,7 +45,7 @@ class CounterLayoutBinder(private val view: View) : LayoutRunner<CounterScreen, 
             return@bind Bindings(subscriptions, events)
     }
 
-    companion object : ViewBinding<CounterScreen> by LayoutRunner.bind(
+    companion object : ViewBinding<CounterScreen> by LayoutBinder.bind(
         R.layout.counter, ::CounterLayoutBinder, CounterScreen::sink
     )
 }

@@ -9,20 +9,32 @@ import com.feedbacktree.flow.core.*
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
-val LoginFlow = Flow<String, State, Event, Unit, LoginViewModel>(
-    initialState = { email -> State(email = email) },
-    stepper = ::stepper,
-    feedbacks = listOf(loginFeedback())
-) { state, context ->
-    // This more clear to start with the architecture: LoginViewModel(state, onEvent = { event -> send(event) })
-    // A shorted version would be LoginViewModel(state, onEvent = ::send)
-    return@Flow LoginViewModel(state, context.sink)
-}
+val LoginFlow = Flow<String, State, Event, String, LoginScreen>(
+    initialState = { lastEmailUsed -> State(email = lastEmailUsed) },
+    stepper = { state, event ->
+        when (event) {
+            is Event.EnteredEmail -> state.copy(email = event.email).advance()
+            is Event.EnteredPassword -> state.copy(password = event.password).advance()
+            Event.ClickedLogin -> state.copy(isLoggingIn = true).advance()
+            is Event.ReceivedLogInResponse -> {
+                if (event.success) {
+                    endFlowWith(state.email)
+                } else {
+                    state.copy(isLoggingIn = false).advance()
+                }
+            }
+        }
+    },
+    feedbacks = listOf(loginFeedback()),
+    render = { state, context ->
+        return@Flow LoginScreen(state, context.sink)
+    }
+)
 
 data class State(
     val email: String = "",
     val password: String = "",
-    val isLoggingIn: Boolean = false
+    val isLoggingIn: Boolean = false,
 )
 
 sealed class Event {
@@ -32,41 +44,54 @@ sealed class Event {
     data class ReceivedLogInResponse(val success: Boolean) : Event()
 }
 
-fun stepper(state: State, event: Event): Step<State, Unit> {
-    return when (event) {
-        is Event.EnteredEmail -> state.copy(email = event.email).advance()
-        is Event.EnteredPassword -> state.copy(password = event.password).advance()
-        Event.ClickedLogin -> endFlowWith(Unit)
-        is Event.ReceivedLogInResponse -> endFlowWith(
-            Unit
-        )
-    }
+data class LoginScreen(
+    val state: State,
+    val sink: (Event) -> Unit
+) {
+    val emailText: String
+        get() = state.email
+
+    val passwordText: String
+        get() = state.password
+
+    val loginButtonTitle: String
+        get() = if (state.isLoggingIn) "Signing In" else "Sign In"
+
+    val isLoginButtonEnabled: Boolean
+        get() = state.email.isNotEmpty() && state.password.isNotEmpty()
 }
 
-typealias LoginQuery = Pair<String, String>
+// Feedbacks
 
-fun loginFeedback() = react<State, LoginQuery, Event>(
+private data class LoginQuery(
+    val email: String,
+    val password: String
+)
+
+@Suppress("RemoveExplicitTypeArguments") // For Readability
+private fun loginFeedback(): Feedback<State, Event> = react<State, LoginQuery, Event>(
     query = { state ->
-        state
-            .takeIf {
-                it.isLoggingIn
-            }?.let {
-                it.email to it.password
-            }
+        if (state.isLoggingIn) {
+            LoginQuery(email = state.email, password = state.password)
+        } else {
+            null
+        }
     },
-    effects = { (email, password) ->
-        login(
-            email = email,
-            password = password
-        ) // Observable<Boolean>, true when authentication succeeds
-            .map { loginSucceeded ->
-                Event.ReceivedLogInResponse(loginSucceeded)
-            }
+    effects = { queryResult ->
+        val authenticationSuccess: Observable<Boolean> = AuthenticationManager.login(
+            email = queryResult.email,
+            password = queryResult.password
+        )
+        authenticationSuccess.map { loginSucceeded ->
+            Event.ReceivedLogInResponse(loginSucceeded)
+        }
     }
 )
 
-private fun login(email: String, password: String): Observable<Boolean> {
-    // simulate network call here...
-    return Observable.just(true)
-        .delaySubscription(2, TimeUnit.SECONDS) // To simulate a network call
+object AuthenticationManager {
+    fun login(email: String, password: String): Observable<Boolean> {
+        // simulate network call here...
+        return Observable.just(true)
+            .delaySubscription(2, TimeUnit.SECONDS) // To simulate a network call
+    }
 }

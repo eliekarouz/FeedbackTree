@@ -1,0 +1,12 @@
+wikiPages:
+  layoutConfig:
+    wrapPageInBox: false
+    wrapTitleInBox: false
+    includeTitle: true
+    includeBreadcrumbs: true
+    pageContentsMenu:
+      - type: 'separator'
+        title: 'In This Page'
+      - type: 'pageIds'
+        structure: nested
+        maxLevel: 2

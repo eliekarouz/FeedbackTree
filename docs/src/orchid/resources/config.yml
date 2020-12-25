@@ -4,7 +4,7 @@ site:
     siteDescription: A unidirectional architecture for Android
 
 Editorial:
-  primaryColor: '#c381c3'
+  primaryColor: '#ffc66d'
   legacySearch: false
   avatar: 'assets/media/logo.png'
   social:

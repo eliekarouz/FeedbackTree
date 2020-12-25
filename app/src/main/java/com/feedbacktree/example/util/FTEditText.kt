@@ -1,11 +1,9 @@
 package com.feedbacktree.example.util
 
 import android.content.Context
-import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
-import io.reactivex.Observable
 
 /**
  * An EditText that can be used for two-way binding. Using the standard EditText will create infinite
@@ -41,41 +39,21 @@ class FTEditText : AppCompatEditText {
         super.removeTextChangedListener(watcher)
     }
 
+    var text: String
+        get() = super.getText()?.toString() ?: ""
+        set(value) {
+            updateText(value)
+        }
 
     /**
      * Updates an EditText without firing text-change events.
      * This is needed for two-way binding
      */
-    fun updateText(newText: String) {
-        if (newText == text.toString()) return
+    private fun updateText(newText: String) {
+        if (newText == super.getText()?.toString()) return
         val watchers = textWatchers.toMutableList()
         watchers.forEach(::removeTextChangedListener)
-        text?.replace(0, text!!.length, newText)
+        super.getText()?.replace(0, super.getText()!!.length, newText)
         watchers.forEach(::addTextChangedListener)
-    }
-}
-
-fun FTEditText.ftTextChanges(): Observable<String> {
-    return Observable.create { emitter ->
-        val textWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                emitter.onNext(s.toString())
-            }
-
-            override fun beforeTextChanged(
-                text: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-            }
-
-            override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {}
-        }
-        addTextChangedListener(textWatcher)
-
-        emitter.setCancellable {
-            removeTextChangedListener(textWatcher)
-        }
     }
 }

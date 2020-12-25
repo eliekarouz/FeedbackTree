@@ -6,6 +6,7 @@
 package com.feedbacktree.example.flows.root
 
 import com.feedbacktree.example.flows.counter.CounterFlow
+import com.feedbacktree.example.flows.login.LoginFlow
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.Step
 import com.feedbacktree.flow.core.advance
@@ -19,23 +20,28 @@ val RootFlow = Flow<Unit, State, Event, Nothing, Any>(
         Demo.CounterExample -> context.renderChild(CounterFlow, onResult = {
             context.sendEvent(Event.DemoCompleted)
         })
+        Demo.Login -> context.renderChild(input = "elie", flow = LoginFlow, onResult = {
+            context.sendEvent(Event.DemoCompleted)
+        })
         null -> DemoScreen(state, context.sink)
     }
 }
 
 data class State(
     val demoOptions: List<Demo> = listOf(
-        Demo.CounterExample
+        Demo.CounterExample, Demo.Login
     ),
     val selectedDemo: Demo? = null
 )
 
 enum class Demo {
-    CounterExample;
+    CounterExample,
+    Login;
 
     val title: String
         get() = when (this) {
             CounterExample -> "Counter"
+            Login -> "Login"
         }
 }
 

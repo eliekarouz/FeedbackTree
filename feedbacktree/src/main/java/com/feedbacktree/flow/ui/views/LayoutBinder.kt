@@ -26,7 +26,7 @@ import kotlin.reflect.KClass
 /**
  * (Experimental)
  */
-interface LayoutRunner<ViewModelT : Any, EventT : Any> {
+interface LayoutBinder<ViewModelT : Any, EventT : Any> {
 
     fun feedbacks(): List<Feedback<ViewModelT, EventT>>
 
@@ -34,7 +34,7 @@ interface LayoutRunner<ViewModelT : Any, EventT : Any> {
     constructor(
         override val type: KClass<ViewModelT>,
         @LayoutRes private val layoutId: Int,
-        private val runnerConstructor: (View, ViewRegistry) -> LayoutRunner<ViewModelT, EventT>,
+        private val binderConstructor: (View, ViewRegistry) -> LayoutBinder<ViewModelT, EventT>,
         private val sink: (ViewModelT) -> (EventT) -> Unit
     ) : ViewBinding<ViewModelT> {
         override fun buildView(
@@ -51,7 +51,7 @@ interface LayoutRunner<ViewModelT : Any, EventT : Any> {
                     val screenBehaviorSubject = BehaviorSubject.createDefault(initialViewModel)
                     val mergedEvents by lazy {
                         // create the view
-                        val layoutAttachable = runnerConstructor.invoke(this, registry)
+                        val layoutAttachable = binderConstructor.invoke(this, registry)
                         val feedbacks = layoutAttachable.feedbacks()
                         val events = feedbacks.map {
                             val observableSchedulerContext = ObservableSchedulerContext(
@@ -66,7 +66,7 @@ interface LayoutRunner<ViewModelT : Any, EventT : Any> {
                     var disposable: Disposable? = mergedEvents.subscribe {
                         sink(initialViewModel).invoke(it)
                     }
-                    logVerbose("LayoutRunner - Attached screen: $type")
+                    logVerbose("LayoutBinder - Attached screen: $type")
 
                     bindShowViewModel(
                         initialViewModel,
@@ -74,7 +74,7 @@ interface LayoutRunner<ViewModelT : Any, EventT : Any> {
                             screenBehaviorSubject.onNext(viewModel)
                         },
                         cleanupViewModel = {
-                            logVerbose("LayoutRunner - Detached screen: $type")
+                            logVerbose("LayoutBinder - Detached screen: $type")
                             disposable?.dispose()
                             disposable = null
                         }
@@ -86,26 +86,26 @@ interface LayoutRunner<ViewModelT : Any, EventT : Any> {
     companion object {
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to show viewModels of type [ViewModelT],
-         * using a [LayoutRunner] created by [constructor].
+         * using a [LayoutBinder] created by [constructor].
          */
         inline fun <reified ViewModelT : Any, EventT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View, ViewRegistry) -> LayoutRunner<ViewModelT, EventT>,
+            noinline constructor: (View, ViewRegistry) -> LayoutBinder<ViewModelT, EventT>,
             noinline sink: (ViewModelT) -> (EventT) -> Unit
         ): ViewBinding<ViewModelT> = Binding(
             type = ViewModelT::class,
             layoutId = layoutId,
-            runnerConstructor = constructor,
+            binderConstructor = constructor,
             sink = sink
         )
 
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to show viewModels of type [ViewModelT],
-         * using a [LayoutRunner] created by [constructor].
+         * using a [LayoutBinder] created by [constructor].
          */
         inline fun <reified ViewModelT : Any, EventT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View) -> LayoutRunner<ViewModelT, EventT>,
+            noinline constructor: (View) -> LayoutBinder<ViewModelT, EventT>,
             noinline sink: (ViewModelT) -> (EventT) -> Unit
         ): ViewBinding<ViewModelT> =
             bind(

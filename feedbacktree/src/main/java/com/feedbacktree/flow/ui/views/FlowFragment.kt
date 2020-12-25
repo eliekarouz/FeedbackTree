@@ -85,7 +85,7 @@ abstract class FlowFragment<InputT : Any, StateT : Any, OutputT : Any> : Fragmen
 
     /**
      * If your workflow needs to manage the back button, override [android.app.Activity.onBackPressed]
-     * and call this method, and have its views or [LayoutRunner]s use [HandlesBack].
+     * and call this method, and have its views or [LayoutBinder]s use [HandlesBack].
      *
      * e.g.:
      *
