@@ -14,7 +14,7 @@ Let's start by adding FeedbackTree as a dependency to the `build.gradle (app)` f
 ```groovy
 dependencies {
 	  // FeedbackTree
-  	implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.11.1"
+  	implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.12.0"
   
 		// RxJava/Kotlin
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
