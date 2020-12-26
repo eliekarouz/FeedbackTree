@@ -26,7 +26,8 @@ import kotlin.reflect.KClass
 /**
  * (Experimental)
  */
-interface LayoutBinder<ScreenT : Any, EventT : Any> {
+@Deprecated("Deprecated in favor of LayoutBinder.create")
+interface LayoutRunner<ScreenT : Any, EventT : Any> {
 
     fun feedbacks(): List<Feedback<ScreenT, EventT>>
 
@@ -34,7 +35,7 @@ interface LayoutBinder<ScreenT : Any, EventT : Any> {
     constructor(
         override val type: KClass<ScreenT>,
         @LayoutRes private val layoutId: Int,
-        private val binderConstructor: (View, ViewRegistry) -> LayoutBinder<ScreenT, EventT>,
+        private val binderConstructor: (View, ViewRegistry) -> LayoutRunner<ScreenT, EventT>,
         private val sink: (ScreenT) -> (EventT) -> Unit
     ) : ViewBinding<ScreenT> {
         override fun buildView(
@@ -86,11 +87,11 @@ interface LayoutBinder<ScreenT : Any, EventT : Any> {
     companion object {
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to show screens of type [ScreenT],
-         * using a [LayoutBinder] created by [constructor].
+         * using a [LayoutRunner] created by [constructor].
          */
         inline fun <reified ScreenT : Any, EventT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View, ViewRegistry) -> LayoutBinder<ScreenT, EventT>,
+            noinline constructor: (View, ViewRegistry) -> LayoutRunner<ScreenT, EventT>,
             noinline sink: (ScreenT) -> (EventT) -> Unit
         ): ViewBinding<ScreenT> = Binding(
             type = ScreenT::class,
@@ -101,11 +102,11 @@ interface LayoutBinder<ScreenT : Any, EventT : Any> {
 
         /**
          * Creates a [ViewBinding] that inflates [layoutId] to show screens of type [ScreenT],
-         * using a [LayoutBinder] created by [constructor].
+         * using a [LayoutRunner] created by [constructor].
          */
         inline fun <reified ScreenT : Any, EventT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View) -> LayoutBinder<ScreenT, EventT>,
+            noinline constructor: (View) -> LayoutRunner<ScreenT, EventT>,
             noinline sink: (ScreenT) -> (EventT) -> Unit
         ): ViewBinding<ScreenT> =
             bind(

@@ -9,31 +9,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.feedbacktree.example.R
 import com.feedbacktree.flow.core.Bindings
-import com.feedbacktree.flow.core.Feedback
-import com.feedbacktree.flow.core.bind
 import com.feedbacktree.flow.ui.views.LayoutBinder
-import com.feedbacktree.flow.ui.views.core.ViewBinding
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 
-class RootLayoutBinder(view: View) : LayoutBinder<DemoScreen, Event> {
+val RootLayoutBinder = LayoutBinder.create(
+    layoutId = R.layout.root_menu,
+    sink = DemoScreen::sink
+) { view ->
 
-    private val adapter = RootAdapter()
-    private val recyclerView: RecyclerView = view.findViewById(R.id.demosRecyclerView)
+    (view.context as Activity).title = "FeedbackTree"
 
-    init {
-        (view.context as Activity).title = "FeedbackTree"
+    val adapter = RootAdapter()
 
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
-        recyclerView.adapter = adapter
-    }
+    val recyclerView: RecyclerView = view.findViewById(R.id.demosRecyclerView)
+    recyclerView.layoutManager = LinearLayoutManager(view.context)
+    recyclerView.adapter = adapter
 
-    override fun feedbacks(): List<Feedback<DemoScreen, Event>> {
-        return listOf(bindUI())
-    }
-
-    private fun bindUI(): Feedback<DemoScreen, Event> = bind { screen ->
+    bind { screen ->
         val subscriptions: List<Disposable> = listOf(
             screen.map { it.rows }.subscribe { adapter.updateDataSet(it) }
         )
@@ -42,10 +36,6 @@ class RootLayoutBinder(view: View) : LayoutBinder<DemoScreen, Event> {
         )
         return@bind Bindings(subscriptions, events)
     }
-
-    companion object : ViewBinding<DemoScreen> by LayoutBinder.bind(
-        R.layout.root_menu, ::RootLayoutBinder, DemoScreen::sink
-    )
 }
 
 private class RootAdapter(private var rows: List<DemoScreen.Row> = listOf()) :
