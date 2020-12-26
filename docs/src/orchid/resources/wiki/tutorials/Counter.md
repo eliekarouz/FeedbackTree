@@ -187,67 +187,54 @@ The `CounterFlow` produces a `CounterScreen` for each `State`. What we need to c
 Let's add to the same package where you placed **CounterFlow.kt** a new file called **CounterLayoutBinder.kt**. Add this code to it:
 
 ```kotlin
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.isInvisible
+import com.feedbacktree.example.R
 import com.feedbacktree.flow.core.Bindings
-import com.feedbacktree.flow.core.Feedback
-import com.feedbacktree.flow.core.bind
-import com.feedbacktree.flow.ui.views.LayoutRunner
-import com.feedbacktree.flow.ui.views.core.ViewBinding
+import com.feedbacktree.flow.ui.views.LayoutBinder
 import com.feedbacktree.flow.ui.views.core.backPresses
 import com.jakewharton.rxbinding3.view.clicks
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
-// 1
-class CounterLayoutBinder(private val view: View) : LayoutBinder<CounterScreen, Event> {
+// 1 
+val CounterLayoutBinder = LayoutBinder.create(
+    layoutId = R.layout.counter,
+    sink = CounterScreen::sink 
+) { view ->
 
     // 2
-    private val counterTextView = view.findViewById<TextView>(R.id.counterTextView)
-    private val incrementButton = view.findViewById<Button>(R.id.incrementButton)
-    private val decrementButton = view.findViewById<Button>(R.id.decrementButton)
-
+    val counterTextView = view.findViewById<TextView>(R.id.counterTextView)
+    val incrementButton = view.findViewById<Button>(R.id.incrementButton)
+    val decrementButton = view.findViewById<Button>(R.id.decrementButton)
+    
     // 3
-    override fun feedbacks(): List<Feedback<CounterScreen, Event>> {
-        return listOf(bindUI())
-    }
-
-  	
-    private fun bindUI(): Feedback<CounterScreen, Event> = bind { screen: Observable<CounterScreen> -> // 4
-				// 5
-        val subscriptions: List<Disposable> = listOf(
+    bind { screen: Observable<CounterScreen> ->
+        // 4
+        subscriptions = listOf(
             screen.map { it.counterText }.subscribe { counterTextView.text = it }
         )
-        // 6
-        val events: List<Observable<Event>> = listOf(
+				// 5
+        events = listOf(
             incrementButton.clicks().map { Event.Increment },
             decrementButton.clicks().map { Event.Decrement }
         )
-        return@bind Bindings(subscriptions, events) // 7
     }
-
-		// 8
-    companion object : ViewBinding<CounterScreen> by LayoutBinder.bind(
-        R.layout.counter, ::CounterLayoutBinder, CounterScreen::sink
-    )
 }
 ```
 
 The breakdown of the code above:
 
-1. Create a class `CounterLayoutBinder` that extends `LayoutBinder`. The LayoutBinder takes two generics, the type of the Screen data class  and the type of the Event that it will produce.
+1. Create a variable called `CounterLayoutBinder` and use `LayoutBinder.create` to create the UI binding logic that will:
+   1. Inflate `R.layout.counter` when a `CounterScreen` is produced.
+   2. Use the `CounterScreen::sink` property to forward UI events back to the flow.
+   3. Update the UI elements everytime a new `CounterScreen` is produced by the flow.
 2. Extract the views using `findViewById`. Note that you have to use `view.findViewById`
-3. A `LayoutBinder` expects that you return a list of Feedbacks. A Feedback in a UI context is a way to say that you will observe each `CounterScreen` being emitted by the `Flow` and you will produce `Events` that will be pushed back to the `Flow`. 
-4. FeedbackTree provides "Feedback builders" like the `bind` method. We will see other operators in future tutorials.
-5. The bind gives you `screen`  which is an `Obsevable<CounterScreen>`. You can subscribe to the screens being produced by the Flow in order to update the UI elements. Just like here where we update the TextView from the CounterScreen.counterText:\
+3. FeedbackTree provides a list of feedback loop builders like the `bind` method. We will see other operators in future tutorials. A UI feedback loop or simply a feedback, allows you to observe each `CounterScreen` being emitted by the `Flow` and produce corresponding `Events` that will be pushed back to the `Flow`.
+4. The bind gives you `screen`  which is an `Obsevable<CounterScreen>`. You can subscribe to the screens being produced by the Flow in order to update the UI elements. Just like here where we update the TextView from the CounterScreen.counterText:\
    `screen.map { it.counterText }.subscribe { counterTextView.text = it }`
-6. UI clicks are being mapped to `Events`.
-7. The `subcsriptions` and the `events` are being returned to the `bind` operator. This is needed to allow FeedbackTree to dispose the subscriptions when the `Flow` terminates or the `View` is not in window hierarchy anymore.
-8. It's a way to say that, when some Flow produces a `CounterScreen`:
-   1. Inflate `R.layout.counter`
-   2. Use the `CounterLayoutBinder` to update the layout
-   3. Use the `CounterScreen::sink` to send back the events to the `Flow`
+5. UI clicks are being mapped to `Events`. When the layout is inflated we will subscribe to the events and will forward them to the `Flow`.
 
 **Starting the Flow**
 
@@ -325,10 +312,10 @@ data class CounterScreen(
 In the `CounterLayoutBinder` subscribe to `isDecrementButtonInvisible` 
 
 ```kotlin
- val subscriptions: List<Disposable> = listOf(
-      screen.map { it.counterText }.subscribe { counterTextView.text = it },
-      screen.map { it.isDecrementButtonInvisible }.subscribe { decrementButton.isInvisible = it }
-  )
+subscriptions = listOf(
+  	screen.map { it.counterText }.subscribe { counterTextView.text = it },
+		screen.map { it.isDecrementButtonInvisible }.subscribe { decrementButton.isInvisible = it }
+)
 ```
 
 Note that `isInvisible` is part of android kotlin extensions. So you will have to add to your build.gradle (app) dependencies:

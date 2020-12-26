@@ -138,34 +138,32 @@ internal class FlowNode<InputT : Any, StateT : Any, EventT : Any, OutputT : Any,
 
     private fun backdoorFeedback(): Feedback<FlowState<StateT, OutputT>, FlowEvent<StateT, EventT>> =
         bindWithScheduler { osc ->
-            return@bindWithScheduler Bindings(
-                subscriptions = listOf(
-                    osc.source.subscribe { flowState.onNext(it) },
+            subscriptions = listOf(
+                osc.source.subscribe { flowState.onNext(it) },
 
 
-                    osc.source.skip(1).subscribe { state ->
-                        // We will only trigger a rendering pass when the flow doesn't emit an output and ends.
-                        // The output will be propagated synchronously to the parent flows. Once a parent/grandparent captures the output,
-                        // its state will be updated and it's at that time that we will trigger the rendering pass.
-                        if (state.flowOutput == null) {
-                            renderingTrigger.onNext(Unit)
-                        }
-                    },
-                    // Observables.system in RxFeedback adds an observeOn(scheduler) before returning the stream of states.
-                    // This means the if we collect the flow output directly from the system, the output will be delayed.
-                    // We are using this feedback loop to do that because we don't have an observerOn(scheduler) and the state is emitted instantly
-                    // as soon as it goes out of the stepper.
-                    osc.source.mapNotNull { it.flowOutput }.subscribe { flowOutput ->
-                        outputPublishSubject.onNext(flowOutput)
+                osc.source.skip(1).subscribe { state ->
+                    // We will only trigger a rendering pass when the flow doesn't emit an output and ends.
+                    // The output will be propagated synchronously to the parent flows. Once a parent/grandparent captures the output,
+                    // its state will be updated and it's at that time that we will trigger the rendering pass.
+                    if (state.flowOutput == null) {
+                        renderingTrigger.onNext(Unit)
                     }
-                ),
-                events = listOf(
-                    eventsPublishSubject.map<FlowEvent<StateT, EventT>> { event ->
-                        FlowEvent.StandardEvent(
-                            event
-                        )
-                    }
-                )
+                },
+                // Observables.system in RxFeedback adds an observeOn(scheduler) before returning the stream of states.
+                // This means the if we collect the flow output directly from the system, the output will be delayed.
+                // We are using this feedback loop to do that because we don't have an observerOn(scheduler) and the state is emitted instantly
+                // as soon as it goes out of the stepper.
+                osc.source.mapNotNull { it.flowOutput }.subscribe { flowOutput ->
+                    outputPublishSubject.onNext(flowOutput)
+                }
+            )
+            events = listOf(
+                eventsPublishSubject.map<FlowEvent<StateT, EventT>> { event ->
+                    FlowEvent.StandardEvent(
+                        event
+                    )
+                }
             )
         }
 

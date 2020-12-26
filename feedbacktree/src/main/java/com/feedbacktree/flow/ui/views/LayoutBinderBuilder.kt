@@ -4,7 +4,7 @@ package com.feedbacktree.flow.ui.views
 
 import android.view.View
 import androidx.annotation.LayoutRes
-import com.feedbacktree.flow.core.Bindings
+import com.feedbacktree.flow.core.BindingsBuilder
 import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
@@ -13,7 +13,8 @@ import io.reactivex.Observable
 class LayoutBinderBuilder<ScreenT : Any, EventT : Any>(
     val feedbacks: MutableList<Feedback<ScreenT, EventT>> = mutableListOf()
 ) {
-    fun bind(bindings: (Observable<ScreenT>) -> (Bindings<EventT>)) {
+
+    fun bind(bindings: BindingsBuilder<EventT>.(Observable<ScreenT>) -> Unit) {
         feedbacks.add(com.feedbacktree.flow.core.bind(bindings))
     }
 

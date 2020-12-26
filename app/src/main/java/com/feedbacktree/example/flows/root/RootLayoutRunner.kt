@@ -8,10 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.feedbacktree.example.R
-import com.feedbacktree.flow.core.Bindings
 import com.feedbacktree.flow.ui.views.LayoutBinder
 import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 
 val RootLayoutBinder = LayoutBinder.create(
@@ -28,13 +26,12 @@ val RootLayoutBinder = LayoutBinder.create(
     recyclerView.adapter = adapter
 
     bind { screen ->
-        val subscriptions: List<Disposable> = listOf(
+        subscriptions = listOf(
             screen.map { it.rows }.subscribe { adapter.updateDataSet(it) }
         )
-        val events: List<Observable<Event>> = listOf(
+        events = listOf(
             adapter.events
         )
-        return@bind Bindings(subscriptions, events)
     }
 }
 

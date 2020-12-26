@@ -259,7 +259,7 @@ fun <Element> Observable<Element>.enqueue(scheduler: Scheduler): Observable<Elem
  * @param subscriptions map a system state to UI presentation.
  * @param events map events from UI to events of a given system.
  */
-data class Bindings<Event>(
+private data class Bindings<Event>(
     val subscriptions: Iterable<Disposable>,
     val events: Iterable<Observable<Event>>
 ) : Disposable {
@@ -275,27 +275,41 @@ data class Bindings<Event>(
     }
 }
 
+class BindingsBuilder<Event>(
+    var subscriptions: List<Disposable> = listOf(),
+    var events: List<Observable<Event>> = listOf()
+)
+
 /**
  * Bi-directional binding of a system State to external state machine and events from it.
  */
-fun <State, Event> bind(bindings: (Observable<State>) -> (Bindings<Event>)): (ObservableSchedulerContext<State>) -> Observable<Event> =
+fun <State, Event> bind(bindings: BindingsBuilder<Event>.(Observable<State>) -> Unit): (ObservableSchedulerContext<State>) -> Observable<Event> =
     { observableSchedulerContext: ObservableSchedulerContext<State> ->
         Observable.using({
-            bindings(observableSchedulerContext.source)
+            @Suppress("NAME_SHADOWING")
+            val bindings = BindingsBuilder<Event>().apply {
+                bindings(observableSchedulerContext.source)
+            }
+            Bindings(subscriptions = bindings.subscriptions, events = bindings.events)
         }, { bindings: Bindings<Event> ->
             Observable.merge(bindings.events).concatWith(Observable.never())
                 .enqueue(observableSchedulerContext.scheduler)
         }, { it.dispose() })
     }
 
+
 /**
  * Bi-directional binding of a system State to external state machine and events from it.
  * Method is useful when you want to use the [Scheduler] on which the the feedback is running.
  */
-fun <State, Event> bindWithScheduler(bindings: (ObservableSchedulerContext<State>) -> (Bindings<Event>)): (ObservableSchedulerContext<State>) -> Observable<Event> =
+fun <State, Event> bindWithScheduler(bindings: BindingsBuilder<Event>.(ObservableSchedulerContext<State>) -> Unit): (ObservableSchedulerContext<State>) -> Observable<Event> =
     { observableSchedulerContext: ObservableSchedulerContext<State> ->
         Observable.using({
-            bindings(observableSchedulerContext)
+            @Suppress("NAME_SHADOWING")
+            val bindings = BindingsBuilder<Event>().apply {
+                bindings(observableSchedulerContext)
+            }
+            Bindings(subscriptions = bindings.subscriptions, events = bindings.events)
         }, { bindings: Bindings<Event> ->
             Observable.merge(bindings.events).concatWith(Observable.never())
                 .enqueue(observableSchedulerContext.scheduler)

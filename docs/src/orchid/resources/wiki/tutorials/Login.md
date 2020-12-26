@@ -34,7 +34,7 @@ val LoginFlow = Flow<String, State, Event, Unit, LoginScreen>( // 1
     },
     feedbacks = listOf(),
     render = { state, context -> 
-        return@Flow LoginScreen(state, context.sink) 
+        LoginScreen(state, context.sink) 
     }
 )
 
@@ -147,34 +147,27 @@ import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 
-class LoginLayoutBinder(private val view: View) : LayoutBinder<LoginScreen, Event> {
+val LoginLayoutBinder = LayoutBinder.create(
+    layoutId = R.layout.login,
+    sink = LoginScreen::sink,
+) { view ->
+    val emailEditText: FTEditText = view.findViewById(R.id.inputEmail) // 3
+    val passwordEditText: FTEditText = view.findViewById(R.id.inputPassword)
+    val btnLogin: Button = view.findViewById(R.id.btnLogin)
 
-    private val emailEditText: FTEditText = view.findViewById(R.id.inputEmail) // 3
-    private val passwordEditText: FTEditText = view.findViewById(R.id.inputPassword)
-    private val btnLogin: Button = view.findViewById(R.id.btnLogin)
-
-    override fun feedbacks() = listOf(bindUI())
-
-    private fun bindUI() = bind<LoginScreen, Event> { screen ->
-        Bindings(
-            subscriptions = listOf(
-                screen.map { it.emailText }.subscribe { emailEditText.text = it }, // 2
-                screen.map { it.passwordText }.subscribe { passwordEditText.text = it },
-                screen.map { it.loginButtonTitle }.subscribe { btnLogin.text = it },
-                screen.map { it.isLoginButtonEnabled }.subscribe { btnLogin.isEnabled = it }
-            ),
-            events = listOf<Observable<Event>>(
-                emailEditText.textChanges().map { Event.EnteredEmail(it.toString()) }, // 1
-                passwordEditText.textChanges().map { Event.EnteredPassword(it.toString()) },
-                btnLogin.clicks().map { Event.ClickedLogin } // 4
-            )
+    bind { screen ->
+        subscriptions = listOf(
+            screen.map { it.emailText }.subscribe { emailEditText.text = it }, // 2
+            screen.map { it.passwordText }.subscribe { passwordEditText.text = it },
+            screen.map { it.loginButtonTitle }.subscribe { btnLogin.text = it },
+            screen.map { it.isLoginButtonEnabled }.subscribe { btnLogin.isEnabled = it }
+        )
+        events = listOf(
+            emailEditText.textChanges().map { Event.EnteredEmail(it.toString()) }, // 1
+            passwordEditText.textChanges().map { Event.EnteredPassword(it.toString()) },
+            btnLogin.clicks().map { Event.ClickedLogin }
         )
     }
-
-  	// 5
-    companion object : ViewBinding<LoginScreen> by LayoutBinder.bind(
-        R.layout.login, ::LoginLayoutBinder, LoginScreen::sink
-    )
 }
 ```
 
@@ -185,10 +178,6 @@ class LoginLayoutBinder(private val view: View) : LayoutBinder<LoginScreen, Even
 3. If you haven't noticed yet, we are doing a two-way binding for the `emailEditText.text` property, which means that we set the `emailEditText.text` in subscriptions and listen to the text changes in the events.\
    The problem of the `EditText` is that watchers are notified when the `text` is updated **programmatically** which will cause **infinte** update cycles/loops when two-way binding is applied. The `FTEditText` breaks the infinite update cycles. The `FTEditText` mainly removes the `TextWatchers` , updates the `text` property, before adding back the watchers that were removed. You can check [here](https://github.com/eliekarouz/FeedbackTree/blob/master/app/src/main/java/com/feedbacktree/example/util/FTEditText.kt) the full implementation in case you want to apply the same logic for other controls like switches. 
 4. We are using  `clicks()` from [RxBinding](https://github.com/JakeWharton/RxBinding) to capture the the View clicks.
-5. It's a way to say that, when some Flow produces a `LoginScreen`:
-   1. Inflate `R.layout.login`
-   2. Use the `LoginLayoutBinder` to update the layout
-   3. Use the `LoginScreen::sink` to send back the events to the `Flow`
 
 ##### **Starting the Flow**
 
