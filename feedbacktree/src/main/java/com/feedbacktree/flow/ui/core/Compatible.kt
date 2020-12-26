@@ -51,7 +51,7 @@ fun <T : Any> List<T>.goTo(next: T): List<T> {
  * Implemented by objects whose [compatibility][compatible] requires more nuance
  * than just being of the same type.
  *
- * ViewModels that don't implement this interface directly can be distinguished
+ * Screens that don't implement this interface directly can be distinguished
  * by wrapping them with [Named].
  */
 interface Compatible {

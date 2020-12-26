@@ -15,7 +15,7 @@ import com.feedbacktree.flow.core.ObservableSchedulerContext
 import com.feedbacktree.flow.ui.views.core.BuilderBinding
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.core.bindShowViewModel
+import com.feedbacktree.flow.ui.views.core.bindShowScreen
 import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,20 +26,20 @@ import kotlin.reflect.KClass
 /**
  * (Experimental)
  */
-interface LayoutBinder<ViewModelT : Any, EventT : Any> {
+interface LayoutBinder<ScreenT : Any, EventT : Any> {
 
-    fun feedbacks(): List<Feedback<ViewModelT, EventT>>
+    fun feedbacks(): List<Feedback<ScreenT, EventT>>
 
-    class Binding<ViewModelT : Any, EventT : Any>
+    class Binding<ScreenT : Any, EventT : Any>
     constructor(
-        override val type: KClass<ViewModelT>,
+        override val type: KClass<ScreenT>,
         @LayoutRes private val layoutId: Int,
-        private val binderConstructor: (View, ViewRegistry) -> LayoutBinder<ViewModelT, EventT>,
-        private val sink: (ViewModelT) -> (EventT) -> Unit
-    ) : ViewBinding<ViewModelT> {
+        private val binderConstructor: (View, ViewRegistry) -> LayoutBinder<ScreenT, EventT>,
+        private val sink: (ScreenT) -> (EventT) -> Unit
+    ) : ViewBinding<ScreenT> {
         override fun buildView(
             registry: ViewRegistry,
-            initialViewModel: ViewModelT,
+            initialScreen: ScreenT,
             contextForNewView: Context,
             container: ViewGroup?
         ): View {
@@ -48,7 +48,7 @@ interface LayoutBinder<ViewModelT : Any, EventT : Any> {
                 .inflate(layoutId, container, false)
                 .apply {
 
-                    val screenBehaviorSubject = BehaviorSubject.createDefault(initialViewModel)
+                    val screenBehaviorSubject = BehaviorSubject.createDefault(initialScreen)
                     val mergedEvents by lazy {
                         // create the view
                         val layoutAttachable = binderConstructor.invoke(this, registry)
@@ -64,16 +64,16 @@ interface LayoutBinder<ViewModelT : Any, EventT : Any> {
                     }
 
                     var disposable: Disposable? = mergedEvents.subscribe {
-                        sink(initialViewModel).invoke(it)
+                        sink(initialScreen).invoke(it)
                     }
                     logVerbose("LayoutBinder - Attached screen: $type")
 
-                    bindShowViewModel(
-                        initialViewModel,
-                        showViewModel = { viewModel ->
-                            screenBehaviorSubject.onNext(viewModel)
+                    bindShowScreen(
+                        initialScreen,
+                        showScreen = { screen ->
+                            screenBehaviorSubject.onNext(screen)
                         },
-                        cleanupViewModel = {
+                        disposeScreenBinding = {
                             logVerbose("LayoutBinder - Detached screen: $type")
                             disposable?.dispose()
                             disposable = null
@@ -85,29 +85,29 @@ interface LayoutBinder<ViewModelT : Any, EventT : Any> {
 
     companion object {
         /**
-         * Creates a [ViewBinding] that inflates [layoutId] to show viewModels of type [ViewModelT],
+         * Creates a [ViewBinding] that inflates [layoutId] to show screens of type [ScreenT],
          * using a [LayoutBinder] created by [constructor].
          */
-        inline fun <reified ViewModelT : Any, EventT : Any> bind(
+        inline fun <reified ScreenT : Any, EventT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View, ViewRegistry) -> LayoutBinder<ViewModelT, EventT>,
-            noinline sink: (ViewModelT) -> (EventT) -> Unit
-        ): ViewBinding<ViewModelT> = Binding(
-            type = ViewModelT::class,
+            noinline constructor: (View, ViewRegistry) -> LayoutBinder<ScreenT, EventT>,
+            noinline sink: (ScreenT) -> (EventT) -> Unit
+        ): ViewBinding<ScreenT> = Binding(
+            type = ScreenT::class,
             layoutId = layoutId,
             binderConstructor = constructor,
             sink = sink
         )
 
         /**
-         * Creates a [ViewBinding] that inflates [layoutId] to show viewModels of type [ViewModelT],
+         * Creates a [ViewBinding] that inflates [layoutId] to show screens of type [ScreenT],
          * using a [LayoutBinder] created by [constructor].
          */
-        inline fun <reified ViewModelT : Any, EventT : Any> bind(
+        inline fun <reified ScreenT : Any, EventT : Any> bind(
             @LayoutRes layoutId: Int,
-            noinline constructor: (View) -> LayoutBinder<ViewModelT, EventT>,
-            noinline sink: (ViewModelT) -> (EventT) -> Unit
-        ): ViewBinding<ViewModelT> =
+            noinline constructor: (View) -> LayoutBinder<ScreenT, EventT>,
+            noinline sink: (ScreenT) -> (EventT) -> Unit
+        ): ViewBinding<ScreenT> =
             bind(
                 layoutId = layoutId,
                 constructor = { view, _ ->
@@ -119,20 +119,20 @@ interface LayoutBinder<ViewModelT : Any, EventT : Any> {
             )
 
         /**
-         * Creates a [ViewBinding] that inflates [layoutId] to "show" viewModels of type [ViewModelT].
+         * Creates a [ViewBinding] that inflates [layoutId] to "show" screens of type [ScreenT].
          * Handy for showing static views.
          */
-        inline fun <reified ViewModelT : Any> bindStatic(
+        inline fun <reified ScreenT : Any> bindStatic(
             @LayoutRes layoutId: Int
-        ): ViewBinding<ViewModelT> = BuilderBinding(
-            type = ViewModelT::class,
-            viewConstructor = { _, initialViewModel, contextForNewView, container ->
+        ): ViewBinding<ScreenT> = BuilderBinding(
+            type = ScreenT::class,
+            viewConstructor = { _, initialScreen, contextForNewView, container ->
                 LayoutInflater.from(container?.context ?: contextForNewView)
                     .cloneInContext(contextForNewView)
                     .inflate(layoutId, container, false).apply {
-                        bindShowViewModel(initialViewModel,
-                            showViewModel = { },
-                            cleanupViewModel = { }
+                        bindShowScreen(initialScreen,
+                            showScreen = { },
+                            disposeScreenBinding = { }
                         )
                     }
             }

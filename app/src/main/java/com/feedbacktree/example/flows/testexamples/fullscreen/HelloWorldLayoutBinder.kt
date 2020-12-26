@@ -9,11 +9,11 @@ import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.backPresses
 import io.reactivex.Observable
 
-class HelloWorldLayoutBinder(private val view: View) : LayoutBinder<HelloWorldViewModel, Event> {
+class HelloWorldLayoutBinder(private val view: View) : LayoutBinder<HelloWorldScreen, Event> {
 
     override fun feedbacks() = listOf(bindUI())
 
-    private fun bindUI() = bind<HelloWorldViewModel, Event> {
+    private fun bindUI() = bind<HelloWorldScreen, Event> {
         return@bind Bindings(
             subscriptions = listOf(),
             events = listOf<Observable<Event>>(
@@ -22,7 +22,7 @@ class HelloWorldLayoutBinder(private val view: View) : LayoutBinder<HelloWorldVi
         )
     }
 
-    companion object : ViewBinding<HelloWorldViewModel> by LayoutBinder.bind(
-        R.layout.hello_world_top_bottom, ::HelloWorldLayoutBinder, HelloWorldViewModel::sink
+    companion object : ViewBinding<HelloWorldScreen> by LayoutBinder.bind(
+        R.layout.hello_world_top_bottom, ::HelloWorldLayoutBinder, HelloWorldScreen::sink
     )
 }

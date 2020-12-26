@@ -79,7 +79,7 @@ abstract class FlowFragment<InputT : Any, StateT : Any, OutputT : Any> : Fragmen
 
         (view as WorkflowLayout).apply {
             id = R.id.workflow_layout
-            start(viewModel.viewModels, parameters.viewRegistry)
+            start(viewModel.screens, parameters.viewRegistry)
         }
     }
 

@@ -23,10 +23,10 @@ import android.view.View
 import android.view.View.BaseSavedState
 import com.feedbacktree.flow.ui.core.Named
 import com.feedbacktree.flow.ui.views.backstack.ViewStateCache.SavedState
-import com.feedbacktree.flow.ui.views.core.showViewModelTag
+import com.feedbacktree.flow.ui.views.core.showScreenTag
 
 /**
- * Handles persistence chores for container views that manage a set of [Named] viewModels,
+ * Handles persistence chores for container views that manage a set of [Named] screens,
  * showing a view for one at a time -- think back stacks or tab sets.
  *
  * This class implements [Parcelable] so that it can be preserved from
@@ -40,7 +40,7 @@ class ViewStateCache private constructor(
 
     /**
      * To be called when the set of hidden views changes but the visible view remains
-     * the same. Any cached view state held for viewModels that are not
+     * the same. Any cached view state held for screens that are not
      * [com.feedbacktree.flow.ui.core.compatible] those in [retaining] will be dropped.
      */
     fun prune(retaining: Collection<Named<*>>) {
@@ -53,14 +53,14 @@ class ViewStateCache private constructor(
     }
 
     /**
-     * @param retainedViewModels the viewModels to be considered hidden after this update. Any
+     * @param retainedScreens the screens to be considered hidden after this update. Any
      * associated view state will be retained in the cache, possibly to be restored to [newView]
      * on a succeeding call to his method. Any other cached view state will be dropped.
      *
      * @param oldViewMaybe the view that is being removed, if any, which is expected to be showing
      * a [Named] viewModel. If that viewModel is
      * [compatible with][com.feedbacktree.flow.ui.core.compatible] a member of
-     * [retainedViewModels], its state will be [saved][View.saveHierarchyState].
+     * [retainedScreens], its state will be [saved][View.saveHierarchyState].
      *
      * @param newView the view that is about to be displayed, which must be showing a
      * [Named] viewModel. If [compatible][com.feedbacktree.flow.ui.core.compatible]
@@ -69,17 +69,17 @@ class ViewStateCache private constructor(
      * @return true if [newView] has been restored.
      */
     fun update(
-        retainedViewModels: Collection<Named<*>>,
+        retainedScreens: Collection<Named<*>>,
         oldViewMaybe: View?,
         newView: View
     ): Boolean {
         val newKey = newView.namedKey
-        val hiddenKeys = retainedViewModels.asSequence()
+        val hiddenKeys = retainedScreens.asSequence()
             .map { it.compatibilityKey }
             .toSet()
             .apply {
-                require(retainedViewModels.size == size) {
-                    "Duplicate entries not allowed in $retainedViewModels."
+                require(retainedScreens.size == size) {
+                    "Duplicate entries not allowed in $retainedScreens."
                 }
             }
 
@@ -175,6 +175,6 @@ class ViewStateCache private constructor(
 }
 
 private val View.namedKey: String
-    get() = checkNotNull((showViewModelTag?.showing as? Named<*>)?.compatibilityKey) {
-        "Expected $this to be showing a Named ViewModel, found ${showViewModelTag?.showing}"
+    get() = checkNotNull((showScreenTag?.showing as? Named<*>)?.compatibilityKey) {
+        "Expected $this to be showing a Named ViewModel, found ${showScreenTag?.showing}"
     }

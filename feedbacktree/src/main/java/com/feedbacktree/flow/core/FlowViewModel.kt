@@ -35,7 +35,7 @@ class FlowViewModel<InputT : Any, StateT : Any, OutputT : Any>(
 
 
     val output: Observable<OutputT> = _output
-    val viewModels: Observable<Any> = renderingTrigger.startWith(Unit).map {
+    val screens: Observable<Any> = renderingTrigger.startWith(Unit).map {
         rootNode.render() as Any
     }
 

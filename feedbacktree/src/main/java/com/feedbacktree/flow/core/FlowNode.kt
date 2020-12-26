@@ -36,19 +36,19 @@ class RenderingContext<EventT : Any, OutputT : Any> internal constructor(
         node.complete(output)
     }
 
-    fun <InputT : Any, ChildStateT : Any, ChildOutputT : Any, ChildViewModelT> renderChild(
+    fun <InputT : Any, ChildStateT : Any, ChildOutputT : Any, ChildScreenT> renderChild(
         input: InputT,
-        flow: Flow<InputT, ChildStateT, *, ChildOutputT, ChildViewModelT>,
+        flow: Flow<InputT, ChildStateT, *, ChildOutputT, ChildScreenT>,
         id: String? = null,
         onResult: (ChildOutputT) -> Unit
-    ): ChildViewModelT {
+    ): ChildScreenT {
         val flowId = id ?: flow.toString()
         logVerbose("renderChild: $flowId, node = ${node.id}, node.children= ${node.children.size}")
         val existingNode = node.children.firstOrNull { it.id == flowId }
 
         return if (existingNode != null) {
             @Suppress("UNCHECKED_CAST")
-            val castedNode = existingNode as FlowNode<*, *, *, ChildOutputT, ChildViewModelT>
+            val castedNode = existingNode as FlowNode<*, *, *, ChildOutputT, ChildScreenT>
             // We update the onResult block with the new block provided block that will be called when the child output ends.
             // In fact, it could be that the Parent State captured inside the onResult block when the child flow was started
             // is not valid anymore.
@@ -71,16 +71,16 @@ class RenderingContext<EventT : Any, OutputT : Any> internal constructor(
     }
 
 
-    fun <ChildStateT : Any, ChildOutputT : Any, ChildViewModelT> renderChild(
-        flow: Flow<Unit, ChildStateT, *, ChildOutputT, ChildViewModelT>,
+    fun <ChildStateT : Any, ChildOutputT : Any, ChildScreenT> renderChild(
+        flow: Flow<Unit, ChildStateT, *, ChildOutputT, ChildScreenT>,
         id: String? = null,
         onResult: (ChildOutputT) -> Unit
     ) = renderChild(Unit, flow, id, onResult)
 }
 
-internal class FlowNode<InputT : Any, StateT : Any, EventT : Any, OutputT : Any, ViewModelT>(
+internal class FlowNode<InputT : Any, StateT : Any, EventT : Any, OutputT : Any, ScreenT>(
     val input: InputT,
-    val flow: Flow<InputT, StateT, EventT, OutputT, ViewModelT>,
+    val flow: Flow<InputT, StateT, EventT, OutputT, ScreenT>,
     val id: String,
     val renderingTrigger: PublishSubject<Unit>,
     var onResult: (OutputT) -> Unit
@@ -114,14 +114,14 @@ internal class FlowNode<InputT : Any, StateT : Any, EventT : Any, OutputT : Any,
     private var flowState = BehaviorSubject.create<FlowState<StateT, OutputT>>()
 
 
-    fun render(): ViewModelT {
+    fun render(): ScreenT {
         val context = RenderingContext(
             sink = { event ->
                 eventsPublishSubject.onNext(event)
             },
             node = this
         )
-        val viewModel = flow.render(currentState ?: flow.initialState(input), context)
+        val screen = flow.render(currentState ?: flow.initialState(input), context)
         val currentChildrenFlowIds = context.tempNodes.map { it.id }
         val childrenToRemove = children.filter {
             !currentChildrenFlowIds.contains(it.id)
@@ -130,7 +130,7 @@ internal class FlowNode<InputT : Any, StateT : Any, EventT : Any, OutputT : Any,
             it.dispose()
         }
         children = context.tempNodes
-        return viewModel
+        return screen
     }
 
     private val outputPublishSubject = PublishSubject.create<OutputT>()

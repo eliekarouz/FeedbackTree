@@ -44,47 +44,48 @@ class ViewRegistry private constructor(
     )
 
     /**
-     * Creates a [View] to display [initialViewModel], which can be updated via calls
-     * to [View.showViewModel].
+     * Creates a [View] to display [initialScreen], which can be updated via calls
+     * to [View.showScreen].
      */
-    fun <ViewModelT : Any> buildView(
-        initialViewModel: ViewModelT,
+    fun <ScreenT : Any> buildView(
+        initialScreen: ScreenT,
         contextForNewView: Context,
         container: ViewGroup? = null
     ): View {
         @Suppress("UNCHECKED_CAST")
-        return (allBindings[initialViewModel::class] as? ViewBinding<ViewModelT>)
-            ?.buildView(this, initialViewModel, contextForNewView, container)
+        return (allBindings[initialScreen::class] as? ViewBinding<ScreenT>)
+            ?.buildView(this, initialScreen, contextForNewView, container)
             ?.apply {
-                checkNotNull(showViewModelTag?.showing) {
-                    "View.bindShowViewModel must be called for $this."
+                checkNotNull(showScreenTag?.showing) {
+                    "View.bindShowScreen must be called for $this."
                 }
             }
             ?: throw IllegalArgumentException(
-                "A binding for ${initialViewModel::class.java.name} must be registered " +
-                        "to display $initialViewModel."
+                "A binding for ${initialScreen::class.java.name} must be registered " +
+                        "to display $initialScreen."
             )
     }
 
-    internal fun <ViewModelT : Any> viewBinding(viewModelT: ViewModelT): ViewBinding<ViewModelT> {
+    internal fun <ScreenT : Any> viewBinding(screen: ScreenT): ViewBinding<ScreenT> {
         @Suppress("UNCHECKED_CAST")
-        return (allBindings[viewModelT::class] as? ViewBinding<ViewModelT>)
+        return (allBindings[screen::class] as? ViewBinding<ScreenT>)
             ?: throw IllegalArgumentException(
-                "A binding for ${viewModelT::class.java.name} must be registered."
+                "A binding for ${screen::class.java.name} must be registered."
             )
     }
+
     /**
-     * Creates a [View] to display [initialViewModel], and which can handle calls
-     * to [View.showViewModel].
+     * Creates a [View] to display [initialScreen], and which can handle calls
+     * to [View.showScreen].
      */
-    fun <ViewModelT : Any> buildView(
-        initialViewModel: ViewModelT,
+    fun <ScreenT : Any> buildView(
+        initialScreen: ScreenT,
         container: ViewGroup
     ): View {
-        return buildView(initialViewModel, container.context, container)
+        return buildView(initialScreen, container.context, container)
     }
 
-    operator fun <ViewModelT : Any> plus(binding: ViewBinding<ViewModelT>): ViewRegistry {
+    operator fun <ScreenT : Any> plus(binding: ViewBinding<ScreenT>): ViewRegistry {
         check(binding.type !in bindings.keys) {
             "Already registered ${bindings[binding.type]} for ${binding.type}, cannot accept $binding."
         }
@@ -103,17 +104,17 @@ class ViewRegistry private constructor(
 private object NamedBinding : ViewBinding<Named<*>>
 by BuilderBinding(
     type = Named::class,
-    viewConstructor = { viewRegistry, initialViewModel, contextForNewView, container ->
-        val view = viewRegistry.buildView(initialViewModel.wrapped, contextForNewView, container)
+    viewConstructor = { viewRegistry, initialScreen, contextForNewView, container ->
+        val view = viewRegistry.buildView(initialScreen.wrapped, contextForNewView, container)
         view.apply {
-            val wrappedUpdater = showViewModelTag!!.showViewModel
-            val cleanupViewModel = cleanupViewModelTag
-            bindShowViewModel(initialViewModel,
-                showViewModel = {
+            val wrappedUpdater = showScreenTag!!.showScreen
+            val cleanupScreenBinding = disposeScreenBindingTag
+            bindShowScreen(initialScreen,
+                showScreen = {
                     wrappedUpdater.invoke(it.wrapped)
                 },
-                cleanupViewModel = {
-                    cleanupViewModel?.invoke()
+                disposeScreenBinding = {
+                    cleanupScreenBinding?.invoke()
                 })
         }
     }

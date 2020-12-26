@@ -16,7 +16,7 @@
 package com.feedbacktree.flow.ui.core
 
 /**
- * Allows viewModels that do not implement [Compatible] themselves to be distinguished
+ * Allows screens that do not implement [Compatible] themselves to be distinguished
  * by more than just their type. Instances are [compatible] if they have the same name
  * and have [compatible] [wrapped] fields.
  */

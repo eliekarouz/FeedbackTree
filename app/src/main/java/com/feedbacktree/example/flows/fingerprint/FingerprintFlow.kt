@@ -11,14 +11,14 @@ import com.feedbacktree.flow.core.advance
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.core.modals.asModal
 
-class EnterFingerprintViewModel(val sink: (Event) -> Unit)
+class EnterFingerprintScreen(val sink: (Event) -> Unit)
 
 val FingerprintFlow = Flow<Unit, State, Event, Unit, Modal>(
     initialState = { State.AskingForFingerprint() },
     stepper = ::stepper,
     feedbacks = listOf()
 ) { state, context ->
-    EnterFingerprintViewModel(context.sink).asModal()
+    EnterFingerprintScreen(context.sink).asModal()
 }
 
 sealed class State {

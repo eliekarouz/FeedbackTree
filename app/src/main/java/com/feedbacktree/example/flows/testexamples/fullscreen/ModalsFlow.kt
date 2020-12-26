@@ -17,10 +17,10 @@ val ModalsFlow = Flow<Unit, State, Event, Unit, Modal>(
 ) { state, context ->
     return@Flow when (state) {
         State.ShowingHelloWorld -> ViewModal(
-            content = HelloWorldViewModel(context.sink)
+            content = HelloWorldScreen(context.sink)
         )
         State.ShowingBackstack -> FullScreenModal(
-            content = BackStackScreen(HelloWorldViewModel(context.sink))
+            content = BackStackScreen(HelloWorldScreen(context.sink))
         )
 
     }

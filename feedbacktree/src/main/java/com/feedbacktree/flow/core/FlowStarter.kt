@@ -64,7 +64,7 @@ fun <InputT : Any, StateT : Any, OutputT : Any> FragmentActivity.startFlow(
 
     val layout = WorkflowLayout(this).apply {
         id = R.id.workflow_layout
-        start(viewModel.viewModels, viewRegistry)
+        start(viewModel.screens, viewRegistry)
     }
     setContentView(layout)
     return disposeBag
@@ -97,13 +97,13 @@ fun <InputT : Any, StateT : Any, OutputT : Any> FragmentActivity.startModalsFlow
             }
         }()
 
-        val viewModels: Observable<Optional<Any>> = renderingTrigger.startWith(Unit).map {
+        val screens: Observable<Optional<Any>> = renderingTrigger.startWith(Unit).map {
             rootNode.render().asOptional
         }
 
         val renderer = DialogFlowRenderer(this, viewRegistry, dialogRegistry)
 
-        val screenDisposable = viewModels
+        val screenDisposable = screens
             .doFinally { renderer.update(listOf()) }
             .subscribe { screen ->
                 when (screen) {

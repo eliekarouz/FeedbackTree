@@ -13,8 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import com.feedbacktree.flow.ui.core.modals.AlertModal
 import com.feedbacktree.flow.ui.core.modals.AlertModalWithView
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.core.cleanupViewModel
-import com.feedbacktree.flow.ui.views.core.showViewModel
+import com.feedbacktree.flow.ui.views.core.disposeScreenBinding
+import com.feedbacktree.flow.ui.views.core.showScreen
 import com.feedbacktree.flow.utils.logAndShow
 import kotlin.reflect.KClass
 
@@ -30,7 +30,7 @@ class AlertWithViewDialogBinding(
         viewRegistry: ViewRegistry,
         context: Context
     ): DialogRef<AlertModalWithView<*>> {
-        val contentView = viewRegistry.buildView(initialModal.contentViewModel, context)
+        val contentView = viewRegistry.buildView(initialModal.contentScreen, context)
         val dialog = AlertDialog.Builder(context, dialogThemeResId)
             .setView(contentView)
             .create()
@@ -76,11 +76,11 @@ class AlertWithViewDialogBinding(
 
     override fun cleanUpDialog(dialogRef: DialogRef<AlertModalWithView<*>>) {
         super.cleanUpDialog(dialogRef)
-        (dialogRef.extra as View).cleanupViewModel()
+        (dialogRef.extra as View).disposeScreenBinding()
     }
     
     private fun contentViewUpdate(dialogRef: DialogRef<AlertModalWithView<*>>) {
-        (dialogRef.extra as View).showViewModel(dialogRef.modal.contentViewModel)
+        (dialogRef.extra as View).showScreen(dialogRef.modal.contentScreen)
     }
 
 

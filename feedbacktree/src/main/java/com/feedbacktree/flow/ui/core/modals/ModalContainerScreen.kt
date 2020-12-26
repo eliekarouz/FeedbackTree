@@ -5,12 +5,12 @@
 
 package com.feedbacktree.flow.ui.core.modals
 
-data class ModalContainerScreen<BaseViewModelT : Any, ModalT : Modal>(
-    val baseScreen: BaseViewModelT,
+data class ModalContainerScreen<BaseScreenT : Any, ModalT : Modal>(
+    val baseScreen: BaseScreenT,
     val modals: List<ModalT>
 ) {
 
-    constructor(baseScreen: BaseViewModelT, modal: ModalT?) : this(
+    constructor(baseScreen: BaseScreenT, modal: ModalT?) : this(
         baseScreen,
         listOfNotNull(modal)
     )

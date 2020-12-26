@@ -22,7 +22,7 @@ import kotlin.reflect.KClass
 
 /**
  * A [ViewBinding] that allows [ViewRegistry.buildView] to dispense [View]s that need
- * to be generated from code. (Use [LayoutRunner] to work with XML layout resources.)
+ * to be generated from code. (Use [LayoutBinder] to work with XML layout resources.)
  *
  * Typical usage is to have a custom builder or view's `companion object` implement
  * [ViewBinding] by delegating to a [BuilderBinding], like this:
@@ -31,7 +31,7 @@ import kotlin.reflect.KClass
  *      context: Context,
  *      attributeSet: AttributeSet?
  *    ) : FrameLayout(context, attributeSet) {
- *      private fun update(viewModel:  MyViewModel) { ... }
+ *      private fun update(screen:  MyScreen) { ... }
  *
  *      companion object : ViewBuilder<MyScreen>
  *      by BuilderBinding(
@@ -39,7 +39,7 @@ import kotlin.reflect.KClass
  *          builder = { _, initialViewModel, context, _ ->
  *            MyView(context).apply {
  *              layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
- *              bindShowViewModel(initialViewModel, ::update)
+ *              bindShowScreen(initialScreen, ::update)
  *            }
  *      )
  *    }
@@ -52,21 +52,21 @@ import kotlin.reflect.KClass
  *    )
  *
  * Note in particular the [ViewRegistry] argument to the [viewConstructor] lambda. This allows
- * nested viewModels to be displayed via nested calls to [ViewRegistry.buildView].
+ * nested screns to be displayed via nested calls to [ViewRegistry.buildView].
  */
-class BuilderBinding<ViewModelT : Any>(
-    override val type: KClass<ViewModelT>,
+class BuilderBinding<ScreenT : Any>(
+    override val type: KClass<ScreenT>,
     private val viewConstructor: (
         viewRegistry: ViewRegistry,
-        initialViewModel: ViewModelT,
+        initialScreen: ScreenT,
         contextForNewView: Context,
         container: ViewGroup?
     ) -> View
-) : ViewBinding<ViewModelT> {
+) : ViewBinding<ScreenT> {
     override fun buildView(
         registry: ViewRegistry,
-        initialViewModel: ViewModelT,
+        initialScreen: ScreenT,
         contextForNewView: Context,
         container: ViewGroup?
-    ): View = viewConstructor.invoke(registry, initialViewModel, contextForNewView, container)
+    ): View = viewConstructor.invoke(registry, initialScreen, contextForNewView, container)
 }

@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatEditText
  * An EditText that can be used for two-way binding. Using the standard EditText will create infinite
  * loops.
  * The reason is that modifying the text programmatically would trigger "text changes" events.
- * So when the EditText.text is updated, a new State will be generated, a new ViewModel will be produced from the new state,
+ * So when the EditText.text is updated, a new State will be generated, a new Screen will be produced from the new state,
  * and the EditText in the layout will be updated which will emit again another "text changes" event.
  */
 class FTEditText : AppCompatEditText {

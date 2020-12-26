@@ -13,14 +13,14 @@ import com.feedbacktree.flow.ui.views.core.ViewBinding
 
 
 class EnterFingerprintLayoutBinder(val view: View) :
-    LayoutBinder<EnterFingerprintViewModel, Event> {
+    LayoutBinder<EnterFingerprintScreen, Event> {
 
     // TODO implement feedbacks
-    override fun feedbacks(): List<Feedback<EnterFingerprintViewModel, Event>> = listOf()
+    override fun feedbacks(): List<Feedback<EnterFingerprintScreen, Event>> = listOf()
 
-    companion object : ViewBinding<EnterFingerprintViewModel> by LayoutBinder.bind(
+    companion object : ViewBinding<EnterFingerprintScreen> by LayoutBinder.bind(
         R.layout.fingerprint_alert_dialog,
         ::EnterFingerprintLayoutBinder,
-        EnterFingerprintViewModel::sink
+        EnterFingerprintScreen::sink
     )
 }

@@ -7,12 +7,12 @@ package com.feedbacktree.flow.ui.core.modals
 
 import com.feedbacktree.flow.ui.core.Compatible
 
-class ViewModal<ContentViewModelT : Any>(
-    val content: ContentViewModelT,
+class ViewModal<ScreenT : Any>(
+    val content: ScreenT,
     val widthLayout: Layout,
     val heightLayout: Layout
 ) : Modal, Compatible {
-    constructor(content: ContentViewModelT) : this(
+    constructor(content: ScreenT) : this(
         content,
         widthLayout = Layout.Wrap,
         heightLayout = Layout.Wrap
@@ -33,12 +33,12 @@ sealed class Layout {
     }
 }
 
-fun <ContentViewModelT : Any> ContentViewModelT.asModal(): ViewModal<ContentViewModelT> {
+fun <ScreenT : Any> ScreenT.asModal(): ViewModal<ScreenT> {
     return ViewModal(content = this)
 }
 
 @Suppress("FunctionName")
-fun <ContentViewModelT : Any> FullScreenModal(content: ContentViewModelT): ViewModal<ContentViewModelT> {
+fun <ScreenT : Any> FullScreenModal(content: ScreenT): ViewModal<ScreenT> {
     return ViewModal(
         content = content,
         widthLayout = Layout.FullScreen,
@@ -46,6 +46,6 @@ fun <ContentViewModelT : Any> FullScreenModal(content: ContentViewModelT): ViewM
     )
 }
 
-fun <ContentViewModelT : Any> ContentViewModelT.asFullScreenModal(): ViewModal<ContentViewModelT> {
+fun <ScreenT : Any> ScreenT.asFullScreenModal(): ViewModal<ScreenT> {
     return FullScreenModal(this)
 }

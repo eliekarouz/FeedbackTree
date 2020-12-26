@@ -57,10 +57,10 @@ open class BackStackContainer(
 
         // If existing view is compatible, just update it.
         oldViewMaybe
-            ?.takeIf { it.canShowViewModel(named.top) }
+            ?.takeIf { it.canShowScreen(named.top) }
             ?.let {
                 viewStateCache.prune(named.stack)
-                it.showViewModel(named.top)
+                it.showScreen(named.top)
                 return
             }
 
@@ -71,13 +71,13 @@ open class BackStackContainer(
     }
 
     private fun cleanUp() {
-        showing?.cleanupViewModel()
+        showing?.disposeScreenBinding()
     }
 
     /**
-     * Called from [View.showViewModel] to swap between views.
+     * Called from [View.showScreen] to swap between views.
      * Subclasses can override to customize visual effects. There is no need to call super.
-     * Note that views are showing viewModels of type [Named]`<BackStackScreen<*>>`.
+     * Note that views are showing screens of type [Named]`<BackStackScreen<*>>`.
      *
      * @param oldViewMaybe the outgoing view, or null if this is the initial viewModel.
      * @param newView the view that should replace [oldViewMaybe] (if it exists), and become
@@ -94,7 +94,7 @@ open class BackStackContainer(
         oldViewMaybe
             ?.let { oldView ->
                 addView(newView)
-                oldView.cleanupViewModel()
+                oldView.disposeScreenBinding()
                 removeView(oldView)
 //                    val newScene = Scene(this, newView)
 //
@@ -145,7 +145,7 @@ open class BackStackContainer(
                     id = R.id.workflow_back_stack_container
                     layoutParams = (ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT))
                     registry = viewRegistry
-                    bindShowViewModel(initialViewModel, ::update, ::cleanUp)
+                    bindShowScreen(initialViewModel, ::update, ::cleanUp)
                 }
         }
     )

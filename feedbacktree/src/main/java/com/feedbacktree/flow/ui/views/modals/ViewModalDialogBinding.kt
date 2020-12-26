@@ -24,8 +24,8 @@ import com.feedbacktree.flow.ui.core.modals.Layout
 import com.feedbacktree.flow.ui.core.modals.ViewModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
-import com.feedbacktree.flow.ui.views.core.cleanupViewModel
-import com.feedbacktree.flow.ui.views.core.showViewModel
+import com.feedbacktree.flow.ui.views.core.disposeScreenBinding
+import com.feedbacktree.flow.ui.views.core.showScreen
 import com.feedbacktree.flow.utils.logAndShow
 import com.feedbacktree.flow.utils.windowManager
 import kotlin.reflect.KClass
@@ -68,9 +68,9 @@ class ViewModalDialogBinding(
             }
     }
 
-    private fun <ContentViewModel : Any> Dialog.addFullScreenView(
+    private fun <ScreenT : Any> Dialog.addFullScreenView(
         viewRegistry: ViewRegistry,
-        viewModal: ViewModal<ContentViewModel>
+        viewModal: ViewModal<ScreenT>
     ): View {
         val view by lazy { viewRegistry.buildView(viewModal.content, context) }
         val panel = PanelBodyWrapper(context).apply {
@@ -93,9 +93,9 @@ class ViewModalDialogBinding(
         return view
     }
 
-    private fun <ContentViewModel : Any> Dialog.addWrapContentView(
+    private fun <ScreenT : Any> Dialog.addWrapContentView(
         viewRegistry: ViewRegistry,
-        viewModal: ViewModal<ContentViewModel>
+        viewModal: ViewModal<ScreenT>
     ): View {
         window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
         logAndShow("ViewModal")
@@ -105,12 +105,12 @@ class ViewModalDialogBinding(
     }
 
     override fun updateDialog(dialogRef: DialogRef<ViewModal<*>>) {
-        with(dialogRef) { (extra as View).showViewModel(modal.content) }
+        with(dialogRef) { (extra as View).showScreen(modal.content) }
     }
 
     override fun cleanUpDialog(dialogRef: DialogRef<ViewModal<*>>) {
         super.cleanUpDialog(dialogRef)
-        with(dialogRef) { (extra as View).cleanupViewModel() }
+        with(dialogRef) { (extra as View).disposeScreenBinding() }
     }
 }
 

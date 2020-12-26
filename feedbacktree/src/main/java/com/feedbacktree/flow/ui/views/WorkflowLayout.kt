@@ -33,7 +33,7 @@ import io.reactivex.disposables.Disposable
  * In most cases, if not all, you will be using [com.feedbacktree.flow.core.startFlow] or subclass [FlowFragment]
  * rather than manage this class directly.
  *
- * [WorkflowLayout] is the root [View] container that will be responsible of rendering the viewModels produced by
+ * [WorkflowLayout] is the root [View] container that will be responsible of rendering the screens produced by
  * the root [Flow].
  */
 class WorkflowLayout(
@@ -44,18 +44,18 @@ class WorkflowLayout(
     private val showing: View? get() = if (childCount > 0) getChildAt(0) else null
 
     /**
-     * Subscribes to [viewModels], and uses [registry] to
+     * Subscribes to [screens], and uses [registry] to
      * [build a new view][ViewRegistry.buildView] each time a new type of viewModel is received,
      * making that view the only child of this one.
      *
      * Views created this way may make recursive calls to [ViewRegistry.buildView] to make
-     * children of their own to handle nested viewModels.
+     * children of their own to handle nested screens.
      */
     fun start(
-        viewModels: Observable<out Any>,
+        screens: Observable<out Any>,
         registry: ViewRegistry
     ) {
-        takeWhileAttached(viewModels) { show(it, registry) }
+        takeWhileAttached(screens) { show(it, registry) }
     }
 
     override fun onBackPressed(): Boolean {
@@ -68,13 +68,13 @@ class WorkflowLayout(
         newViewModel: Any,
         registry: ViewRegistry
     ) {
-        showing?.takeIf { it.canShowViewModel(newViewModel) }
+        showing?.takeIf { it.canShowScreen(newViewModel) }
             ?.let { it ->
-                it.showViewModel(newViewModel)
+                it.showScreen(newViewModel)
                 return
             }
 
-        showing?.cleanupViewModel()
+        showing?.disposeScreenBinding()
         removeAllViews()
         val newView = registry.buildView(newViewModel, this)
         restoredChildState?.let { restoredState ->
@@ -149,7 +149,7 @@ class WorkflowLayout(
 
                 override fun detach(view: View) {
                     sub?.let {
-                        showing?.cleanupViewModel()
+                        showing?.disposeScreenBinding()
                         it.dispose()
                         sub = null
                     }
