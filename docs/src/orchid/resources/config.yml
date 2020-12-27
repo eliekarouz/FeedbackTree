@@ -29,6 +29,10 @@ kotlindoc:
   sourceDirs:
     - '../../../../feedbacktree/src/main/java'
 
+assets:
+  sourceDirs:
+    - 'FeedbackTree/media'
+
 allPages:
   metaComponents:
     - type: 'prism'

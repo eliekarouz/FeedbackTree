@@ -3,14 +3,13 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.example
+package com.feedbacktree.tutorials
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.feedbacktree.example.flows.root.RootFlow
-import com.feedbacktree.example.ui.appViewRegistry
 import com.feedbacktree.flow.core.startFlow
 import com.feedbacktree.flow.ui.views.core.HandlesBack
+import com.feedbacktree.tutorials.root.RootFlow
 import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity() {

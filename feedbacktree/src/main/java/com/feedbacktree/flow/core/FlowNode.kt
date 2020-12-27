@@ -159,7 +159,7 @@ internal class FlowNode<InputT : Any, StateT : Any, EventT : Any, OutputT : Any,
                 }
             )
             events = listOf(
-                eventsPublishSubject.map<FlowEvent<StateT, EventT>> { event ->
+                eventsPublishSubject.map { event ->
                     FlowEvent.StandardEvent(
                         event
                     )
@@ -188,7 +188,7 @@ internal class FlowNode<InputT : Any, StateT : Any, EventT : Any, OutputT : Any,
         }
 
         val system = Observables.system(
-            initialState = FlowState<StateT, OutputT>(
+            initialState = FlowState(
                 state = flow.initialState(input),
                 flowOutput = null
             ),
@@ -225,8 +225,8 @@ internal class FlowNode<InputT : Any, StateT : Any, EventT : Any, OutputT : Any,
 }
 
 private data class FlowState<StateT, OutputT>(
-    internal val state: StateT,
-    internal val flowOutput: OutputT?
+    val state: StateT,
+    val flowOutput: OutputT?
 )
 
 
@@ -263,7 +263,7 @@ private fun <StateT : Any, EventT : Any, OutputT : Any> wrapFeedback(feedback: F
         )
         val observableEvents = feedback(stateObservableSchedulerContext)
         observableEvents.map { event ->
-            FlowEvent.StandardEvent<StateT, EventT>(event)
+            FlowEvent.StandardEvent(event)
         }
     }
 }

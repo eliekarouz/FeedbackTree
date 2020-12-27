@@ -3,13 +3,13 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.example.flows.root
+package com.feedbacktree.tutorials.root
 
-import com.feedbacktree.example.flows.counter.CounterFlow
-import com.feedbacktree.example.flows.login.LoginFlow
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.Step
 import com.feedbacktree.flow.core.advance
+import com.feedbacktree.tutorials.flows.counter.CounterFlow
+import com.feedbacktree.tutorials.login.LoginFlow
 
 val RootFlow = Flow<Unit, State, Event, Nothing, Any>(
     initialState = { State() },

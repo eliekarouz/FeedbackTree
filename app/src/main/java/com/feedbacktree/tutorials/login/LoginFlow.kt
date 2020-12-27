@@ -3,7 +3,7 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.example.flows.login
+package com.feedbacktree.tutorials.login
 
 import com.feedbacktree.flow.core.*
 import io.reactivex.Observable

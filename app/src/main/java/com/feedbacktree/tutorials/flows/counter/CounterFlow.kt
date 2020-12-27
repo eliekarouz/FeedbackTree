@@ -3,7 +3,7 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.example.flows.counter
+package com.feedbacktree.tutorials.flows.counter
 
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.advance

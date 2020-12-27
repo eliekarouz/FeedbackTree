@@ -1,4 +1,4 @@
-package com.feedbacktree.example.util
+package com.feedbacktree.utils
 
 import android.content.Context
 import android.text.TextWatcher

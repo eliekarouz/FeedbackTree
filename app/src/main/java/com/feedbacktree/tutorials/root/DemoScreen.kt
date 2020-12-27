@@ -1,4 +1,4 @@
-package com.feedbacktree.example.flows.root
+package com.feedbacktree.tutorials.root
 
 data class DemoScreen(
     val state: State,

@@ -3,12 +3,12 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.example.flows.login
+package com.feedbacktree.tutorials.login
 
 import android.widget.Button
-import com.feedbacktree.example.R
-import com.feedbacktree.example.util.FTEditText
 import com.feedbacktree.flow.ui.views.LayoutBinder
+import com.feedbacktree.tutorials.R
+import com.feedbacktree.utils.FTEditText
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 

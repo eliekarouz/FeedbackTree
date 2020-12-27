@@ -1,4 +1,4 @@
-package com.feedbacktree.example.flows.root
+package com.feedbacktree.tutorials.root
 
 import android.app.Activity
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.feedbacktree.example.R
 import com.feedbacktree.flow.ui.views.LayoutBinder
+import com.feedbacktree.tutorials.R
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 

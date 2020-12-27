@@ -1,3 +1,11 @@
+In this tutorial, we will be implementing a simple login flow with the following requirements
+
+- User should be able to enter his email and password
+- Sign In button
+  - Disabled (gray) when the email/password fields are empty. Colored using the main theme otherwise.
+  - Button text is "Sign In" but changes to "Signing In" once the user clicks on it.
+- It could be that the user has already entered his email somewhere in the app before kickstarting the login process. The input of the login flow will be the email that we would like to start with.
+
 ### Getting Started
 
 In this tutorial, we will be implementing a simple login flow with the following requirements
@@ -163,7 +171,7 @@ val LoginLayoutBinder = LayoutBinder.create(
         events = listOf(
             emailEditText.textChanges().map { Event.EnteredEmail(it.toString()) }, // 1
             passwordEditText.textChanges().map { Event.EnteredPassword(it.toString()) },
-            btnLogin.clicks().map { Event.ClickedLogin }
+            btnLogin.clicks().map { Event.ClickedLogin } // 4
         )
     }
 }
@@ -174,7 +182,7 @@ val LoginLayoutBinder = LayoutBinder.create(
    1. The `Flow` can start with the last email that was used to login. So the `emailEditText` can initially be non-empty. 
    2. It is recommended to always rely on the state as the single source of truth.  In other terms, store the values of the textfields in the state and use what's in the state to drive the UI. This technique comes handy when the device configuration changes and a new layout is be inflated which would allow FeedbackTree to automatically refill the new layout from what is stored in the state.
 3. If you haven't noticed yet, we are doing a two-way binding for the `emailEditText.text` property, which means that we set the `emailEditText.text` in subscriptions and listen to the text changes in the events.\
-   The problem of the `EditText` is that watchers are notified when the `text` is updated **programmatically** which will cause **infinte** update cycles/loops when two-way binding is applied. The `FTEditText` breaks the infinite update cycles. The `FTEditText` mainly removes the `TextWatchers` , updates the `text` property, before adding back the watchers that were removed. You can check [here](https://github.com/eliekarouz/FeedbackTree/blob/master/app/src/main/java/com/feedbacktree/example/util/FTEditText.kt) the full implementation in case you want to apply the same logic for other controls like switches. 
+   The problem of the `EditText` is that watchers are notified when the `text` is updated **programmatically** which will cause **infinte** update cycles/loops when two-way binding is applied. The `FTEditText` breaks the infinite update cycles. The `FTEditText` mainly removes the `TextWatchers`  and updates the `text` property before adding back the watchers that were removed. You can check [here](https://github.com/eliekarouz/FeedbackTree/blob/master/app/src/main/java/com/feedbacktree/example/util/FTEditText.kt) the full implementation in case you want to apply the same logic for other controls like switches. 
 4. We are using  `clicks()` from [RxBinding](https://github.com/JakeWharton/RxBinding) to capture the the View clicks.
 
 ### Starting the Flow
