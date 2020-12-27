@@ -33,7 +33,7 @@ kotlindoc:
 
 assets:
   sourceDirs:
-    - 'FeedbackTree/media'
+    - 'assets/media'
 
 allPages:
   metaComponents:
