@@ -1,4 +1,6 @@
 site:
+  theme: 'Editorial'
+  baseUrl: 'https://eliekarouz.github.io/FeedbackTree'
   about:
     siteName: Feedback Tree
     siteDescription: A unidirectional architecture for Android
