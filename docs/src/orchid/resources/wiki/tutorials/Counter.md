@@ -2,7 +2,7 @@ In this tutorial, you will learn the steps needed to set up a basic FeedbackTree
 You will build a screen that has a counter and two buttons to increment and decrement the counter.
 
 <div style:"text-align: center;"> 
-  <img style: src="/FeedbackTree/media/counter_app_screenshot.png" width="250"/> 
+  <img style: src="/FeedbackTree/assets/media/counter_app_screenshot.png" width="250"/> 
 </div>
 
 <br>
@@ -113,7 +113,7 @@ FeedbackTree is based on two core concepts a `Flow` and a `Declarative UI`.\
 Here's a diagram that shows how FeedbackTree works when applied to the Counter example:
 
 <div style:"text-align: center;"> 
-  <img style: src="/FeedbackTree/media/counter_flow_diagram.svg" width="800"/> 
+  <img style: src="/FeedbackTree/assets/media/counter_flow_diagram.svg" width="800"/> 
 </div>
 
 <br>
