@@ -9,7 +9,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.feedbacktree.flow.core.startFlow
 import com.feedbacktree.flow.ui.views.core.HandlesBack
-import com.feedbacktree.tutorials.root.RootFlow
+import com.feedbacktree.tutorials.flows.root.RootFlow
 import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity() {

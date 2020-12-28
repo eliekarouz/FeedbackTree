@@ -40,6 +40,7 @@ Add this to your build.gradle (app)
 ```groovy
 dependencies {
   implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.12.0"
+  implementation "com.github.eliekarouz.feedbacktree:core:0.12.0"
 }
 ```
 

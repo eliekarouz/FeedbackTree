@@ -1,24 +1,26 @@
 In this tutorial, we will be implementing a simple login flow with the following requirements
 
-- User should be able to enter his email and password
+- User should be able to enter his email and password.
 - Sign In button
-  - Disabled (gray) when the email/password fields are empty. Colored using the main theme otherwise.
+  - Disabled (grayish) when the email/password fields are empty. Colored using the main theme otherwise.
   - Button text is "Sign In" but changes to "Signing In" once the user clicks on it.
 - It could be that the user has already entered his email somewhere in the app before kickstarting the login process. The input of the login flow will be the email that we would like to start with.
+
+<div style:"text-align: center;"> 
+  <img style: src="/FeedbackTree/assets/media/login_app_screenshot.png" width="250"/> 
+</div>
 
 ### Getting Started
 
-In this tutorial, we will be implementing a simple login flow with the following requirements
+You can download the starter project [here](https://drive.google.com/uc?export=download&id=1AfNTKG-DSOS1At-iV0-HBVrDx5bZ5g_D). The starter project includes:
 
-- User should be able to enter his email and password
-- Sign In button
-  - Disabled (gray) when the email/password fields are empty. Colored using the main theme otherwise.
-  - Button text is "Sign In" but changes to "Signing In" once the user clicks on it.
-- It could be that the user has already entered his email somewhere in the app before kickstarting the login process. The input of the login flow will be the email that we would like to start with.
+- The dependencies needed, FeedbackTree, RxJava, and, RxBinding.
+- The login XML layout.
+- The `AuthenticationManager` that contains the authentication logic. 
 
 ### The Login Flow
 
-Create a new package called **login** and add to it a new Kotlin file called **LoginFlow.kt**, then. add the code below to it:
+Create a new package called **login** under **flows** package and add to it a new Kotlin file called **LoginFlow.kt**, then. add the code below to it:
 
 ```kotlin
 import com.feedbacktree.flow.core.*
@@ -63,8 +65,11 @@ data class LoginScreen(
     private val state: State,
     val sink: (Event) -> Unit
 ) {
-    val email: String
+    val emailText: String
         get() = state.email
+
+    val passwordText: String
+        get() = state.password
 
     val loginButtonTitle: String // 5
         get() = if (state.isLoggingIn) "Signing In" else "Sign In"
@@ -141,17 +146,12 @@ The `LoginFlow` renders a `LoginScreen`. The `LoginScreen` is a UI representatio
 In the **login** package, add a new file called **LoginLayoutBinder.kt** and the code below to it:
 
 ```kotlin
-import android.view.View
 import android.widget.Button
-import com.feedbacktree.example.R
-import com.feedbacktree.example.util.FTEditText
-import com.feedbacktree.flow.core.Bindings
-import com.feedbacktree.flow.core.bind
 import com.feedbacktree.flow.ui.views.LayoutBinder
-import com.feedbacktree.flow.ui.views.core.ViewBinding
+import com.feedbacktree.tutorials.R
+import com.feedbacktree.utils.FTEditText
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
-import io.reactivex.Observable
 
 val LoginLayoutBinder = LayoutBinder.create(
     layoutId = R.layout.login,
@@ -187,38 +187,40 @@ val LoginLayoutBinder = LayoutBinder.create(
 
 ### Starting the Flow
 
-Combining all the pieces together... 
+Combining all the pieces together:
 
 ```kotlin
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.feedbacktree.flow.core.startFlow
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.tutorials.flows.login.LoginFlow
+import com.feedbacktree.tutorials.flows.login.LoginLayoutBinder
 import io.reactivex.disposables.Disposable
 
-class LoginActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     var disposable: Disposable? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      
-      	val viewRegistry = ViewRegistry(LoginLayoutBinder) // 1
-      
+
+        val viewRegistry = ViewRegistry(LoginLayoutBinder) // 1
+
         disposable = startFlow(
-          input = "developer@feedbacktree.com", // 2
-          flow = LoginFlow,
-          viewRegistry = viewRegistry,
-          onOutput = {
-            // Do something with the output if you want
-          })
+            input = "developer@feedbacktree.com", // 2
+            flow = LoginFlow,
+            viewRegistry = viewRegistry,
+            onOutput = {
+                // Do something with the output if you want
+            })
     }
-  
+
     override fun onPause() {
         super.onPause()
         // 3 
         if (isFinishing) {
-            disposable?.dispose() 
+            disposable?.dispose()
             disposable = null
         }
     }
@@ -231,4 +233,7 @@ class LoginActivity : AppCompatActivity() {
 
 ### Where to Go From Here?
 
-In the next tutorial will create a demo application where we will see the reason there is a "Tree" in FeedbackTree.
+In this tutorial you learned how to create a non-UI feedback loop that will perform the authentication. In the next tutorial, we will see how to start children flows.
+
+The full code can be downloaded from [here](https://drive.google.com/uc?export=download&id=1ZQ1ETlCp_aKbPlK0vDDEZu3QMJuUlK76)
+

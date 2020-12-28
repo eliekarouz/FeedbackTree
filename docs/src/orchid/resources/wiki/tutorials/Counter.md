@@ -9,7 +9,7 @@ You will build a screen that has a counter and two buttons to increment and decr
 
 ### Getting Started
 
-Start by downloading the tutorial materials from [here](https://drive.google.com/uc?export=download&id=1QviU7VW9hvzzGBWz_wfVDXx2baqg5GyL) and open the **starter** project in Android Studio.\
+Start by downloading the tutorial materials from [here](https://drive.google.com/uc?export=download&id=1sDLQeo7HSGRSj5eS09mfzeCK-AVsur42) and open the **starter** project in Android Studio.\
 Let's start by adding FeedbackTree, RxJava, and, other RxJava related dependencies to the `build.gradle (app)` file. 
 
 ```groovy
@@ -329,5 +329,5 @@ subscriptions = listOf(
 I hope that you were able to successfully digest the core ideas. It's fine if you still have a lot of question marks.
 You can check the next tutorial where you will learn more about the `Feedbacks`.
 
-The full code can be downloaded from [here](https://drive.google.com/uc?export=download&id=1aHhjpAmz56g7oRL2uQDw17KJ7zYRCDTE)
+The full code can be downloaded from [here](https://drive.google.com/uc?export=download&id=1FWm4VLA_yas0hbg1ilo5zIvovbyJL3GN)
 

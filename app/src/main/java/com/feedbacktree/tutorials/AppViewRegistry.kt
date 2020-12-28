@@ -7,8 +7,8 @@ package com.feedbacktree.tutorials
 
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.tutorials.flows.counter.CounterLayoutBinder
-import com.feedbacktree.tutorials.login.LoginLayoutBinder
-import com.feedbacktree.tutorials.root.RootLayoutBinder
+import com.feedbacktree.tutorials.flows.login.LoginLayoutBinder
+import com.feedbacktree.tutorials.flows.root.RootLayoutBinder
 
 val appViewRegistry = ViewRegistry(
     RootLayoutBinder,

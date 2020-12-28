@@ -3,7 +3,7 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.tutorials.login
+package com.feedbacktree.tutorials.flows.login
 
 import android.widget.Button
 import com.feedbacktree.flow.ui.views.LayoutBinder

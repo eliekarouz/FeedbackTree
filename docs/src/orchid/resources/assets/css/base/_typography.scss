@@ -152,6 +152,15 @@
 		padding: 0.22em 0.65em;
 	}
 
+    li {
+        ul {
+            margin: 0 !important;
+        }
+        ol {
+            margin: 0 !important;
+        }
+    }
+
 	pre {
 		-webkit-overflow-scrolling: touch;
 		font-family: _font(family-fixed);

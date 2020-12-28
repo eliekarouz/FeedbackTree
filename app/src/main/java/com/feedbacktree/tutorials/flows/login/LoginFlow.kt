@@ -3,11 +3,11 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.tutorials.login
+package com.feedbacktree.tutorials.flows.login
 
 import com.feedbacktree.flow.core.*
+import com.feedbacktree.tutorials.managers.AuthenticationManager
 import io.reactivex.Observable
-import java.util.concurrent.TimeUnit
 
 val LoginFlow = Flow<String, State, Event, String, LoginScreen>(
     initialState = { lastEmailUsed -> State(email = lastEmailUsed) },
@@ -87,11 +87,3 @@ private fun loginFeedback(): Feedback<State, Event> = react<State, LoginQuery, E
         }
     }
 )
-
-object AuthenticationManager {
-    fun login(email: String, password: String): Observable<Boolean> {
-        // simulate network call here...
-        return Observable.just(true)
-            .delaySubscription(2, TimeUnit.SECONDS) // To simulate a network call
-    }
-}
