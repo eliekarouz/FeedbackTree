@@ -1,3 +1,8 @@
+/*
+ * Created by eliek on 12/28/2020
+ * Copyright (c) 2020 eliekarouz. All rights reserved.
+ */
+
 @file:Suppress("DEPRECATION")
 
 package com.feedbacktree.flow.ui.views
@@ -9,6 +14,40 @@ import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import io.reactivex.Observable
+
+object LayoutBinder {
+
+    inline fun <reified ScreenT : Any, reified EventT : Any> create(
+        @LayoutRes layoutId: Int,
+        noinline sink: (ScreenT) -> (EventT) -> Unit,
+        noinline build: (LayoutBinderBuilder<ScreenT, EventT>).(View) -> Unit
+    ): ViewBinding<ScreenT> = create(
+        layoutId = layoutId,
+        sink = sink,
+        build = { view, _ ->
+            build(view)
+        }
+    )
+
+    inline fun <reified ScreenT : Any, reified EventT : Any> create(
+        @LayoutRes layoutId: Int,
+        noinline sink: (ScreenT) -> (EventT) -> Unit,
+        noinline build: (LayoutBinderBuilder<ScreenT, EventT>).(View, ViewRegistry) -> Unit
+    ): ViewBinding<ScreenT> {
+        return LayoutRunner.bind(
+            layoutId = layoutId,
+            constructor = { view, viewRegistry ->
+                val builder = LayoutBinderBuilder<ScreenT, EventT>()
+                build(builder, view, viewRegistry)
+
+                object : LayoutRunner<ScreenT, EventT> {
+                    override fun feedbacks(): List<Feedback<ScreenT, EventT>> = builder.feedbacks
+                }
+            },
+            sink = sink
+        )
+    }
+}
 
 class LayoutBinderBuilder<ScreenT : Any, EventT : Any>(
     val feedbacks: MutableList<Feedback<ScreenT, EventT>> = mutableListOf()
@@ -45,42 +84,6 @@ class LayoutBinderBuilder<ScreenT : Any, EventT : Any>(
         effects: (initial: QueryT, queryObservable: Observable<QueryT>) -> Observable<EventT>
     ) {
         feedbacks.add(com.feedbacktree.flow.core.react(queries, effects))
-    }
-}
-
-object LayoutBinder {
-    @Suppress("FunctionName")
-    inline fun <reified ScreenT : Any, reified EventT : Any> create(
-        @LayoutRes layoutId: Int,
-        noinline sink: (ScreenT) -> (EventT) -> Unit,
-        noinline build: (LayoutBinderBuilder<ScreenT, EventT>).(View) -> Unit
-    ): ViewBinding<ScreenT> = create(
-        layoutId = layoutId,
-        sink = sink,
-        build = { view, _ ->
-            build(view)
-        }
-    )
-
-
-    @Suppress("FunctionName")
-    inline fun <reified ScreenT : Any, reified EventT : Any> create(
-        @LayoutRes layoutId: Int,
-        noinline sink: (ScreenT) -> (EventT) -> Unit,
-        noinline build: (LayoutBinderBuilder<ScreenT, EventT>).(View, ViewRegistry) -> Unit
-    ): ViewBinding<ScreenT> {
-        return LayoutRunner.bind(
-            layoutId = layoutId,
-            constructor = { view, viewRegistry ->
-                val builder = LayoutBinderBuilder<ScreenT, EventT>()
-                build(builder, view, viewRegistry)
-
-                object : LayoutRunner<ScreenT, EventT> {
-                    override fun feedbacks(): List<Feedback<ScreenT, EventT>> = builder.feedbacks
-                }
-            },
-            sink = sink
-        )
     }
 }
 

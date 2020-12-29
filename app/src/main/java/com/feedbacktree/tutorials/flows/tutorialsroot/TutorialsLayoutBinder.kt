@@ -1,6 +1,10 @@
-package com.feedbacktree.tutorials.flows.root
+/*
+ * Created by eliek on 12/28/2020
+ * Copyright (c) 2020 eliekarouz. All rights reserved.
+ */
 
-import android.app.Activity
+package com.feedbacktree.tutorials.flows.tutorialsroot
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,19 +13,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.feedbacktree.flow.ui.views.LayoutBinder
 import com.feedbacktree.tutorials.R
+import com.feedbacktree.utils.actionBarTitle
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
-val RootLayoutBinder = LayoutBinder.create(
+val TutorialsLayoutBinder = LayoutBinder.create(
     layoutId = R.layout.root_menu,
-    sink = DemoScreen::sink
+    sink = TutorialsScreen::sink
 ) { view ->
 
-    (view.context as Activity).title = "FeedbackTree"
+    view.actionBarTitle = "Feedback Tree Tutorials"
 
-    val adapter = RootAdapter()
-
-    val recyclerView: RecyclerView = view.findViewById(R.id.demosRecyclerView)
+    val adapter = TutorialsAdapter()
+    val recyclerView: RecyclerView = view.findViewById(R.id.tutorialsRecyclerView)
     recyclerView.layoutManager = LinearLayoutManager(view.context)
     recyclerView.adapter = adapter
 
@@ -35,8 +39,8 @@ val RootLayoutBinder = LayoutBinder.create(
     }
 }
 
-private class RootAdapter(private var rows: List<DemoScreen.Row> = listOf()) :
-    RecyclerView.Adapter<RootAdapter.ViewHolder>() {
+private class TutorialsAdapter(private var rows: List<TutorialsScreen.Row> = listOf()) :
+    RecyclerView.Adapter<TutorialsAdapter.ViewHolder>() {
 
     private val _events = PublishSubject.create<Event>()
     val events: Observable<Event> = _events
@@ -48,7 +52,6 @@ private class RootAdapter(private var rows: List<DemoScreen.Row> = listOf()) :
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(android.R.layout.simple_list_item_1, viewGroup, false)
-
         return ViewHolder(view)
     }
 
@@ -64,7 +67,7 @@ private class RootAdapter(private var rows: List<DemoScreen.Row> = listOf()) :
         return rows.size
     }
 
-    fun updateDataSet(rows: List<DemoScreen.Row>) {
+    fun updateDataSet(rows: List<TutorialsScreen.Row>) {
         this.rows = rows
         notifyDataSetChanged()
     }

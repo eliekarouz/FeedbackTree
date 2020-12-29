@@ -234,7 +234,7 @@ The breakdown of the code above:
 
 > **Note:** The xml layout has been added to the starter project
 
-**Starting the Flow**
+##### Starting the Flow
 
 Let's modify the **MainActivity.kt** to kickstart the `CounterFlow`:
 

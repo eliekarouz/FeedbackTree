@@ -9,7 +9,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.feedbacktree.flow.core.startFlow
 import com.feedbacktree.flow.ui.views.core.HandlesBack
-import com.feedbacktree.tutorials.flows.root.RootFlow
+import com.feedbacktree.tutorials.flows.tutorialsroot.TutorialsFlow
 import io.reactivex.disposables.Disposable
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        disposable = startFlow(flow = RootFlow, viewRegistry = appViewRegistry)
+        disposable = startFlow(flow = TutorialsFlow, viewRegistry = appViewRegistry)
     }
 
     override fun onPause() {

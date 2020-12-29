@@ -9,6 +9,7 @@ import android.widget.Button
 import com.feedbacktree.flow.ui.views.LayoutBinder
 import com.feedbacktree.tutorials.R
 import com.feedbacktree.utils.FTEditText
+import com.feedbacktree.utils.actionBarTitle
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
 
@@ -16,6 +17,9 @@ val LoginLayoutBinder = LayoutBinder.create(
     layoutId = R.layout.login,
     sink = LoginScreen::sink,
 ) { view ->
+
+    view.actionBarTitle = "Login"
+
     val emailEditText: FTEditText = view.findViewById(R.id.inputEmail)
     val passwordEditText: FTEditText = view.findViewById(R.id.inputPassword)
     val btnLogin: Button = view.findViewById(R.id.btnLogin)
