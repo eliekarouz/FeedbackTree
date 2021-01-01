@@ -5,6 +5,8 @@
 
 ### Feedback Loops
 
+- [Bind](Bind.md)
+- [React](React.md)
 - [React-Set](ReactSet.md)
 - [Your Custom Feedback Loop](YourCustomFeedbackLoop.md)
 
