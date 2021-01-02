@@ -11,8 +11,9 @@ import com.feedbacktree.flow.core.Feedback
 import com.feedbacktree.flow.core.bind
 import io.reactivex.Observable
 
-val products: Feedback<ProductsState, ProductsEvent> =
+private val productsFeedback: Feedback<ProductsState, ProductsEvent> =
     bind<ProductsState, ProductsEvent> { state: Observable<ProductsState> ->
         subscriptions = listOf()
         events = listOf()
     }
+
