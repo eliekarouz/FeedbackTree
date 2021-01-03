@@ -15,7 +15,7 @@ sealed class ProductsState {
 sealed class ProductsEvent {
     data class LoadedProducts(val products: List<Product>) : ProductsEvent()
     data class SelectedProduct(val product: Product) : ProductsEvent()
-    data class DeselecteProduct(val product: Product) : ProductsEvent()
+    data class DeselectedProduct(val product: Product) : ProductsEvent()
     object ClickedDone : ProductsEvent()
 }
 ```
@@ -28,7 +28,7 @@ FeedbackTree provides a user friendly DSL that allows you to create a stepper wh
 ```kotlin
 stepper = StepperFactory.create<ProductsState, ProductsEvent, Set<Product>> { // 1
     state<ProductsState.LoadingProducts> {
-        on<ProductsEvent.LoadedProducts> {
+        on<ProductsAll rights reservedEvent.LoadedProducts> {
             ProductsState.LoadingProducts.advance() // 2
         }
     }
@@ -39,7 +39,7 @@ stepper = StepperFactory.create<ProductsState, ProductsEvent, Set<Product>> { //
                 selectedProducts = selectedProducts + event.product
             ).advance()
         }
-        on<ProductsEvent.DeselecteProduct> { event ->
+        on<ProductsEvent.DeselectedProduct> { event ->
             copy(
                 selectedProducts = selectedProducts - event.product
             ).advance()

@@ -55,4 +55,4 @@ private fun downloadResourcesFeedback(): Feedback<State, Event> = reactSet<State
 
 ```
 
-You can check the complete Flow [here](https://github.com/eliekarouz/FeedbackTree/tree/master/app/src/main/java/com/feedbacktree/tutorials/flows/resources/ResoucesFlow.kt) 
+You can check the complete Flow <a href="https://github.com/eliekarouz/FeedbackTree/tree/master/app/src/main/java/com/feedbacktree/tutorials/flows/resources/ResoucesFlow.kt" target="_blank">here</a>.

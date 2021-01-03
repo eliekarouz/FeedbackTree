@@ -73,6 +73,6 @@ framework("Example") {
 
 The following repos were a great source of inspiration:
 
-- [RxFeedback](www.github.com/notests/rxfeedback.swift)
-- [Workflows](www.github.com/square/workflow)
+- <a href="https://www.github.com/notests/rxfeedback.swift" target="_blank">RxFeedback</a>
+- <a href="https://www.github.com/square/workflow" target="_blank">Workflow</a>
 

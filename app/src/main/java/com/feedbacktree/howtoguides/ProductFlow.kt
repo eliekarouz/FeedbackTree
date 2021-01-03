@@ -23,7 +23,7 @@ sealed class ProductsState {
 sealed class ProductsEvent {
     data class LoadedProducts(val products: List<Product>) : ProductsEvent()
     data class SelectedProduct(val product: Product) : ProductsEvent()
-    data class DeselecteProduct(val product: Product) : ProductsEvent()
+    data class DeselectedProduct(val product: Product) : ProductsEvent()
     object ClickedDone : ProductsEvent()
 }
 
@@ -40,7 +40,7 @@ val stepper = StepperFactory.create<ProductsState, ProductsEvent, Set<Product>> 
                 selectedProducts = selectedProducts + event.product
             ).advance()
         }
-        on<ProductsEvent.DeselecteProduct> { event ->
+        on<ProductsEvent.DeselectedProduct> { event ->
             copy(
                 selectedProducts = selectedProducts - event.product
             ).advance()
