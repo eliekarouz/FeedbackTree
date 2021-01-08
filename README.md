@@ -4,7 +4,7 @@
 
 FeedbackTree is a unidirectional data flow architecture for Android which relies heavily on state mahines to perform all types of side effects, like network calls, bluetooth, UI updates as well as navigation.
 
-#### Why FeedbackTree?
+### Why FeedbackTree?
 
 - Organizes the code around the business rules.
 - Reactive Declarative UI
@@ -13,7 +13,7 @@ FeedbackTree is a unidirectional data flow architecture for Android which relies
   - Most logic is placed in the `Stepper` which is pure function.
   - Side effect are isolated and testing can be done with a TestScheduler.
 
-#### Core concepts
+### Core concepts
 
 - Business rules are wrapped in a Flow. You kickstart the Flow with some input and wait for the output to be produced.
 - The Flow is driven by a state machine. 
@@ -22,7 +22,7 @@ FeedbackTree is a unidirectional data flow architecture for Android which relies
   makes unit testing very straightforward.
 - Feedback loops are used separate business logic from side effects like network calls, database operations, timers, bluetooth...
 
-#### Installation
+### Installation
 
 The project recently migrated from `jitpack` to `Maven Central`
 
@@ -35,7 +35,7 @@ allprojects {
 }
 ```
 
-##### Android Projects
+#### Android Projects
 Add this to your build.gradle (app)
 ```groovy
 dependencies {
@@ -44,7 +44,15 @@ dependencies {
 }
 ```
 
-##### Kotlin Multiplatform
+#### Proguard Rules
+
+You need to add this to your proguard-rules.pro:
+
+```
+-keep class com.feedbacktree**
+```
+
+#### Kotlin Multiplatform
 We are only supporting the concept of `Step` and `Stepper` in Kotlin multiplatform (iOS/Android only).  
 We might provide additional multiplatform support in the future.
 To include these concepts to a multipatform module, add this dependency to commonMain.
@@ -61,7 +69,7 @@ framework("Example") {
 }
 ```
 
-##### Versions
+### Versions
 
 |Kotlin|FeedbackTree|
 |------|------|
@@ -69,7 +77,7 @@ framework("Example") {
 |1.4.0|0.11|
 |1.4.10|0.11.1|
 
-#### Acknowledgements
+### Acknowledgements
 
 The following repos were a great source of inspiration:
 
