@@ -1,28 +1,28 @@
 ### State Machines
 
-- [A Sealed Class State](ASealedClassState.md)
-- [Combining Steppers](CombiningSteppers.md)
+- [A Sealed Class State](statemachines/ASealedClassState.md)
+- [Combining Steppers](statemachines/CombiningSteppers.md)
 
 ### Feedback Loops
 
-- [Bind](Bind.md)
-- [React](React.md)
-- [React-Set](ReactSet.md)
-- [Your Custom Feedback Loop](YourCustomFeedbackLoop.md)
+- [Bind](feedbackloops/Bind.md)
+- [React](feedbackloops/React.md)
+- [React-Set](feedbackloops/ReactSet.md)
+- [Your Custom Feedback Loop](feedbackloops/YourCustomFeedbackLoop.md)
 
 ### Rendering
 
-- [Rendering Multiple Screens](RenderingMultipleScreens.md)
-- [Back-Presses](BackPresses.md)
-- [The Backstack Screen](TheBackstackScreen.md)
-- [Show a Modal](ShowAModal.md)
-- [Your Custom Modal](YourCustomModal.md)
-- [Your Custom Container](YourCustomContainer.md)
-- [Indentifiable Flows](IdentifiableFlows.md)
-- [Reusing the Same Screen in Different Flows](ReusingTheSameScreenInDifferentFlows)
+- [Rendering Multiple Screens](rendering/RenderingMultipleScreens.md)
+- [Back-Presses](rendering/BackPresses.md)
+- [The Backstack Screen](rendering/TheBackstackScreen.md)
+- [Show a Modal](rendering/ShowAModal.md)
+- [Your Custom Modal](rendering/YourCustomModal.md)
+- [Your Custom Container](rendering/YourCustomContainer.md)
+- [Indentifiable Flows](rendering/IdentifiableFlows.md)
+- [Reusing the Same Screen in Different Flows](rendering/ReusingTheSameScreenInDifferentFlows)
 
 #### Starting Flows
 
-- [From an Activity](StartFlowFromAnActivity.md)
-- [From a Fragment](StartFlowFromAFragment.md)
-- [Retrofitting](StartFlowRetrofitting.md)
+- [From an Activity](startingflows/StartFlowFromAnActivity.md)
+- [From a Fragment](startingflows/StartFlowFromAFragment.md)
+- [Retrofitting](startingflows/StartFlowRetrofitting.md)
