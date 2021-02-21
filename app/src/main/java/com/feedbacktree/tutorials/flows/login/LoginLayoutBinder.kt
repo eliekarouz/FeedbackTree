@@ -7,6 +7,7 @@ package com.feedbacktree.tutorials.flows.login
 
 import android.widget.Button
 import com.feedbacktree.flow.ui.views.LayoutBinder
+import com.feedbacktree.flow.ui.views.core.backPresses
 import com.feedbacktree.tutorials.R
 import com.feedbacktree.utils.FTEditText
 import com.feedbacktree.utils.actionBarTitle
@@ -34,7 +35,8 @@ val LoginLayoutBinder = LayoutBinder.create(
         events = listOf(
             emailEditText.textChanges().map { Event.EnteredEmail(it.toString()) },
             passwordEditText.textChanges().map { Event.EnteredPassword(it.toString()) },
-            btnLogin.clicks().map { Event.ClickedLogin }
+            btnLogin.clicks().map { Event.ClickedLogin },
+            view.backPresses().map { Event.BackPressed }
         )
     }
 }

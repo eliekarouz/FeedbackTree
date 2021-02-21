@@ -7,4 +7,8 @@
     <string name="increment">Increment</string>
     <string name="decrement">Decrement</string>
     <string name="sign_in">Sign In</string>
+    <string name="alert_modal_with_view">Alert Modal With View</string>
+    <string name="alert_modal">Alert Modal</string>
+    <string name="full_screen_modal">Full Screen Modal</string>
+    <string name="test_if_keyboard_pushes_view">Test if keyboard pushes view</string>
 </resources>

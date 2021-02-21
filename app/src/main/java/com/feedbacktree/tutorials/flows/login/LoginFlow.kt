@@ -9,7 +9,7 @@ import com.feedbacktree.flow.core.*
 import com.feedbacktree.tutorials.managers.AuthenticationManager
 import io.reactivex.Observable
 
-val LoginFlow = Flow<String, State, Event, String, LoginScreen>(
+val LoginFlow = Flow<String, State, Event, LoginFlowOutput, LoginScreen>(
     initialState = { lastEmailUsed -> State(email = lastEmailUsed) },
     stepper = { state, event ->
         when (event) {
@@ -18,11 +18,12 @@ val LoginFlow = Flow<String, State, Event, String, LoginScreen>(
             Event.ClickedLogin -> state.copy(isLoggingIn = true).advance()
             is Event.ReceivedLogInResponse -> {
                 if (event.success) {
-                    endFlowWith(state.email)
+                    endFlowWith(LoginFlowOutput.Success(state.email))
                 } else {
                     state.copy(isLoggingIn = false).advance()
                 }
             }
+            Event.BackPressed -> endFlowWith(LoginFlowOutput.Aborted)
         }
     },
     feedbacks = listOf(loginFeedback()),
@@ -42,6 +43,13 @@ sealed class Event {
     data class EnteredPassword(val password: String) : Event()
     object ClickedLogin : Event()
     data class ReceivedLogInResponse(val success: Boolean) : Event()
+
+    object BackPressed : Event()
+}
+
+sealed class LoginFlowOutput {
+    object Aborted : LoginFlowOutput()
+    data class Success(val email: String) : LoginFlowOutput()
 }
 
 data class LoginScreen(

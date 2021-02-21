@@ -19,35 +19,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="24dp"
-            android:paddingTop="100dp"
+            android:paddingTop="30dp"
             android:paddingRight="24dp">
 
-            <com.feedbacktree.utils.FTEditText
-                android:id="@+id/inputEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_primary"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:padding="12dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/textColorPrimary" />
-
-
-            <com.feedbacktree.utils.FTEditText
-                android:id="@+id/inputPassword"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/topViewButton"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/border_primary"
-                android:hint="@string/password"
-                android:inputType="textPassword"
+                android:layout_marginBottom="24dp"
+                android:enabled="true"
                 android:padding="12dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/textColorPrimary" />
+                android:text="@string/alert_modal" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/alertModalWithViewButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -55,8 +41,17 @@
                 android:background="@drawable/button_background"
                 android:enabled="true"
                 android:padding="12dp"
-                android:text="@string/sign_in"
-                android:textColor="@color/black" />
+                android:text="@string/alert_modal_with_view" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttomViewButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:enabled="true"
+                android:padding="12dp"
+                android:text="@string/full_screen_modal" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

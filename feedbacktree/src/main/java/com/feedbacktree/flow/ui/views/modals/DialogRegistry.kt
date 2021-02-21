@@ -78,9 +78,7 @@ class DialogRegistry private constructor(
             @StyleRes dialogThemeResId: Int = 0
         ): DialogRegistry {
             return DialogRegistry(
-                AlertScreenDialogBinding(dialogThemeResId = dialogThemeResId),
-                AlertWithViewDialogBinding(dialogThemeResId = dialogThemeResId),
-                ViewModalDialogBinding()
+                AlertDialogBinding(dialogThemeResId = dialogThemeResId)
             )
         }
     }

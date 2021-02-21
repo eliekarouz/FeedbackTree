@@ -6,14 +6,14 @@
 package com.feedbacktree.utils
 
 import android.view.View
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.feedbacktree.tutorials.R
 
-val View.actionBar: ActionBar?
-    get() = (this.context as AppCompatActivity).supportActionBar
+val View.actionBar: Toolbar?
+    get() = this.findViewById(R.id.ft_toolbar)
 
 var View.actionBarTitle: String
-    get() = actionBar?.title.toString() ?: ""
+    get() = actionBar?.title.toString()
     set(value) {
         actionBar?.title = value
     }

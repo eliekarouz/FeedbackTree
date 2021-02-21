@@ -47,7 +47,27 @@ object LayoutBinder {
             sink = sink
         )
     }
+
+    inline fun <reified ScreenT : Any> create(
+        @LayoutRes layoutId: Int,
+        noinline build: (LayoutBinderBuilder<ScreenT, NoEvent>).(View) -> Unit
+    ) = create(
+        layoutId = layoutId,
+        sink = { { } },
+        build = build
+    )
+
+    inline fun <reified ScreenT : Any> create(
+        @LayoutRes layoutId: Int,
+        noinline build: (LayoutBinderBuilder<ScreenT, NoEvent>).(View, ViewRegistry) -> Unit
+    ) = create(
+        layoutId = layoutId,
+        sink = { { } },
+        build = build
+    )
 }
+
+class NoEvent private constructor()
 
 class LayoutBinderBuilder<ScreenT : Any, EventT : Any>(
     val feedbacks: MutableList<Feedback<ScreenT, EventT>> = mutableListOf()

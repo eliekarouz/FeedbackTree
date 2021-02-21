@@ -3,6 +3,8 @@
  * Copyright (c) 2019 eliekarouz. All rights reserved.
  */
 
+@file:Suppress("FunctionName")
+
 package com.feedbacktree.flow.ui.core.modals
 
 import com.feedbacktree.flow.ui.core.Compatible
@@ -37,7 +39,13 @@ fun <ScreenT : Any> ScreenT.asModal(): ViewModal<ScreenT> {
     return ViewModal(content = this)
 }
 
-@Suppress("FunctionName")
+
+/**
+ * Wrap you screen in a [FullScreenModal] to show it as if you have hosted it in a new activity.
+ * Use cases for a [FullScreenModal] is when you have a split screen or even a bottom navigation view
+ * and you want the [content] to cover the whole screen even though the rendering is being done in a
+ * more restricted area.
+ */
 fun <ScreenT : Any> FullScreenModal(content: ScreenT): ViewModal<ScreenT> {
     return ViewModal(
         content = content,

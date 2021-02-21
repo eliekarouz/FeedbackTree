@@ -7,11 +7,13 @@ package com.feedbacktree.tutorials.flows.tutorialsroot
 
 enum class Tutorial {
     Counter,
-    Login;
+    Login,
+    Modals;
 
     val title: String
         get() = when (this) {
             Counter -> "Counter"
             Login -> "Login"
+            Modals -> "Modals"
         }
 }

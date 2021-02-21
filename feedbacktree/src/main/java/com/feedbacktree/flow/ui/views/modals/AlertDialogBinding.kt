@@ -13,10 +13,12 @@ import androidx.appcompat.app.AlertDialog
 import com.feedbacktree.flow.ui.core.modals.AlertModal
 import com.feedbacktree.flow.ui.core.modals.Modal
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.ui.views.core.disposeScreenBinding
+import com.feedbacktree.flow.ui.views.core.showScreen
 import com.feedbacktree.flow.utils.logAndShow
 import kotlin.reflect.KClass
 
-class AlertScreenDialogBinding(
+class AlertDialogBinding(
     @StyleRes private val dialogThemeResId: Int = 0,
     override val type: KClass<AlertModal> = AlertModal::class
 ) : Modal,
@@ -30,7 +32,12 @@ class AlertScreenDialogBinding(
     ): DialogRef<AlertModal> {
         val dialog = AlertDialog.Builder(context, dialogThemeResId)
             .create()
-        val ref = DialogRef(initialModal, dialog)
+        val contentView = if (initialModal.contentScreen != null) {
+            viewRegistry.buildView(initialModal.contentScreen, context).also {
+                dialog.setView(it)
+            }
+        } else null
+        val ref = DialogRef(modal = initialModal, dialog = dialog, extra = contentView)
         updateDialog(ref)
         dialog.logAndShow("AlertModal")
         return ref
@@ -71,6 +78,21 @@ class AlertScreenDialogBinding(
         if (modal.title.isNotEmpty()) {
             dialog.setTitle(modal.title)
         }
+
+        contentViewUpdate(dialogRef)
+    }
+
+    private fun contentViewUpdate(dialogRef: DialogRef<AlertModal>) {
+        if (dialogRef.modal.contentScreen != null) {
+            val contentView = dialogRef.extra as? View
+
+            (dialogRef.extra as? View)?.showScreen(dialogRef.modal.contentScreen)
+        }
+    }
+
+    override fun cleanUpDialog(dialogRef: DialogRef<AlertModal>) {
+        super.cleanUpDialog(dialogRef)
+        (dialogRef.extra as? View)?.disposeScreenBinding()
     }
 
     private fun AlertModal.Button.toId(): Int = when (this) {
@@ -78,5 +100,4 @@ class AlertScreenDialogBinding(
         AlertModal.Button.NEGATIVE -> DialogInterface.BUTTON_NEGATIVE
         AlertModal.Button.NEUTRAL -> DialogInterface.BUTTON_NEUTRAL
     }
-
 }

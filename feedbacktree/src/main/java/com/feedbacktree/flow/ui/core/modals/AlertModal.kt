@@ -10,6 +10,7 @@ data class AlertModal(
     val message: String = "",
     val title: String = "",
     val cancelable: Boolean = true,
+    val contentScreen: Any? = null,
     val onEvent: (Event) -> Unit
 ) : Modal {
     enum class Button {
@@ -43,4 +44,63 @@ data class AlertModal(
         result = 31 * result + cancelable.hashCode()
         return result
     }
+
+    companion object {
+        /**
+         * DSL constructor for Alert Modals
+         * @return AlertModal
+         */
+        operator fun <Event> invoke(
+            sink: (Event) -> Unit,
+            build: AlertModalBuilder<Event>.() -> Unit
+        ): AlertModal {
+            val builder = AlertModalBuilder<Event>().apply {
+                build()
+            }
+            return AlertModal(
+                buttons = builder.buttons.map {
+                    it.key to it.value.first
+                }.toMap(),
+                title = builder.title,
+                message = builder.message,
+                cancelable = builder.cancelEvent != null,
+                contentScreen = builder.contentScreen,
+                onEvent = { alertModalEvent ->
+                    when (alertModalEvent) {
+                        is AlertModal.Event.ButtonClicked -> {
+                            builder.buttons[alertModalEvent.button]?.let {
+                                sink(it.second)
+                            }
+                        }
+                        AlertModal.Event.Canceled -> {
+                            builder.cancelEvent?.let(sink)
+                        }
+                    }
+                }
+
+            )
+        }
+
+        class AlertModalBuilder<Event>(
+            internal val buttons: MutableMap<Button, Pair<String, Event>> = mutableMapOf(),
+            var title: String = "",
+            var message: String = "",
+            var cancelEvent: Event? = null,
+            var contentScreen: Any? = null,
+        ) {
+
+            fun positive(title: String, event: Event) {
+                buttons[Button.POSITIVE] = title to event
+            }
+
+            fun negative(title: String, event: Event) {
+                buttons[Button.NEGATIVE] = title to event
+            }
+
+            fun neutral(title: String, event: Event) {
+                buttons[Button.NEUTRAL] = title to event
+            }
+        }
+    }
 }
+

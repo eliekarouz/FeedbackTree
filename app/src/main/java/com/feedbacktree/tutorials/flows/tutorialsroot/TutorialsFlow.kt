@@ -9,18 +9,7 @@ import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.advance
 import com.feedbacktree.tutorials.flows.counter.CounterFlow
 import com.feedbacktree.tutorials.flows.login.LoginFlow
-
-data class State(
-    val tutorials: List<Tutorial> = listOf(
-        Tutorial.Counter, Tutorial.Login
-    ),
-    val selectedTutorial: Tutorial? = null
-)
-
-sealed class Event {
-    data class SelectedTutorial(val tutorial: Tutorial) : Event()
-    object CompletedTutorial : Event()
-}
+import com.feedbacktree.tutorials.flows.modals.ModalsFlow
 
 val TutorialsFlow = Flow<Unit, State, Event, Nothing, Any>(
     initialState = { State() },
@@ -40,9 +29,24 @@ val TutorialsFlow = Flow<Unit, State, Event, Nothing, Any>(
             Tutorial.Login -> context.renderChild(input = "", flow = LoginFlow, onResult = {
                 context.sendEvent(Event.CompletedTutorial)
             })
+            Tutorial.Modals -> context.renderChild(ModalsFlow, onResult = {
+                context.sendEvent(Event.CompletedTutorial)
+            })
         }
     }
 )
+
+data class State(
+    val tutorials: List<Tutorial> = listOf(
+        Tutorial.Counter, Tutorial.Login, Tutorial.Modals
+    ),
+    val selectedTutorial: Tutorial? = null
+)
+
+sealed class Event {
+    data class SelectedTutorial(val tutorial: Tutorial) : Event()
+    object CompletedTutorial : Event()
+}
 
 
 data class TutorialsScreen(

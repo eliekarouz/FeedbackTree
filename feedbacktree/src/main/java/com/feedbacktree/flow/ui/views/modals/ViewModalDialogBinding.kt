@@ -11,15 +11,13 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
-import android.view.Display
-import android.view.Gravity
-import android.view.KeyEvent
-import android.view.View
+import android.view.*
 import android.view.View.MeasureSpec.EXACTLY
 import android.view.View.MeasureSpec.makeMeasureSpec
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
+import androidx.annotation.ColorInt
 import com.feedbacktree.flow.ui.core.modals.Layout
 import com.feedbacktree.flow.ui.core.modals.ViewModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
@@ -32,7 +30,8 @@ import kotlin.reflect.KClass
 
 
 class ViewModalDialogBinding(
-    override val type: KClass<ViewModal<*>> = ViewModal::class
+    @ColorInt private val backgroundColor: Int = Color.WHITE,
+    override val type: KClass<ViewModal<*>> = ViewModal::class,
 ) : DialogBinding<ViewModal<*>> {
 
     override fun buildDialog(
@@ -74,8 +73,9 @@ class ViewModalDialogBinding(
     ): View {
         val view by lazy { viewRegistry.buildView(viewModal.content, context) }
         val panel = PanelBodyWrapper(context).apply {
-            background = ColorDrawable(Color.TRANSPARENT)
+            background = ColorDrawable(backgroundColor)
         }
+        window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         setContentView(panel)
         window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
         window!!.setBackgroundDrawable(null)
