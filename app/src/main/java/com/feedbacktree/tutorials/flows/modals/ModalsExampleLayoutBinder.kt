@@ -5,30 +5,26 @@
 
 package com.feedbacktree.tutorials.flows.modals
 
-import android.widget.Button
 import com.feedbacktree.flow.ui.views.LayoutBinder
 import com.feedbacktree.flow.ui.views.core.backPresses
-import com.feedbacktree.tutorials.R
+import com.feedbacktree.tutorials.databinding.ModalExamplesBinding
 import com.feedbacktree.utils.actionBarTitle
 import com.jakewharton.rxbinding3.view.clicks
 
 val ModalsExampleLayoutBinder = LayoutBinder.create(
-    layoutId = R.layout.modal_examples,
+    viewBindingInflater = ModalExamplesBinding::inflate,
     sink = ModalsScreen::sink
-) { view ->
+) { viewBinding ->
 
-    view.actionBarTitle = "Modals Examples"
-
-    val alertButton = view.findViewById<Button>(R.id.topViewButton)
-    val alertWithViewButton = view.findViewById<Button>(R.id.alertModalWithViewButton)
-    val fullScreenModalButton = view.findViewById<Button>(R.id.buttomViewButton)
+    viewBinding.actionBarTitle = "Modals Examples"
 
     bind {
         events = listOf(
-            alertButton.clicks().map { Event.ShowAlertClicked },
-            alertWithViewButton.clicks().map { Event.ShowAlertWithCustomViewClicked },
-            fullScreenModalButton.clicks().map { Event.ShowFullScreenModalClicked },
-            view.backPresses().map { Event.BackClicked }
+            viewBinding.alertButton.clicks().map { Event.ShowAlertClicked },
+            viewBinding.alertModalWithViewButton.clicks()
+                .map { Event.ShowAlertWithCustomViewClicked },
+            viewBinding.fullScreenModalButton.clicks().map { Event.ShowFullScreenModalClicked },
+            viewBinding.root.backPresses().map { Event.BackClicked }
         )
     }
 }

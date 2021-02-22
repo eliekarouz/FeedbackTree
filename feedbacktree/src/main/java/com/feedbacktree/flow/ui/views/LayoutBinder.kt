@@ -7,13 +7,25 @@
 
 package com.feedbacktree.flow.ui.views
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.feedbacktree.flow.core.BindingsBuilder
 import com.feedbacktree.flow.core.Feedback
+import com.feedbacktree.flow.core.ObservableSchedulerContext
 import com.feedbacktree.flow.ui.views.core.ViewBinding
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.flow.ui.views.core.bindShowScreen
+import com.feedbacktree.flow.utils.logVerbose
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.BehaviorSubject
+import kotlin.reflect.KClass
+
+typealias ViewBindingInflater<BindingT> = (layoutInflator: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> BindingT
 
 object LayoutBinder {
 
@@ -34,16 +46,10 @@ object LayoutBinder {
         noinline sink: (ScreenT) -> (EventT) -> Unit,
         noinline build: (LayoutBinderBuilder<ScreenT, EventT>).(View, ViewRegistry) -> Unit
     ): ViewBinding<ScreenT> {
-        return LayoutRunner.bind(
+        return LayoutResBinding(
+            type = ScreenT::class,
             layoutId = layoutId,
-            constructor = { view, viewRegistry ->
-                val builder = LayoutBinderBuilder<ScreenT, EventT>()
-                build(builder, view, viewRegistry)
-
-                object : LayoutRunner<ScreenT, EventT> {
-                    override fun feedbacks(): List<Feedback<ScreenT, EventT>> = builder.feedbacks
-                }
-            },
+            build = build,
             sink = sink
         )
     }
@@ -65,6 +71,141 @@ object LayoutBinder {
         sink = { { } },
         build = build
     )
+
+    // ViewBinding factories
+    inline fun <reified ScreenT : Any, reified EventT : Any, reified BindingT : androidx.viewbinding.ViewBinding> create(
+        noinline viewBindingInflater: ViewBindingInflater<BindingT>,
+        noinline sink: (ScreenT) -> (EventT) -> Unit,
+        noinline build: (LayoutBinderBuilder<ScreenT, EventT>).(BindingT) -> Unit
+    ): ViewBinding<ScreenT> = create(
+        viewBindingInflater = viewBindingInflater,
+        sink = sink,
+        build = { view, _ ->
+            build(view)
+        }
+    )
+
+    inline fun <reified ScreenT : Any, reified EventT : Any, reified BindingT : androidx.viewbinding.ViewBinding> create(
+        noinline viewBindingInflater: ViewBindingInflater<BindingT>,
+        noinline sink: (ScreenT) -> (EventT) -> Unit,
+        noinline build: (LayoutBinderBuilder<ScreenT, EventT>).(BindingT, ViewRegistry) -> Unit
+    ): ViewBinding<ScreenT> {
+        return AndroidViewBinding(
+            type = ScreenT::class,
+            viewBindingInflater = viewBindingInflater,
+            build = build,
+            sink = sink
+        )
+    }
+
+    // The term ViewBinding is a bit confusing here. There is a name collision between feedbacktree.ViewBinding,
+    // and AndroidX.ViewBinding.
+    class AndroidViewBinding<ScreenT : Any, EventT : Any, BindingT : androidx.viewbinding.ViewBinding>(
+        override val type: KClass<ScreenT>,
+        val viewBindingInflater: ViewBindingInflater<BindingT>,
+        val build: (LayoutBinderBuilder<ScreenT, EventT>).(BindingT, ViewRegistry) -> Unit,
+        val sink: (ScreenT) -> (EventT) -> Unit,
+    ) : ViewBinding<ScreenT> {
+
+        override fun buildView(
+            registry: ViewRegistry,
+            initialScreen: ScreenT,
+            contextForNewView: Context,
+            container: ViewGroup?
+        ): View {
+            val layoutInflator = LayoutInflater.from(container?.context ?: contextForNewView)
+            val viewBinding =
+                viewBindingInflater(
+                    layoutInflator.cloneInContext(contextForNewView),
+                    container,
+                    false
+                )
+            val screenBehaviorSubject = BehaviorSubject.createDefault(initialScreen)
+            val mergedEvents by lazy {
+                // create the view
+                val builder = LayoutBinderBuilder<ScreenT, EventT>()
+                builder.build(viewBinding, registry)
+                val events = builder.feedbacks.map {
+                    val observableSchedulerContext = ObservableSchedulerContext(
+                        screenBehaviorSubject,
+                        AndroidSchedulers.mainThread()
+                    )
+                    it(observableSchedulerContext)
+                }
+                Observable.merge(events)
+            }
+
+            var disposable: Disposable? = mergedEvents.subscribe {
+                sink(initialScreen).invoke(it)
+            }
+            logVerbose("LayoutBinder - Attached screen: $type")
+
+            return viewBinding.root.apply {
+                bindShowScreen(
+                    initialScreen,
+                    showScreen = { screen ->
+                        screenBehaviorSubject.onNext(screen)
+                    },
+                    disposeScreenBinding = {
+                        logVerbose("LayoutBinder - Detached screen: $type")
+                        disposable?.dispose()
+                        disposable = null
+                    }
+                )
+            }
+        }
+    }
+
+    class LayoutResBinding<ScreenT : Any, EventT : Any>(
+        override val type: KClass<ScreenT>,
+        @LayoutRes val layoutId: Int,
+        val build: (LayoutBinderBuilder<ScreenT, EventT>).(View, ViewRegistry) -> Unit,
+        val sink: (ScreenT) -> (EventT) -> Unit,
+    ) : ViewBinding<ScreenT> {
+        override fun buildView(
+            registry: ViewRegistry,
+            initialScreen: ScreenT,
+            contextForNewView: Context,
+            container: ViewGroup?
+        ): View {
+            return LayoutInflater.from(container?.context ?: contextForNewView)
+                .cloneInContext(contextForNewView)
+                .inflate(layoutId, container, false)
+                .apply {
+                    val screenBehaviorSubject = BehaviorSubject.createDefault(initialScreen)
+                    val mergedEvents by lazy {
+                        // create the view
+                        val builder = LayoutBinderBuilder<ScreenT, EventT>()
+                        builder.build(this, registry)
+                        val events = builder.feedbacks.map {
+                            val observableSchedulerContext = ObservableSchedulerContext(
+                                screenBehaviorSubject,
+                                AndroidSchedulers.mainThread()
+                            )
+                            it(observableSchedulerContext)
+                        }
+                        Observable.merge(events)
+                    }
+
+                    var disposable: Disposable? = mergedEvents.subscribe {
+                        sink(initialScreen).invoke(it)
+                    }
+                    logVerbose("LayoutBinder - Attached screen: $type")
+
+                    bindShowScreen(
+                        initialScreen,
+                        showScreen = { screen ->
+                            screenBehaviorSubject.onNext(screen)
+                        },
+                        disposeScreenBinding = {
+                            logVerbose("LayoutBinder - Detached screen: $type")
+                            disposable?.dispose()
+                            disposable = null
+                        }
+                    )
+                }
+        }
+    }
 }
 
 class NoEvent private constructor()

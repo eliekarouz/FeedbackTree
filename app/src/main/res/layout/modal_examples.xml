@@ -23,7 +23,7 @@
             android:paddingRight="24dp">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/topViewButton"
+                android:id="@+id/alert_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -44,7 +44,7 @@
                 android:text="@string/alert_modal_with_view" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/buttomViewButton"
+                android:id="@+id/full_screen_modal_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

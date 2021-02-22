@@ -12,22 +12,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.feedbacktree.flow.ui.views.LayoutBinder
-import com.feedbacktree.tutorials.R
+import com.feedbacktree.tutorials.databinding.RootMenuBinding
 import com.feedbacktree.utils.actionBarTitle
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
 val TutorialsLayoutBinder = LayoutBinder.create(
-    layoutId = R.layout.root_menu,
+    viewBindingInflater = RootMenuBinding::inflate,
     sink = TutorialsScreen::sink
-) { view ->
+) { viewBinding ->
 
-    view.actionBarTitle = "Feedback Tree Tutorials"
+    viewBinding.actionBarTitle = "Feedback Tree Tutorials"
 
     val adapter = TutorialsAdapter()
-    val recyclerView: RecyclerView = view.findViewById(R.id.tutorialsRecyclerView)
-    recyclerView.layoutManager = LinearLayoutManager(view.context)
-    recyclerView.adapter = adapter
+    viewBinding.tutorialsRecyclerView.layoutManager = LinearLayoutManager(viewBinding.root.context)
+    viewBinding.tutorialsRecyclerView.adapter = adapter
 
     bind { screen ->
         subscriptions = listOf(
