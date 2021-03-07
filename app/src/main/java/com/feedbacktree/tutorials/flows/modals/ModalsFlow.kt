@@ -8,9 +8,7 @@ package com.feedbacktree.tutorials.flows.modals
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.advance
 import com.feedbacktree.flow.core.endFlow
-import com.feedbacktree.flow.ui.core.modals.AlertModal
-import com.feedbacktree.flow.ui.core.modals.FullScreenModal
-import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
+import com.feedbacktree.flow.ui.core.modals.*
 import com.feedbacktree.tutorials.flows.login.LoginFlow
 
 val ModalsFlow = Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
@@ -20,6 +18,7 @@ val ModalsFlow = Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
             Event.ShowAlertClicked -> State.ShowingAlertModal.advance()
             Event.ShowAlertWithCustomViewClicked -> State.ShowingAlertModalWithCustomView.advance()
             Event.ShowFullScreenModalClicked -> State.ShowingFullScreenModal.advance()
+            Event.ShowCustomSizeModalClicked -> State.ShowingCustomSizeModal.advance()
             is Event.DismissAlert -> State.Idle.advance()
             Event.FullScreenFlowCompleted -> State.Idle.advance()
             Event.BackClicked -> endFlow()
@@ -52,6 +51,17 @@ val ModalsFlow = Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
                     // Wrap the screen produced by the LoginFlow in a FullScreenModal
                     FullScreenModal(contentScreen)
                 }
+                State.ShowingCustomSizeModal -> {
+                    val contentScreen =
+                        context.renderChild(input = "", flow = LoginFlow, onResult = {
+                            context.sendEvent(Event.FullScreenFlowCompleted)
+                        })
+                    ViewModal(
+                        contentScreen,
+                        widthLayout = Layout.Percentage(55),
+                        heightLayout = Layout.Percentage(55)
+                    )
+                }
             }
         )
     }
@@ -62,17 +72,19 @@ enum class State {
     Idle,
     ShowingAlertModal,
     ShowingAlertModalWithCustomView,
-    ShowingFullScreenModal
+    ShowingFullScreenModal,
+    ShowingCustomSizeModal
 }
 
 sealed class Event {
     object ShowAlertClicked : Event()
     object ShowAlertWithCustomViewClicked : Event()
     object ShowFullScreenModalClicked : Event()
+    object ShowCustomSizeModalClicked : Event()
 
     data class DismissAlert(val action: String) : Event()
-    object FullScreenFlowCompleted : Event()
 
+    object FullScreenFlowCompleted : Event()
     object BackClicked : Event()
 }
 

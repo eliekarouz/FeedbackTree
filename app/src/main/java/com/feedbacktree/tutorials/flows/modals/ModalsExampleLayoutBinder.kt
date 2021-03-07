@@ -24,6 +24,7 @@ val ModalsExampleLayoutBinder = LayoutBinder.create(
             viewBinding.alertModalWithViewButton.clicks()
                 .map { Event.ShowAlertWithCustomViewClicked },
             viewBinding.fullScreenModalButton.clicks().map { Event.ShowFullScreenModalClicked },
+            viewBinding.customSizeModalButton.clicks().map { Event.ShowCustomSizeModalClicked },
             viewBinding.root.backPresses().map { Event.BackClicked }
         )
     }

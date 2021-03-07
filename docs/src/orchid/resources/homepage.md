@@ -39,8 +39,8 @@ allprojects {
 Add this to your build.gradle (app)
 ```groovy
 dependencies {
-  implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.12.0"
-  implementation "com.github.eliekarouz.feedbacktree:core:0.12.0"
+  implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.13.0"
+  implementation "com.github.eliekarouz.feedbacktree:core:0.13.0"
 }
 ```
 
@@ -50,13 +50,13 @@ We might provide additional multiplatform support in the future.
 To include these concepts to a multipatform module, add this dependency to commonMain.
 ```groovy
 dependencies {
-    api "com.github.eliekarouz.feedbacktree:core:0.12.0"
+    api "com.github.eliekarouz.feedbacktree:core:0.13.0"
 }
 ```
 If you are targeting iOS you will also need to export the dependencies:
 ```
 framework("Example") {
-    export "com.github.eliekarouz.feedbacktree:core:0.12.0"
+    export "com.github.eliekarouz.feedbacktree:core:0.13.0"
     transitiveExport = true
 }
 ```
@@ -68,6 +68,7 @@ framework("Example") {
 |1.3.72|0.10.2|
 |1.4.0|0.11|
 |1.4.10|0.11.1|
+|1.4.30|0.13.0|
 
 #### Acknowledgements
 

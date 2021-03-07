@@ -27,4 +27,15 @@
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="PanelDialog">
+        <!--        <item name="android:windowAnimationStyle">@style/PanelDialogAnimation</item>-->
+        <item name="android:backgroundDimAmount">0</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <!--    <style name="PanelDialogAnimation">-->
+    <!--        <item name="android:windowEnterAnimation">@anim/panel_enter</item>-->
+    <!--        <item name="android:windowExitAnimation">@anim/panel_exit</item>-->
+    <!--    </style>-->
 </resources>

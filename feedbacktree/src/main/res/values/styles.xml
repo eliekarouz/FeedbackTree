@@ -1,0 +1,12 @@
+<!--
+  ~ Created by eliek on 3/7/2021
+  ~ Copyright (c) 2021 eliekarouz. All rights reserved.
+  -->
+
+<resources>
+
+    <style name="PanelDialog">
+        <item name="android:backgroundDimAmount">0</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+</resources>

@@ -7,12 +7,14 @@
 
 package com.feedbacktree.flow.ui.core.modals
 
+import androidx.annotation.ColorInt
 import com.feedbacktree.flow.ui.core.Compatible
 
 class ViewModal<ScreenT : Any>(
     val content: ScreenT,
     val widthLayout: Layout,
-    val heightLayout: Layout
+    val heightLayout: Layout,
+    @ColorInt val backgroundColor: Int? = null
 ) : Modal, Compatible {
     constructor(content: ScreenT) : this(
         content,

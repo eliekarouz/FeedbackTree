@@ -5,11 +5,9 @@
 
 package com.feedbacktree.tutorials
 
-import android.graphics.Color
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.ui.views.modals.DialogRegistry
 import com.feedbacktree.flow.ui.views.modals.ModalContainer
-import com.feedbacktree.flow.ui.views.modals.ViewModalDialogBinding
 import com.feedbacktree.tutorials.flows.counter.CounterLayoutBinder
 import com.feedbacktree.tutorials.flows.login.LoginLayoutBinder
 import com.feedbacktree.tutorials.flows.modals.CovidInfoLayoutBinder
@@ -17,9 +15,7 @@ import com.feedbacktree.tutorials.flows.modals.ModalsExampleLayoutBinder
 import com.feedbacktree.tutorials.flows.tutorialsroot.TutorialsLayoutBinder
 
 private val dialogRegistry =
-    DialogRegistry.registry(R.style.FTDialogTheme) + ViewModalDialogBinding(
-        Color.WHITE
-    )
+    DialogRegistry.registry(R.style.FTDialogTheme)
 
 val appViewRegistry = ViewRegistry(
     ModalContainer.Binding(dialogRegistry),

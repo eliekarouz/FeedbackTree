@@ -7,7 +7,7 @@ version = VERSION_NAME
 mavenPublish {
     releaseSigningEnabled = !getGpgKey().isEmpty()
 
-    useLegacyMode = !project.plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')
+//    useLegacyMode = !project.plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')
 
     targets {
         installArchives {

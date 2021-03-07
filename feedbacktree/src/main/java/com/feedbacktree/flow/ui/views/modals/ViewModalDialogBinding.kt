@@ -10,14 +10,13 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
-import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.*
-import android.view.View.MeasureSpec.EXACTLY
-import android.view.View.MeasureSpec.makeMeasureSpec
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
-import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
+import com.feedbacktree.R
 import com.feedbacktree.flow.ui.core.modals.Layout
 import com.feedbacktree.flow.ui.core.modals.ViewModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
@@ -30,7 +29,6 @@ import kotlin.reflect.KClass
 
 
 class ViewModalDialogBinding(
-    @ColorInt private val backgroundColor: Int = Color.WHITE,
     override val type: KClass<ViewModal<*>> = ViewModal::class,
 ) : DialogBinding<ViewModal<*>> {
 
@@ -41,17 +39,10 @@ class ViewModalDialogBinding(
         context: Context
     ): DialogRef<ViewModal<*>> {
 
-        return Dialog(context, 0)
+        return Dialog(context, R.style.PanelDialog)
             .run {
                 setCancelable(false)
-                val view =
-                    if (initialModal.widthLayout == Layout.Wrap && initialModal.heightLayout == Layout.Wrap) {
-                        addWrapContentView(viewRegistry, initialModal)
-                    } else {
-                        addFullScreenView(viewRegistry, initialModal)
-                    }
-
-
+                val view = addFullScreenView(viewRegistry, initialModal, context)
                 setOnKeyListener { _, keyCode, keyEvent ->
                     if (keyEvent.action != KeyEvent.ACTION_DOWN) {
                         true
@@ -69,38 +60,49 @@ class ViewModalDialogBinding(
 
     private fun <ScreenT : Any> Dialog.addFullScreenView(
         viewRegistry: ViewRegistry,
-        viewModal: ViewModal<ScreenT>
+        viewModal: ViewModal<ScreenT>,
+        context: Context
     ): View {
-        val view by lazy { viewRegistry.buildView(viewModal.content, context) }
-        val panel = PanelBodyWrapper(context).apply {
-            background = ColorDrawable(backgroundColor)
+        // used to position the custom view when the not in full screen mode
+        val fullWindowPanel = FrameLayout(context).apply {
+            ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            setBackgroundColor(Color.TRANSPARENT)
         }
-        window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        setContentView(panel)
-        window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
-        window!!.setBackgroundDrawable(null)
+
+        setContentView(fullWindowPanel)
         logAndShow("FullScreen")
 
+        window?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, R.color.dim)))
+
+
+        // panel that wraps the custom view with the background color needed
+        val contentPanel = FrameLayout(context)
+
+        // Setting backgroundColor of the panel ideally with using the windowBackground
+        if (viewModal.backgroundColor != null) {
+            contentPanel.setBackgroundColor(viewModal.backgroundColor)
+        } else {
+            val typedValue = TypedValue()
+            context.theme.resolveAttribute(android.R.attr.windowBackground, typedValue, true)
+            if (typedValue.type in TypedValue.TYPE_FIRST_COLOR_INT..TypedValue.TYPE_LAST_COLOR_INT) {
+                contentPanel.setBackgroundColor(typedValue.data)
+            }
+        }
+
+        // Adjusting the panel size
         val screenSize = context.screenSize
         val scale = context.resources.displayMetrics.density
-        view.layoutParams = FrameLayout.LayoutParams(
+        contentPanel.layoutParams = FrameLayout.LayoutParams(
             layoutParams(viewModal.widthLayout, screenSize.x, scale),
             layoutParams(viewModal.heightLayout, screenSize.y, scale)
         ).apply {
             gravity = Gravity.CENTER
         }
-        panel.addView(view)
-        return view
-    }
-
-    private fun <ScreenT : Any> Dialog.addWrapContentView(
-        viewRegistry: ViewRegistry,
-        viewModal: ViewModal<ScreenT>
-    ): View {
-        window!!.setLayout(WRAP_CONTENT, WRAP_CONTENT)
-        logAndShow("ViewModal")
+        fullWindowPanel.addView(contentPanel)
+        // The view is created and added after Dialog.show is called to preserve of the dialogs as described by the
+        // virtual DOM screens.
         val view = viewRegistry.buildView(viewModal.content, context)
-        setContentView(view)
+        contentPanel.addView(view)
         return view
     }
 
@@ -111,24 +113,6 @@ class ViewModalDialogBinding(
     override fun cleanUpDialog(dialogRef: DialogRef<ViewModal<*>>) {
         super.cleanUpDialog(dialogRef)
         with(dialogRef) { (extra as View).disposeScreenBinding() }
-    }
-}
-
-internal class PanelBodyWrapper
-@JvmOverloads constructor(
-    context: Context,
-    attributeSet: AttributeSet? = null
-) : FrameLayout(context, attributeSet) {
-
-    override fun onMeasure(
-        widthMeasureSpec: Int,
-        heightMeasureSpec: Int
-    ) {
-        val screenSize = context.screenSize
-        val calculatedWidthSpec: Int = makeMeasureSpec(screenSize.x, EXACTLY)
-        val calculatedHeightSpec: Int =
-            makeMeasureSpec(screenSize.y, EXACTLY)
-        super.onMeasure(calculatedWidthSpec, calculatedHeightSpec)
     }
 }
 

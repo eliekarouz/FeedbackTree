@@ -22,7 +22,7 @@ import kotlin.reflect.KClass
 
 /**
  * Factory for [View] instances that can show screens of type[ScreenT].
- * Use [LayoutBinder.bind] to work with XML layout resources, or
+ * Use [LayoutBinder.create] to work with XML layout resources, or
  * [BuilderBinding] to create views from code.
  *
  * Sets of bindings are gathered in [ViewRegistry] instances.
