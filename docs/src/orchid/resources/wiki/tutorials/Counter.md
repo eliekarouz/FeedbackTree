@@ -17,8 +17,8 @@ dependencies {
     ...
       
 	  // FeedbackTree
-  	implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.13.0"
-		implementation "com.github.eliekarouz.feedbacktree:core:0.13.0"
+  	implementation "com.github.eliekarouz.feedbacktree:feedbacktree:0.13.1"
+		implementation "com.github.eliekarouz.feedbacktree:core:0.13.1"
   
 		// RxJava/Kotlin
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"

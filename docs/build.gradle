@@ -22,5 +22,5 @@ repositories {
 
 // 4. Use the 'Editorial' theme, and set the URL it will have on Github Pages
 orchid {
-    version = "0.13.0"
+    version = "0.13.1"
 }
