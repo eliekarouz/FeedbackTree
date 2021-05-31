@@ -1,0 +1,31 @@
+{
+  "ownKey": "home",
+  "ownPages": [
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+        "fileName": "",
+        "extension": "html",
+        "usePrettyUrl": true,
+        "link": "https://eliekarouz.github.io/FeedbackTree"
+      },
+      "description": "",
+      "title": "Home",
+      "content": "<h1 id=\"feedbacktree\"><a href=\"#feedbacktree\" id=\"feedbacktree\" class=\"anchor\"><\/a>FeedbackTree<\/h1>\n<p><strong>The API is not stable yet as we are still experimenting with the concept.<\/strong><\/p>\n<p>FeedbackTree is a unidirectional data flow architecture for Android which relies heavily on state mahines to perform all types of side effects, like network calls, bluetooth, UI updates as well as navigation.<\/p>\n<h4 id=\"why-feedbacktree\"><a href=\"#why-feedbacktree\" id=\"why-feedbacktree\" class=\"anchor\"><\/a>Why FeedbackTree?<\/h4>\n<ul>\n<li>Organizes the code around the business rules.<\/li>\n<li>Reactive Declarative UI<\/li>\n<li>Built-in navigation<\/li>\n<li>Logic can be easily unit tested\n<ul>\n<li>Most logic is placed in the <code>Stepper<\/code> which is pure function.<\/li>\n<li>Side effect are isolated and testing can be done with a TestScheduler.<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<h4 id=\"core-concepts\"><a href=\"#core-concepts\" id=\"core-concepts\" class=\"anchor\"><\/a>Core concepts<\/h4>\n<ul>\n<li>Business rules are wrapped in a Flow. You kickstart the Flow with some input and wait for the output to be produced.<\/li>\n<li>The Flow is driven by a state machine.<\/li>\n<li>You emit Events to advance the Flow.<\/li>\n<li>Stepper is used to progress or complete a Flow based on the Events received. It is a pure function which\nmakes unit testing very straightforward.<\/li>\n<li>Feedback loops are used separate business logic from side effects like network calls, database operations, timers, bluetooth...<\/li>\n<\/ul>\n<h4 id=\"installation\"><a href=\"#installation\" id=\"installation\" class=\"anchor\"><\/a>Installation<\/h4>\n<p>The project recently migrated from <code>jitpack<\/code> to <code>Maven Central<\/code><\/p>\n<p>Add it in your root build.gradle:<\/p>\n<pre><code class=\"language-groovy\">allprojects {\n  repositories {\n    mavenCentral()\n  }\n}\n<\/code><\/pre>\n<h5 id=\"android-projects\"><a href=\"#android-projects\" id=\"android-projects\" class=\"anchor\"><\/a>Android Projects<\/h5>\n<p>Add this to your build.gradle (app)<\/p>\n<pre><code class=\"language-groovy\">dependencies {\n  implementation &quot;com.github.eliekarouz.feedbacktree:feedbacktree:0.13.1&quot;\n  implementation &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;\n}\n<\/code><\/pre>\n<h5 id=\"kotlin-multiplatform\"><a href=\"#kotlin-multiplatform\" id=\"kotlin-multiplatform\" class=\"anchor\"><\/a>Kotlin Multiplatform<\/h5>\n<p>We are only supporting the concept of <code>Step<\/code> and <code>Stepper<\/code> in Kotlin multiplatform (iOS/Android only).<br />\nWe might provide additional multiplatform support in the future.\nTo include these concepts to a multipatform module, add this dependency to commonMain.<\/p>\n<pre><code class=\"language-groovy\">dependencies {\n    api &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;\n}\n<\/code><\/pre>\n<p>If you are targeting iOS you will also need to export the dependencies:<\/p>\n<pre><code>framework(&quot;Example&quot;) {\n    export &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;\n    transitiveExport = true\n}\n<\/code><\/pre>\n<h5 id=\"versions\"><a href=\"#versions\" id=\"versions\" class=\"anchor\"><\/a>Versions<\/h5>\n<table>\n<thead>\n<tr><th>Kotlin<\/th><th>FeedbackTree<\/th><\/tr>\n<\/thead>\n<tbody>\n<tr><td>1.3.72<\/td><td>0.10.2<\/td><\/tr>\n<tr><td>1.4.0<\/td><td>0.11<\/td><\/tr>\n<tr><td>1.4.10<\/td><td>0.11.1<\/td><\/tr>\n<tr><td>1.4.30<\/td><td>0.13.1<\/td><\/tr>\n<\/tbody>\n<\/table>\n<h4 id=\"acknowledgements\"><a href=\"#acknowledgements\" id=\"acknowledgements\" class=\"anchor\"><\/a>Acknowledgements<\/h4>\n<p>The following repos were a great source of inspiration:<\/p>\n<ul>\n<li><a href=\"https://www.github.com/notests/rxfeedback.swift\" target=\"_blank\">RxFeedback<\/a><\/li>\n<li><a href=\"https://www.github.com/square/workflow\" target=\"_blank\">Workflow<\/a><\/li>\n<\/ul>\n"
+    },
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+        "fileName": "404",
+        "extension": "html",
+        "usePrettyUrl": false,
+        "link": "https://eliekarouz.github.io/FeedbackTree/404.html"
+      },
+      "description": "",
+      "title": "Not Found",
+      "content": ""
+    }
+  ]
+}

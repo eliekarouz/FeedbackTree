@@ -1,0 +1,965 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>README</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.13.1"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="is-loading">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>README</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <h1 id="feedbacktree"><a href="#feedbacktree" id="feedbacktree" class="anchor"></a>FeedbackTree</h1>
+<p><strong>The API is not stable yet as we are still experimenting with the concept.</strong></p>
+<p>FeedbackTree is a unidirectional data flow architecture for Android which relies heavily on state mahines to perform all types of side effects, like network calls, bluetooth, UI updates as well as navigation.</p>
+<h3 id="why-feedbacktree"><a href="#why-feedbacktree" id="why-feedbacktree" class="anchor"></a>Why FeedbackTree?</h3>
+<ul>
+<li>Organizes the code around the business rules.</li>
+<li>Reactive Declarative UI</li>
+<li>Built-in navigation</li>
+<li>Logic can be easily unit tested
+<ul>
+<li>Most logic is placed in the <code>Stepper</code> which is pure function.</li>
+<li>Side effect are isolated and testing can be done with a TestScheduler.</li>
+</ul>
+</li>
+</ul>
+<h3 id="core-concepts"><a href="#core-concepts" id="core-concepts" class="anchor"></a>Core concepts</h3>
+<ul>
+<li>Business rules are wrapped in a Flow. You kickstart the Flow with some input and wait for the output to be produced.</li>
+<li>The Flow is driven by a state machine.</li>
+<li>You emit Events to advance the Flow.</li>
+<li>Stepper is used to progress or complete a Flow based on the Events received. It is a pure function which
+makes unit testing very straightforward.</li>
+<li>Feedback loops are used separate business logic from side effects like network calls, database operations, timers, bluetooth...</li>
+</ul>
+<h3 id="installation"><a href="#installation" id="installation" class="anchor"></a>Installation</h3>
+<p>The project recently migrated from <code>jitpack</code> to <code>Maven Central</code></p>
+<p>Add it in your root build.gradle:</p>
+<pre><code class="language-groovy">allprojects {
+  repositories {
+    mavenCentral()
+  }
+}
+</code></pre>
+<h4 id="android-projects"><a href="#android-projects" id="android-projects" class="anchor"></a>Android Projects</h4>
+<p>Add this to your build.gradle (app)</p>
+<pre><code class="language-groovy">dependencies {
+  implementation &quot;com.github.eliekarouz.feedbacktree:feedbacktree:0.13.1&quot;
+  implementation &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;
+}
+</code></pre>
+<h4 id="proguard-rules"><a href="#proguard-rules" id="proguard-rules" class="anchor"></a>Proguard Rules</h4>
+<p>You need to add this to your proguard-rules.pro:</p>
+<pre><code>-keep class com.feedbacktree**
+</code></pre>
+<h4 id="kotlin-multiplatform"><a href="#kotlin-multiplatform" id="kotlin-multiplatform" class="anchor"></a>Kotlin Multiplatform</h4>
+<p>We are only supporting the concept of <code>Step</code> and <code>Stepper</code> in Kotlin multiplatform (iOS/Android only).<br />
+We might provide additional multiplatform support in the future.
+To include these concepts to a multipatform module, add this dependency to commonMain.</p>
+<pre><code class="language-groovy">dependencies {
+    api &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;
+}
+</code></pre>
+<p>If you are targeting iOS you will also need to export the dependencies:</p>
+<pre><code class="language-groovy">framework(&quot;Example&quot;) {
+    export &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;
+    transitiveExport = true
+}
+</code></pre>
+<h3 id="versions"><a href="#versions" id="versions" class="anchor"></a>Versions</h3>
+<table>
+<thead>
+<tr><th>Kotlin</th><th>FeedbackTree</th></tr>
+</thead>
+<tbody>
+<tr><td>1.3.72</td><td>0.10.2</td></tr>
+<tr><td>1.4.0</td><td>0.11</td></tr>
+<tr><td>1.4.10</td><td>0.11.1</td></tr>
+<tr><td>1.4.30</td><td>0.13.1</td></tr>
+</tbody>
+</table>
+<h3 id="acknowledgements"><a href="#acknowledgements" id="acknowledgements" class="anchor"></a>Acknowledgements</h3>
+<p>The following repos were a great source of inspiration:</p>
+<ul>
+<li><a href="https://www.github.com/notests/rxfeedback.swift" target="_blank">RxFeedback</a></li>
+<li><a href="https://www.github.com/square/workflow" target="_blank">Workflow</a></li>
+</ul>
+
+
+
+<p><b>Roots:</b></p>
+<ul>
+  <li>com.feedbacktree.flow.core</li>
+
+  <li>com.feedbacktree.flow.utils</li>
+
+  <li>com.feedbacktree.flow.ui.views</li>
+
+  <li>com.feedbacktree.flow.ui.core</li>
+
+</ul>
+
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a class="subheader">API Docs</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">All Packages</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core">com.feedbacktree.flow.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core">com.feedbacktree.flow.ui.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals">com.feedbacktree.flow.ui.core.modals</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views">com.feedbacktree.flow.ui.views</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack">com.feedbacktree.flow.ui.views.backstack</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core">com.feedbacktree.flow.ui.views.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals">com.feedbacktree.flow.ui.views.modals</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils">com.feedbacktree.flow.utils</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">All Classes</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/alertdialogbinding">AlertDialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal">AlertModal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/alertmodalbuilder">AlertModalBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder/androidviewbinding">AndroidViewBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/backstackcontainer">BackStackContainer</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/backstackscreen">BackStackScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutrunner/binding">Binding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/modalcontainer/binding">Binding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/bindingsbuilder">BindingsBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/builderbinding">BuilderBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/button">Button</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event/buttonclicked">ButtonClicked</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event/canceled">Canceled</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/backstackcontainer/companion">Companion</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/compatible">Compatible</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/dps">DPs</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogbinding">DialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogref">DialogRef</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogregistry">DialogRegistry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/disposescreenbinding">DisposeScreenBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event">Event</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flowviewmodel/factory">Factory</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/feedback">Feedback</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flow">Flow</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/flowfragment">FlowFragment</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flowviewmodel">FlowViewModel</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/fullscreen">FullScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/handlesback">HandlesBack</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/handlesback/helper">Helper</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout">Layout</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder">LayoutBinder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinderbuilder">LayoutBinderBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder/layoutresbinding">LayoutResBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutrunner">LayoutRunner</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/loglevel">LogLevel</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/logger">Logger</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/modal">Modal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/modalcontainer">ModalContainer</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/modalcontainerscreen">ModalContainerScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/named">Named</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/noevent">NoEvent</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional/none">None</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/observableschedulercontext">ObservableSchedulerContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/observables">Observables</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional">Optional</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/flowfragment/parameters">Parameters</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/percentage">Percentage</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/renderingcontext">RenderingContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/viewstatecache/savedstate">SavedState</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/showscreen">ShowScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/showscreentag">ShowScreenTag</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional/some">Some</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/viewbinding">ViewBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/viewbindinginflater">ViewBindingInflater</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/viewmodal">ViewModal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/viewmodaldialogbinding">ViewModalDialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/viewregistry">ViewRegistry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/viewstatecache">ViewStateCache</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/workflowlayout">WorkflowLayout</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/wrap">Wrap</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.13.1. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>

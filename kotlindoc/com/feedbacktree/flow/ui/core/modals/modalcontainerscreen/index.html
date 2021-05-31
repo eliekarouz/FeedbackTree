@@ -1,0 +1,1090 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>ModalContainerScreen</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSourceDoc.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.13.1"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="is-loading">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>ModalContainerScreen</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="sourcedoc-page orchid-sourcedoc content">
+  
+<div class="sourcedoc-section section-root section-level-1" id="ModalContainerScreen">
+
+
+  
+
+  
+    <div class="sourcedoc-section section-element" id="1399f645d5302d7a6e7ecfc8745bcc38da06b16f">
+      
+      <p class="sourcedoc-section section-signature">
+        <code>data class ModalContainerScreen&lt;BaseScreenT : Any, ModalT : Modal&gt; : Any</code>
+      </p>
+
+      
+        
+    <!-- start:inject components -->
+    
+    <!-- end:inject components -->
+
+
+      
+
+      <div class="sourcedoc-section section-comments"></div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="fields">
+
+
+  <p class="sourcedoc-section section-name"><strong>Fields</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="be2d49386698fce85d8a93846fc4ba58b227f554">
+        <td class="sourcedoc-section section-signature">
+          <code>val baseScreen: BaseScreenT</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="dcded7f03596d9cf8d5b6612f5865d56b85f0c48">
+        <td class="sourcedoc-section section-signature">
+          <code>val modals: List&lt;ModalT&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="constructors">
+
+
+  
+    <h2 class="sourcedoc-section section-name">Constructors</h2>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="268296d0bde7c186a675cecaa22e2569be48c6d0">
+      
+      <h3 class="sourcedoc-section element-name">&lt;init&gt;</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>constructor(baseScreen: BaseScreenT, modal: ModalT?)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"></div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="4a3ed89bccc50081354c2a903f6a12b4375544d5">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f06d34a42652ec7e82ba62cd4dcfc8d3a5af4b55">
+        <td class="sourcedoc-section section-signature">
+          <code>baseScreen: BaseScreenT</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="91d13c8b2bdff1855aa48aae38a829d550fea544">
+        <td class="sourcedoc-section section-signature">
+          <code>modal: ModalT?</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="9f6959fd9313d099a372e0a7df63e3e23eb9fcf3">
+      
+      <h3 class="sourcedoc-section element-name">&lt;init&gt;</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>constructor(baseScreen: BaseScreenT, modals: List&lt;ModalT&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"></div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="99b513cceff2b046bf633203bd4f84dd247b11e1">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f06d34a42652ec7e82ba62cd4dcfc8d3a5af4b55">
+        <td class="sourcedoc-section section-signature">
+          <code>baseScreen: BaseScreenT</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="c5ffc47c244dc84c2810d41d74445c7a8ffd3a9a">
+        <td class="sourcedoc-section section-signature">
+          <code>modals: List&lt;ModalT&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+</div>
+
+
+
+
+
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a class="subheader">API Docs</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">All Packages</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core">com.feedbacktree.flow.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core">com.feedbacktree.flow.ui.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals">com.feedbacktree.flow.ui.core.modals</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views">com.feedbacktree.flow.ui.views</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack">com.feedbacktree.flow.ui.views.backstack</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core">com.feedbacktree.flow.ui.views.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals">com.feedbacktree.flow.ui.views.modals</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils">com.feedbacktree.flow.utils</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">All Classes</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/alertdialogbinding">AlertDialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal">AlertModal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/alertmodalbuilder">AlertModalBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder/androidviewbinding">AndroidViewBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/backstackcontainer">BackStackContainer</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/backstackscreen">BackStackScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutrunner/binding">Binding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/modalcontainer/binding">Binding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/bindingsbuilder">BindingsBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/builderbinding">BuilderBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/button">Button</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event/buttonclicked">ButtonClicked</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event/canceled">Canceled</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/backstackcontainer/companion">Companion</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/compatible">Compatible</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/dps">DPs</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogbinding">DialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogref">DialogRef</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogregistry">DialogRegistry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/disposescreenbinding">DisposeScreenBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event">Event</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flowviewmodel/factory">Factory</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/feedback">Feedback</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flow">Flow</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/flowfragment">FlowFragment</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flowviewmodel">FlowViewModel</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/fullscreen">FullScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/handlesback">HandlesBack</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/handlesback/helper">Helper</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout">Layout</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder">LayoutBinder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinderbuilder">LayoutBinderBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder/layoutresbinding">LayoutResBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutrunner">LayoutRunner</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/loglevel">LogLevel</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/logger">Logger</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/modal">Modal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/modalcontainer">ModalContainer</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/modalcontainerscreen">ModalContainerScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/named">Named</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/noevent">NoEvent</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional/none">None</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/observableschedulercontext">ObservableSchedulerContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/observables">Observables</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional">Optional</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/flowfragment/parameters">Parameters</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/percentage">Percentage</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/renderingcontext">RenderingContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/viewstatecache/savedstate">SavedState</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/showscreen">ShowScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/showscreentag">ShowScreenTag</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional/some">Some</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/viewbinding">ViewBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/viewbindinginflater">ViewBindingInflater</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/viewmodal">ViewModal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/viewmodaldialogbinding">ViewModalDialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/viewregistry">ViewRegistry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/viewstatecache">ViewStateCache</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/workflowlayout">WorkflowLayout</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/wrap">Wrap</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.13.1. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>

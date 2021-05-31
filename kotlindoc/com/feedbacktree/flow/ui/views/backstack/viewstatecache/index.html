@@ -1,0 +1,1611 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>ViewStateCache</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSourceDoc.css"  />
+<!-- end:inject styles -->
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.13.1"};
+</script>
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+    <!-- start:inject meta-components [head] -->
+    
+
+        
+            
+        
+
+        
+            
+        
+    
+    <!-- end:inject meta-components [head] -->
+
+
+
+
+
+
+
+</head>
+<body class="is-loading">
+
+
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+    <!-- start:inject meta-components [bodyStart] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyStart] -->
+
+
+
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>ViewStateCache</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="sourcedoc-page orchid-sourcedoc content">
+  
+<div class="sourcedoc-section section-root section-level-1" id="ViewStateCache">
+
+
+  
+
+  
+    <div class="sourcedoc-section section-element" id="53395526a757d0cdb50cbe416acc643cfd761774">
+      
+      <p class="sourcedoc-section section-signature">
+        <code>class ViewStateCache: Any</code>
+      </p>
+
+      
+        
+    <!-- start:inject components -->
+    
+    <!-- end:inject components -->
+
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Handles persistence chores for container views that manage a set of Named screens,
+showing a view for one at a time -- think back stacks or tab sets.</p><p>This class implements <a href="#">Parcelable</a> so that it can be preserved from
+a container view's own <a href="#">View.saveHierarchyState</a> method. A simple container can
+return SavedState from that method rather than creating its own persistence class.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="constructors">
+
+
+  <p class="sourcedoc-section section-name"><strong>Constructors</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="d4613aad3f43ed7d2b370aabe518d8516ff827ff">
+        <td class="sourcedoc-section section-signature">
+          <code>constructor()</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="methods">
+
+
+  
+    <h2 class="sourcedoc-section section-name">Methods</h2>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="994076ece9cb55ca71278846b85033e6452a3b48">
+      
+      <h3 class="sourcedoc-section element-name">prune</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun prune(retaining: Collection&lt;Named&lt;*&gt;&gt;)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>To be called when the set of hidden views changes but the visible view remains
+the same. Any cached view state held for screens that are not
+com.feedbacktree.flow.ui.core.compatible those in retaining will be dropped.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="85e36ba1fec58fd07da28c7b825d4ebccd26d91f">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="3ca294a375630647ffa245089f3df82fe4583a43">
+        <td class="sourcedoc-section section-signature">
+          <code>retaining: Collection&lt;Named&lt;*&gt;&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="40e4593d7b7a5f82588964d78f2325247c0ba913">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="3d97e0f4a75bd01af11bfaada9e5d3eca99fecc1">
+      
+      <h3 class="sourcedoc-section element-name">update</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun update(retainedScreens: Collection&lt;Named&lt;*&gt;&gt;, oldViewMaybe: View?, newView: View): Boolean</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"></div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="f624e79f974767d9481d4960dc1099dcb3ff7779">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="48711f5582e59c78341d299b44c7786d19550991">
+        <td class="sourcedoc-section section-signature">
+          <code>retainedScreens: Collection&lt;Named&lt;*&gt;&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>the screens to be considered hidden after this update. Any
+associated view state will be retained in the cache, possibly to be restored to newView
+on a succeeding call to his method. Any other cached view state will be dropped.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="96f6af77595b5386bc9deef9ab6dbcc96d31f9fa">
+        <td class="sourcedoc-section section-signature">
+          <code>oldViewMaybe: View?</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>the view that is being removed, if any, which is expected to be showing
+a Named viewModel. If that viewModel is
+compatible with a member of
+retainedScreens, its state will be <a href="#">saved</a>.</p>
+
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="0ad0c2f77b6fd01126738af6b23a698bcaf34957">
+        <td class="sourcedoc-section section-signature">
+          <code>newView: View</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>the view that is about to be displayed, which must be showing a
+Named viewModel. If compatible
+view state is found in the cache, it is <a href="#">restored</a>.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="a8c798ee9a197903be7f96dbb5e296462f04ff36">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="b76ff4906f33c2dd97ddd929b9662ba8cac6174c">
+        <td class="sourcedoc-section section-signature">
+          <code>Boolean</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        <p>true if newView has been restored.</p>
+
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="719a5cae933c537249cbd40ac57cce0200a96a83">
+      
+      <h3 class="sourcedoc-section element-name">restore</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun restore(from: ViewStateCache)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Replaces the state of the receiver with that of from. Typical usage is to call this from
+a container view's <a href="#">View.onRestoreInstanceState</a>.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="90f3b0ec9721ef011d6f3e8b2a7e55a7e9427c79">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="661889f07f11580ec767b6269ea97b9579624201">
+        <td class="sourcedoc-section section-signature">
+          <code>from: ViewStateCache</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="1bf671c98caa602c354701bb16b172e08208ed64">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="dc199c019682ad53c474a7477673e0e21f8f7bb8">
+      
+      <h3 class="sourcedoc-section element-name">describeContents</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun describeContents(): Int</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"></div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="f513cbeb21aff5234efc37216c7859df7f4f03b8">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="5c89edcac2811a6a9e8072517cae7f3cbfd5049d">
+        <td class="sourcedoc-section section-signature">
+          <code>Int</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="980baa2e5e2f0cba932cc10efd6c83c52ae14cf1">
+      
+      <h3 class="sourcedoc-section element-name">writeToParcel</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun writeToParcel(parcel: Parcel, flags: Int)</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"></div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="f67a0f0a91bd69787ec0c35be774d6362e8725a5">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="aa53dacc84ff0f561073cbac763e55dde3d5ede2">
+        <td class="sourcedoc-section section-signature">
+          <code>parcel: Parcel</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      <tr class="sourcedoc-section section-element" id="d66e66dac69811f5c477dd38cec7659358763e3e">
+        <td class="sourcedoc-section section-signature">
+          <code>flags: Int</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="eea9480f091127e1cc49b59d810915c22b5130ea">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="f6b935ab337145efdeadda28cae18aa89a845e36">
+        <td class="sourcedoc-section section-signature">
+          <code>Unit</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-2" id="companionObject">
+
+
+  
+    <h2 class="sourcedoc-section section-name">CompanionObject</h2>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="53395526a757d0cdb50cbe416acc643cfd761774">
+      
+      <h3 class="sourcedoc-section element-name">ViewStateCache</h3>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>class ViewStateCache: Any</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"><p>Handles persistence chores for container views that manage a set of Named screens,
+showing a view for one at a time -- think back stacks or tab sets.</p><p>This class implements <a href="#">Parcelable</a> so that it can be preserved from
+a container view's own <a href="#">View.saveHierarchyState</a> method. A simple container can
+return SavedState from that method rather than creating its own persistence class.</p>
+</div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-3" id="9669901795b92ee3c62dd8b060572d151e750008">
+
+
+  
+    <h3 class="sourcedoc-section section-name">Methods</h3>
+  
+
+  
+    <div class="sourcedoc-section section-element" id="9bad1dc3edf8937d57dd9f671410974b88607859">
+      
+      <h4 class="sourcedoc-section element-name">createFromParcel</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun createFromParcel(parcel: Parcel): ViewStateCache</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"></div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="f925677ceb8fe9045be4a01741def6393654b4c3">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="aa53dacc84ff0f561073cbac763e55dde3d5ede2">
+        <td class="sourcedoc-section section-signature">
+          <code>parcel: Parcel</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="f1287a352175ee2c63fa5772f806ea6294159bd4">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="c825e8724ee158a9cb322b8ba489b2d368b455a6">
+        <td class="sourcedoc-section section-signature">
+          <code>ViewStateCache</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+    <div class="sourcedoc-section section-element" id="4d859ab68badeab40c659fcd6355c17fae98ddd5">
+      
+      <h4 class="sourcedoc-section element-name">newArray</h4>
+      
+      <p class="sourcedoc-section section-signature">
+        <code>fun newArray(size: Int): Array&lt;ViewStateCache?&gt;</code>
+      </p>
+
+      
+
+      <div class="sourcedoc-section section-comments"></div>
+
+      
+      
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="10f4b834b3fc52dd6ba0d449217de4e435536a49">
+
+
+  <p class="sourcedoc-section section-name"><strong>Parameters</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="dbbe178f5454bf951d22f436e97723133f89964b">
+        <td class="sourcedoc-section section-signature">
+          <code>size: Int</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+          
+<div class="sourcedoc-section section-root section-level-4" id="b6e100a79c62d2acb2470aed3d8853b00c1a1155">
+
+
+  <p class="sourcedoc-section section-name"><strong>ReturnValue</strong></p>
+
+  <div class="table-container">
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr class="sourcedoc-section section-element" id="a7dbdebb34b9fd86afa71648e3888dbf2c43b25f">
+        <td class="sourcedoc-section section-signature">
+          <code>Array&lt;ViewStateCache?&gt;</code>
+        </td>
+        <td class="sourcedoc-section section-comments content">
+        
+        </td>
+      </tr>
+      
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+        
+      
+    </div>
+  
+
+</div>
+
+</div>
+
+
+
+
+
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a class="subheader">API Docs</a>
+    </li>
+    
+
+                
+                    
+    <li>
+        <span class="opener">All Packages</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core">com.feedbacktree.flow.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core">com.feedbacktree.flow.ui.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals">com.feedbacktree.flow.ui.core.modals</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views">com.feedbacktree.flow.ui.views</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack">com.feedbacktree.flow.ui.views.backstack</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core">com.feedbacktree.flow.ui.views.core</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals">com.feedbacktree.flow.ui.views.modals</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils">com.feedbacktree.flow.utils</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+                    
+    <li>
+        <span class="opener">All Classes</span>
+        <ul>
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/alertdialogbinding">AlertDialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal">AlertModal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/alertmodalbuilder">AlertModalBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder/androidviewbinding">AndroidViewBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/backstackcontainer">BackStackContainer</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/backstackscreen">BackStackScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutrunner/binding">Binding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/modalcontainer/binding">Binding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/bindingsbuilder">BindingsBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/builderbinding">BuilderBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/button">Button</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event/buttonclicked">ButtonClicked</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event/canceled">Canceled</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/backstackcontainer/companion">Companion</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/compatible">Compatible</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/dps">DPs</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogbinding">DialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogref">DialogRef</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/dialogregistry">DialogRegistry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/disposescreenbinding">DisposeScreenBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/alertmodal/event">Event</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flowviewmodel/factory">Factory</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/feedback">Feedback</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flow">Flow</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/flowfragment">FlowFragment</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/flowviewmodel">FlowViewModel</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/fullscreen">FullScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/handlesback">HandlesBack</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/handlesback/helper">Helper</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout">Layout</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder">LayoutBinder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinderbuilder">LayoutBinderBuilder</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutbinder/layoutresbinding">LayoutResBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/layoutrunner">LayoutRunner</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/loglevel">LogLevel</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/logger">Logger</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/modal">Modal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/modalcontainer">ModalContainer</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/modalcontainerscreen">ModalContainerScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/named">Named</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/noevent">NoEvent</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional/none">None</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/observableschedulercontext">ObservableSchedulerContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/observables">Observables</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional">Optional</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/flowfragment/parameters">Parameters</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/percentage">Percentage</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/core/renderingcontext">RenderingContext</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/viewstatecache/savedstate">SavedState</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/showscreen">ShowScreen</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/showscreentag">ShowScreenTag</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/utils/optional/some">Some</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/viewbinding">ViewBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/viewbindinginflater">ViewBindingInflater</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/viewmodal">ViewModal</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/modals/viewmodaldialogbinding">ViewModalDialogBinding</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/core/viewregistry">ViewRegistry</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/backstack/viewstatecache">ViewStateCache</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/views/workflowlayout">WorkflowLayout</a>
+    </li>
+    
+
+        
+            
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/kotlindoc/com/feedbacktree/flow/ui/core/modals/layout/wrap">Wrap</a>
+    </li>
+    
+
+        
+        </ul>
+    </li>
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.13.1. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+    <!-- start:inject meta-components [bodyEnd] -->
+    
+
+        
+            
+        
+
+        
+    
+    <!-- end:inject meta-components [bodyEnd] -->
+
+
+
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/2502c344/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<!-- end:inject scripts -->
+
+
+</body>
+</html>
