@@ -20,6 +20,12 @@ android {
         viewBinding = true
     }
 
+    publishing {
+        multipleVariants {
+            allVariants()
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -42,7 +48,8 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            register("release", MavenPublication::class) {
+
+        register("release", MavenPublication::class) {
                 from(components["release"])
                 group = project.group
                 version = "${project.version}"
