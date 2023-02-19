@@ -1,8 +1,0 @@
-include ':app'
-include ':feedbacktree'
-include ':core'
-include ':docs'
-rootProject.name = 'FeedbackTree'
-
-
-enableFeaturePreview("GRADLE_METADATA")
