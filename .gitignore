@@ -40,6 +40,7 @@ captures/
 .idea/assetWizardSettings.xml
 .idea/dictionaries
 .idea/libraries
+.idea/artifacts
 .idea/caches
 
 # Keystore files
@@ -64,3 +65,4 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 public
+/.idea/artifacts/core_android_0_13_1.xml

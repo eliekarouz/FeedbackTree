@@ -20,10 +20,10 @@ Editorial:
     - type: 'page'
       itemId: 'Changelog'
 
-    - type: 'separator'
-      title: 'API Docs'
-    - type: 'sourcedocPages'
-      moduleType: 'kotlindoc'
+#    - type: 'separator'
+#      title: 'API Docs'
+#    - type: 'sourcedocPages'
+#      moduleType: 'kotlindoc'
 
 kotlindoc:
   homePagePermalink: ':moduleGroup/:module'
