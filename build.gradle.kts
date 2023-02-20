@@ -73,9 +73,9 @@ allprojects {
         extensions.findByType<SigningExtension>()?.apply {
             val publishing = extensions.findByType<PublishingExtension>() ?: return@apply
             val key = properties["signingKey"]?.toString()?.replace("\\n", "\n")
-            val password = properties["signingPassword"]?.toString()
 
-            useInMemoryPgpKeys(key, password)
+            println("signing")
+            useInMemoryPgpKeys(key, "")
             sign(publishing.publications)
         }
 

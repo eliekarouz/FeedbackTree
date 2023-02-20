@@ -21,8 +21,8 @@ android {
     }
 
     publishing {
-        multipleVariants {
-            allVariants()
+        singleVariant("release") {
+            println("Adding source jar")
             withSourcesJar()
         }
     }
@@ -49,7 +49,7 @@ afterEvaluate {
     publishing {
         publications {
 
-        register("release", MavenPublication::class) {
+            register("release", MavenPublication::class) {
                 from(components["release"])
                 group = project.group
                 version = "${project.version}"
