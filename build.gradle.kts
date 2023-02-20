@@ -35,8 +35,8 @@ allprojects {
                     name = "sonatype"
                     setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                     credentials {
-                        username = properties["NEXUS_USERNAME"]?.toString()
-                        password = properties["NEXUS_PASSWORD"]?.toString()
+                        username = properties["SONATYPE_NEXUS_USERNAME"]?.toString()
+                        password = properties["SONATYPE_NEXUS_PASSWORD"]?.toString()
                     }
                 }
             }
