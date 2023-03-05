@@ -282,6 +282,8 @@ class BindingsBuilder<Event>(
 
 /**
  * Bi-directional binding of a system State to external state machine and events from it.
+ *
+ * Note that [bind] does not enqueue any event to the scheduler.
  */
 fun <State, Event> bind(bindings: BindingsBuilder<Event>.(Observable<State>) -> Unit): (ObservableSchedulerContext<State>) -> Observable<Event> =
     { observableSchedulerContext: ObservableSchedulerContext<State> ->
@@ -293,7 +295,6 @@ fun <State, Event> bind(bindings: BindingsBuilder<Event>.(Observable<State>) -> 
             Bindings(subscriptions = bindings.subscriptions, events = bindings.events)
         }, { bindings: Bindings<Event> ->
             Observable.merge(bindings.events).concatWith(Observable.never())
-                .enqueue(observableSchedulerContext.scheduler)
         }, { it.dispose() })
     }
 
