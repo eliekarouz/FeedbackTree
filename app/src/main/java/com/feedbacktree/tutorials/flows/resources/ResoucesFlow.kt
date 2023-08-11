@@ -14,6 +14,7 @@ import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 
 val ResourcesFlow = Flow<Unit, State, Event, Unit, FilesScreen>(
+    id = "ResourcesFlow",
     initialState = {
         State(
             fileResources = listOf(
@@ -28,6 +29,7 @@ val ResourcesFlow = Flow<Unit, State, Event, Unit, FilesScreen>(
             is Event.UserRequestedResource -> state.copy(
                 resourceUrlsToDownload = state.resourceUrlsToDownload + event.fileResource.url
             ).advance()
+
             is Event.LoadedResource -> state.copy(
                 resourceUrlsToDownload = state.resourceUrlsToDownload - event.url,
                 fileResources = state.fileResources.update(
@@ -37,11 +39,10 @@ val ResourcesFlow = Flow<Unit, State, Event, Unit, FilesScreen>(
             ).advance()
         }
     },
-    feedbacks = listOf(downloadResourcesFeedback()),
-    render = { state, context ->
-        FilesScreen(state, context.sink)
-    }
-)
+    feedbacks = listOf(downloadResourcesFeedback())
+) { state, context ->
+    FilesScreen(state, context.sink)
+}
 
 data class FileResource(
     val url: String,

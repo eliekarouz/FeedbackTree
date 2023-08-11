@@ -11,23 +11,25 @@ import com.feedbacktree.flow.core.endFlow
 import kotlin.math.max
 
 val CounterFlow = Flow<Unit, State, Event, Unit, CounterScreen>(
+    id = "CounterFlow",
     initialState = { State(counter = 0) },
     stepper = { state, event ->
         when (event) {
             Event.Increment -> state.copy(
                 counter = state.counter + 1
             ).advance()
+
             Event.Decrement -> state.copy(
                 counter = max(0, state.counter - 1)
             ).advance()
+
             Event.BackPressed -> endFlow()
         }
     },
-    feedbacks = listOf(),
-    render = { state, context ->
-        CounterScreen(state, context.sink)
-    }
-)
+    feedbacks = listOf()
+) { state, context ->
+    CounterScreen(state, context.sink)
+}
 
 data class State(
     val counter: Int

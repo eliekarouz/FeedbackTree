@@ -3,8 +3,6 @@
  * Copyright (c) 2020 eliekarouz. All rights reserved.
  */
 
-@file:Suppress("DEPRECATION")
-
 package com.feedbacktree.flow.ui.views
 
 import android.content.Context

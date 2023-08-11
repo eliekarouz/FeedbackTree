@@ -12,10 +12,11 @@ import com.feedbacktree.tutorials.flows.counter.CounterLayoutBinder
 import com.feedbacktree.tutorials.flows.login.LoginLayoutBinder
 import com.feedbacktree.tutorials.flows.modals.CovidInfoLayoutBinder
 import com.feedbacktree.tutorials.flows.modals.ModalsExampleLayoutBinder
+import com.feedbacktree.tutorials.flows.modals.ViewModalDialogBinding
 import com.feedbacktree.tutorials.flows.tutorialsroot.TutorialsLayoutBinder
 
 private val dialogRegistry =
-    DialogRegistry.registry(R.style.FTDialogTheme)
+    DialogRegistry.registry(R.style.FTDialogTheme) + ViewModalDialogBinding()
 
 val appViewRegistry = ViewRegistry(
     ModalContainer.Binding(dialogRegistry),

@@ -8,10 +8,12 @@ package com.feedbacktree.tutorials.flows.modals
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.advance
 import com.feedbacktree.flow.core.endFlow
-import com.feedbacktree.flow.ui.core.modals.*
+import com.feedbacktree.flow.ui.core.modals.AlertModal
+import com.feedbacktree.flow.ui.core.modals.ModalContainerScreen
 import com.feedbacktree.tutorials.flows.login.LoginFlow
 
 val ModalsFlow = Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
+    id = "ModalsFlow",
     initialState = { State.Idle },
     stepper = { _, event ->
         when (event) {
@@ -24,48 +26,51 @@ val ModalsFlow = Flow<Unit, State, Event, Unit, ModalContainerScreen<*, *>>(
             Event.BackClicked -> endFlow()
         }
     },
-    feedbacks = listOf(),
-    render = { state, context ->
-        ModalContainerScreen(
-            baseScreen = ModalsScreen(sink = context.sink),
-            modal = when (state) {
-                State.Idle -> null
-                State.ShowingAlertModal -> AlertModal(context.sink) {
-                    title = "COVID Screening"
-                    message = "Do you have fever?"
-                    positive("Yes", Event.DismissAlert("Yes Clicked"))
-                    negative("No", Event.DismissAlert("No Clicked"))
-                    cancelEvent = Event.DismissAlert("BackClicked")
-                }
-                State.ShowingAlertModalWithCustomView -> AlertModal(context.sink) {
-                    title = "COVID Info"
-                    positive("Dismiss", Event.DismissAlert("Dismiss Clicked"))
-                    contentScreen = CovidInfoScreen()
-                    cancelEvent = Event.DismissAlert("BackClicked")
-                }
-                State.ShowingFullScreenModal -> {
-                    val contentScreen =
-                        context.renderChild(input = "", flow = LoginFlow, onResult = {
-                            context.sendEvent(Event.FullScreenFlowCompleted)
-                        })
-                    // Wrap the screen produced by the LoginFlow in a FullScreenModal
-                    FullScreenModal(contentScreen)
-                }
-                State.ShowingCustomSizeModal -> {
-                    val contentScreen =
-                        context.renderChild(input = "", flow = LoginFlow, onResult = {
-                            context.sendEvent(Event.FullScreenFlowCompleted)
-                        })
-                    ViewModal(
-                        contentScreen,
-                        widthLayout = Layout.Percentage(55),
-                        heightLayout = Layout.Percentage(55)
-                    )
-                }
+    feedbacks = listOf()
+) { state, context ->
+    ModalContainerScreen(
+        baseScreen = ModalsScreen(sink = context.sink),
+        modal = when (state) {
+            State.Idle -> null
+            State.ShowingAlertModal -> AlertModal(context.sink) {
+                title = "COVID Screening"
+                message = "Do you have fever?"
+                positive("Yes", Event.DismissAlert("Yes Clicked"))
+                negative("No", Event.DismissAlert("No Clicked"))
+                cancelEvent = Event.DismissAlert("BackClicked")
             }
-        )
-    }
-)
+
+            State.ShowingAlertModalWithCustomView -> AlertModal(context.sink) {
+                title = "COVID Info"
+                positive("Dismiss", Event.DismissAlert("Dismiss Clicked"))
+                contentScreen = CovidInfoScreen()
+                cancelEvent = Event.DismissAlert("BackClicked")
+            }
+
+            State.ShowingFullScreenModal -> {
+                val contentScreen =
+                    context.renderChild(input = "", flow = LoginFlow, onResult = {
+                        context.sendEvent(Event.FullScreenFlowCompleted)
+                    })
+                // Wrap the screen produced by the LoginFlow in a FullScreenModal
+                FullScreenModal(contentScreen)
+            }
+
+            State.ShowingCustomSizeModal -> {
+                val contentScreen =
+                    context.renderChild(input = "", flow = LoginFlow, onResult = {
+                        context.sendEvent(Event.FullScreenFlowCompleted)
+                    })
+                ViewModal(
+                    contentScreen,
+                    widthLayout = Layout.Percentage(55),
+                    heightLayout = Layout.Percentage(55),
+                    roundCorners = false
+                )
+            }
+        }
+    )
+}
 
 
 enum class State {
