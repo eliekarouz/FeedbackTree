@@ -17,6 +17,7 @@ buildscript {
 
 allprojects {
     group = "com.github.eliekarouz.feedbacktree"
+
     version = System.getenv("GITHUB_REF_NAME")?.takeIf { it.isNotEmpty() } ?: "0.16.0"
 
     repositories {

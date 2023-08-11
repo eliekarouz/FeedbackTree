@@ -83,23 +83,29 @@ fun <InputT : Any, StateT : Any, OutputT : Any> FragmentActivity.startModalsFlow
 ): Observable<OutputT> {
     val renderingTrigger = PublishSubject.create<Unit>()
     return Observable.create<OutputT> { emitter ->
-        val rootNode: FlowNode<*, *, *, *, *> = {
-            FlowNode(
-                input = input,
-                flow = flow,
-                id = "RootFlow",
-                renderingTrigger = renderingTrigger,
-                onResult = {
-                    emitter.onNext(it)
-                }
-            ).apply {
-                run()
+        val rootNode: FlowNode<*, *, *, *, *> = FlowNode(
+            input = input,
+            flow = flow,
+            id = "RootFlow",
+            renderingTrigger = renderingTrigger,
+            onResult = {
+                emitter.onNext(it)
             }
-        }()
-
-        val screens: Observable<Optional<Any>> = renderingTrigger.startWith(Unit).map {
-            rootNode.render().asOptional
+        ).apply {
+            run()
         }
+
+        // The use of enqueueRecursiveEmissions guarantees that rendering is done in sequence,
+        // this can happen if you emit an event why you are rendering the screen.
+        // To do that, you can simply add Observable.just(MyEvent) to the bind.events.
+        // This operator will wait until the rendering is completed before starting the next
+        // rendering pass.
+        val screens: Observable<Optional<Any>> = renderingTrigger
+            .startWith(Unit)
+            .enqueueRecursiveEmissions()
+            .map {
+                rootNode.render().asOptional
+            }
 
         val renderer = DialogFlowRenderer(this, viewRegistry, dialogRegistry)
 
