@@ -6,6 +6,7 @@ Here's an example of a phone registration code where the user enters their phone
 
 ```kotlin
 val phoneNumberRegistrationFlow = Flow<Unit, State, Event, Unit, Any>(
+    id = "PhoneNumberRegistrationFlow",
     initialState = {
         ...
     },

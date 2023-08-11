@@ -29,6 +29,7 @@ import com.feedbacktree.flow.core.*
 import io.reactivex.Observable
 
 val LoginFlow = Flow<String, State, Event, Unit, LoginScreen>( // 1
+    id = "LoginFlow",
     initialState = { lastEmailUsed -> State(email = lastEmailUsed) }, // 2
     stepper = { state, event ->
         when (event) {

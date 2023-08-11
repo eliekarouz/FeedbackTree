@@ -138,7 +138,8 @@ import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.advance
 
 val CounterFlow = Flow<Unit, State, Event, Nothing, CounterScreen>( // 1
-    initialState = { State(counter = 0) }, // 2
+   id = "CounterFlow",
+   initialState = { State(counter = 0) }, // 2
     stepper = { state, event -> // 3
         when (event) {
             Event.Increment -> state.copy(

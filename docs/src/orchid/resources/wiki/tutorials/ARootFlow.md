@@ -36,6 +36,7 @@ sealed class Event {
 }
 
 val TutorialsFlow = Flow<Unit, State, Event, Nothing, Any>(
+    id = "TutorialsFlow",
     initialState = { State() },
     stepper = { state, event ->
         when (event) {
