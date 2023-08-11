@@ -24,8 +24,6 @@ import android.util.SparseArray
 import android.view.View
 import android.widget.FrameLayout
 import com.feedbacktree.flow.ui.views.core.*
-import com.squareup.coordinators.Coordinator
-import com.squareup.coordinators.Coordinators
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 
@@ -84,7 +82,7 @@ class WorkflowLayout(
         addView(newView)
     }
 
-    override fun onSaveInstanceState(): Parcelable? {
+    override fun onSaveInstanceState(): Parcelable {
         return SavedState(
             super.onSaveInstanceState()!!,
             SparseArray<Parcelable>().also { array -> showing?.saveHierarchyState(array) }
@@ -139,22 +137,34 @@ class WorkflowLayout(
         source: Observable<S>,
         update: (S) -> Unit
     ) {
-        Coordinators.bind(this) {
-            object : Coordinator() {
-                var sub: Disposable? = null
-
-                override fun attach(view: View) {
-                    sub = source.subscribe { screen -> update(screen) }
-                }
-
-                override fun detach(view: View) {
-                    sub?.let {
-                        showing?.disposeScreenBinding()
-                        it.dispose()
-                        sub = null
-                    }
+        var sub: Disposable? = null
+        isAttachedToWindowBinder { isAttached ->
+            println("WorkflowLayout is Attached to window $isAttached")
+            if (isAttached) {
+                sub = source.subscribe { screen -> update(screen) }
+            } else {
+                sub?.let {
+                    showing?.disposeScreenBinding()
+                    it.dispose()
+                    sub = null
                 }
             }
         }
+    }
+
+    // callback is called with initial state and on subsequent updates
+    private fun View.isAttachedToWindowBinder(
+        onAttached: (Boolean) -> Unit
+    ) {
+        addOnAttachStateChangeListener(object : OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View) {
+                onAttached(true)
+            }
+
+            override fun onViewDetachedFromWindow(v: View) {
+                onAttached(false)
+            }
+        })
+        onAttached(isAttachedToWindow)
     }
 }

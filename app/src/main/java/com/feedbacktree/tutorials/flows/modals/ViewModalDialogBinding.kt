@@ -1,29 +1,36 @@
 /*
- * Created by eliek on 9/26/2019
- * Copyright (c) 2019 eliekarouz. All rights reserved.
+ * Created by eliek on 8/11/2023
+ * Copyright (c) 2023 eliekarouz. All rights reserved.
  */
 
-package com.feedbacktree.flow.ui.views.modals
+package com.feedbacktree.tutorials.flows.modals
 
 import android.app.Dialog
 import android.content.Context
+import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
 import android.util.TypedValue
-import android.view.*
+import android.view.Display
+import android.view.Gravity
+import android.view.KeyEvent
+import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.feedbacktree.R
-import com.feedbacktree.flow.ui.core.modals.Layout
-import com.feedbacktree.flow.ui.core.modals.ViewModal
 import com.feedbacktree.flow.ui.views.core.HandlesBack
 import com.feedbacktree.flow.ui.views.core.ViewRegistry
 import com.feedbacktree.flow.ui.views.core.disposeScreenBinding
 import com.feedbacktree.flow.ui.views.core.showScreen
-import com.feedbacktree.flow.utils.logAndShow
+import com.feedbacktree.flow.ui.views.modals.DialogBinding
+import com.feedbacktree.flow.ui.views.modals.DialogRef
+import com.feedbacktree.flow.ui.views.modals.DialogRegistry
 import com.feedbacktree.flow.utils.windowManager
 import kotlin.reflect.KClass
 
@@ -70,7 +77,7 @@ class ViewModalDialogBinding(
         }
 
         setContentView(fullWindowPanel)
-        logAndShow("FullScreen")
+        show()
 
         window?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, R.color.dim)))
 
@@ -79,14 +86,28 @@ class ViewModalDialogBinding(
         val contentPanel = FrameLayout(context)
 
         // Setting backgroundColor of the panel ideally with using the windowBackground
-        if (viewModal.backgroundColor != null) {
-            contentPanel.setBackgroundColor(viewModal.backgroundColor)
+        val panelBackgroundColor = if (viewModal.backgroundColor != null) {
+            viewModal.backgroundColor
         } else {
             val typedValue = TypedValue()
             context.theme.resolveAttribute(android.R.attr.windowBackground, typedValue, true)
             if (typedValue.type in TypedValue.TYPE_FIRST_COLOR_INT..TypedValue.TYPE_LAST_COLOR_INT) {
-                contentPanel.setBackgroundColor(typedValue.data)
+                typedValue.data
+            } else null
+        }
+
+        if (viewModal.roundCorners ?: !viewModal.hasFullScreenDimension()) {
+            contentPanel.background = GradientDrawable().apply {
+                panelBackgroundColor?.also { color = ColorStateList.valueOf(it) }
+                cornerRadius = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    20f,
+                    Resources.getSystem().displayMetrics
+                )
             }
+            contentPanel.clipToOutline = true
+        } else if (panelBackgroundColor != null) {
+            contentPanel.setBackgroundColor(panelBackgroundColor)
         }
 
         // Adjusting the panel size
@@ -168,4 +189,11 @@ private fun layoutParams(layout: Layout, screenDimension: Int, scale: Float): In
         is Layout.DPs -> (layout.dps * scale).toInt()
         is Layout.Percentage -> (screenDimension.toFloat() * layout.percentage.toFloat() * 0.01).toInt()
     }
+}
+
+private fun <Screen : Any> ViewModal<Screen>.hasFullScreenDimension(): Boolean {
+    return widthLayout == Layout.FullScreen ||
+            heightLayout == Layout.FullScreen ||
+            (widthLayout is Layout.Percentage && widthLayout.percentage == 100) ||
+            (heightLayout is Layout.Percentage && heightLayout.percentage == 100)
 }

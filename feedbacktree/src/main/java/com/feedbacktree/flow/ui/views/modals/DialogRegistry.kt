@@ -79,7 +79,7 @@ class DialogRegistry private constructor(
         ): DialogRegistry {
             return DialogRegistry(
                 AlertDialogBinding(dialogThemeResId = dialogThemeResId)
-            ) + ViewModalDialogBinding()
+            )
         }
     }
 }

@@ -42,7 +42,7 @@ class RenderingContext<EventT : Any, OutputT : Any> internal constructor(
         id: String? = null,
         onResult: (ChildOutputT) -> Unit
     ): ChildScreenT {
-        val flowId = id ?: flow.toString()
+        val flowId = id ?: flow.id(input)
         logVerbose("renderChild: $flowId, node = ${node.id}, node.children= ${node.children.size}")
         val existingNode = node.children.firstOrNull { it.id == flowId }
 

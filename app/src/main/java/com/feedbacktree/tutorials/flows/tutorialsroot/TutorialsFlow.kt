@@ -12,6 +12,7 @@ import com.feedbacktree.tutorials.flows.login.LoginFlow
 import com.feedbacktree.tutorials.flows.modals.ModalsFlow
 
 val TutorialsFlow = Flow<Unit, State, Event, Nothing, Any>(
+    id = "TutorialsFlow",
     initialState = { State() },
     stepper = { state, event ->
         when (event) {
@@ -19,22 +20,23 @@ val TutorialsFlow = Flow<Unit, State, Event, Nothing, Any>(
             Event.CompletedTutorial -> state.copy(selectedTutorial = null).advance()
         }
     },
-    feedbacks = listOf(),
-    render = { state, context ->
-        when (state.selectedTutorial) {
-            null -> TutorialsScreen(state, context.sink)
-            Tutorial.Counter -> context.renderChild(CounterFlow, onResult = {
-                context.sendEvent(Event.CompletedTutorial)
-            })
-            Tutorial.Login -> context.renderChild(input = "", flow = LoginFlow, onResult = {
-                context.sendEvent(Event.CompletedTutorial)
-            })
-            Tutorial.Modals -> context.renderChild(ModalsFlow, onResult = {
-                context.sendEvent(Event.CompletedTutorial)
-            })
-        }
+    feedbacks = listOf()
+) { state, context ->
+    when (state.selectedTutorial) {
+        null -> TutorialsScreen(state, context.sink)
+        Tutorial.Counter -> context.renderChild(CounterFlow, onResult = {
+            context.sendEvent(Event.CompletedTutorial)
+        })
+
+        Tutorial.Login -> context.renderChild(input = "", flow = LoginFlow, onResult = {
+            context.sendEvent(Event.CompletedTutorial)
+        })
+
+        Tutorial.Modals -> context.renderChild(ModalsFlow, onResult = {
+            context.sendEvent(Event.CompletedTutorial)
+        })
     }
-)
+}
 
 data class State(
     val tutorials: List<Tutorial> = listOf(

@@ -8,9 +8,13 @@ package com.feedbacktree.tutorials.flows.phonenumber
 import com.feedbacktree.flow.core.Flow
 import com.feedbacktree.flow.core.advance
 import com.feedbacktree.flow.core.endFlow
-import com.feedbacktree.tutorials.flows.phonenumber.State.Progress.*
+import com.feedbacktree.tutorials.flows.phonenumber.State.Progress.EnteringNumber
+import com.feedbacktree.tutorials.flows.phonenumber.State.Progress.EnteringRegistrationCode
+import com.feedbacktree.tutorials.flows.phonenumber.State.Progress.Registering
+import com.feedbacktree.tutorials.flows.phonenumber.State.Progress.SendingCode
 
 val PhoneNumberRegistrationFlow = Flow<Unit, State, Event, Unit, Any>(
+    id = "PhoneNumberRegistrationFlow",
     initialState = {
         State(
             phoneNumber = "",
@@ -33,25 +37,27 @@ val PhoneNumberRegistrationFlow = Flow<Unit, State, Event, Unit, Any>(
             is Event.ReceivedRegistrationResponse -> state.copy(
                 progress = EnteringRegistrationCode
             ).advance()
+
             is Event.EnteredRegistrationCode -> state.copy(
                 registrationCode = event.code
             ).advance()
+
             Event.ClickedValidateCode -> state.copy(
                 progress = Registering
             ).advance()
+
             is Event.ReceivedValidationResponse -> endFlow()
         }
     },
-    feedbacks = listOf(),
-    render = { state, context ->
-        when (state.progress) {
-            EnteringNumber -> EnterPhoneScreen(state, context.sink)
-            SendingCode -> LoadingScreen(message = "Sending Code", context.sink)
-            EnteringRegistrationCode -> EnterRegistrationCodeScreen(state, context.sink)
-            Registering -> LoadingScreen(message = "Validating Code", context.sink)
-        }
+    feedbacks = listOf()
+) { state, context ->
+    when (state.progress) {
+        EnteringNumber -> EnterPhoneScreen(state, context.sink)
+        SendingCode -> LoadingScreen(message = "Sending Code", context.sink)
+        EnteringRegistrationCode -> EnterRegistrationCodeScreen(state, context.sink)
+        Registering -> LoadingScreen(message = "Validating Code", context.sink)
     }
-)
+}
 
 
 data class State(

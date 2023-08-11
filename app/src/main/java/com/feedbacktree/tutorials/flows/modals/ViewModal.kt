@@ -1,25 +1,31 @@
 /*
- * Created by eliek on 9/26/2019
- * Copyright (c) 2019 eliekarouz. All rights reserved.
+ * Created by eliek on 8/9/2023
+ * Copyright (c) 2023 eliekarouz. All rights reserved.
  */
 
 @file:Suppress("FunctionName")
 
-package com.feedbacktree.flow.ui.core.modals
+package com.feedbacktree.tutorials.flows.modals
 
 import androidx.annotation.ColorInt
 import com.feedbacktree.flow.ui.core.Compatible
+import com.feedbacktree.flow.ui.core.modals.Modal
 
 class ViewModal<ScreenT : Any>(
     val content: ScreenT,
     val widthLayout: Layout,
     val heightLayout: Layout,
-    @ColorInt val backgroundColor: Int? = null
+    @ColorInt val backgroundColor: Int? = null,
+    val roundCorners: Boolean? = null
 ) : Modal, Compatible {
-    constructor(content: ScreenT) : this(
+    constructor(
+        content: ScreenT,
+        roundCorners: Boolean?,
+    ) : this(
         content,
         widthLayout = Layout.Wrap,
-        heightLayout = Layout.Wrap
+        heightLayout = Layout.Wrap,
+        roundCorners = roundCorners
     )
 
     override val compatibilityKey: String
@@ -37,8 +43,8 @@ sealed class Layout {
     }
 }
 
-fun <ScreenT : Any> ScreenT.asModal(): ViewModal<ScreenT> {
-    return ViewModal(content = this)
+fun <ScreenT : Any> ScreenT.asModal(roundCorners: Boolean? = null): ViewModal<ScreenT> {
+    return ViewModal(content = this, roundCorners = roundCorners)
 }
 
 
@@ -52,7 +58,7 @@ fun <ScreenT : Any> FullScreenModal(content: ScreenT): ViewModal<ScreenT> {
     return ViewModal(
         content = content,
         widthLayout = Layout.FullScreen,
-        heightLayout = Layout.FullScreen
+        heightLayout = Layout.FullScreen,
     )
 }
 
