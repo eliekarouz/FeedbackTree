@@ -1,0 +1,514 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Counter Flow</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+
+<link rel="next" href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Login">
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.20.0"};
+</script>
+
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<!-- end:inject styles -->
+
+</head>
+<body class="is-loading">
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>Counter Flow</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <p>In this tutorial, you will learn the steps needed to set up a basic FeedbackTree <code>Flow</code>.
+You will build a screen that has a counter and two buttons to increment and decrement the counter.</p>
+<div style:"text-align: center;"> 
+  <img style: src="/FeedbackTree/assets/media/counter_app_screenshot.png" width="250"/> 
+</div>
+<p><br></p>
+<h3 id="getting-started"><a href="#getting-started" id="getting-started" class="anchor"></a>Getting Started</h3>
+<p>Start by downloading the tutorial materials from <a href="https://drive.google.com/uc?export=download&amp;id=1sDLQeo7HSGRSj5eS09mfzeCK-AVsur42">here</a> and open the <strong>starter</strong> project in Android Studio.<br />
+Let's start by adding FeedbackTree, RxJava, and, other RxJava related dependencies to the <code>build.gradle (app)</code> file.</p>
+<pre><code class="language-groovy">dependencies {
+    ...
+      
+	  // FeedbackTree
+  	implementation &quot;com.github.eliekarouz.feedbacktree:feedbacktree:0.13.1&quot;
+		implementation &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;
+  
+		// RxJava/Kotlin
+    implementation &quot;io.reactivex.rxjava2:rxandroid:2.1.1&quot;
+    implementation &quot;io.reactivex.rxjava2:rxkotlin:2.3.0&quot;
+    
+     // RxBinding (not all of them are used)
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-drawerlayout:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-leanback:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-recyclerview:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:3.0.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding-viewpager:3.0.0'
+}
+</code></pre>
+<p>Note that the library is published to <code>Maven Central</code>. You might also need to add to your <code>build.gradle (.)</code></p>
+<pre><code class="language-groovy">allprojects {
+  repositories {
+    ...
+    mavenCentral()
+  }
+}
+</code></pre>
+<p>Although it is a very simple screen, and, we might not use the full power of FeedbackTree, this tutorials provides you a solid foundation to FeedbackTree.</p>
+<h3 id="state-and-events"><a href="#state-and-events" id="state-and-events" class="anchor"></a>State and Events</h3>
+<p><em>What is a State?</em><br />
+A state is the condition your software is in at a specific time. In the context of this tutorial, it is just the value of the counter. <br />
+In Kotlin, states can be represented using <code>data classes</code>, <code>enums</code>, <code>sealed classes</code> or even  <code>primitive types</code> . The latter is rarely used in practice.</p>
+<p><em>What is an Event?</em><br />
+An Event is the external input that will allow the software to transition from one state to another. In the context of this tutorial, you have two events representing the clicks on the increment or decrement buttons.<br />
+In Kotlin, events are usually represented with <code>sealed classes</code></p>
+<p>Let's go back to our Counter example, and write the state and events in Kotlin:</p>
+<pre><code class="language-kotlin">data class State(
+    val counter: Int
+)
+
+sealed class Event {
+    object Increment : Event()
+    object Decrement : Event()
+}
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> We could have just used an <code>Int</code> to represent the state but it is really rare in practice to have one primitive type as a state, that's why we will stick with a <code>data class</code>.</p>
+</blockquote>
+<h3 id="stepper"><a href="#stepper" id="stepper" class="anchor"></a>Stepper</h3>
+<p>If you haven't noticed yet, the counter is a <code>val</code> and I assume you are wondering how we will update the state when the attributes are immutable. We won't, we will just create a new state!</p>
+<p>In FeedbackTree or more generally with state machines, an event &quot;advances&quot; the state machine to a new state. In some cases, the event can cause the state machine to complete.  We call this transformation a <code>Stepper</code>.</p>
+<p>A stepper is a <a href="https://en.wikipedia.org/wiki/Pure_function">pure function</a> with the following signature: <code>(state: State, event: Event) -&gt; Step&lt;State, Output&gt;</code>.  <br />
+In other terms, the stepper takes the current state your in and the event that occured, and, produces a <code>Step</code> which is either the new state we will get in next or the end of state machine/flow.</p>
+<p>If we want to write the write the stepper for the Counter tutorial,</p>
+<pre><code class="language-kotlin">fun stepper(state: State, event: Event): Step&lt;State, Nothing&gt; { // 1
+    return when (event) {
+        Event.Increment -&gt; state.copy( // 2
+            counter = state.counter + 1 
+        ).advance() // 3
+        Event.Decrement -&gt; state.copy(
+            counter = state.counter - 1
+        ).advance()
+    }
+}
+</code></pre>
+<p>Let's take a closer look code above:</p>
+<ol>
+<li>The first generic argument of the <code>Step</code> is <code>State</code>.
+The second generic argument is  of type <code>Nothing</code>. It is the output of the state machine. When it's <code>Nothing</code> it means that the state machine cannot complete.</li>
+<li>We are using the <code>copy</code> feature of <code>data classes</code> to create a new state with a different <code>counter</code> value.</li>
+<li><code>state.advance()</code> is a syntactic sugar that converts the new state into a <code>Step</code> so that it can be returned to the <code>Stepper</code>.</li>
+</ol>
+<h3 id="what-is-feedbacktree-"><a href="#what-is-feedbacktree-" id="what-is-feedbacktree-" class="anchor"></a>What is FeedbackTree ?</h3>
+<p>FeedbackTree is based on two core concepts a <code>Flow</code> and a <code>Declarative UI</code>.<br />
+Here's a diagram that shows how FeedbackTree works when applied to the Counter example:</p>
+<div style:"text-align: center;"> 
+  <img style: src="/FeedbackTree/assets/media/counter_flow_diagram.svg" width="800"/> 
+</div>
+<p><br></p>
+<h5 id="what-is-a-flow"><a href="#what-is-a-flow" id="what-is-a-flow" class="anchor"></a>What is a Flow?</h5>
+<p>A <code>Flow</code> kickstarts with some <code>Input</code> and produces some <code>Output</code>. Although we won't be using the Input/Output concept in this tutorial, it will come handy in future tutorials.<br />
+A <code>Flow</code> wraps the state machine: the state, the events, and, the stepper.<br />
+The <code>Flow</code> uses <code>Feedback Loops</code> to perform network calls, database operations, bluetooth... More on this will come in next tutorials.<br />
+At each state we are in, the Flow will tell what &quot;Screen&quot; we should render on the UI. The screen is a simple data class that will revisit in depth in the next sections.</p>
+<h5 id="the-declarative-ui"><a href="#the-declarative-ui" id="the-declarative-ui" class="anchor"></a>The Declarative UI</h5>
+<p>FeedbackTree UI rendering engine takes the &quot;screens&quot; generated by the <code>Flow</code> and creates the corresponding <code>Android.View</code>. Once the view is created, it will take care of updating it with the new values.</p>
+<h3 id="the-counter-flow"><a href="#the-counter-flow" id="the-counter-flow" class="anchor"></a>The Counter Flow</h3>
+<p>In the package <strong>counter</strong>, create a file called <strong>CounterFlow.kt</strong> and the code below to it:</p>
+<pre><code class="language-kotlin">import com.feedbacktree.flow.core.Flow
+import com.feedbacktree.flow.core.advance
+
+val CounterFlow = Flow&lt;Unit, State, Event, Nothing, CounterScreen&gt;( // 1
+   id = &quot;CounterFlow&quot;,
+   initialState = { State(counter = 0) }, // 2
+    stepper = { state, event -&gt; // 3
+        when (event) {
+            Event.Increment -&gt; state.copy(
+                counter = state.counter + 1
+            ).advance()
+            Event.Decrement -&gt; state.copy(
+                counter = state.counter - 1
+            ).advance()
+        }
+    },
+    feedbacks = listOf(), // 4
+    render = { state, context -&gt; // 5
+        CounterScreen(state, context.sink)
+    }
+)
+
+data class State(
+    val counter: Int
+)
+
+sealed class Event {
+    object Increment : Event()
+    object Decrement : Event()
+}
+
+data class CounterScreen(
+    private val state: State,
+    val sink: (Event) -&gt; Unit // 6
+) {
+    val counterText: String = state.counter.toString() // 7
+}
+</code></pre>
+<p>Here's the breakdown of each component:</p>
+<ol>
+<li><code>CounterFlow</code> is an immutable variable of type  <code>Flow</code>. The <code>Flow</code> wraps the different component needed to kickstart the state machine, update it, and render the current state on the UI.
+In the next tutorials, will see that the <code>Flows</code> have also another purpose; They take an input and produce an output when they complete.</li>
+<li>The <code>initialState</code> is a function of type <code>(Input) -&gt; State</code>. The <code>Input</code> in this case is of type <code>Unit</code>. Having a dynamic input allows you to start the same flow with different arguments.</li>
+<li>For small flows, steppers can be written this way but when the flow gets bigger, it's usually preferable to spit them into a separate function.</li>
+<li><code>feedbacks</code> are used to perform non-UI side effects, like network calls, database operations, bluetooth... We won't have non-UI effects in this tutorial.</li>
+<li><code>render</code> is used to describe what should be displayed on the UI. For instance, this flow will render the <code>CounterScreen</code> data class. FeedbackTree will take care of converting that data class into a <code>android.View</code> and show it on the UI. The returned &quot;Screens&quot; data class usually hold all the properties needed to fill/render the UI.</li>
+<li><code>sink</code> allows the you to push UI events, like clicks, back to the flow.</li>
+<li>The <code>CounterScreen</code> contains the properties that we are going to use to render the UI. For instance, <code>counterText</code> will be used to set the <code>counterTextView.text</code> property.</li>
+</ol>
+<h3 id="the-counter-ui"><a href="#the-counter-ui" id="the-counter-ui" class="anchor"></a>The Counter UI</h3>
+<p>The <code>CounterFlow</code> produces a <code>CounterScreen</code> for each <code>State</code>. Obviously, the different <code>CounterScreen</code> will have different <code>counterText</code> values. What we need to complete the puzzle is some code that will create the corresponding <code>Layout</code>, and, update its element when the state updates.
+Let's add to the <strong>counter</strong> package, next to the <strong>CounterFlow.kt</strong> a new file called <strong>CounterLayoutBinder.kt</strong>. Add this code to it:</p>
+<pre><code class="language-kotlin">import android.widget.Button
+import android.widget.TextView
+import com.feedbacktree.flow.ui.views.LayoutBinder
+import com.feedbacktree.tutorials.R
+import com.jakewharton.rxbinding3.view.clicks
+import io.reactivex.Observable
+
+// 1 
+val CounterLayoutBinder = LayoutBinder.create(
+    layoutId = R.layout.counter,
+    sink = CounterScreen::sink 
+) { view -&gt;
+
+    // 2
+    val counterTextView = view.findViewById&lt;TextView&gt;(R.id.counterTextView)
+    val incrementButton = view.findViewById&lt;Button&gt;(R.id.incrementButton)
+    val decrementButton = view.findViewById&lt;Button&gt;(R.id.decrementButton)
+    
+    // 3
+    bind { screen: Observable&lt;CounterScreen&gt; -&gt;
+        // 4
+        subscriptions = listOf(
+            screen.map { it.counterText }.subscribe { counterTextView.text = it }
+        )
+        // 5
+        events = listOf(
+            incrementButton.clicks().map { Event.Increment },
+            decrementButton.clicks().map { Event.Decrement }
+        )
+    }
+}
+</code></pre>
+<p>The breakdown of the code above:</p>
+<ol>
+<li>Create a variable called <code>CounterLayoutBinder</code> and use <code>LayoutBinder.create</code> to create the UI binding logic that will:
+<ol>
+<li>Inflate <code>R.layout.counter</code> when a <code>CounterScreen</code> is produced.</li>
+<li>Use the <code>CounterScreen::sink</code> property to forward UI events back to the flow.</li>
+<li>Update the UI elements everytime a new <code>CounterScreen</code> is produced by the flow.</li>
+</ol>
+</li>
+<li>Extract the views using <code>findViewById</code>. Note that you have to use <code>view.findViewById</code></li>
+<li>FeedbackTree provides a list of feedback loop builders like the <code>bind</code> method. We will see other operators in future tutorials. A UI feedback loop or simply a feedback, allows you to observe each <code>CounterScreen</code> being emitted by the <code>Flow</code> and produce corresponding <code>Events</code> that will be pushed back to the <code>Flow</code>.</li>
+<li>The bind gives you <code>screen</code>  which is an <code>Obsevable&lt;CounterScreen&gt;</code>. You can subscribe to the screens being produced by the Flow in order to update the UI elements. Just like here where we update the TextView from the CounterScreen.counterText:<br />
+<code>screen.map { it.counterText }.subscribe { counterTextView.text = it }</code></li>
+<li>UI clicks are being mapped to <code>Events</code>. When the layout is inflated, we will subscribe to the events and will forward them to the <code>Flow</code>.</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> The xml layout has been added to the starter project</p>
+</blockquote>
+<h5 id="starting-the-flow"><a href="#starting-the-flow" id="starting-the-flow" class="anchor"></a>Starting the Flow</h5>
+<p>Let's modify the <strong>MainActivity.kt</strong> to kickstart the <code>CounterFlow</code>:</p>
+<pre><code class="language-kotlin">import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.feedbacktree.flow.core.startFlow
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.tutorials.flows.counter.CounterFlow
+import com.feedbacktree.tutorials.flows.counter.CounterLayoutBinder
+import io.reactivex.disposables.Disposable
+
+class MainActivity : AppCompatActivity() {
+
+    var disposable: Disposable? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val viewRegistry = ViewRegistry( // 1
+            CounterLayoutBinder // 2
+        )
+        disposable = startFlow(flow = CounterFlow, // 3
+            viewRegistry = viewRegistry)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // 3 
+        if (isFinishing) {
+            disposable?.dispose()
+            disposable = null
+        }
+    }
+}
+</code></pre>
+<ol>
+<li>A <code>ViewRegistry</code> is a lookup table that FeedbackTree uses to create the corresponding layout when some <code>Screen</code> is produced by the <code>Flow</code></li>
+<li>We are registering the <code>CounterLayoutBinder</code> in the <code>viewRegistry</code> variable.</li>
+<li>Use the <code>Activity.startFlow</code> method to start the <code>CounterFlow</code>.</li>
+<li>Pass the <code>viewRegistry</code> so that the FeedbackTree knows how to render the <code>CounterScreens</code> that will be produced by the <code>CounterFlow</code>.</li>
+<li>Terminate the flow when the activity finishes.</li>
+</ol>
+<p>No need to panic! You don't have to create an Activity for each flow. We will see in the next tutorials that you can use only one Activity for the whole Application and your Activity will still never grow more than a few lines of code.</p>
+<h3 id="counter-cannot-go-negative"><a href="#counter-cannot-go-negative" id="counter-cannot-go-negative" class="anchor"></a>Counter Cannot Go Negative:</h3>
+<p>Let's consider you are counting the number of people in a birthday party. You cannot have negative numbers!
+This can be easily done by modifying the stepper:</p>
+<pre><code class="language-kotlin">when (event) {
+    Event.Increment -&gt; state.copy(
+        counter = state.counter + 1
+    ).advance()
+    Event.Decrement -&gt; state.copy(
+        counter = kotlin.math.max(0, state.counter - 1) // prevents the state going negative
+    ).advance()
+}
+</code></pre>
+<p><strong>Let's say we want to hide the &quot;-&quot; button when we reach 0.</strong></p>
+<p>In the <code>CounterScreen</code>, we will add a property <code>isDecrementButtonInvisible</code></p>
+<pre><code class="language-kotlin">data class CounterScreen(
+    private val state: State,
+    val sink: (Event) -&gt; Unit
+) {
+    val counterText: String = state.counter.toString()
+    val isDecrementButtonInvisible: Boolean = state.counter == 0 
+}
+</code></pre>
+<p>In the <code>CounterLayoutBinder</code> subscribe to <code>isDecrementButtonInvisible</code></p>
+<pre><code class="language-kotlin">subscriptions = listOf(
+  	screen.map { it.counterText }.subscribe { counterTextView.text = it },
+		screen.map { it.isDecrementButtonInvisible }.subscribe { decrementButton.isInvisible = it }
+)
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> <code>View.isInvisible</code> is part of the android kotlin extensions, you might need to add the below to your build.gradle (app) dependencies:</p>
+<pre><code class="language-kotlin">implementation 'androidx.core:core-ktx:1.3.2'
+</code></pre>
+</blockquote>
+<h3 id="where-to-go-from-here"><a href="#where-to-go-from-here" id="where-to-go-from-here" class="anchor"></a>Where to Go From Here?</h3>
+<p>I hope that you were able to successfully digest the core ideas. It's fine if you still have a lot of question marks.
+You can check the next tutorial where you will learn more about the <code>Feedbacks</code>.</p>
+<p>The full code can be downloaded from <a href="https://drive.google.com/uc?export=download&amp;id=1FWm4VLA_yas0hbg1ilo5zIvovbyJL3GN">here</a></p>
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+                <div class="float-right">
+                    <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Login" class="button special small pill">
+                        Login Flow<span>&rarr;</span>
+                    </a>
+                </div>
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.20.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+</body>
+</html>

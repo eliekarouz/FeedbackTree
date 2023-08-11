@@ -1,0 +1,1038 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>com.feedbacktree.flow.core</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.20.0"};
+</script>
+
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<!-- end:inject styles -->
+
+</head>
+<body class="is-loading">
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>com.feedbacktree.flow.core</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <div class="orchid-sourcedoc">
+
+
+<p><b>Package <code>com.feedbacktree.flow.core</code></b></p>
+
+<div class="package-description">
+
+</div>
+
+
+
+
+
+    
+<div class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title">Class Summary</h3></div>
+    <div class="list-group">
+    
+    
+        <a class="list-group-item clearfix" href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/BindingsBuilder">
+            <code class="pull-left">BindingsBuilder</code>
+            
+            
+            
+
+            
+        </a>
+    
+    
+        <a class="list-group-item clearfix" href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/FlowViewModel/Factory">
+            <code class="pull-left">Factory</code>
+            
+            
+            
+
+            
+        </a>
+    
+    
+        <a class="list-group-item clearfix" href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">
+            <code class="pull-left">Flow</code>
+            
+            
+            
+
+            
+        </a>
+    
+    
+        <a class="list-group-item clearfix" href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/FlowViewModel">
+            <code class="pull-left">FlowViewModel</code>
+            
+            
+            
+
+            
+        </a>
+    
+    
+        <a class="list-group-item clearfix" href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">
+            <code class="pull-left">ObservableSchedulerContext</code>
+            
+            
+            
+
+            
+        </a>
+    
+    
+        <a class="list-group-item clearfix" href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Observables">
+            <code class="pull-left">Observables</code>
+            
+            
+            
+
+            
+        </a>
+    
+    
+        <a class="list-group-item clearfix" href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/RenderingContext">
+            <code class="pull-left">RenderingContext</code>
+            
+            
+            
+
+            
+        </a>
+    
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    <h2 id="extensions">Methods</h2>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__State__Query___Any__Event__react_query___State___Query___areEqual___Query__Query___Boolean__effects___Query____ERROR_CLASS_____ObservableSchedulerContext____ERROR_CLASS_">
+        <code>
+        fun &lt;State, Query : Any, Event&gt; react(query: (State)-&gt;Query?, areEqual: (Query, Query)-&gt;Boolean, effects: (Query)-&gt;<ERROR CLASS>): (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"><p>State State type of the system.
+Query Subset of state used to control the feedback loop.<p>When query returns some value, that value is being passed into <code>effects</code> lambda to decide which effects should be performed.
+In case new <code>query</code> is different from the previous one, new effects are calculated by using <code>effects</code> lambda and then performed.</p><p>When <code>query</code> returns null, feedback loops doesn't perform any effect.</p></p>
+</div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        query: (State)-&gt;Query?
+        </code>
+        
+            <br><br>
+            <div><p>Part of state that controls feedback loop.</p>
+</div>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        areEqual: (Query, Query)-&gt;Boolean
+        </code>
+        
+            <br><br>
+            <div><p>Part of state that controls feedback loop.</p>
+</div>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        effects: (Query)-&gt;<ERROR CLASS>
+        </code>
+        
+            <br><br>
+            <div><p>Chooses which effects to perform for certain query result.</p>
+</div>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div><p>Feedback loop performing the effects.</p>
+</div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__State__Query___Any__Event__react_query___State___Query___effects___Query____ERROR_CLASS_____ObservableSchedulerContext____ERROR_CLASS_">
+        <code>
+        fun &lt;State, Query : Any, Event&gt; react(query: (State)-&gt;Query?, effects: (Query)-&gt;<ERROR CLASS>): (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"><p>State State type of the system.
+Query Subset of state used to control the feedback loop.<p>When query returns some value, that value is being passed into <code>effects</code> lambda to decide which effects should be performed.
+In case new <code>query</code> is different from the previous one, new effects are calculated by using <code>effects</code> lambda and then performed.</p><p>When <code>query</code> returns null, feedback loops doesn't perform any effect.</p></p>
+</div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        query: (State)-&gt;Query?
+        </code>
+        
+            <br><br>
+            <div><p>Part of state that controls feedback loop.</p>
+</div>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        effects: (Query)-&gt;<ERROR CLASS>
+        </code>
+        
+            <br><br>
+            <div><p>Chooses which effects to perform for certain query result.</p>
+</div>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div><p>Feedback loop performing the effects.</p>
+</div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__State__Query___Any__QueryID__Event__react_queries___State___Map__effects___Query___ERROR_CLASS_____ERROR_CLASS_____ObservableSchedulerContext____ERROR_CLASS_">
+        <code>
+        fun &lt;State, Query : Any, QueryID, Event&gt; react(queries: (State)-&gt;Map, effects: (Query, <ERROR CLASS>)-&gt;<ERROR CLASS>): (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"><p>For every uniquely identifiable Query, effects closure is invoked with the initial value of the Query and future Querys corresponding to the same identifier.
+Subsequent equal values of Query are not emitted from the effects state parameter.</p>
+</div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        queries: (State)-&gt;Map
+        </code>
+        
+            <br><br>
+            <div><p>queries to perform some effects</p>
+</div>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        effects: (Query, <ERROR CLASS>)-&gt;<ERROR CLASS>
+        </code>
+        
+            <br><br>
+            <div><p>The query effects (initial is the initial query
+and queryObservable: Subsequent Querys with the same QueryID</p>
+</div>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__State__Query___Any__Event__reactSet_query___State___Set__effects___Query____ERROR_CLASS_____ObservableSchedulerContext____ERROR_CLASS_">
+        <code>
+        fun &lt;State, Query : Any, Event&gt; reactSet(query: (State)-&gt;Set, effects: (Query)-&gt;<ERROR CLASS>): (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"><p>State State type of the system.
+Query Subset of state used to control the feedback loop.<p>When <code>query</code> returns some set of values, each value is being passed into <code>effects</code> lambda to decide which effects should be performed.</p><p>Effects are not interrupted for elements in the new <code>query</code> that were present in the <code>old</code> query.
+Effects are cancelled for elements present in <code>old</code> query but not in <code>new</code> query.
+In case new elements are present in <code>new</code> query (and not in <code>old</code> query) they are being passed to the <code>effects</code> lambda and resulting effects are being performed.</p></p>
+</div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        query: (State)-&gt;Set
+        </code>
+        
+            <br><br>
+            <div><p>Part of state that controls feedback loop.</p>
+</div>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        effects: (Query)-&gt;<ERROR CLASS>
+        </code>
+        
+            <br><br>
+            <div><p>Chooses which effects to perform for certain query element.</p>
+</div>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div><p>Feedback loop performing the effects.</p>
+</div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__Element___ERROR_CLASS_.enqueue_scheduler___ERROR_CLASS_____ERROR_CLASS_">
+        <code>
+        fun &lt;Element&gt; <ERROR CLASS>.enqueue(scheduler: <ERROR CLASS>): <ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+<div class="panel-footer">
+    <div><b>Receiver: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scheduler: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__State__Event__bind_bindings__BindingsBuilder.__ERROR_CLASS____Unit____ObservableSchedulerContext____ERROR_CLASS_">
+        <code>
+        fun &lt;State, Event&gt; bind(bindings: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/BindingsBuilder">BindingsBuilder</a>.(<ERROR CLASS>)-&gt;Unit): (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"><p>Bi-directional binding of a system State to external state machine and events from it.<p>Note that bind does not enqueue any event to the scheduler.</p></p>
+</div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        bindings: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/BindingsBuilder">BindingsBuilder</a>.(<ERROR CLASS>)-&gt;Unit
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__State__Event__bindWithScheduler_bindings__BindingsBuilder._ObservableSchedulerContext___Unit____ObservableSchedulerContext____ERROR_CLASS_">
+        <code>
+        fun &lt;State, Event&gt; bindWithScheduler(bindings: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/BindingsBuilder">BindingsBuilder</a>.(<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;Unit): (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"><p>Bi-directional binding of a system State to external state machine and events from it.
+Method is useful when you want to use the <a href="#">Scheduler</a> on which the the feedback is running.</p>
+</div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        bindings: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/BindingsBuilder">BindingsBuilder</a>.(<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;Unit
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        (<a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext">ObservableSchedulerContext</a>)-&gt;<ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__StateT___Any__OutputT___Any___ERROR_CLASS_.startFlow_flow__Flow__onOutput___OutputT___Unit__viewRegistry__ViewRegistry____ERROR_CLASS_">
+        <code>
+        fun &lt;StateT : Any, OutputT : Any&gt; <ERROR CLASS>.startFlow(flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>, onOutput: (OutputT)-&gt;Unit, viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>): <ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+<div class="panel-footer">
+    <div><b>Receiver: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        onOutput: (OutputT)-&gt;Unit
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__StateT___Any___ERROR_CLASS_.startFlow_flow__Flow__viewRegistry__ViewRegistry____ERROR_CLASS_">
+        <code>
+        fun &lt;StateT : Any&gt; <ERROR CLASS>.startFlow(flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>, viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>): <ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+<div class="panel-footer">
+    <div><b>Receiver: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__InputT___Any__StateT___Any___ERROR_CLASS_.startFlow_input__InputT__flow__Flow__viewRegistry__ViewRegistry____ERROR_CLASS_">
+        <code>
+        fun &lt;InputT : Any, StateT : Any&gt; <ERROR CLASS>.startFlow(input: InputT, flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>, viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>): <ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+<div class="panel-footer">
+    <div><b>Receiver: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        input: InputT
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__InputT___Any__StateT___Any__OutputT___Any___ERROR_CLASS_.startFlow_input__InputT__flow__Flow__onOutput___OutputT___Unit__viewRegistry__ViewRegistry____ERROR_CLASS_">
+        <code>
+        fun &lt;InputT : Any, StateT : Any, OutputT : Any&gt; <ERROR CLASS>.startFlow(input: InputT, flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>, onOutput: (OutputT)-&gt;Unit, viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>): <ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+<div class="panel-footer">
+    <div><b>Receiver: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        input: InputT
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        onOutput: (OutputT)-&gt;Unit
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun__InputT___Any__StateT___Any__OutputT___Any___ERROR_CLASS_.startModalsFlow_input__InputT__flow__Flow__viewRegistry__ViewRegistry__dialogRegistry__DialogRegistry____ERROR_CLASS_">
+        <code>
+        fun &lt;InputT : Any, StateT : Any, OutputT : Any&gt; <ERROR CLASS>.startModalsFlow(input: InputT, flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>, viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>, dialogRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/DialogRegistry">DialogRegistry</a>): <ERROR CLASS>
+        </code>
+    </div>
+    <div class="panel-body"><p>Utility that can be used to start Flows which produce Modals.
+It's useful when you need to use FeedbackTree in a areas that are not using it yet.</p>
+</div>
+
+    
+
+<div class="panel-footer">
+    <div><b>Receiver: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        input: InputT
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        flow: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow">Flow</a>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        viewRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry">ViewRegistry</a>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        dialogRegistry: <a href="https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/DialogRegistry">DialogRegistry</a>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+<div class="panel-footer">
+    <div><b>Returns: </b></div>
+    <div>
+        <code>
+        <ERROR CLASS>
+        </code>
+    </div>
+    <div></div>
+</div>
+
+</div>
+
+
+
+
+</div>
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.20.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+</body>
+</html>

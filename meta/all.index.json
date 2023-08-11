@@ -1,0 +1,1903 @@
+{
+  "ownKey": "index",
+  "childrenPages": {
+    "com": {
+      "ownKey": "com",
+      "childrenPages": {"feedbacktree": {
+        "ownKey": "feedbacktree",
+        "childrenPages": {"flow": {
+          "ownKey": "flow",
+          "childrenPages": {
+            "core": {
+              "ownKey": "core",
+              "childrenPages": {
+                "RenderingContext": {
+                  "ownKey": "RenderingContext",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/core",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "RenderingContext",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/RenderingContext"
+                    },
+                    "description": "",
+                    "title": "RenderingContext",
+                    "content": "<p>sink<\/p>\n<p>sink<\/p>\n<p>sendEvent<\/p>\n<p>complete<\/p>\n<p>renderChild<\/p>\n<p>renderChild<\/p>\n"
+                  }]
+                },
+                "FlowViewModel": {
+                  "ownKey": "FlowViewModel",
+                  "childrenPages": {"Factory": {
+                    "ownKey": "Factory",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/core/FlowViewModel",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "Factory",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/FlowViewModel/Factory"
+                      },
+                      "description": "",
+                      "title": "Factory",
+                      "content": "<p><init><\/p>\n<p>create<\/p>\n"
+                    }]
+                  }},
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/core",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "FlowViewModel",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/FlowViewModel"
+                    },
+                    "description": "",
+                    "title": "FlowViewModel",
+                    "content": "<p><init><\/p>\n<p>output<\/p>\n<p>screens<\/p>\n<p>onCleared<\/p>\n"
+                  }]
+                },
+                "Feedback": {
+                  "ownKey": "Feedback",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/core",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Feedback",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Feedback"
+                    },
+                    "description": "",
+                    "title": "Feedback",
+                    "content": ""
+                  }]
+                },
+                "Observables": {
+                  "ownKey": "Observables",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/core",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Observables",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Observables"
+                    },
+                    "description": "",
+                    "title": "Observables",
+                    "content": "<p><init><\/p>\n"
+                  }]
+                },
+                "BindingsBuilder": {
+                  "ownKey": "BindingsBuilder",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/core",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "BindingsBuilder",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/BindingsBuilder"
+                    },
+                    "description": "",
+                    "title": "BindingsBuilder",
+                    "content": "<p><init><\/p>\n<p>subscriptions<\/p>\n<p>events<\/p>\n"
+                  }]
+                },
+                "ObservableSchedulerContext": {
+                  "ownKey": "ObservableSchedulerContext",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/core",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ObservableSchedulerContext",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext"
+                    },
+                    "description": "",
+                    "title": "ObservableSchedulerContext",
+                    "content": "<p>Tuple of observable sequence and corresponding scheduler context on which that observable sequence receives elements.<init>\nTuple of observable sequence and corresponding scheduler context on which that observable sequence receives elements.\nsource<\/p>\n<p>scheduler<\/p>\n"
+                  }]
+                },
+                "Flow": {
+                  "ownKey": "Flow",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/core",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Flow",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow"
+                    },
+                    "description": "",
+                    "title": "Flow",
+                    "content": "<p><init><\/p>\n<p><init><\/p>\n<p>id<\/p>\n<p>initialState<\/p>\n<p>stepper<\/p>\n<p>feedbacks<\/p>\n<p>render<\/p>\n"
+                  }]
+                }
+              },
+              "ownPages": [{
+                "reference": {
+                  "path": "com/feedbacktree/flow",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "core",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core"
+                },
+                "description": "",
+                "title": "com.feedbacktree.flow.core",
+                "content": "<p>react\nState State type of the system.\nQuery Subset of state used to control the feedback loop.<p>When query returns some value, that value is being passed into <code>effects<\/code> lambda to decide which effects should be performed.\nIn case new <code>query<\/code> is different from the previous one, new effects are calculated by using <code>effects<\/code> lambda and then performed.<\/p><p>When <code>query<\/code> returns null, feedback loops doesn't perform any effect.<\/p>\nreact\nState State type of the system.\nQuery Subset of state used to control the feedback loop.<p>When query returns some value, that value is being passed into <code>effects<\/code> lambda to decide which effects should be performed.\nIn case new <code>query<\/code> is different from the previous one, new effects are calculated by using <code>effects<\/code> lambda and then performed.<\/p><p>When <code>query<\/code> returns null, feedback loops doesn't perform any effect.<\/p>\nreact\nFor every uniquely identifiable Query, effects closure is invoked with the initial value of the Query and future Querys corresponding to the same identifier.\nSubsequent equal values of Query are not emitted from the effects state parameter.\nreactSet\nState State type of the system.\nQuery Subset of state used to control the feedback loop.<p>When <code>query<\/code> returns some set of values, each value is being passed into <code>effects<\/code> lambda to decide which effects should be performed.<\/p><p>Effects are not interrupted for elements in the new <code>query<\/code> that were present in the <code>old<\/code> query.\nEffects are cancelled for elements present in <code>old<\/code> query but not in <code>new<\/code> query.\nIn case new elements are present in <code>new<\/code> query (and not in <code>old<\/code> query) they are being passed to the <code>effects<\/code> lambda and resulting effects are being performed.<\/p>\nenqueue<\/p>\n<p>bind\nBi-directional binding of a system State to external state machine and events from it.<p>Note that bind does not enqueue any event to the scheduler.<\/p>\nbindWithScheduler\nBi-directional binding of a system State to external state machine and events from it.\nMethod is useful when you want to use the <a href=\"#\">Scheduler<\/a> on which the the feedback is running.\nstartFlow<\/p>\n<p>startFlow<\/p>\n<p>startFlow<\/p>\n<p>startFlow<\/p>\n<p>startModalsFlow\nUtility that can be used to start Flows which produce Modals.\nIt's useful when you need to use FeedbackTree in a areas that are not using it yet.<\/p>\n"
+              }]
+            },
+            "ui": {
+              "ownKey": "ui",
+              "childrenPages": {
+                "core": {
+                  "ownKey": "core",
+                  "childrenPages": {
+                    "Named": {
+                      "ownKey": "Named",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/core",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "Named",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/Named"
+                        },
+                        "description": "",
+                        "title": "Named",
+                        "content": "<p>Allows screens that do not implement Compatible themselves to be distinguished\nby more than just their type. Instances are compatible if they have the same name\nand have compatible fields.<init>\nAllows screens that do not implement Compatible themselves to be distinguished\nby more than just their type. Instances are compatible if they have the same name\nand have compatible fields.\ncompatibilityKey\nInstances of the same type are compatible iff they have the same compatibilityKey.\nwrapped<\/p>\n<p>name<\/p>\n<p>toString<\/p>\n"
+                      }]
+                    },
+                    "BackStackScreen": {
+                      "ownKey": "BackStackScreen",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/core",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "BackStackScreen",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/BackStackScreen"
+                        },
+                        "description": "",
+                        "title": "BackStackScreen",
+                        "content": "<p><init><\/p>\n<p><init><\/p>\n<p>top<\/p>\n<p>backStack<\/p>\n<p>stack\n: screens that have are / have been displayed, ending in the current screen<\/p>\n"
+                      }]
+                    },
+                    "Compatible": {
+                      "ownKey": "Compatible",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/core",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "Compatible",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/Compatible"
+                        },
+                        "description": "",
+                        "title": "Compatible",
+                        "content": "<p>Implemented by objects whose compatibility requires more nuance\nthan just being of the same type.<p>Screens that don't implement this interface directly can be distinguished\nby wrapping them with Named.<\/p>\ncompatibilityKey\nInstances of the same type are compatible iff they have the same compatibilityKey.<\/p>\n"
+                      }]
+                    },
+                    "modals": {
+                      "ownKey": "modals",
+                      "childrenPages": {
+                        "AlertModal": {
+                          "ownKey": "AlertModal",
+                          "childrenPages": {
+                            "Button": {
+                              "ownKey": "Button",
+                              "ownPages": [{
+                                "reference": {
+                                  "path": "com/feedbacktree/flow/ui/core/modals/AlertModal",
+                                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                  "fileName": "Button",
+                                  "extension": "html",
+                                  "usePrettyUrl": true,
+                                  "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/Button"
+                                },
+                                "description": "",
+                                "title": "Button",
+                                "content": ""
+                              }]
+                            },
+                            "Event": {
+                              "ownKey": "Event",
+                              "childrenPages": {
+                                "ButtonClicked": {
+                                  "ownKey": "ButtonClicked",
+                                  "ownPages": [{
+                                    "reference": {
+                                      "path": "com/feedbacktree/flow/ui/core/modals/AlertModal/Event",
+                                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                      "fileName": "ButtonClicked",
+                                      "extension": "html",
+                                      "usePrettyUrl": true,
+                                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/Event/ButtonClicked"
+                                    },
+                                    "description": "",
+                                    "title": "ButtonClicked",
+                                    "content": "<p><init><\/p>\n<p>button<\/p>\n"
+                                  }]
+                                },
+                                "Canceled": {
+                                  "ownKey": "Canceled",
+                                  "ownPages": [{
+                                    "reference": {
+                                      "path": "com/feedbacktree/flow/ui/core/modals/AlertModal/Event",
+                                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                      "fileName": "Canceled",
+                                      "extension": "html",
+                                      "usePrettyUrl": true,
+                                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/Event/Canceled"
+                                    },
+                                    "description": "",
+                                    "title": "Canceled",
+                                    "content": ""
+                                  }]
+                                }
+                              },
+                              "ownPages": [{
+                                "reference": {
+                                  "path": "com/feedbacktree/flow/ui/core/modals/AlertModal",
+                                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                  "fileName": "Event",
+                                  "extension": "html",
+                                  "usePrettyUrl": true,
+                                  "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/Event"
+                                },
+                                "description": "",
+                                "title": "Event",
+                                "content": ""
+                              }]
+                            },
+                            "AlertModalBuilder": {
+                              "ownKey": "AlertModalBuilder",
+                              "ownPages": [{
+                                "reference": {
+                                  "path": "com/feedbacktree/flow/ui/core/modals/AlertModal",
+                                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                  "fileName": "AlertModalBuilder",
+                                  "extension": "html",
+                                  "usePrettyUrl": true,
+                                  "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/AlertModalBuilder"
+                                },
+                                "description": "",
+                                "title": "AlertModalBuilder",
+                                "content": "<p><init><\/p>\n<p>title<\/p>\n<p>message<\/p>\n<p>cancelEvent<\/p>\n<p>contentScreen<\/p>\n<p>positive<\/p>\n<p>negative<\/p>\n<p>neutral<\/p>\n"
+                              }]
+                            }
+                          },
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/core/modals",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "AlertModal",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal"
+                            },
+                            "description": "",
+                            "title": "AlertModal",
+                            "content": "<p><init><\/p>\n<p>buttons<\/p>\n<p>message<\/p>\n<p>title<\/p>\n<p>cancelable<\/p>\n<p>contentScreen<\/p>\n<p>onEvent<\/p>\n<p>equals<\/p>\n<p>hashCode<\/p>\n"
+                          }]
+                        },
+                        "ModalContainerScreen": {
+                          "ownKey": "ModalContainerScreen",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/core/modals",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "ModalContainerScreen",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/ModalContainerScreen"
+                            },
+                            "description": "",
+                            "title": "ModalContainerScreen",
+                            "content": "<p><init><\/p>\n<p><init><\/p>\n<p>baseScreen<\/p>\n<p>modals<\/p>\n"
+                          }]
+                        },
+                        "Modal": {
+                          "ownKey": "Modal",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/core/modals",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "Modal",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/Modal"
+                            },
+                            "description": "",
+                            "title": "Modal",
+                            "content": ""
+                          }]
+                        }
+                      },
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/core",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "modals",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals"
+                        },
+                        "description": "",
+                        "title": "com.feedbacktree.flow.ui.core.modals",
+                        "content": ""
+                      }]
+                    }
+                  },
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/ui",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "core",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core"
+                    },
+                    "description": "",
+                    "title": "com.feedbacktree.flow.ui.core",
+                    "content": "<p>compatible\nNormally returns true if me and you are instances of the same class.\nIf that common class implements Compatible, both instances must also\nhave the same Compatible.compatibilityKey.<p>A convenient way to take control over the matching behavior of objects that\ndon't implement Compatible is to wrap them with Named.<\/p>\ngoTo\nHelper for Lists that are used as back-stacks, where the last element is considered\nto be the top / current value of the stack.<p>Returns a transformation of the receiver by popping back to the first element\nthat is compatible with next. If no matching frame is found, adds next\nto the end.<\/p><\/p>\n"
+                  }]
+                },
+                "views": {
+                  "ownKey": "views",
+                  "childrenPages": {
+                    "LayoutBinderBuilder": {
+                      "ownKey": "LayoutBinderBuilder",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "LayoutBinderBuilder",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/LayoutBinderBuilder"
+                        },
+                        "description": "",
+                        "title": "LayoutBinderBuilder",
+                        "content": "<p><init><\/p>\n<p>feedbacks<\/p>\n<p>bind<\/p>\n<p>react<\/p>\n<p>react<\/p>\n<p>react<\/p>\n<p>reactSet<\/p>\n"
+                      }]
+                    },
+                    "core": {
+                      "ownKey": "core",
+                      "childrenPages": {
+                        "HandlesBack": {
+                          "ownKey": "HandlesBack",
+                          "childrenPages": {"Helper": {
+                            "ownKey": "Helper",
+                            "ownPages": [{
+                              "reference": {
+                                "path": "com/feedbacktree/flow/ui/views/core/HandlesBack",
+                                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                "fileName": "Helper",
+                                "extension": "html",
+                                "usePrettyUrl": true,
+                                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/HandlesBack/Helper"
+                              },
+                              "description": "",
+                              "title": "Helper",
+                              "content": "<p>setBackHandler\nSets a handler that always consumes the back event. Convenient for use\nwith method references.\nsetConditionalBackHandler\nSets a handler that can return <code>true<\/code> if it has consumed the back\nevent, or <code>false<\/code> if processing should continue.\nonBackPressed\nTo be called by a container when the back button is pressed. Calls the given\nview's HandlesBack.onBackPressed method, or the handler registered on it\nvia setConditionalBackHandler or setBackHandler.<\/p>\n"
+                            }]
+                          }},
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/core",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "HandlesBack",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/HandlesBack"
+                            },
+                            "description": "",
+                            "title": "HandlesBack",
+                            "content": "<p>Implemented by objects that want the option to intercept back button taps.\nCan be implemented by <a href=\"#\">View<\/a> subclasses, or can be attached to a stock view via\nHelper.setBackHandler.<p>When implemented by a container view, the onBackPressed methods or tags of its\nsubviews should be invoked first, via Helper.onBackPressed<\/p><p>To kick things off, override <a href=\"#\">android.app.Activity.onBackPressed<\/a> to call<\/p>\n<a href=\"#\">workflowOnBackPressed<\/a> or <a href=\"#\">WorkflowFragment.onBackPressed<\/a><\/p><p><b>NB<\/b> This is all expected to be scrapped as soon as\n<a href=\"https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher.html\">OnBackPressedDispatcher<\/a>\nstabilizes.<\/p>\n<p>onBackPressed\nReturns <code>true<\/code> if back event was handled, <code>false<\/code> if someone higher in\nthe chain should.<\/p>\n"
+                          }]
+                        },
+                        "DisposeScreenBinding": {
+                          "ownKey": "DisposeScreenBinding",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/core",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "DisposeScreenBinding",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/DisposeScreenBinding"
+                            },
+                            "description": "",
+                            "title": "DisposeScreenBinding",
+                            "content": "<p>Function attached to aview created by ViewRegistry, to allow cleanup of resources\nwhen the view is removed from the window hierarchy.<\/p>\n"
+                          }]
+                        },
+                        "ViewBinding": {
+                          "ownKey": "ViewBinding",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/core",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "ViewBinding",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewBinding"
+                            },
+                            "description": "",
+                            "title": "ViewBinding",
+                            "content": "<p>Factory for <a href=\"#\">View<\/a> instances that can show screens of typeScreenT.\nUse <a href=\"#\">LayoutBinder.create<\/a> to work with XML layout resources, or\nBuilderBinding to create views from code.<p>Sets of bindings are gathered in ViewRegistry instances.<\/p>\ntype<\/p>\n<p>buildView\nReturns a View ready to display initialScreen (and any succeeding values)\nvia <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                          }]
+                        },
+                        "ShowScreen": {
+                          "ownKey": "ShowScreen",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/core",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "ShowScreen",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ShowScreen"
+                            },
+                            "description": "",
+                            "title": "ShowScreen",
+                            "content": "<p>Function attached to a view created by ViewRegistry, to allow it\nto respond to <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                          }]
+                        },
+                        "ViewRegistry": {
+                          "ownKey": "ViewRegistry",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/core",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "ViewRegistry",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry"
+                            },
+                            "description": "",
+                            "title": "ViewRegistry",
+                            "content": "<p><init><\/p>\n<p><init><\/p>\n<p>buildView\nCreates a <a href=\"#\">View<\/a> to display initialScreen, which can be updated via calls\nto <a href=\"#\">View.showScreen<\/a>.\nbuildView\nCreates a <a href=\"#\">View<\/a> to display initialScreen, and which can handle calls\nto <a href=\"#\">View.showScreen<\/a>.\nplus<\/p>\n<p>plus<\/p>\n"
+                          }]
+                        },
+                        "BuilderBinding": {
+                          "ownKey": "BuilderBinding",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/core",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "BuilderBinding",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/BuilderBinding"
+                            },
+                            "description": "",
+                            "title": "BuilderBinding",
+                            "content": "<p class=\"..\">A ViewBinding that allows ViewRegistry.buildView to dispense <a href=\"#\">View<\/a>s that need\nto be generated from code. (Use <a href=\"#\">LayoutBinder<\/a> to work with XML layout resources.)<p>Typical usage is to have a custom builder or view's <code>companion object<\/code> implement\nViewBinding by delegating to a BuilderBinding, like this:<\/p><pre><code class=\"language-\">    class MyView(\ncontext: Context,\nattributeSet: AttributeSet?\n) : FrameLayout(context, attributeSet) {\nprivate fun update(screen:  MyScreen)<\/p>\n<pre><code>  companion object : ViewBuilder&lt;MyScreen&gt;\n  by BuilderBinding(\n      type = MyScreen::class,\n      builder = { _, initialViewModel, context, _ -&gt;\n        MyView(context).apply {\n          layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)\n          bindShowScreen(initialScreen, ::update)\n        }\n  )\n}&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This pattern allows us to assemble a ViewRegistry out of the\n<\/code><\/pre>\n<p class=\"..\">custom classes themselves.<\/p><pre><code class=\"language-\">    val TicTacToeViewBuilders = ViewRegistry(\nMyView, GamePlayLayoutRunner, GameOverLayoutRunner\n)<\/code><\/pre><p>Note in particular the ViewRegistry argument to the viewConstructor lambda. This allows\nnested screns to be displayed via nested calls to ViewRegistry.buildView.<\/p><init>\nA ViewBinding that allows ViewRegistry.buildView to dispense <a href=\"#\">View<\/a>s that need\nto be generated from code. (Use <a href=\"#\">LayoutBinder<\/a> to work with XML layout resources.)<p>Typical usage is to have a custom builder or view's <code>companion object<\/code> implement\nViewBinding by delegating to a BuilderBinding, like this:<\/p><pre><code class=\"language-\">    class MyView(\ncontext: Context,\nattributeSet: AttributeSet?\n) : FrameLayout(context, attributeSet) {\nprivate fun update(screen:  MyScreen)<\/p>\n<pre><code>  companion object : ViewBuilder&lt;MyScreen&gt;\n  by BuilderBinding(\n      type = MyScreen::class,\n      builder = { _, initialViewModel, context, _ -&gt;\n        MyView(context).apply {\n          layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)\n          bindShowScreen(initialScreen, ::update)\n        }\n  )\n}&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This pattern allows us to assemble a ViewRegistry out of the\n<\/code><\/pre>\n<p>custom classes themselves.<\/p><pre><code class=\"language-\">    val TicTacToeViewBuilders = ViewRegistry(\nMyView, GamePlayLayoutRunner, GameOverLayoutRunner\n)<\/code><\/pre><p>Note in particular the ViewRegistry argument to the viewConstructor lambda. This allows\nnested screns to be displayed via nested calls to ViewRegistry.buildView.<\/p>\ntype<\/p>\n<p>buildView\nReturns a View ready to display initialScreen (and any succeeding values)\nvia <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                          }]
+                        },
+                        "ShowScreenTag": {
+                          "ownKey": "ShowScreenTag",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/core",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "ShowScreenTag",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ShowScreenTag"
+                            },
+                            "description": "",
+                            "title": "ShowScreenTag",
+                            "content": "<p><init><\/p>\n<p>showing<\/p>\n<p>showScreen<\/p>\n"
+                          }]
+                        }
+                      },
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "core",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core"
+                        },
+                        "description": "",
+                        "title": "com.feedbacktree.flow.ui.views.core",
+                        "content": "<p>setBackHandler\nSets a handler that always consumes the back event. Convenient for use\nwith method references.<p>Outside of HandlesBack.Helper because when it's there, IntelliJ can't find it for auto-import\nfor some reason.<\/p>\nbackPresses<\/p>\n<p>bindShowScreen\nEstablishes showScreen as the implementation of <a href=\"#\">View.showScreen<\/a>\nfor the receiver, possibly replacing the existing one. Calls showScreen\nto display initialScreen.<p>Intended for use by implementations of ViewBinding.buildView.<\/p>\ncanShowScreen\nTrue if this view is able to show screen.<p>Returns <code>false<\/code> if bindShowScreen has not been called, so it is always safe to\ncall this method. Otherwise returns the compatibility of the new\nscreen and the current one.<\/p>\nshowScreen\nShows screen in a view that has been initialized by bindShowScreen.\ndisposeScreenBinding\nInvokes cleanup code installed by bindShowScreen<\/p>\n"
+                      }]
+                    },
+                    "WorkflowLayout": {
+                      "ownKey": "WorkflowLayout",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "WorkflowLayout",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/WorkflowLayout"
+                        },
+                        "description": "",
+                        "title": "WorkflowLayout",
+                        "content": "<p>In most cases, if not all, you will be using com.feedbacktree.flow.core.startFlow or subclass FlowFragment\nrather than manage this class directly.<p>WorkflowLayout is the root <a href=\"#\">View<\/a> container that will be responsible of rendering the screens produced by\nthe root <a href=\"#\">Flow<\/a>.<\/p><init>\nIn most cases, if not all, you will be using com.feedbacktree.flow.core.startFlow or subclass FlowFragment\nrather than manage this class directly.<p>WorkflowLayout is the root <a href=\"#\">View<\/a> container that will be responsible of rendering the screens produced by\nthe root <a href=\"#\">Flow<\/a>.<\/p><\/p>\n<p>start\nSubscribes to screens, and uses registry to\nbuild a new view each time a new type of viewModel is received,\nmaking that view the only child of this one.<p>Views created this way may make recursive calls to ViewRegistry.buildView to make\nchildren of their own to handle nested screens.<\/p>\nonBackPressed\nReturns <code>true<\/code> if back event was handled, <code>false<\/code> if someone higher in\nthe chain should.\nonSaveInstanceState<\/p>\n<p>onRestoreInstanceState<\/p>\n"
+                      }]
+                    },
+                    "LayoutBinder": {
+                      "ownKey": "LayoutBinder",
+                      "childrenPages": {
+                        "LayoutResBinding": {
+                          "ownKey": "LayoutResBinding",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/LayoutBinder",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "LayoutResBinding",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/LayoutBinder/LayoutResBinding"
+                            },
+                            "description": "",
+                            "title": "LayoutResBinding",
+                            "content": "<p><init><\/p>\n<p>type<\/p>\n<p>layoutId<\/p>\n<p>build<\/p>\n<p>sink<\/p>\n<p>buildView\nReturns a View ready to display initialScreen (and any succeeding values)\nvia <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                          }]
+                        },
+                        "AndroidViewBinding": {
+                          "ownKey": "AndroidViewBinding",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/LayoutBinder",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "AndroidViewBinding",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/LayoutBinder/AndroidViewBinding"
+                            },
+                            "description": "",
+                            "title": "AndroidViewBinding",
+                            "content": "<p><init><\/p>\n<p>type<\/p>\n<p>viewBindingInflater<\/p>\n<p>build<\/p>\n<p>sink<\/p>\n<p>buildView\nReturns a View ready to display initialScreen (and any succeeding values)\nvia <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                          }]
+                        }
+                      },
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "LayoutBinder",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/LayoutBinder"
+                        },
+                        "description": "",
+                        "title": "LayoutBinder",
+                        "content": "<p>create<\/p>\n<p>create<\/p>\n<p>create<\/p>\n<p>create<\/p>\n<p>create<\/p>\n<p>create<\/p>\n"
+                      }]
+                    },
+                    "NoEvent": {
+                      "ownKey": "NoEvent",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "NoEvent",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/NoEvent"
+                        },
+                        "description": "",
+                        "title": "NoEvent",
+                        "content": ""
+                      }]
+                    },
+                    "FlowFragment": {
+                      "ownKey": "FlowFragment",
+                      "childrenPages": {"Parameters": {
+                        "ownKey": "Parameters",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/FlowFragment",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "Parameters",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/FlowFragment/Parameters"
+                          },
+                          "description": "",
+                          "title": "Parameters",
+                          "content": "<p><init><\/p>\n<p>input<\/p>\n<p>flow<\/p>\n<p>viewRegistry<\/p>\n"
+                        }]
+                      }},
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "FlowFragment",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/FlowFragment"
+                        },
+                        "description": "",
+                        "title": "FlowFragment",
+                        "content": "<p>Extend this class in order to launch a flow inside a fragment.\nThis would allow you to smoothly integrate FeedbackTree to your project.<init>\nExtend this class in order to launch a flow inside a fragment.\nThis would allow you to smoothly integrate FeedbackTree to your project.\noutput\nYou an subscribe to this variable to collect the output produced by the flow.\nparameters\nYou will have to provide the different parameters input,\nthe flow, and, the viewRegistry.<p>The fragment will use the different parameters provided to start the flow when the activity is\ncreated.<\/p>\nonCreateView<\/p>\n<p>onActivityCreated<\/p>\n<p>onBackPressed\nIf your workflow needs to manage the back button, override <a href=\"#\">android.app.Activity.onBackPressed<\/a>\nand call this method, and have its views or LayoutBinders use HandlesBack or <code>view.backPresses()<\/code>.<p>e.g.:<\/p><pre><code class=\"language-\">    override fun onBackPressed() {\nval flowFragment =\nsupportFragmentManager.findFragmentByTag(MY_WORKFLOW) as? FlowFragment&lt;*, *, *&gt;\nif (flowFragment?.onBackPressed() != true) super.onBackPressed()\n}<\/code><\/pre>\nonDestroy<\/p>\n"
+                      }]
+                    },
+                    "modals": {
+                      "ownKey": "modals",
+                      "childrenPages": {
+                        "ModalContainer": {
+                          "ownKey": "ModalContainer",
+                          "childrenPages": {"Binding": {
+                            "ownKey": "Binding",
+                            "ownPages": [{
+                              "reference": {
+                                "path": "com/feedbacktree/flow/ui/views/modals/ModalContainer",
+                                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                "fileName": "Binding",
+                                "extension": "html",
+                                "usePrettyUrl": true,
+                                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/ModalContainer/Binding"
+                              },
+                              "description": "",
+                              "title": "Binding",
+                              "content": "<p><init><\/p>\n"
+                            }]
+                          }},
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/modals",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "ModalContainer",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/ModalContainer"
+                            },
+                            "description": "",
+                            "title": "ModalContainer",
+                            "content": "<p>Containers used to display Modals.<p>The DialogRegistry is passed to the ModalContainer in order to specify how to create and update the dialog views.<\/p><init>\nContainers used to display Modals.<p>The DialogRegistry is passed to the ModalContainer in order to specify how to create and update the dialog views.<\/p><\/p>\n<p>onBackPressed\nReturns <code>true<\/code> if back event was handled, <code>false<\/code> if someone higher in\nthe chain should.\nonSaveInstanceState<\/p>\n<p>onRestoreInstanceState<\/p>\n"
+                          }]
+                        },
+                        "DialogBinding": {
+                          "ownKey": "DialogBinding",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/modals",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "DialogBinding",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/DialogBinding"
+                            },
+                            "description": "",
+                            "title": "DialogBinding",
+                            "content": "<p>type<\/p>\n<p>buildDialog<\/p>\n<p>updateDialog<\/p>\n<p>cleanUpDialog<\/p>\n"
+                          }]
+                        },
+                        "DialogRef": {
+                          "ownKey": "DialogRef",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/modals",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "DialogRef",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/DialogRef"
+                            },
+                            "description": "",
+                            "title": "DialogRef",
+                            "content": "<p><init><\/p>\n<p>modal<\/p>\n<p>dialog<\/p>\n<p>extra\noptional hook to allow DialogRegistrys to associate extra data with this dialog,\ne.g. its content view. Not considered for equality.\nequals<\/p>\n<p>hashCode<\/p>\n"
+                          }]
+                        },
+                        "AlertDialogBinding": {
+                          "ownKey": "AlertDialogBinding",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/modals",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "AlertDialogBinding",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/AlertDialogBinding"
+                            },
+                            "description": "",
+                            "title": "AlertDialogBinding",
+                            "content": "<p><init><\/p>\n<p>type<\/p>\n<p>buildDialog<\/p>\n<p>updateDialog<\/p>\n<p>cleanUpDialog<\/p>\n"
+                          }]
+                        },
+                        "DialogRegistry": {
+                          "ownKey": "DialogRegistry",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/modals",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "DialogRegistry",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/DialogRegistry"
+                            },
+                            "description": "",
+                            "title": "DialogRegistry",
+                            "content": "<p><init><\/p>\n<p><init><\/p>\n<p>bindings<\/p>\n<p>buildDialog\nCreates a DialogRef (aka <a href=\"#\">Dialog<\/a>) to display initialModal, which can be updated via calls\nto updateDialog.\nupdateDialog<\/p>\n<p>cleanUp<\/p>\n<p>plus<\/p>\n<p>plus<\/p>\n"
+                          }]
+                        }
+                      },
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "modals",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals"
+                        },
+                        "description": "",
+                        "title": "com.feedbacktree.flow.ui.views.modals",
+                        "content": ""
+                      }]
+                    },
+                    "ViewBindingInflater": {
+                      "ownKey": "ViewBindingInflater",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "ViewBindingInflater",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/ViewBindingInflater"
+                        },
+                        "description": "",
+                        "title": "ViewBindingInflater",
+                        "content": ""
+                      }]
+                    },
+                    "backstack": {
+                      "ownKey": "backstack",
+                      "childrenPages": {
+                        "ViewStateCache": {
+                          "ownKey": "ViewStateCache",
+                          "childrenPages": {"SavedState": {
+                            "ownKey": "SavedState",
+                            "ownPages": [{
+                              "reference": {
+                                "path": "com/feedbacktree/flow/ui/views/backstack/ViewStateCache",
+                                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                "fileName": "SavedState",
+                                "extension": "html",
+                                "usePrettyUrl": true,
+                                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack/ViewStateCache/SavedState"
+                              },
+                              "description": "",
+                              "title": "SavedState",
+                              "content": "<p>Convenience for use in <a href=\"#\">View.onSaveInstanceState<\/a> and <a href=\"#\">View.onRestoreInstanceState<\/a>\nmethods of container views that have no other state of their own to save.<p>More interesting containers should create their own subclass of <a href=\"#\">BaseSavedState<\/a>\nrather than trying to extend this one.<\/p><init><\/p>\n<p><init><\/p>\n<p>viewStateCache<\/p>\n<p>writeToParcel<\/p>\n"
+                            }]
+                          }},
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/backstack",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "ViewStateCache",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack/ViewStateCache"
+                            },
+                            "description": "",
+                            "title": "ViewStateCache",
+                            "content": "<p>Handles persistence chores for container views that manage a set of Named screens,\nshowing a view for one at a time -- think back stacks or tab sets.<p>This class implements <a href=\"#\">Parcelable<\/a> so that it can be preserved from\na container view's own <a href=\"#\">View.saveHierarchyState<\/a> method. A simple container can\nreturn SavedState from that method rather than creating its own persistence class.<\/p><init><\/p>\n<p>prune\nTo be called when the set of hidden views changes but the visible view remains\nthe same. Any cached view state held for screens that are not\ncom.feedbacktree.flow.ui.core.compatible those in retaining will be dropped.\nupdate<\/p>\n<p>restore\nReplaces the state of the receiver with that of from. Typical usage is to call this from\na container view's <a href=\"#\">View.onRestoreInstanceState<\/a>.\ndescribeContents<\/p>\n<p>writeToParcel<\/p>\n"
+                          }]
+                        },
+                        "BackStackContainer": {
+                          "ownKey": "BackStackContainer",
+                          "childrenPages": {"Companion": {
+                            "ownKey": "Companion",
+                            "ownPages": [{
+                              "reference": {
+                                "path": "com/feedbacktree/flow/ui/views/backstack/BackStackContainer",
+                                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                "fileName": "Companion",
+                                "extension": "html",
+                                "usePrettyUrl": true,
+                                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack/BackStackContainer/Companion"
+                              },
+                              "description": "",
+                              "title": "Companion",
+                              "content": ""
+                            }]
+                          }},
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/backstack",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "BackStackContainer",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack/BackStackContainer"
+                            },
+                            "description": "",
+                            "title": "BackStackContainer",
+                            "content": "<p>A container view that can display a stream of BackStackScreen instances.<p>This view is back button friendly -- it implements HandlesBack, delegating\nto displayed views that implement that interface themselves.<\/p><init><\/p>\n<p><init>\nA container view that can display a stream of BackStackScreen instances.<p>This view is back button friendly -- it implements HandlesBack, delegating\nto displayed views that implement that interface themselves.<\/p><\/p>\n<p>performTransition\nCalled from <a href=\"#\">View.showScreen<\/a> to swap between views.\nSubclasses can override to customize visual effects. There is no need to call super.\nNote that views are showing screens of type Named<code>&lt;BackStackScreen&lt;*&gt;&gt;<\/code>.\nonBackPressed\nReturns <code>true<\/code> if back event was handled, <code>false<\/code> if someone higher in\nthe chain should.\nonSaveInstanceState<\/p>\n<p>onRestoreInstanceState<\/p>\n"
+                          }]
+                        }
+                      },
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "backstack",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack"
+                        },
+                        "description": "",
+                        "title": "com.feedbacktree.flow.ui.views.backstack",
+                        "content": ""
+                      }]
+                    }
+                  },
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/ui",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "views",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views"
+                    },
+                    "description": "",
+                    "title": "com.feedbacktree.flow.ui.views",
+                    "content": ""
+                  }]
+                }
+              }
+            },
+            "utils": {
+              "ownKey": "utils",
+              "childrenPages": {
+                "Optional": {
+                  "ownKey": "Optional",
+                  "childrenPages": {
+                    "Some": {
+                      "ownKey": "Some",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/utils/Optional",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "Some",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/Optional/Some"
+                        },
+                        "description": "",
+                        "title": "Some",
+                        "content": "<p><init><\/p>\n<p>data<\/p>\n"
+                      }]
+                    },
+                    "None": {
+                      "ownKey": "None",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/utils/Optional",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "None",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/Optional/None"
+                        },
+                        "description": "",
+                        "title": "None",
+                        "content": "<p><init><\/p>\n"
+                      }]
+                    }
+                  },
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/utils",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Optional",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/Optional"
+                    },
+                    "description": "",
+                    "title": "Optional",
+                    "content": ""
+                  }]
+                },
+                "Logger": {
+                  "ownKey": "Logger",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/utils",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Logger",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/Logger"
+                    },
+                    "description": "",
+                    "title": "Logger",
+                    "content": "<p>In case you want to have your custom logger, feel free to implement this interface and\nset logger to the what you have created.\nYou can also set the logLevel that fits your needs. The default value is LogLevel.Info<\/p>\n<p>info<\/p>\n<p>debug<\/p>\n<p>verbose<\/p>\n<p>error<\/p>\n"
+                  }]
+                },
+                "LogLevel": {
+                  "ownKey": "LogLevel",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/utils",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "LogLevel",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/LogLevel"
+                    },
+                    "description": "",
+                    "title": "LogLevel",
+                    "content": ""
+                  }]
+                }
+              },
+              "ownPages": [{
+                "reference": {
+                  "path": "com/feedbacktree/flow",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "utils",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils"
+                },
+                "description": "",
+                "title": "com.feedbacktree.flow.utils",
+                "content": "<p>mapNotNull\nThe returned stream will emit value(T) if value(T) is not null.<\/p>\n"
+              }]
+            }
+          }
+        }}
+      }}
+    },
+    "wiki": {
+      "ownKey": "wiki",
+      "childrenPages": {
+        "reference": {
+          "ownKey": "reference",
+          "childrenPages": {
+            "rendering": {
+              "ownKey": "rendering",
+              "childrenPages": {
+                "HierachicalRendering": {
+                  "ownKey": "HierachicalRendering",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/reference/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "HierachicalRendering",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/HierachicalRendering"
+                    },
+                    "next": {
+                      "path": "wiki/reference/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "BackPresses",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/BackPresses"
+                    },
+                    "previous": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "FlowId",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/FlowId"
+                    },
+                    "description": "",
+                    "title": "Hierarchical Rendering",
+                    "content": ""
+                  }]
+                },
+                "BackPresses": {
+                  "ownKey": "BackPresses",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/reference/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "BackPresses",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/BackPresses"
+                    },
+                    "previous": {
+                      "path": "wiki/reference/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "HierachicalRendering",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/HierachicalRendering"
+                    },
+                    "description": "",
+                    "title": "Back Presses",
+                    "content": ""
+                  }]
+                }
+              }
+            },
+            "flow": {
+              "ownKey": "flow",
+              "childrenPages": {
+                "FlowId": {
+                  "ownKey": "FlowId",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "FlowId",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/FlowId"
+                    },
+                    "next": {
+                      "path": "wiki/reference/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "HierachicalRendering",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/HierachicalRendering"
+                    },
+                    "previous": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartingFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/StartingFlows"
+                    },
+                    "description": "",
+                    "title": "Flow Id",
+                    "content": "<h3 id=\"setting-flow-identifiers\"><a href=\"#setting-flow-identifiers\" id=\"setting-flow-identifiers\" class=\"anchor\"><\/a>Setting Flow Identifiers<\/h3>\n<p>When initiating a Flow, it's essential to designate an identifier id for the Flow. This identifier\ncan be a constant value or dynamically generated based on input.<\/p>\n<pre><code class=\"language-kotlin\">Flow(\n    id = &quot;MyFlowFixedId&quot;,\n    // ...\n)\n\nFlow(\n    id = { input -&gt; &quot;MyFlowFor-${input.itemKey}&quot; },\n    // ...\n)\n<\/code><\/pre>\n<h3 id=\"ensuring-uniqueness\"><a href=\"#ensuring-uniqueness\" id=\"ensuring-uniqueness\" class=\"anchor\"><\/a>Ensuring Uniqueness<\/h3>\n<p>When applying identifiers to your flows, it's not only important to aim for a reasonable level of\nuniqueness, but it's also critical to ensure <strong>complete uniqueness<\/strong> within the specific context of\nthe <code>render<\/code> block. This consideration becomes particularly significant when dealing with the\ninitiation of multiple child flows.<\/p>\n<p>In scenarios where you find yourself simultaneously initiating multiple child flows using\nthe <code>context.renderChild(input, ChildFlow, ...)<\/code> function, it becomes paramount that each flow\ninstance possesses an identifier that is distinct from all others. This distinction is necessary to\nprevent collisions and unexpected interactions between running flows.<\/p>\n<p>The <code>renderChild<\/code> process begins by computing the identifier of the child flow based on the provided\ninput. Subsequently, this identifier plays a crucial role in determining whether a specific child\nflow needs to be newly initiated or resumed from a prior state within the same render block. The\ndecision is made based on whether the computed identifier matches any previously initiated flows\nwithin the current rendering context. A new flow instance is only created if the computed identifier\ndiffers from those encountered so far.<\/p>\n<h3 id=\"practical-use-of-unique-ids-for-each-input\"><a href=\"#practical-use-of-unique-ids-for-each-input\" id=\"practical-use-of-unique-ids-for-each-input\" class=\"anchor\"><\/a>Practical Use of Unique IDs for Each Input<\/h3>\n<p>Consider an example involving an <code>ItemsListFlow<\/code> and <code>ItemDetailFlow<\/code>. The <code>ItemsListFlow<\/code> maintains\na state variable called <code>showingDetailsItemKey: String?<\/code>. When this variable isn't null, the render\nblock triggers the <code>ItemDetailFlow<\/code>.<\/p>\n<p>While a fixed ID works well on mobiles, envision a tablet's split-screen layout. Here's where the\nchallenge arises. The <code>ItemDetailFlow<\/code> remains active, but as you select new items, it needs to\nrestart. Using a fixed ID for <code>ItemDetailFlow<\/code> causes the initial flow to resume, preventing new\nstarts.<\/p>\n<p>The remedy? Incorporate the <code>itemKey<\/code> into the Flow's ID. This guarantees a fresh flow for each\nitem, ensuring that selecting a different item leads to a new flow initiation.<\/p>\n"
+                  }]
+                },
+                "FeedbackLoops": {
+                  "ownKey": "FeedbackLoops",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "FeedbackLoops",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/FeedbackLoops"
+                    },
+                    "next": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartingFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/StartingFlows"
+                    },
+                    "previous": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "HierarchicalFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/HierarchicalFlows"
+                    },
+                    "description": "",
+                    "title": "Feedback Loops",
+                    "content": "<h4 id=\"bind\"><a href=\"#bind\" id=\"bind\" class=\"anchor\"><\/a>Bind<\/h4>\n<h4 id=\"react\"><a href=\"#react\" id=\"react\" class=\"anchor\"><\/a>React<\/h4>\n<h4 id=\"your-custom-feedback-loop\"><a href=\"#your-custom-feedback-loop\" id=\"your-custom-feedback-loop\" class=\"anchor\"><\/a>Your custom Feedback Loop<\/h4>\n"
+                  }]
+                },
+                "StartingFlows": {
+                  "ownKey": "StartingFlows",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartingFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/StartingFlows"
+                    },
+                    "next": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "FlowId",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/FlowId"
+                    },
+                    "previous": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "FeedbackLoops",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/FeedbackLoops"
+                    },
+                    "description": "",
+                    "title": "Starting Flows",
+                    "content": "<h4 id=\"from-activity\"><a href=\"#from-activity\" id=\"from-activity\" class=\"anchor\"><\/a>From Activity<\/h4>\n<h4 id=\"from-fragment\"><a href=\"#from-fragment\" id=\"from-fragment\" class=\"anchor\"><\/a>From Fragment<\/h4>\n<h4 id=\"as-a-child-flow\"><a href=\"#as-a-child-flow\" id=\"as-a-child-flow\" class=\"anchor\"><\/a>As a Child Flow<\/h4>\n<h4><a href=\"#\" class=\"anchor\"><\/a><\/h4>\n"
+                  }]
+                },
+                "HierarchicalFlows": {
+                  "ownKey": "HierarchicalFlows",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "HierarchicalFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/HierarchicalFlows"
+                    },
+                    "next": {
+                      "path": "wiki/reference/flow",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "FeedbackLoops",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/FeedbackLoops"
+                    },
+                    "description": "",
+                    "title": "Hierarchical Flows",
+                    "content": ""
+                  }]
+                }
+              }
+            }
+          },
+          "ownPages": [{
+            "reference": {
+              "path": "wiki",
+              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+              "fileName": "reference",
+              "extension": "html",
+              "usePrettyUrl": true,
+              "link": "https://eliekarouz.github.io/FeedbackTree/wiki/reference"
+            },
+            "description": "",
+            "title": "Reference",
+            "content": "<html>\n <head><\/head>\n <body>\n  <h3 id=\"flow\"><a href=\"#flow\" id=\"flow\" class=\"anchor\"><\/a>Flow<\/h3> \n  <ol> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/HierarchicalFlows\">Hierarchical Flows<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/FeedbackLoops\">Feedback Loops<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/StartingFlows\">Starting Flows<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/FlowId\">Flow Id<\/a><\/li> \n  <\/ol> \n  <h3 id=\"rendering\"><a href=\"#rendering\" id=\"rendering\" class=\"anchor\"><\/a>Rendering<\/h3> \n  <ol> \n   <li> <p><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/HierachicalRendering\">Hierarchical Rendering<\/a><\/p> <\/li> \n   <li> <p><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/BackPresses\">Back Presses<\/a><\/p> <\/li> \n  <\/ol> \n <\/body>\n<\/html>\n"
+          }]
+        },
+        "howtoguides": {
+          "ownKey": "howtoguides",
+          "childrenPages": {
+            "startingflows": {
+              "ownKey": "startingflows",
+              "childrenPages": {
+                "StartFlowRetrofitting": {
+                  "ownKey": "StartFlowRetrofitting",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/startingflows",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartFlowRetrofitting",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowRetrofitting"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/startingflows",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartFlowFromAFragment",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowFromAFragment"
+                    },
+                    "description": "",
+                    "title": "Retrofitting",
+                    "content": "<p>Retrofitting<\/p>\n"
+                  }]
+                },
+                "StartFlowFromAnActivity": {
+                  "ownKey": "StartFlowFromAnActivity",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/startingflows",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartFlowFromAnActivity",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowFromAnActivity"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/startingflows",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartFlowFromAFragment",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowFromAFragment"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ReusingTheSameScreenInDifferentFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/ReusingTheSameScreenInDifferentFlows"
+                    },
+                    "description": "",
+                    "title": "From an Activity",
+                    "content": "<p>From an Activity<\/p>\n"
+                  }]
+                },
+                "StartFlowFromAFragment": {
+                  "ownKey": "StartFlowFromAFragment",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/startingflows",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartFlowFromAFragment",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowFromAFragment"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/startingflows",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartFlowRetrofitting",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowRetrofitting"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/startingflows",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartFlowFromAnActivity",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowFromAnActivity"
+                    },
+                    "description": "",
+                    "title": "From a Fragment",
+                    "content": "<p>From a Fragment<\/p>\n"
+                  }]
+                }
+              }
+            },
+            "feedbackloops": {
+              "ownKey": "feedbackloops",
+              "childrenPages": {
+                "Bind": {
+                  "ownKey": "Bind",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Bind",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/Bind"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "React",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/React"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/statemachines",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "CombiningSteppers",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/statemachines/CombiningSteppers"
+                    },
+                    "description": "",
+                    "title": "Bind",
+                    "content": "<p>FeedbackTree provides different factories to create Feedback Loops. <code>bind<\/code> is one of them. You can use <code>bind<\/code> to either create:<\/p>\n<h3 id=\"ui-feedback-loop\"><a href=\"#ui-feedback-loop\" id=\"ui-feedback-loop\" class=\"anchor\"><\/a>UI Feedback Loop<\/h3>\n<p>You are going to use <code>bind<\/code> to create UI bindings in the <code>LayoutBinder<\/code> DSL.<\/p>\n<pre><code class=\"language-kotlin\">bind { screen: Observable&lt;CounterScreen&gt; -&gt;\n    subscriptions = listOf(\n        screen.map { it.counterText }.subscribe { counterTextView.text = it },\n    )\n    events = listOf(\n        incrementButton.clicks().map { Event.Increment },\n        decrementButton.clicks().map { Event.Decrement },\n    )\n}\n<\/code><\/pre>\n<p>You get a stream of <strong>screens<\/strong> that you can subscribe to and update UI elements.<br />\nYou can generate stream of events that will be forwarded to the Flow.<\/p>\n<h3 id=\"non-ui-feedback-loop\"><a href=\"#non-ui-feedback-loop\" id=\"non-ui-feedback-loop\" class=\"anchor\"><\/a>Non-UI Feedback Loop<\/h3>\n<p>Although <code>bind<\/code> is not as frequently used for non-ui binding as for UI binding, you can still use it to create a non-UI binding that can be added to the flow feedbacks:\\<\/p>\n<pre><code class=\"language-kotlin\">val someNonUIFeedback: Feedback&lt;State, Event&gt; = bind&lt;State, Event&gt; { state: Observable&lt;State&gt; -&gt;\n    subscriptions = listOf() // &lt;- add the subscriptions here\n    events = listOf() // &lt;- add the events here\n}\n<\/code><\/pre>\n<p>You get a stream of <strong>states<\/strong> that you can subscribe to.<br />\nYou can generate stream of events that will be forwarded to the Flow.<\/p>\n"
+                  }]
+                },
+                "YourCustomFeedbackLoop": {
+                  "ownKey": "YourCustomFeedbackLoop",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomFeedbackLoop",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/YourCustomFeedbackLoop"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "RenderingMultipleScreens",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/RenderingMultipleScreens"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ReactSet",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/ReactSet"
+                    },
+                    "description": "",
+                    "title": "Your Custom Feedback Loop",
+                    "content": "<p>The <code>bind<\/code> and <code>react<\/code> operators cover 99% of the cases you might encounter but you can still create your custom feedback loop if you need to.<\/p>\n<p>A feedback loop is just a function that takes the <strong>states<\/strong>  and returns a stream of <strong>events<\/strong>:<br />\n<code>(Observable&lt;State&gt;) -&gt; Observable&lt;Event&gt;<\/code>.<\/p>\n<p>To be more accurate it is <code>(ObservableSchedulerContext&lt;State&gt;) -&gt; Observable&lt;Event&gt;<\/code>:<\/p>\n<ul>\n<li>You use <code>ObservableSchedulerContext.source<\/code> to get to the <code>Observable&lt;State&gt;<\/code><\/li>\n<li>You use <code>ObservableSchedulerContext.scheduler<\/code> to access the Flow scheduler (usually the main thread) and you should enqueue all events to that scheduler.<\/li>\n<\/ul>\n<h3 id=\"ui-feedback-loop\"><a href=\"#ui-feedback-loop\" id=\"ui-feedback-loop\" class=\"anchor\"><\/a>UI Feedback Loop<\/h3>\n<p>When you want to create a custom UI feedback in the <code>LayoutBinder<\/code><\/p>\n<pre><code class=\"language-kotlin\">LayoutBinder.create(...) {\n\tfeedbacks.add { screenScheduler -&gt;\n\t\t// screenScheduler.source is the Observable&lt;Screen&gt;\n      Observable.empty&lt;Event&gt;()\n                 .observeOn(screenScheduler.scheduler)\n  }\n}\n<\/code><\/pre>\n<h3 id=\"non-ui-feedback-loop\"><a href=\"#non-ui-feedback-loop\" id=\"non-ui-feedback-loop\" class=\"anchor\"><\/a>Non-UI Feedback Loop<\/h3>\n<p>When you want to create a custom feedback that you can add to the <code>Flow.feedbacks<\/code>:<\/p>\n<pre><code class=\"language-kotlin\">fun yourCustomFeedback(): Feedback&lt;State, Event&gt; = { stateScheduler -&gt;\n\t\t// stateScheduler.source is the Observable&lt;State&gt;\n      Observable.empty&lt;Event&gt;()\n                 .observeOn(screenScheduler.scheduler)\n}\n<\/code><\/pre>\n"
+                  }]
+                },
+                "ReactSet": {
+                  "ownKey": "ReactSet",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ReactSet",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/ReactSet"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomFeedbackLoop",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/YourCustomFeedbackLoop"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "React",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/React"
+                    },
+                    "description": "",
+                    "title": "React-Set",
+                    "content": "<p>When the number of effects you want to kickstart is dynamic, you can use the <code>reactSet<\/code> operator which does pretty much the same thing as <code>react<\/code> but allows you to run simultaneously multiple effects.<\/p>\n<pre><code class=\"language-kotlin\">fun reactFeedback(): Feedback&lt;State, Event&gt; = reactSet&lt;State, Query, Event&gt;(\n    query = { state -&gt;\n\t\t\t\t// return either a Set&lt;Query&gt;\n    },\n    effects = { query: Query -&gt;\n\t\t\t\t// Use the query to perform side effect, network calls, bluetooth, database...\n\t\t\t\t// return an Observable&lt;Event&gt;\n    }\n)\n<\/code><\/pre>\n<h3 id=\"the-rules\"><a href=\"#the-rules\" id=\"the-rules\" class=\"anchor\"><\/a>The Rules<\/h3>\n<ul>\n<li>Each time the flow enters a new state, the query is evaluated and a <code>Set&lt;Query&gt;<\/code> is returned.<\/li>\n<li>The operator compares the <strong>old<\/strong> query with the <strong>new<\/strong> query:\n<ul>\n<li>Effects are not interrupted for elements in the new query that were present in the old query.<\/li>\n<li>Effects are canceled for elements present in old query but not in new query.<\/li>\n<li>In case new elements are present in new query (and not in old query) they are being passed to the effects lambda and resulting effects are being performed<\/li>\n<\/ul>\n<\/li>\n<li>The effects will run in parallel.<\/li>\n<\/ul>\n<h3 id=\"example\"><a href=\"#example\" id=\"example\" class=\"anchor\"><\/a>Example<\/h3>\n<p>Let's take an example where the user is presented with a list of files that they can download:<\/p>\n<pre><code class=\"language-kotlin\">data class FileResource(\n    val url: String,\n    val name: String,\n    val localUrl: String?\n)\n\ndata class State(\n    val fileResources: List&lt;FileResource&gt;, // The list of all files\n    val resourceUrlsToDownload: Set&lt;String&gt; // The resouce files being downloaded\n)\n\nsealed class Event {\n    data class UserRequestedResource(val fileResource: FileResource) : Event()\n    data class LoadedResource(val url: String, val localUrl: String) : Event()\n}\n\nprivate fun downloadResourcesFeedback(): Feedback&lt;State, Event&gt; = reactSet&lt;State, String, Event&gt;(\n    query = { state -&gt;\n        state.resourceUrlsToDownload\n    },\n    effects = { url -&gt; \n        downloadResource(url).map { localUrl -&gt;\n            Event.LoadedResource(url, localUrl)\n        }\n    }\n)\n\n<\/code><\/pre>\n<p>You can check the complete Flow <a href=\"https://github.com/eliekarouz/FeedbackTree/tree/master/app/src/main/java/com/feedbacktree/tutorials/flows/resources/ResoucesFlow.kt\" target=\"_blank\">here<\/a>.<\/p>\n"
+                  }]
+                },
+                "React": {
+                  "ownKey": "React",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "React",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/React"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ReactSet",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/ReactSet"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Bind",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/Bind"
+                    },
+                    "description": "",
+                    "title": "React",
+                    "content": "<p>The most used factory of feedback loops is <code>react<\/code>. Like the <code>bind<\/code> operator, it can be used to perform <strong>non-UI<\/strong> feedback loops or even <strong>UI<\/strong> feedback loops. The former is more frequently used in practice. Here's how to use it:<\/p>\n<pre><code class=\"language-kotlin\">fun reactFeedback(): Feedback&lt;State, Event&gt; = react&lt;State, Query, Event&gt;(\n    query = { state -&gt;\n\t\t\t\t// return either a Query or null\n    },\n    effects = { query: Query -&gt;\n\t\t\t\t// Use the query to perform side effect, network calls, bluetooth, database...\n\t\t\t\t// return an Observable&lt;Event&gt;\n    }\n)\n<\/code><\/pre>\n<h3 id=\"the-rules\"><a href=\"#the-rules\" id=\"the-rules\" class=\"anchor\"><\/a>The Rules<\/h3>\n<ul>\n<li>Each time the flow enters a new state, the query is evaluated.<\/li>\n<li>The effect kickstarts only when the query is <strong>not<\/strong> null.<\/li>\n<li>Eventhough the state might be updating while an effect is running, the effect won't be triggered again as long as the query value is the <strong>same<\/strong>.<\/li>\n<li>If the query evaluates to a different value, the previous effect is disposed and a new effect with the new value kickstarts.<\/li>\n<\/ul>\n<h3 id=\"example\"><a href=\"#example\" id=\"example\" class=\"anchor\"><\/a>Example<\/h3>\n<p>Here's an example from the <a href=\"../tutorials/Login\">Login Tutorial<\/a><\/p>\n<pre><code class=\"language-kotlin\">fun loginFeedback(): Feedback&lt;State, Event&gt; = react&lt;State, LoginQuery, Event&gt;(\n    query = { state -&gt;\n        if (state.isLoggingIn) {\n            LoginQuery(email = state.email, password = state.password)\n        } else {\n            null\n        }\n    },\n    effects = { queryResult -&gt;\n        val authenticationSuccess: Observable&lt;Boolean&gt; = AuthenticationManager.login(\n            email = queryResult.email,\n            password = queryResult.password\n        )\n        authenticationSuccess.map { loginSucceeded -&gt;\n            Event.ReceivedLogInResponse(loginSucceeded)\n        }\n    }\n)\n<\/code><\/pre>\n"
+                  }]
+                }
+              }
+            },
+            "rendering": {
+              "ownKey": "rendering",
+              "childrenPages": {
+                "TheBackstackScreen": {
+                  "ownKey": "TheBackstackScreen",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "TheBackstackScreen",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/TheBackstackScreen"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ShowAModal",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/ShowAModal"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "BackPresses",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/BackPresses"
+                    },
+                    "description": "",
+                    "title": "The Backstack Screen",
+                    "content": "<p>The Backstack Screen<\/p>\n"
+                  }]
+                },
+                "BackPresses": {
+                  "ownKey": "BackPresses",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "BackPresses",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/BackPresses"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "TheBackstackScreen",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/TheBackstackScreen"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "RenderingMultipleScreens",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/RenderingMultipleScreens"
+                    },
+                    "description": "",
+                    "title": "Back-Presses",
+                    "content": ""
+                  }]
+                },
+                "IdentifiableFlows": {
+                  "ownKey": "IdentifiableFlows",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "IdentifiableFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/IdentifiableFlows"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ReusingTheSameScreenInDifferentFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/ReusingTheSameScreenInDifferentFlows"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomContainer",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/YourCustomContainer"
+                    },
+                    "description": "",
+                    "title": "Indentifiable Flows",
+                    "content": "<p>Indentifiable Flows<\/p>\n"
+                  }]
+                },
+                "YourCustomContainer": {
+                  "ownKey": "YourCustomContainer",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomContainer",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/YourCustomContainer"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "IdentifiableFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/IdentifiableFlows"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomModal",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/YourCustomModal"
+                    },
+                    "description": "",
+                    "title": "Your Custom Container",
+                    "content": "<p>Your Custom Container<\/p>\n"
+                  }]
+                },
+                "ReusingTheSameScreenInDifferentFlows": {
+                  "ownKey": "ReusingTheSameScreenInDifferentFlows",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ReusingTheSameScreenInDifferentFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/ReusingTheSameScreenInDifferentFlows"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/startingflows",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "StartFlowFromAnActivity",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowFromAnActivity"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "IdentifiableFlows",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/IdentifiableFlows"
+                    },
+                    "description": "",
+                    "title": "Reusing the Same Screen in Different Flows",
+                    "content": "<p>Reusing the Same Screen in Different Flows<\/p>\n"
+                  }]
+                },
+                "ShowAModal": {
+                  "ownKey": "ShowAModal",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ShowAModal",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/ShowAModal"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomModal",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/YourCustomModal"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "TheBackstackScreen",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/TheBackstackScreen"
+                    },
+                    "description": "",
+                    "title": "Show a Modal",
+                    "content": "<p>Show a Modal<\/p>\n"
+                  }]
+                },
+                "RenderingMultipleScreens": {
+                  "ownKey": "RenderingMultipleScreens",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "RenderingMultipleScreens",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/RenderingMultipleScreens"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "BackPresses",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/BackPresses"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomFeedbackLoop",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/YourCustomFeedbackLoop"
+                    },
+                    "description": "",
+                    "title": "Rendering Multiple Screens",
+                    "content": "<p>A Flow in FeedbackTree is not bound to a particular screen/layout. In fact, a flow can render multiple screens. You can do that by setting the <code>ScreenType<\/code> to <code>Any<\/code> (the 5th generic argument when you create a Flow):<\/p>\n<h3 id=\"example\"><a href=\"#example\" id=\"example\" class=\"anchor\"><\/a>Example<\/h3>\n<p>Here's an example of a phone registration code where the user enters their phone number and then validate it using a code sent by SMS:<\/p>\n<pre><code class=\"language-kotlin\">val phoneNumberRegistrationFlow = Flow&lt;Unit, State, Event, Unit, Any&gt;(\n    id = &quot;PhoneNumberRegistrationFlow&quot;,\n    initialState = {\n        ...\n    },\n    stepper = { state, event -&gt;\n        when (event) {\n            ...\n        }\n    },\n    feedbacks = listOf(...),\n    render = { state, context -&gt;\n        when (state.progress) {\n            EnteringNumber -&gt; EnterPhoneScreen(state, context.sink)\n            SendingCode -&gt; LoadingScreen(message = &quot;Sending Code&quot;, context.sink)\n            EnteringRegistrationCode -&gt; EnterRegistrationCodeScreen(state, context.sink)\n            Registering -&gt; LoadingScreen(message = &quot;Validating Code&quot;, context.sink)\n        }\n    }\n)\n<\/code><\/pre>\n<p>You can check the complete Flow <a href=\"https://github.com/eliekarouz/FeedbackTree/tree/master/app/src/main/java/com/feedbacktree/tutorials/flows/phonenumber/PhoneNumberRegistrationFlow.kt\" target=\"_blank\">here<\/a>,<\/p>\n"
+                  }]
+                },
+                "YourCustomModal": {
+                  "ownKey": "YourCustomModal",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomModal",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/YourCustomModal"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "YourCustomContainer",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/YourCustomContainer"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/rendering",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ShowAModal",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/ShowAModal"
+                    },
+                    "description": "",
+                    "title": "Your Custom Modal",
+                    "content": "<p>Your Custom Modal<\/p>\n"
+                  }]
+                }
+              }
+            },
+            "statemachines": {
+              "ownKey": "statemachines",
+              "childrenPages": {
+                "ASealedClassState": {
+                  "ownKey": "ASealedClassState",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/statemachines",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ASealedClassState",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/statemachines/ASealedClassState"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/statemachines",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "CombiningSteppers",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/statemachines/CombiningSteppers"
+                    },
+                    "description": "",
+                    "title": "A Sealed Class State",
+                    "content": "<p>You have different ways to write your states, i.e. data classes, sealed classes, enums, and, primitive types. The focus here will be on <strong>sealed classes<\/strong>.<\/p>\n<p>We will take the example of a simple flow that allows the user to select products loaded from some data source:<\/p>\n<pre><code class=\"language-kotlin\">sealed class ProductsState {\n    object LoadingProducts : ProductsState()\n\n    data class ShowingProducts(\n        val allProducts: List&lt;Product&gt;,\n        val selectedProducts: Set&lt;Product&gt;\n    ) : ProductsState()\n}\n\nsealed class ProductsEvent {\n    data class LoadedProducts(val products: List&lt;Product&gt;) : ProductsEvent()\n    data class SelectedProduct(val product: Product) : ProductsEvent()\n    data class DeselectedProduct(val product: Product) : ProductsEvent()\n    object ClickedDone : ProductsEvent()\n}\n<\/code><\/pre>\n<h3 id=\"stepper-dsl\"><a href=\"#stepper-dsl\" id=\"stepper-dsl\" class=\"anchor\"><\/a>Stepper DSL<\/h3>\n<p>A stepper is a function that takes the current state your in, and based on the event received, it produces a new state or ends the flow.\nFeedbackTree provides a user friendly DSL that allows you to create a stepper when the state is a sealed class.<\/p>\n<pre><code class=\"language-kotlin\">stepper = StepperFactory.create&lt;ProductsState, ProductsEvent, Set&lt;Product&gt;&gt; { // 1\n    state&lt;ProductsState.LoadingProducts&gt; {\n        on&lt;ProductsAll rights reservedEvent.LoadedProducts&gt; {\n            ProductsState.LoadingProducts.advance() // 2\n        }\n    }\n\n    state&lt;ProductsState.ShowingProducts&gt; {\n        on&lt;ProductsEvent.SelectedProduct&gt; { event -&gt;\n            copy( // 3\n                selectedProducts = selectedProducts + event.product\n            ).advance()\n        }\n        on&lt;ProductsEvent.DeselectedProduct&gt; { event -&gt;\n            copy(\n                selectedProducts = selectedProducts - event.product\n            ).advance()\n        }\n        on&lt;ProductsEvent.ClickedDone&gt; {\n            endFlowWith(selectedProducts) // 4\n        }\n    }\n}\n<\/code><\/pre>\n<p>A breakdown of the code above:<\/p>\n<ol>\n<li>To create a stepper we need to define the generic arguments <code>&lt;StateType, EventType, OutputType&gt;<\/code><\/li>\n<li>The DSL provides a state and event selectors through the <code>state&lt;State.SubState&gt;<\/code> and <code>on&lt;SomeEvent&gt;<\/code> methods. The <code>on<\/code> lambda expects that you return a <strong>step<\/strong> through <code>state.advance()<\/code>  or <code>endFlowWith<\/code><\/li>\n<li>Inside the <code>state&lt;State.SubState&gt;<\/code> block you directly have access to the sub-state:\n<ul>\n<li><code>copy()<\/code> is actucally <code>this.copy()<\/code> where <code>this<\/code> is of type <code>State.ShowingProducts<\/code>.<\/li>\n<li>You can use the sub-state <code>ProductsState.ShowingProducts<\/code> properties to perform the updates needed like in <code>selectedProducts + event.product<\/code> where <code>selectedProducts<\/code> is just the state before the <code>ProductsEvent.SelectedProduct<\/code>  is emitted.<\/li>\n<\/ul>\n<\/li>\n<li>You can complete the flow, when some event is received.<\/li>\n<\/ol>\n"
+                  }]
+                },
+                "CombiningSteppers": {
+                  "ownKey": "CombiningSteppers",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "wiki/howtoguides/statemachines",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "CombiningSteppers",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/statemachines/CombiningSteppers"
+                    },
+                    "next": {
+                      "path": "wiki/howtoguides/feedbackloops",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Bind",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/Bind"
+                    },
+                    "previous": {
+                      "path": "wiki/howtoguides/statemachines",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "ASealedClassState",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/statemachines/ASealedClassState"
+                    },
+                    "description": "",
+                    "title": "Combining Steppers",
+                    "content": "<p>Combining Steppers<\/p>\n"
+                  }]
+                }
+              }
+            }
+          },
+          "ownPages": [{
+            "reference": {
+              "path": "wiki",
+              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+              "fileName": "howtoguides",
+              "extension": "html",
+              "usePrettyUrl": true,
+              "link": "https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides"
+            },
+            "description": "",
+            "title": "How - To   Guides",
+            "content": "<html>\n <head><\/head>\n <body>\n  <h3 id=\"state-machines\"><a href=\"#state-machines\" id=\"state-machines\" class=\"anchor\"><\/a>State Machines<\/h3> \n  <ul> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/statemachines/ASealedClassState\">A Sealed Class State<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/statemachines/CombiningSteppers\">Combining Steppers<\/a><\/li> \n  <\/ul> \n  <h3 id=\"feedback-loops\"><a href=\"#feedback-loops\" id=\"feedback-loops\" class=\"anchor\"><\/a>Feedback Loops<\/h3> \n  <ul> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/Bind\">Bind<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/React\">React<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/ReactSet\">React-Set<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/YourCustomFeedbackLoop\">Your Custom Feedback Loop<\/a><\/li> \n  <\/ul> \n  <h3 id=\"rendering\"><a href=\"#rendering\" id=\"rendering\" class=\"anchor\"><\/a>Rendering<\/h3> \n  <ul> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/RenderingMultipleScreens\">Rendering Multiple Screens<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/BackPresses\">Back-Presses<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/TheBackstackScreen\">The Backstack Screen<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/ShowAModal\">Show a Modal<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/YourCustomModal\">Your Custom Modal<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/YourCustomContainer\">Your Custom Container<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/IdentifiableFlows\">Indentifiable Flows<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/rendering/ReusingTheSameScreenInDifferentFlows\">Reusing the Same Screen in Different Flows<\/a><\/li> \n  <\/ul> \n  <h4 id=\"starting-flows\"><a href=\"#starting-flows\" id=\"starting-flows\" class=\"anchor\"><\/a>Starting Flows<\/h4> \n  <ul> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowFromAnActivity\">From an Activity<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowFromAFragment\">From a Fragment<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/startingflows/StartFlowRetrofitting\">Retrofitting<\/a><\/li> \n  <\/ul> \n <\/body>\n<\/html>\n"
+          }]
+        },
+        "tutorials": {
+          "ownKey": "tutorials",
+          "childrenPages": {
+            "Counter": {
+              "ownKey": "Counter",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/tutorials",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "Counter",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Counter"
+                },
+                "next": {
+                  "path": "wiki/tutorials",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "Login",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Login"
+                },
+                "description": "",
+                "title": "Counter Flow",
+                "content": "<p>In this tutorial, you will learn the steps needed to set up a basic FeedbackTree <code>Flow<\/code>.\nYou will build a screen that has a counter and two buttons to increment and decrement the counter.<\/p>\n<div style:\"text-align: center;\"> \n  <img style: src=\"/FeedbackTree/assets/media/counter_app_screenshot.png\" width=\"250\"/> \n<\/div>\n<p><br><\/p>\n<h3 id=\"getting-started\"><a href=\"#getting-started\" id=\"getting-started\" class=\"anchor\"><\/a>Getting Started<\/h3>\n<p>Start by downloading the tutorial materials from <a href=\"https://drive.google.com/uc?export=download&amp;id=1sDLQeo7HSGRSj5eS09mfzeCK-AVsur42\">here<\/a> and open the <strong>starter<\/strong> project in Android Studio.<br />\nLet's start by adding FeedbackTree, RxJava, and, other RxJava related dependencies to the <code>build.gradle (app)<\/code> file.<\/p>\n<pre><code class=\"language-groovy\">dependencies {\n    ...\n      \n\t  // FeedbackTree\n  \timplementation &quot;com.github.eliekarouz.feedbacktree:feedbacktree:0.13.1&quot;\n\t\timplementation &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;\n  \n\t\t// RxJava/Kotlin\n    implementation &quot;io.reactivex.rxjava2:rxandroid:2.1.1&quot;\n    implementation &quot;io.reactivex.rxjava2:rxkotlin:2.3.0&quot;\n    \n     // RxBinding (not all of them are used)\n    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0'\n    implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.0.0'\n    implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.0.0'\n    implementation 'com.jakewharton.rxbinding3:rxbinding-drawerlayout:3.0.0'\n    implementation 'com.jakewharton.rxbinding3:rxbinding-leanback:3.0.0'\n    implementation 'com.jakewharton.rxbinding3:rxbinding-recyclerview:3.0.0'\n    implementation 'com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:3.0.0'\n    implementation 'com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:3.0.0'\n    implementation 'com.jakewharton.rxbinding3:rxbinding-viewpager:3.0.0'\n}\n<\/code><\/pre>\n<p>Note that the library is published to <code>Maven Central<\/code>. You might also need to add to your <code>build.gradle (.)<\/code><\/p>\n<pre><code class=\"language-groovy\">allprojects {\n  repositories {\n    ...\n    mavenCentral()\n  }\n}\n<\/code><\/pre>\n<p>Although it is a very simple screen, and, we might not use the full power of FeedbackTree, this tutorials provides you a solid foundation to FeedbackTree.<\/p>\n<h3 id=\"state-and-events\"><a href=\"#state-and-events\" id=\"state-and-events\" class=\"anchor\"><\/a>State and Events<\/h3>\n<p><em>What is a State?<\/em><br />\nA state is the condition your software is in at a specific time. In the context of this tutorial, it is just the value of the counter. <br />\nIn Kotlin, states can be represented using <code>data classes<\/code>, <code>enums<\/code>, <code>sealed classes<\/code> or even  <code>primitive types<\/code> . The latter is rarely used in practice.<\/p>\n<p><em>What is an Event?<\/em><br />\nAn Event is the external input that will allow the software to transition from one state to another. In the context of this tutorial, you have two events representing the clicks on the increment or decrement buttons.<br />\nIn Kotlin, events are usually represented with <code>sealed classes<\/code><\/p>\n<p>Let's go back to our Counter example, and write the state and events in Kotlin:<\/p>\n<pre><code class=\"language-kotlin\">data class State(\n    val counter: Int\n)\n\nsealed class Event {\n    object Increment : Event()\n    object Decrement : Event()\n}\n<\/code><\/pre>\n<blockquote>\n<p><strong>Note:<\/strong> We could have just used an <code>Int<\/code> to represent the state but it is really rare in practice to have one primitive type as a state, that's why we will stick with a <code>data class<\/code>.<\/p>\n<\/blockquote>\n<h3 id=\"stepper\"><a href=\"#stepper\" id=\"stepper\" class=\"anchor\"><\/a>Stepper<\/h3>\n<p>If you haven't noticed yet, the counter is a <code>val<\/code> and I assume you are wondering how we will update the state when the attributes are immutable. We won't, we will just create a new state!<\/p>\n<p>In FeedbackTree or more generally with state machines, an event &quot;advances&quot; the state machine to a new state. In some cases, the event can cause the state machine to complete.  We call this transformation a <code>Stepper<\/code>.<\/p>\n<p>A stepper is a <a href=\"https://en.wikipedia.org/wiki/Pure_function\">pure function<\/a> with the following signature: <code>(state: State, event: Event) -&gt; Step&lt;State, Output&gt;<\/code>.  <br />\nIn other terms, the stepper takes the current state your in and the event that occured, and, produces a <code>Step<\/code> which is either the new state we will get in next or the end of state machine/flow.<\/p>\n<p>If we want to write the write the stepper for the Counter tutorial,<\/p>\n<pre><code class=\"language-kotlin\">fun stepper(state: State, event: Event): Step&lt;State, Nothing&gt; { // 1\n    return when (event) {\n        Event.Increment -&gt; state.copy( // 2\n            counter = state.counter + 1 \n        ).advance() // 3\n        Event.Decrement -&gt; state.copy(\n            counter = state.counter - 1\n        ).advance()\n    }\n}\n<\/code><\/pre>\n<p>Let's take a closer look code above:<\/p>\n<ol>\n<li>The first generic argument of the <code>Step<\/code> is <code>State<\/code>.\nThe second generic argument is  of type <code>Nothing<\/code>. It is the output of the state machine. When it's <code>Nothing<\/code> it means that the state machine cannot complete.<\/li>\n<li>We are using the <code>copy<\/code> feature of <code>data classes<\/code> to create a new state with a different <code>counter<\/code> value.<\/li>\n<li><code>state.advance()<\/code> is a syntactic sugar that converts the new state into a <code>Step<\/code> so that it can be returned to the <code>Stepper<\/code>.<\/li>\n<\/ol>\n<h3 id=\"what-is-feedbacktree-\"><a href=\"#what-is-feedbacktree-\" id=\"what-is-feedbacktree-\" class=\"anchor\"><\/a>What is FeedbackTree ?<\/h3>\n<p>FeedbackTree is based on two core concepts a <code>Flow<\/code> and a <code>Declarative UI<\/code>.<br />\nHere's a diagram that shows how FeedbackTree works when applied to the Counter example:<\/p>\n<div style:\"text-align: center;\"> \n  <img style: src=\"/FeedbackTree/assets/media/counter_flow_diagram.svg\" width=\"800\"/> \n<\/div>\n<p><br><\/p>\n<h5 id=\"what-is-a-flow\"><a href=\"#what-is-a-flow\" id=\"what-is-a-flow\" class=\"anchor\"><\/a>What is a Flow?<\/h5>\n<p>A <code>Flow<\/code> kickstarts with some <code>Input<\/code> and produces some <code>Output<\/code>. Although we won't be using the Input/Output concept in this tutorial, it will come handy in future tutorials.<br />\nA <code>Flow<\/code> wraps the state machine: the state, the events, and, the stepper.<br />\nThe <code>Flow<\/code> uses <code>Feedback Loops<\/code> to perform network calls, database operations, bluetooth... More on this will come in next tutorials.<br />\nAt each state we are in, the Flow will tell what &quot;Screen&quot; we should render on the UI. The screen is a simple data class that will revisit in depth in the next sections.<\/p>\n<h5 id=\"the-declarative-ui\"><a href=\"#the-declarative-ui\" id=\"the-declarative-ui\" class=\"anchor\"><\/a>The Declarative UI<\/h5>\n<p>FeedbackTree UI rendering engine takes the &quot;screens&quot; generated by the <code>Flow<\/code> and creates the corresponding <code>Android.View<\/code>. Once the view is created, it will take care of updating it with the new values.<\/p>\n<h3 id=\"the-counter-flow\"><a href=\"#the-counter-flow\" id=\"the-counter-flow\" class=\"anchor\"><\/a>The Counter Flow<\/h3>\n<p>In the package <strong>counter<\/strong>, create a file called <strong>CounterFlow.kt<\/strong> and the code below to it:<\/p>\n<pre><code class=\"language-kotlin\">import com.feedbacktree.flow.core.Flow\nimport com.feedbacktree.flow.core.advance\n\nval CounterFlow = Flow&lt;Unit, State, Event, Nothing, CounterScreen&gt;( // 1\n   id = &quot;CounterFlow&quot;,\n   initialState = { State(counter = 0) }, // 2\n    stepper = { state, event -&gt; // 3\n        when (event) {\n            Event.Increment -&gt; state.copy(\n                counter = state.counter + 1\n            ).advance()\n            Event.Decrement -&gt; state.copy(\n                counter = state.counter - 1\n            ).advance()\n        }\n    },\n    feedbacks = listOf(), // 4\n    render = { state, context -&gt; // 5\n        CounterScreen(state, context.sink)\n    }\n)\n\ndata class State(\n    val counter: Int\n)\n\nsealed class Event {\n    object Increment : Event()\n    object Decrement : Event()\n}\n\ndata class CounterScreen(\n    private val state: State,\n    val sink: (Event) -&gt; Unit // 6\n) {\n    val counterText: String = state.counter.toString() // 7\n}\n<\/code><\/pre>\n<p>Here's the breakdown of each component:<\/p>\n<ol>\n<li><code>CounterFlow<\/code> is an immutable variable of type  <code>Flow<\/code>. The <code>Flow<\/code> wraps the different component needed to kickstart the state machine, update it, and render the current state on the UI.\nIn the next tutorials, will see that the <code>Flows<\/code> have also another purpose; They take an input and produce an output when they complete.<\/li>\n<li>The <code>initialState<\/code> is a function of type <code>(Input) -&gt; State<\/code>. The <code>Input<\/code> in this case is of type <code>Unit<\/code>. Having a dynamic input allows you to start the same flow with different arguments.<\/li>\n<li>For small flows, steppers can be written this way but when the flow gets bigger, it's usually preferable to spit them into a separate function.<\/li>\n<li><code>feedbacks<\/code> are used to perform non-UI side effects, like network calls, database operations, bluetooth... We won't have non-UI effects in this tutorial.<\/li>\n<li><code>render<\/code> is used to describe what should be displayed on the UI. For instance, this flow will render the <code>CounterScreen<\/code> data class. FeedbackTree will take care of converting that data class into a <code>android.View<\/code> and show it on the UI. The returned &quot;Screens&quot; data class usually hold all the properties needed to fill/render the UI.<\/li>\n<li><code>sink<\/code> allows the you to push UI events, like clicks, back to the flow.<\/li>\n<li>The <code>CounterScreen<\/code> contains the properties that we are going to use to render the UI. For instance, <code>counterText<\/code> will be used to set the <code>counterTextView.text<\/code> property.<\/li>\n<\/ol>\n<h3 id=\"the-counter-ui\"><a href=\"#the-counter-ui\" id=\"the-counter-ui\" class=\"anchor\"><\/a>The Counter UI<\/h3>\n<p>The <code>CounterFlow<\/code> produces a <code>CounterScreen<\/code> for each <code>State<\/code>. Obviously, the different <code>CounterScreen<\/code> will have different <code>counterText<\/code> values. What we need to complete the puzzle is some code that will create the corresponding <code>Layout<\/code>, and, update its element when the state updates.\nLet's add to the <strong>counter<\/strong> package, next to the <strong>CounterFlow.kt<\/strong> a new file called <strong>CounterLayoutBinder.kt<\/strong>. Add this code to it:<\/p>\n<pre><code class=\"language-kotlin\">import android.widget.Button\nimport android.widget.TextView\nimport com.feedbacktree.flow.ui.views.LayoutBinder\nimport com.feedbacktree.tutorials.R\nimport com.jakewharton.rxbinding3.view.clicks\nimport io.reactivex.Observable\n\n// 1 \nval CounterLayoutBinder = LayoutBinder.create(\n    layoutId = R.layout.counter,\n    sink = CounterScreen::sink \n) { view -&gt;\n\n    // 2\n    val counterTextView = view.findViewById&lt;TextView&gt;(R.id.counterTextView)\n    val incrementButton = view.findViewById&lt;Button&gt;(R.id.incrementButton)\n    val decrementButton = view.findViewById&lt;Button&gt;(R.id.decrementButton)\n    \n    // 3\n    bind { screen: Observable&lt;CounterScreen&gt; -&gt;\n        // 4\n        subscriptions = listOf(\n            screen.map { it.counterText }.subscribe { counterTextView.text = it }\n        )\n        // 5\n        events = listOf(\n            incrementButton.clicks().map { Event.Increment },\n            decrementButton.clicks().map { Event.Decrement }\n        )\n    }\n}\n<\/code><\/pre>\n<p>The breakdown of the code above:<\/p>\n<ol>\n<li>Create a variable called <code>CounterLayoutBinder<\/code> and use <code>LayoutBinder.create<\/code> to create the UI binding logic that will:\n<ol>\n<li>Inflate <code>R.layout.counter<\/code> when a <code>CounterScreen<\/code> is produced.<\/li>\n<li>Use the <code>CounterScreen::sink<\/code> property to forward UI events back to the flow.<\/li>\n<li>Update the UI elements everytime a new <code>CounterScreen<\/code> is produced by the flow.<\/li>\n<\/ol>\n<\/li>\n<li>Extract the views using <code>findViewById<\/code>. Note that you have to use <code>view.findViewById<\/code><\/li>\n<li>FeedbackTree provides a list of feedback loop builders like the <code>bind<\/code> method. We will see other operators in future tutorials. A UI feedback loop or simply a feedback, allows you to observe each <code>CounterScreen<\/code> being emitted by the <code>Flow<\/code> and produce corresponding <code>Events<\/code> that will be pushed back to the <code>Flow<\/code>.<\/li>\n<li>The bind gives you <code>screen<\/code>  which is an <code>Obsevable&lt;CounterScreen&gt;<\/code>. You can subscribe to the screens being produced by the Flow in order to update the UI elements. Just like here where we update the TextView from the CounterScreen.counterText:<br />\n<code>screen.map { it.counterText }.subscribe { counterTextView.text = it }<\/code><\/li>\n<li>UI clicks are being mapped to <code>Events<\/code>. When the layout is inflated, we will subscribe to the events and will forward them to the <code>Flow<\/code>.<\/li>\n<\/ol>\n<blockquote>\n<p><strong>Note:<\/strong> The xml layout has been added to the starter project<\/p>\n<\/blockquote>\n<h5 id=\"starting-the-flow\"><a href=\"#starting-the-flow\" id=\"starting-the-flow\" class=\"anchor\"><\/a>Starting the Flow<\/h5>\n<p>Let's modify the <strong>MainActivity.kt<\/strong> to kickstart the <code>CounterFlow<\/code>:<\/p>\n<pre><code class=\"language-kotlin\">import androidx.appcompat.app.AppCompatActivity\nimport android.os.Bundle\nimport com.feedbacktree.flow.core.startFlow\nimport com.feedbacktree.flow.ui.views.core.ViewRegistry\nimport com.feedbacktree.tutorials.flows.counter.CounterFlow\nimport com.feedbacktree.tutorials.flows.counter.CounterLayoutBinder\nimport io.reactivex.disposables.Disposable\n\nclass MainActivity : AppCompatActivity() {\n\n    var disposable: Disposable? = null\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        val viewRegistry = ViewRegistry( // 1\n            CounterLayoutBinder // 2\n        )\n        disposable = startFlow(flow = CounterFlow, // 3\n            viewRegistry = viewRegistry)\n    }\n\n    override fun onPause() {\n        super.onPause()\n        // 3 \n        if (isFinishing) {\n            disposable?.dispose()\n            disposable = null\n        }\n    }\n}\n<\/code><\/pre>\n<ol>\n<li>A <code>ViewRegistry<\/code> is a lookup table that FeedbackTree uses to create the corresponding layout when some <code>Screen<\/code> is produced by the <code>Flow<\/code><\/li>\n<li>We are registering the <code>CounterLayoutBinder<\/code> in the <code>viewRegistry<\/code> variable.<\/li>\n<li>Use the <code>Activity.startFlow<\/code> method to start the <code>CounterFlow<\/code>.<\/li>\n<li>Pass the <code>viewRegistry<\/code> so that the FeedbackTree knows how to render the <code>CounterScreens<\/code> that will be produced by the <code>CounterFlow<\/code>.<\/li>\n<li>Terminate the flow when the activity finishes.<\/li>\n<\/ol>\n<p>No need to panic! You don't have to create an Activity for each flow. We will see in the next tutorials that you can use only one Activity for the whole Application and your Activity will still never grow more than a few lines of code.<\/p>\n<h3 id=\"counter-cannot-go-negative\"><a href=\"#counter-cannot-go-negative\" id=\"counter-cannot-go-negative\" class=\"anchor\"><\/a>Counter Cannot Go Negative:<\/h3>\n<p>Let's consider you are counting the number of people in a birthday party. You cannot have negative numbers!\nThis can be easily done by modifying the stepper:<\/p>\n<pre><code class=\"language-kotlin\">when (event) {\n    Event.Increment -&gt; state.copy(\n        counter = state.counter + 1\n    ).advance()\n    Event.Decrement -&gt; state.copy(\n        counter = kotlin.math.max(0, state.counter - 1) // prevents the state going negative\n    ).advance()\n}\n<\/code><\/pre>\n<p><strong>Let's say we want to hide the &quot;-&quot; button when we reach 0.<\/strong><\/p>\n<p>In the <code>CounterScreen<\/code>, we will add a property <code>isDecrementButtonInvisible<\/code><\/p>\n<pre><code class=\"language-kotlin\">data class CounterScreen(\n    private val state: State,\n    val sink: (Event) -&gt; Unit\n) {\n    val counterText: String = state.counter.toString()\n    val isDecrementButtonInvisible: Boolean = state.counter == 0 \n}\n<\/code><\/pre>\n<p>In the <code>CounterLayoutBinder<\/code> subscribe to <code>isDecrementButtonInvisible<\/code><\/p>\n<pre><code class=\"language-kotlin\">subscriptions = listOf(\n  \tscreen.map { it.counterText }.subscribe { counterTextView.text = it },\n\t\tscreen.map { it.isDecrementButtonInvisible }.subscribe { decrementButton.isInvisible = it }\n)\n<\/code><\/pre>\n<blockquote>\n<p><strong>Note:<\/strong> <code>View.isInvisible<\/code> is part of the android kotlin extensions, you might need to add the below to your build.gradle (app) dependencies:<\/p>\n<pre><code class=\"language-kotlin\">implementation 'androidx.core:core-ktx:1.3.2'\n<\/code><\/pre>\n<\/blockquote>\n<h3 id=\"where-to-go-from-here\"><a href=\"#where-to-go-from-here\" id=\"where-to-go-from-here\" class=\"anchor\"><\/a>Where to Go From Here?<\/h3>\n<p>I hope that you were able to successfully digest the core ideas. It's fine if you still have a lot of question marks.\nYou can check the next tutorial where you will learn more about the <code>Feedbacks<\/code>.<\/p>\n<p>The full code can be downloaded from <a href=\"https://drive.google.com/uc?export=download&amp;id=1FWm4VLA_yas0hbg1ilo5zIvovbyJL3GN\">here<\/a><\/p>\n"
+              }]
+            },
+            "ARootFlow": {
+              "ownKey": "ARootFlow",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/tutorials",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "ARootFlow",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/ARootFlow"
+                },
+                "previous": {
+                  "path": "wiki/tutorials",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "Login",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Login"
+                },
+                "description": "",
+                "title": "A Root Flow",
+                "content": "<p>In this tutorial, you will learn how to kickstart the <strong>Counter<\/strong> and <strong>Login<\/strong> flows that you created in the previous tutorials from a screen that shows you the list of tutorials. Basically, you will understand why there is &quot;Tree&quot; in FeedbackTree.<\/p>\n<div style:\"text-align: center;\"> \n  <img style: src=\"/FeedbackTree/assets/media/tutorials_screenshot.png\" width=\"250\"/> \n<\/div>\n<p><br><\/p>\n<h3 id=\"getting-started\"><a href=\"#getting-started\" id=\"getting-started\" class=\"anchor\"><\/a>Getting Started<\/h3>\n<p>You can download the <strong>starter<\/strong> project from here. It includes:<\/p>\n<ul>\n<li>The flows that were built in the previous tutorials with some adjustements that we will discuss below.<\/li>\n<li>The XML layout to display the screen above.<\/li>\n<\/ul>\n<h3 id=\"the-tutorials-flow\"><a href=\"#the-tutorials-flow\" id=\"the-tutorials-flow\" class=\"anchor\"><\/a>The Tutorials Flow<\/h3>\n<p>In the <strong>tutorialsroot<\/strong> package under the <strong>flows<\/strong> package, create a new Kotlin file called <strong>TutorialsFlow.kt<\/strong>, then. add the code below to it:<\/p>\n<pre><code class=\"language-kotlin\">import com.feedbacktree.flow.core.Flow\nimport com.feedbacktree.flow.core.advance\nimport com.feedbacktree.tutorials.flows.counter.CounterFlow\nimport com.feedbacktree.tutorials.flows.login.LoginFlow\n\ndata class State(\n    val tutorials: List&lt;Tutorial&gt; = listOf(\n        Tutorial.Counter, Tutorial.Login\n    ), // 1\n    val selectedTutorial: Tutorial? = null // 2\n)\n\nsealed class Event {\n    data class SelectedTutorial(val tutorial: Tutorial) : Event()\n    object CompletedTutorial : Event()\n}\n\nval TutorialsFlow = Flow&lt;Unit, State, Event, Nothing, Any&gt;(\n    id = &quot;TutorialsFlow&quot;,\n    initialState = { State() },\n    stepper = { state, event -&gt;\n        when (event) {\n            is Event.SelectedTutorial -&gt; state.copy(selectedTutorial = event.tutorial).advance()\n            Event.CompletedTutorial -&gt; state.copy(selectedTutorial = null).advance()\n        }\n    },\n    feedbacks = listOf(),\n    render = { state, context -&gt;\n        when (state.selectedTutorial) {\n            null -&gt; TutorialsScreen(state, context.sink) // 3\n\t          // 4\n            Tutorial.Counter -&gt; context.renderChild(CounterFlow, onResult = { \n                context.sendEvent(Event.CompletedTutorial)\n            })\n            Tutorial.Login -&gt; context.renderChild(input = &quot;&quot;, flow = LoginFlow, onResult = {\n                context.sendEvent(Event.CompletedTutorial)\n            })\n        }\n    }\n)\n\ndata class TutorialsScreen(\n    val state: State,\n    val sink: (Event) -&gt; Unit\n) {\n\n    data class Row(\n        val title: String,\n        val onClickEvent: Event\n    )\n\n    val rows: List&lt;Row&gt; = state.tutorials.mapIndexed { index, demo -&gt;\n            Row(\n                title = &quot;${index + 1}. ${demo.title}&quot;,\n                onClickEvent = Event.SelectedTutorial(demo)\n            )\n        }\n}\n<\/code><\/pre>\n<p>Here's the breakdown of the code:<\/p>\n<ol>\n<li>\n<p>The state holds the list of tutorials that the user can select.<\/p>\n<\/li>\n<li>\n<p>The <code>selectedTutorial<\/code> becomes not null when the user selects a tutorial. You can take a closer look at the stepper for more details.<\/p>\n<\/li>\n<li>\n<p>When the no tutorial is selected render the <code>TutorialsScreen<\/code>. FeedbackTree will take care of inflating the Tutorials layout.<\/p>\n<\/li>\n<li>\n<p>When a tutorial is selected, you call <code>context.renderChild<\/code> to kickstart a child flow:<\/p>\n<ul>\n<li><code>context.renderChild<\/code> returns what the <code>render<\/code> function of the child flow returns. For instance,\n<ul>\n<li>The <code>render<\/code> method of <code>CounterFlow<\/code>, produces <code>CounterScreens<\/code>. Thus, the <code>context.renderChild(CounterFlow...)<\/code>will return <code>CounterScreens<\/code><\/li>\n<li>The render method of the <code>LoginFlow<\/code> produces <code>LoginScreens<\/code>.Thus, the <code>context.renderChild(..., LoginFlow, ...)<\/code> will return <code>LoginScreens<\/code><\/li>\n<li>The returned screen by the subflows is returned back by the <code>render<\/code> method of the <code>TutorialsFlow<\/code>. FeedbackTree will display in these case either the <code>Counter<\/code> layout or the the <code>Login<\/code> layout.<\/li>\n<\/ul>\n<\/li>\n<li><code>context.renderChild<\/code> takes the input of the Flow:\n<ul>\n<li>The input of the <code>CounterFlow<\/code> is Unit, you don't have to specify anything when calling <code>context.renderChild<\/code> or even starting the flow from an Activity just like in the Counter tutorial.<\/li>\n<li>The input of the LoginFlow is a String, the email to start the flow with. Calling <code>context.renderChild<\/code> requires you to specify the <code>input<\/code>.<\/li>\n<\/ul>\n<\/li>\n<li>We have seen in previous tutorials, that a flow can complete using the <code>endFlow/endFlowWith()<\/code> methods. the <code>onResult<\/code> block is used to collect the output <code>flow<\/code>.\n<ul>\n<li>When a flow completes, you send an <code>Event.CompletedTutorial<\/code> to update the state through <code>context.sendEvent<\/code>.<\/li>\n<li>Once the <code>CompletedTutorial<\/code> event is sent, the state gets updated and the <code>render<\/code> is called again. This time, the <code>selectedTutorial<\/code> is null, and, the <code>TutorialsScreen<\/code> is displayed.<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<\/li>\n<\/ol>\n<h3 id=\"the-tutorials-ui\"><a href=\"#the-tutorials-ui\" id=\"the-tutorials-ui\" class=\"anchor\"><\/a>The Tutorials UI<\/h3>\n<p>Create a new file called <strong>TutorialsLayoutBinder.kt<\/strong> and add the code below it:<\/p>\n<pre><code class=\"language-kotlin\">import android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.TextView\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport androidx.recyclerview.widget.RecyclerView\nimport com.feedbacktree.flow.ui.views.LayoutBinder\nimport com.feedbacktree.tutorials.R\nimport com.feedbacktree.utils.actionBarTitle\nimport io.reactivex.Observable\nimport io.reactivex.subjects.PublishSubject\n\nval TutorialsLayoutBinder = LayoutBinder.create(\n    layoutId = R.layout.root_menu,\n    sink = TutorialsScreen::sink\n) { view -&gt;\n\n    view.actionBarTitle = &quot;Feedback Tree Tutorials&quot; // 1\n\n   // 2\n    val adapter = TutorialsAdapter()\n    val recyclerView: RecyclerView = view.findViewById(R.id.tutorialsRecyclerView)\n    recyclerView.layoutManager = LinearLayoutManager(view.context)\n    recyclerView.adapter = adapter\n\n    bind { screen -&gt;\n        subscriptions = listOf(\n            screen.map { it.rows }.subscribe { adapter.updateDataSet(it) } // 3\n        )\n        events = listOf(\n            adapter.events // 4\n        )\n    }\n}\n\nprivate class TutorialsAdapter(private var rows: List&lt;TutorialsScreen.Row&gt; = listOf()) :\n    RecyclerView.Adapter&lt;TutorialsAdapter.ViewHolder&gt;() {\n\n    private val _events = PublishSubject.create&lt;Event&gt;()\n    val events: Observable&lt;Event&gt; = _events\n\n    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {\n        val textView: TextView = view.findViewById(android.R.id.text1)\n    }\n\n    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {\n        val view = LayoutInflater.from(viewGroup.context)\n            .inflate(android.R.layout.simple_list_item_1, viewGroup, false)\n        return ViewHolder(view)\n    }\n\n    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {\n        val row = rows[position]\n        viewHolder.textView.text = row.title\n        viewHolder.itemView.setOnClickListener {\n            _events.onNext(row.onClickEvent) // 5\n        }\n    }\n\n    override fun getItemCount(): Int {\n        return rows.size\n    }\n\n    fun updateDataSet(rows: List&lt;TutorialsScreen.Row&gt;) {\n        this.rows = rows\n        notifyDataSetChanged()\n    }\n}\n<\/code><\/pre>\n<p>Let's take a closer look at the code above:<\/p>\n<ol>\n<li>You can set the <code>ActionBar<\/code> title property through this extension. Basically this <code>View<\/code> extension method does nothing but access the Activity from the <code>view.context<\/code> like this <code>this.context as AppCompatActivity).supportActionBar<\/code><\/li>\n<li>This code sets the <code>Adapter<\/code> to the recycler view.<\/li>\n<li>Every time a new <code>TutorialsScreen<\/code> is produced by the flow, the <code>rows<\/code> data classes will be sent to the adapter and the <code>recyclerView<\/code> will refresh its content.<\/li>\n<li>Forward adapter events like user clicks to the flow.<\/li>\n<li>You can notice that the <code>TutorialsScreen.Row<\/code> data class has the <code>onClickEvent<\/code> already there, so when the user clicks on a row that event is just ready to be sent to the flow.<\/li>\n<\/ol>\n<h5 id=\"app-view-registry\"><a href=\"#app-view-registry\" id=\"app-view-registry\" class=\"anchor\"><\/a>App View Registry<\/h5>\n<p>In the <strong>tutorials<\/strong> package create a Kotlin file called <strong>AppViewRegistry.kt<\/strong> and add the code below to it:<\/p>\n<pre><code class=\"language-kotlin\">import com.feedbacktree.flow.ui.views.core.ViewRegistry\nimport com.feedbacktree.tutorials.flows.counter.CounterLayoutBinder\nimport com.feedbacktree.tutorials.flows.login.LoginLayoutBinder\nimport com.feedbacktree.tutorials.flows.tutorialsroot.TutorialsLayoutBinder\n\nval appViewRegistry = ViewRegistry(\n    TutorialsLayoutBinder,\n    CounterLayoutBinder,\n    LoginLayoutBinder\n)\n<\/code><\/pre>\n<p>You can notice that we created a variable called <code>appViewRegistry<\/code> that contains the different <code>Binders<\/code> that we created so far.\nYou need to add all the <code>LayoutBinders<\/code> into one registry that we are going to use when we start the &quot;root&quot; flow from the activity.<\/p>\n<h5 id=\"starting-the-root-flow\"><a href=\"#starting-the-root-flow\" id=\"starting-the-root-flow\" class=\"anchor\"><\/a>Starting The Root Flow<\/h5>\n<p>In the <strong>MainActivity.kt<\/strong>, let's paste this code and run the app:<\/p>\n<pre><code class=\"language-kotlin\">import android.os.Bundle\nimport androidx.appcompat.app.AppCompatActivity\nimport com.feedbacktree.flow.core.startFlow\nimport com.feedbacktree.tutorials.flows.tutorialsroot.TutorialsFlow\nimport io.reactivex.disposables.Disposable\n\nclass MainActivity : AppCompatActivity() {\n\n    var disposable: Disposable? = null\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        disposable = startFlow(flow = TutorialsFlow, viewRegistry = appViewRegistry)\n    }\n\n    override fun onPause() {\n        super.onPause()\n        if (isFinishing) {\n            disposable?.dispose()\n            disposable = null\n        }\n    }\n}\n<\/code><\/pre>\n<h3 id=\"handling-the-back\"><a href=\"#handling-the-back\" id=\"handling-the-back\" class=\"anchor\"><\/a>Handling the Back<\/h3>\n<p>When you were trying the app, you tapped on the <strong>Counter<\/strong> tutorial, you were able to go inside and try the counter but when you tapped on the back button, the app exited instead of going back to the list of Tutorials. Handling backward navigation is going to be the focus of this section:<\/p>\n<p>Let's start by adding overriding <code>onBackPressed()<\/code> of the <code>MainActivity<\/code> .<\/p>\n<pre><code class=\"language-kotlin\">\nclass MainActivity : AppCompatActivity() {\n\t\t...\n  \n    override fun onBackPressed() {\n        if (!HandlesBack.Helper.onBackPressed(findViewById(R.id.workflow_layout))) {\n            super.onBackPressed()\n        }\n    }\n}\n<\/code><\/pre>\n<p>This code will be responsible of forwarding the back-presses into FeedbackTree's rendering layer. If FeedbackTree, doesn't capture the back-presses, the <code>super.onBackPressed()<\/code> is called, and, the activity terminates.<\/p>\n<h5 id=\"capturing-back-presses-in-the-counter-flow\"><a href=\"#capturing-back-presses-in-the-counter-flow\" id=\"capturing-back-presses-in-the-counter-flow\" class=\"anchor\"><\/a>Capturing back-presses in the Counter flow<\/h5>\n<p>FeedbackTree provides a way to capture back-presses through a <code>View<\/code> extension. In the <strong>CounterLayoutBinder.kt<\/strong> modify the binding <code>events<\/code> add the necssary code to listen the to back-presses:<\/p>\n<pre><code class=\"language-kotlin\">events = listOf(\n    incrementButton.clicks().map { Event.Increment },\n    decrementButton.clicks().map { Event.Decrement },\n    view.backPresses().map { Event.BackPressed }, // &lt;- Add this code\n)\n<\/code><\/pre>\n<p>The code obviously won't compile because we need to add a <code>BackPressed<\/code> Event and update the <strong>CounterFlow<\/strong> accordingly:<\/p>\n<pre><code class=\"language-kotlin\">sealed class Event {\n    object Increment : Event()\n    object Decrement : Event()\n    object BackPressed : Event() // &lt;- Add this code\n}\n<\/code><\/pre>\n<p>And,<\/p>\n<pre><code class=\"language-kotlin\">val CounterFlow = Flow&lt;Unit, State, Event, Unit, CounterScreen&gt;(\n    initialState = { State(counter = 0) },\n    stepper = { state, event -&gt;\n        when (event) {\n            Event.Increment -&gt; state.copy(\n                counter = state.counter + 1\n            ).advance()\n            Event.Decrement -&gt; state.copy(\n                counter = max(0, state.counter - 1)\n            ).advance()\n            Event.BackPressed -&gt; endFlow() // &lt;- Add this code to end the flow\n        }\n    },\n    feedbacks = listOf(),\n    render = { state, context -&gt;\n        CounterScreen(state, context.sink)\n    }\n)\n<\/code><\/pre>\n<p>Now, if you run the app and tap on back when you are in the <strong>Counter<\/strong> tutorial, the app will go back to the list of tutorials.\nIf you tap back again one more time, the app will exit because no view is subscrived to the back-presses and <code>HandlesBack.Helper.onBackPressed<\/code> that we added to the <code>MainActivity<\/code> will return false.<\/p>\n<h3 id=\"where-to-go-from-here\"><a href=\"#where-to-go-from-here\" id=\"where-to-go-from-here\" class=\"anchor\"><\/a>Where to Go From Here?<\/h3>\n<p>In this tutorial you learned how to start sub-flows, to handle back presses, and, to use the view registry with multiple screens.\nWe recommend to visit the <a href=\"../howtoguides/summary.md\">How-to Guides<\/a> to learn the different FeedbackTree use cases and if you want to understand more about FeedbackTree internels the <a href=\"../reference/summary.md\">Reference<\/a> guide is a good start.<\/p>\n"
+              }]
+            },
+            "Login": {
+              "ownKey": "Login",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/tutorials",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "Login",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Login"
+                },
+                "next": {
+                  "path": "wiki/tutorials",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "ARootFlow",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/ARootFlow"
+                },
+                "previous": {
+                  "path": "wiki/tutorials",
+                  "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                  "fileName": "Counter",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Counter"
+                },
+                "description": "",
+                "title": "Login Flow",
+                "content": "<p>In this tutorial, we will be implementing a simple login flow with the following requirements<\/p>\n<ul>\n<li>User should be able to enter his email and password.<\/li>\n<li>Sign In button\n<ul>\n<li>Disabled (grayish) when the email/password fields are empty. Colored using the main theme otherwise.<\/li>\n<li>Button text is &quot;Sign In&quot; but changes to &quot;Signing In&quot; once the user clicks on it.<\/li>\n<\/ul>\n<\/li>\n<li>It could be that the user has already entered his email somewhere in the app before kickstarting the login process. The input of the login flow will be the email that we would like to start with.<\/li>\n<\/ul>\n<div style:\"text-align: center;\"> \n  <img style: src=\"/FeedbackTree/assets/media/login_app_screenshot.png\" width=\"250\"/> \n<\/div>\n<p><br><\/p>\n<h3 id=\"getting-started\"><a href=\"#getting-started\" id=\"getting-started\" class=\"anchor\"><\/a>Getting Started<\/h3>\n<p>You can download the starter project <a href=\"https://drive.google.com/uc?export=download&amp;id=1AfNTKG-DSOS1At-iV0-HBVrDx5bZ5g_D\">here<\/a>. The starter project includes:<\/p>\n<ul>\n<li>The dependencies needed, FeedbackTree, RxJava, and, RxBinding.<\/li>\n<li>The login XML layout.<\/li>\n<li>The <code>AuthenticationManager<\/code> that contains the authentication logic.<\/li>\n<\/ul>\n<h3 id=\"the-login-flow\"><a href=\"#the-login-flow\" id=\"the-login-flow\" class=\"anchor\"><\/a>The Login Flow<\/h3>\n<p>Create a new package called <strong>login<\/strong> under <strong>flows<\/strong> package and add to it a new Kotlin file called <strong>LoginFlow.kt<\/strong>, then. add the code below to it:<\/p>\n<pre><code class=\"language-kotlin\">import com.feedbacktree.flow.core.*\nimport io.reactivex.Observable\n\nval LoginFlow = Flow&lt;String, State, Event, Unit, LoginScreen&gt;( // 1\n    id = &quot;LoginFlow&quot;,\n    initialState = { lastEmailUsed -&gt; State(email = lastEmailUsed) }, // 2\n    stepper = { state, event -&gt;\n        when (event) {\n            is Event.EnteredEmail -&gt; state.copy(email = event.email).advance()\n            is Event.EnteredPassword -&gt; state.copy(password = event.password).advance()\n            Event.ClickedLogin -&gt; state.copy(isLoggingIn = true).advance()\n            is Event.ReceivedLogInResponse -&gt; {\n                if (event.success) {\n                    endFlow() // 3\n                } else {\n                    state.copy(isLoggingIn = false).advance() // 4\n                }\n            }\n        }\n    },\n    feedbacks = listOf(),\n    render = { state, context -&gt; \n        LoginScreen(state, context.sink) \n    }\n)\n\ndata class State(\n    val email: String = &quot;&quot;,\n    val password: String = &quot;&quot;,\n    val isLoggingIn: Boolean = false\n)\n\nsealed class Event {\n    data class EnteredEmail(val email: String) : Event()\n    data class EnteredPassword(val password: String) : Event()\n    object ClickedLogin : Event()\n    data class ReceivedLogInResponse(val success: Boolean) : Event()\n}\n\ndata class LoginScreen(\n    private val state: State,\n    val sink: (Event) -&gt; Unit\n) {\n    val emailText: String\n        get() = state.email\n\n    val passwordText: String\n        get() = state.password\n\n    val loginButtonTitle: String // 5\n        get() = if (state.isLoggingIn) &quot;Signing In&quot; else &quot;Sign In&quot;\n\n    val isLoginButtonEnabled: Boolean\n        get() = state.email.isNotEmpty() &amp;&amp; state.password.isNotEmpty()\n}\n<\/code><\/pre>\n<p>Here's the breakdown of the code above:<\/p>\n<ol>\n<li>Here is the signature of the FeedbackTree Flow <code>Flow&lt;Input, State, Event, Output, Screen&gt;<\/code>:\n<ul>\n<li>The <code>Input<\/code> of the  <code>LoginFlow<\/code> is a String that represents the last email used.<\/li>\n<li>The <code>State<\/code> of the Flow<\/li>\n<li>The <code>Event<\/code> that is used to update the state of the <code>Flow<\/code><\/li>\n<li>The <code>Output<\/code> is of type <code>Unit<\/code> which means the <code>Flow<\/code> can complete.<\/li>\n<li>The <code>Screen<\/code> produced is a <code>LoginScreen<\/code>.<\/li>\n<\/ul>\n<\/li>\n<li>We build the initial state using the String input.<\/li>\n<li>When the login succeeds, we will terminate the flow.<\/li>\n<li>When the login fails, we set back <code>isLoggingIn<\/code> in to false. Ideally, we  should tell the user that something went wrong. We will do this in the next sections<\/li>\n<li>When we are logging in we will change the sign in button title to &quot;Signing In&quot; to tell the user that the operation is running.<\/li>\n<\/ol>\n<h5 id=\"where-is-the-sign-in-logic\"><a href=\"#where-is-the-sign-in-logic\" id=\"where-is-the-sign-in-logic\" class=\"anchor\"><\/a>Where is the Sign in logic?<\/h5>\n<p>You use <code>Feedbacks<\/code> to perform side effects, like calling an API, reading from a bluetooth device, running database operations or even updating the UI...<br />\nWe have seen in the Counter tutorial a way to build a UI binding <code>Feedback<\/code> using the <code>bind<\/code> operator. Here we will use the <code>react<\/code> operator to perform the authentication logic.<\/p>\n<pre><code class=\"language-kotlin\">private data class LoginQuery(\n    val email: String,\n    val password: String\n)\nprivate fun loginFeedback(): Feedback&lt;State, Event&gt; = react&lt;State, LoginQuery, Event&gt;(\n    query = { state -&gt; // 1\n        if (state.isLoggingIn) {\n            LoginQuery(email = state.email, password = state.password)\n        } else {\n            null\n        }\n    },\n    effects = { queryResult -&gt; // 2\n        val authenticationSuccess: Observable&lt;Boolean&gt; = AuthenticationManager.login(\n            email = queryResult.email,\n            password = queryResult.password\n        ) // 3\n        authenticationSuccess.map { loginSucceeded -&gt;\n            Event.ReceivedLogInResponse(loginSucceeded) // 4\n        }\n    }\n)\n<\/code><\/pre>\n<p>A <code>react<\/code> feedback loop is a declarative way to perform side effects. Here's a detailed breakdown of what how the Feedback above will run:<\/p>\n<ol>\n<li>For every state the flow gets into, the <code>query<\/code> will be evaluated. As soon the evaluated value is different than <code>null<\/code>, the <code>effects<\/code> will kickstart.<\/li>\n<li>The <code>effects<\/code> is a block of code that takes the <code>queryResult<\/code>, evaluated in the <code>query<\/code> block, perform the side effect like executing the authentication logic, and emit back an <code>Event<\/code> when done. The signature of the effets is <code>(Query) -&gt; Observable&lt;Event&gt;<\/code><\/li>\n<li><code>authenticationSuccess<\/code> is an <code>Observable&lt;Boolean&gt;<\/code> that will perform the authentication logic and return true when done.<\/li>\n<li>map the <code>Observable&lt;Boolean&gt;<\/code> into an <code>Observable&lt;Event&gt;<\/code> that is returned to the <code>effects<\/code> block. The events being produced will be sent back to the <code>Flow<\/code> to update the state.<\/li>\n<\/ol>\n<p>Now it's time to add the <code>loginFeedback()<\/code> to the list of <code>feedbacks<\/code> in the <code>Flow<\/code><\/p>\n<pre><code class=\"language-kotlin\">val LoginFlow = Flow&lt;String, State, Event, Unit, LoginScreen&gt;(\n    ...\n    feedbacks = listOf(loginFeedback()),\n    ...\n)\n<\/code><\/pre>\n<h3 id=\"the-login-ui\"><a href=\"#the-login-ui\" id=\"the-login-ui\" class=\"anchor\"><\/a>The Login UI<\/h3>\n<p>The <code>LoginFlow<\/code> renders a <code>LoginScreen<\/code>. The <code>LoginScreen<\/code> is a UI representation of the state. What we need to complete the puzzle is some code that will create the corresponding Login View, update its ui elements when the state updates and consume clicks and events generated by the user and pass them back to the Flow.<\/p>\n<p>In the <strong>login<\/strong> package, add a new file called <strong>LoginLayoutBinder.kt<\/strong> and the code below to it:<\/p>\n<pre><code class=\"language-kotlin\">import android.widget.Button\nimport com.feedbacktree.flow.ui.views.LayoutBinder\nimport com.feedbacktree.tutorials.R\nimport com.feedbacktree.utils.FTEditText\nimport com.jakewharton.rxbinding3.view.clicks\nimport com.jakewharton.rxbinding3.widget.textChanges\n\nval LoginLayoutBinder = LayoutBinder.create(\n    layoutId = R.layout.login,\n    sink = LoginScreen::sink,\n) { view -&gt;\n    val emailEditText: FTEditText = view.findViewById(R.id.inputEmail) // 3\n    val passwordEditText: FTEditText = view.findViewById(R.id.inputPassword)\n    val btnLogin: Button = view.findViewById(R.id.btnLogin)\n\n    bind { screen -&gt;\n        subscriptions = listOf(\n            screen.map { it.emailText }.subscribe { emailEditText.text = it }, // 2\n            screen.map { it.passwordText }.subscribe { passwordEditText.text = it },\n            screen.map { it.loginButtonTitle }.subscribe { btnLogin.text = it },\n            screen.map { it.isLoginButtonEnabled }.subscribe { btnLogin.isEnabled = it }\n        )\n        events = listOf(\n            emailEditText.textChanges().map { Event.EnteredEmail(it.toString()) }, // 1\n            passwordEditText.textChanges().map { Event.EnteredPassword(it.toString()) },\n            btnLogin.clicks().map { Event.ClickedLogin } // 4\n        )\n    }\n}\n<\/code><\/pre>\n<ol>\n<li><code>emailEditText.textChanges().map { Event.EnteredEmail(it.toString()) }<\/code> uses the <code>textChanges()<\/code> from <a href=\"https://github.com/JakeWharton/RxBinding\">RxBinding<\/a> to capture the <code>emailEditText<\/code> updates and map it to an <code>Event<\/code>.<\/li>\n<li>We subscribe the <code>emailText<\/code>  in <code>screen.map { it.emailText }.subscribe { emailEditText.text = it }<\/code> for two puposes:\n<ol>\n<li>The <code>Flow<\/code> can start with the last email that was used to login. So the <code>emailEditText<\/code> can initially be non-empty.<\/li>\n<li>It is recommended to always rely on the state as the single source of truth.  In other terms, store the values of the textfields in the state and use what's in the state to drive the UI. This technique comes handy when the device configuration changes and a new layout is be inflated which would allow FeedbackTree to automatically refill the new layout from what is stored in the state.<\/li>\n<\/ol>\n<\/li>\n<li>If you haven't noticed yet, we are doing a two-way binding for the <code>emailEditText.text<\/code> property, which means that we set the <code>emailEditText.text<\/code> in subscriptions and listen to the text changes in the events.<br />\nThe problem of the <code>EditText<\/code> is that watchers are notified when the <code>text<\/code> is updated <strong>programmatically<\/strong> which will cause <strong>infinte<\/strong> update cycles/loops when two-way binding is applied. The <code>FTEditText<\/code> breaks the infinite update cycles. The <code>FTEditText<\/code> mainly removes the <code>TextWatchers<\/code>  and updates the <code>text<\/code> property before adding back the watchers that were removed. You can check <a href=\"https://github.com/eliekarouz/FeedbackTree/blob/master/app/src/main/java/com/feedbacktree/example/util/FTEditText.kt\">here<\/a> the full implementation in case you want to apply the same logic for other controls like switches.<\/li>\n<li>We are using  <code>clicks()<\/code> from <a href=\"https://github.com/JakeWharton/RxBinding\">RxBinding<\/a> to capture the the View clicks.<\/li>\n<\/ol>\n<h3 id=\"starting-the-flow\"><a href=\"#starting-the-flow\" id=\"starting-the-flow\" class=\"anchor\"><\/a>Starting the Flow<\/h3>\n<p>Combining all the pieces together:<\/p>\n<pre><code class=\"language-kotlin\">import android.os.Bundle\nimport androidx.appcompat.app.AppCompatActivity\nimport com.feedbacktree.flow.core.startFlow\nimport com.feedbacktree.flow.ui.views.core.ViewRegistry\nimport com.feedbacktree.tutorials.flows.login.LoginFlow\nimport com.feedbacktree.tutorials.flows.login.LoginLayoutBinder\nimport io.reactivex.disposables.Disposable\n\nclass MainActivity : AppCompatActivity() {\n\n    var disposable: Disposable? = null\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n\n        val viewRegistry = ViewRegistry(LoginLayoutBinder) // 1\n\n        disposable = startFlow(\n            input = &quot;developer@feedbacktree.com&quot;, // 2\n            flow = LoginFlow,\n            viewRegistry = viewRegistry,\n            onOutput = {\n                // Do something with the output if you want\n            })\n    }\n\n    override fun onPause() {\n        super.onPause()\n        // 3 \n        if (isFinishing) {\n            disposable?.dispose()\n            disposable = null\n        }\n    }\n}\n<\/code><\/pre>\n<ol>\n<li>A <code>ViewRegistry<\/code> is a lookup table that FeedbackTree uses to create the corresponding layout when some <code>Screen<\/code> is produced by the <code>Flow<\/code>. We are registering the <code>LoginLayoutBinder<\/code> <code>companion object<\/code> from the previous section to the <code>viewRegistry<\/code> variable.<\/li>\n<li>Start the <code>LoginFlow<\/code> with the last email used.<\/li>\n<li>Terminate the flow when the activity finishes.<\/li>\n<\/ol>\n<h3 id=\"where-to-go-from-here\"><a href=\"#where-to-go-from-here\" id=\"where-to-go-from-here\" class=\"anchor\"><\/a>Where to Go From Here?<\/h3>\n<p>In this tutorial you learned how to create a non-UI feedback loop that will perform the authentication. In the next tutorial, we will see how to start children flows.<\/p>\n<p>The full code can be downloaded from <a href=\"https://drive.google.com/uc?export=download&amp;id=1ZQ1ETlCp_aKbPlK0vDDEZu3QMJuUlK76\">here<\/a><\/p>\n"
+              }]
+            }
+          },
+          "ownPages": [{
+            "reference": {
+              "path": "wiki",
+              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+              "fileName": "tutorials",
+              "extension": "html",
+              "usePrettyUrl": true,
+              "link": "https://eliekarouz.github.io/FeedbackTree/wiki/tutorials"
+            },
+            "description": "",
+            "title": "Tutorials",
+            "content": "<html>\n <head><\/head>\n <body>\n  <p>You will find here a list of tutorials that will introduce you to the concepts:<\/p> \n  <ol> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Counter\">Counter Flow<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Login\">Login Flow<\/a><\/li> \n   <li><a href=\"https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/ARootFlow\">A Root Flow<\/a><\/li> \n  <\/ol> \n <\/body>\n<\/html>\n"
+          }]
+        }
+      },
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+          "fileName": "wiki",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://eliekarouz.github.io/FeedbackTree/wiki"
+        },
+        "description": "",
+        "title": "Wiki",
+        "content": ""
+      }]
+    }
+  },
+  "ownPages": [
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+        "fileName": "",
+        "extension": "html",
+        "usePrettyUrl": true,
+        "link": "https://eliekarouz.github.io/FeedbackTree"
+      },
+      "description": "",
+      "title": "Home",
+      "content": "<h1 id=\"feedbacktree\"><a href=\"#feedbacktree\" id=\"feedbacktree\" class=\"anchor\"><\/a>FeedbackTree<\/h1>\n<p><strong>The API is not stable yet as we are still experimenting with the concept.<\/strong><\/p>\n<p>FeedbackTree is a unidirectional data flow architecture for Android which relies heavily on state mahines to perform all types of side effects, like network calls, bluetooth, UI updates as well as navigation.<\/p>\n<h4 id=\"why-feedbacktree\"><a href=\"#why-feedbacktree\" id=\"why-feedbacktree\" class=\"anchor\"><\/a>Why FeedbackTree?<\/h4>\n<ul>\n<li>Organizes the code around the business rules.<\/li>\n<li>Reactive Declarative UI<\/li>\n<li>Built-in navigation<\/li>\n<li>Logic can be easily unit tested\n<ul>\n<li>Most logic is placed in the <code>Stepper<\/code> which is pure function.<\/li>\n<li>Side effect are isolated and testing can be done with a TestScheduler.<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<h4 id=\"core-concepts\"><a href=\"#core-concepts\" id=\"core-concepts\" class=\"anchor\"><\/a>Core concepts<\/h4>\n<ul>\n<li>Business rules are wrapped in a Flow. You kickstart the Flow with some input and wait for the output to be produced.<\/li>\n<li>The Flow is driven by a state machine.<\/li>\n<li>You emit Events to advance the Flow.<\/li>\n<li>Stepper is used to progress or complete a Flow based on the Events received. It is a pure function which\nmakes unit testing very straightforward.<\/li>\n<li>Feedback loops are used separate business logic from side effects like network calls, database operations, timers, bluetooth...<\/li>\n<\/ul>\n<h4 id=\"installation\"><a href=\"#installation\" id=\"installation\" class=\"anchor\"><\/a>Installation<\/h4>\n<p>The project recently migrated from <code>jitpack<\/code> to <code>Maven Central<\/code><\/p>\n<p>Add it in your root build.gradle:<\/p>\n<pre><code class=\"language-groovy\">allprojects {\n  repositories {\n    mavenCentral()\n  }\n}\n<\/code><\/pre>\n<h5 id=\"android-projects\"><a href=\"#android-projects\" id=\"android-projects\" class=\"anchor\"><\/a>Android Projects<\/h5>\n<p>Add this to your build.gradle (app)<\/p>\n<pre><code class=\"language-groovy\">dependencies {\n  implementation &quot;com.github.eliekarouz.feedbacktree:feedbacktree:0.13.1&quot;\n  implementation &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;\n}\n<\/code><\/pre>\n<h5 id=\"kotlin-multiplatform\"><a href=\"#kotlin-multiplatform\" id=\"kotlin-multiplatform\" class=\"anchor\"><\/a>Kotlin Multiplatform<\/h5>\n<p>We are only supporting the concept of <code>Step<\/code> and <code>Stepper<\/code> in Kotlin multiplatform (iOS/Android only).<br />\nWe might provide additional multiplatform support in the future.\nTo include these concepts to a multipatform module, add this dependency to commonMain.<\/p>\n<pre><code class=\"language-groovy\">dependencies {\n    api &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;\n}\n<\/code><\/pre>\n<p>If you are targeting iOS you will also need to export the dependencies:<\/p>\n<pre><code>framework(&quot;Example&quot;) {\n    export &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;\n    transitiveExport = true\n}\n<\/code><\/pre>\n<h5 id=\"versions\"><a href=\"#versions\" id=\"versions\" class=\"anchor\"><\/a>Versions<\/h5>\n<table>\n<thead>\n<tr><th>Kotlin<\/th><th>FeedbackTree<\/th><\/tr>\n<\/thead>\n<tbody>\n<tr><td>1.3.72<\/td><td>0.10.2<\/td><\/tr>\n<tr><td>1.4.0<\/td><td>0.11<\/td><\/tr>\n<tr><td>1.4.10<\/td><td>0.11.1<\/td><\/tr>\n<tr><td>1.4.30<\/td><td>0.13.1<\/td><\/tr>\n<\/tbody>\n<\/table>\n<h4 id=\"acknowledgements\"><a href=\"#acknowledgements\" id=\"acknowledgements\" class=\"anchor\"><\/a>Acknowledgements<\/h4>\n<p>The following repos were a great source of inspiration:<\/p>\n<ul>\n<li><a href=\"https://www.github.com/notests/rxfeedback.swift\" target=\"_blank\">RxFeedback<\/a><\/li>\n<li><a href=\"https://www.github.com/square/workflow\" target=\"_blank\">Workflow<\/a><\/li>\n<\/ul>\n"
+    },
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+        "fileName": "404",
+        "extension": "html",
+        "usePrettyUrl": false,
+        "link": "https://eliekarouz.github.io/FeedbackTree/404.html"
+      },
+      "description": "",
+      "title": "Not Found",
+      "content": ""
+    }
+  ]
+}

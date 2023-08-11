@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>React-Set</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+<link rel="prev" href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/React">
+
+
+<link rel="next" href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/YourCustomFeedbackLoop">
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.20.0"};
+</script>
+
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<!-- end:inject styles -->
+
+</head>
+<body class="is-loading">
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>React-Set</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <p>When the number of effects you want to kickstart is dynamic, you can use the <code>reactSet</code> operator which does pretty much the same thing as <code>react</code> but allows you to run simultaneously multiple effects.</p>
+<pre><code class="language-kotlin">fun reactFeedback(): Feedback&lt;State, Event&gt; = reactSet&lt;State, Query, Event&gt;(
+    query = { state -&gt;
+				// return either a Set&lt;Query&gt;
+    },
+    effects = { query: Query -&gt;
+				// Use the query to perform side effect, network calls, bluetooth, database...
+				// return an Observable&lt;Event&gt;
+    }
+)
+</code></pre>
+<h3 id="the-rules"><a href="#the-rules" id="the-rules" class="anchor"></a>The Rules</h3>
+<ul>
+<li>Each time the flow enters a new state, the query is evaluated and a <code>Set&lt;Query&gt;</code> is returned.</li>
+<li>The operator compares the <strong>old</strong> query with the <strong>new</strong> query:
+<ul>
+<li>Effects are not interrupted for elements in the new query that were present in the old query.</li>
+<li>Effects are canceled for elements present in old query but not in new query.</li>
+<li>In case new elements are present in new query (and not in old query) they are being passed to the effects lambda and resulting effects are being performed</li>
+</ul>
+</li>
+<li>The effects will run in parallel.</li>
+</ul>
+<h3 id="example"><a href="#example" id="example" class="anchor"></a>Example</h3>
+<p>Let's take an example where the user is presented with a list of files that they can download:</p>
+<pre><code class="language-kotlin">data class FileResource(
+    val url: String,
+    val name: String,
+    val localUrl: String?
+)
+
+data class State(
+    val fileResources: List&lt;FileResource&gt;, // The list of all files
+    val resourceUrlsToDownload: Set&lt;String&gt; // The resouce files being downloaded
+)
+
+sealed class Event {
+    data class UserRequestedResource(val fileResource: FileResource) : Event()
+    data class LoadedResource(val url: String, val localUrl: String) : Event()
+}
+
+private fun downloadResourcesFeedback(): Feedback&lt;State, Event&gt; = reactSet&lt;State, String, Event&gt;(
+    query = { state -&gt;
+        state.resourceUrlsToDownload
+    },
+    effects = { url -&gt; 
+        downloadResource(url).map { localUrl -&gt;
+            Event.LoadedResource(url, localUrl)
+        }
+    }
+)
+
+</code></pre>
+<p>You can check the complete Flow <a href="https://github.com/eliekarouz/FeedbackTree/tree/master/app/src/main/java/com/feedbacktree/tutorials/flows/resources/ResoucesFlow.kt" target="_blank">here</a>.</p>
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+                <div class="float-left">
+                    <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/React" class="button special small pill">
+                        <span>&larr;</span> React
+                    </a>
+                </div>
+            
+            
+                <div class="float-right">
+                    <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides/feedbackloops/YourCustomFeedbackLoop" class="button special small pill">
+                        Your Custom Feedback Loop<span>&rarr;</span>
+                    </a>
+                </div>
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.20.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+</body>
+</html>

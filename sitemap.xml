@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd"
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-assets.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-external.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-changelog.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-forms.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-home.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-kotlindoc.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-pages.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-wiki.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-sitemap.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://eliekarouz.github.io/FeedbackTree/sitemap-indices.xml</loc>
+        <lastmod>2023-08-11</lastmod>
+    </sitemap>
+    
+</sitemapindex>

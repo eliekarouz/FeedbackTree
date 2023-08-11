@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Flow Id</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+<link rel="prev" href="https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/StartingFlows">
+
+
+<link rel="next" href="https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/HierachicalRendering">
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.20.0"};
+</script>
+
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<!-- end:inject styles -->
+
+</head>
+<body class="is-loading">
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>Flow Id</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <h3 id="setting-flow-identifiers"><a href="#setting-flow-identifiers" id="setting-flow-identifiers" class="anchor"></a>Setting Flow Identifiers</h3>
+<p>When initiating a Flow, it's essential to designate an identifier id for the Flow. This identifier
+can be a constant value or dynamically generated based on input.</p>
+<pre><code class="language-kotlin">Flow(
+    id = &quot;MyFlowFixedId&quot;,
+    // ...
+)
+
+Flow(
+    id = { input -&gt; &quot;MyFlowFor-${input.itemKey}&quot; },
+    // ...
+)
+</code></pre>
+<h3 id="ensuring-uniqueness"><a href="#ensuring-uniqueness" id="ensuring-uniqueness" class="anchor"></a>Ensuring Uniqueness</h3>
+<p>When applying identifiers to your flows, it's not only important to aim for a reasonable level of
+uniqueness, but it's also critical to ensure <strong>complete uniqueness</strong> within the specific context of
+the <code>render</code> block. This consideration becomes particularly significant when dealing with the
+initiation of multiple child flows.</p>
+<p>In scenarios where you find yourself simultaneously initiating multiple child flows using
+the <code>context.renderChild(input, ChildFlow, ...)</code> function, it becomes paramount that each flow
+instance possesses an identifier that is distinct from all others. This distinction is necessary to
+prevent collisions and unexpected interactions between running flows.</p>
+<p>The <code>renderChild</code> process begins by computing the identifier of the child flow based on the provided
+input. Subsequently, this identifier plays a crucial role in determining whether a specific child
+flow needs to be newly initiated or resumed from a prior state within the same render block. The
+decision is made based on whether the computed identifier matches any previously initiated flows
+within the current rendering context. A new flow instance is only created if the computed identifier
+differs from those encountered so far.</p>
+<h3 id="practical-use-of-unique-ids-for-each-input"><a href="#practical-use-of-unique-ids-for-each-input" id="practical-use-of-unique-ids-for-each-input" class="anchor"></a>Practical Use of Unique IDs for Each Input</h3>
+<p>Consider an example involving an <code>ItemsListFlow</code> and <code>ItemDetailFlow</code>. The <code>ItemsListFlow</code> maintains
+a state variable called <code>showingDetailsItemKey: String?</code>. When this variable isn't null, the render
+block triggers the <code>ItemDetailFlow</code>.</p>
+<p>While a fixed ID works well on mobiles, envision a tablet's split-screen layout. Here's where the
+challenge arises. The <code>ItemDetailFlow</code> remains active, but as you select new items, it needs to
+restart. Using a fixed ID for <code>ItemDetailFlow</code> causes the initial flow to resume, preventing new
+starts.</p>
+<p>The remedy? Incorporate the <code>itemKey</code> into the Flow's ID. This guarantees a fresh flow for each
+item, ensuring that selecting a different item leads to a new flow initiation.</p>
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+                <div class="float-left">
+                    <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference/flow/StartingFlows" class="button special small pill">
+                        <span>&larr;</span> Starting Flows
+                    </a>
+                </div>
+            
+            
+                <div class="float-right">
+                    <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference/rendering/HierachicalRendering" class="button special small pill">
+                        Hierarchical Rendering<span>&rarr;</span>
+                    </a>
+                </div>
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.20.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+</body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Login Flow</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+<link rel="prev" href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Counter">
+
+
+<link rel="next" href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/ARootFlow">
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.20.0"};
+</script>
+
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<!-- end:inject styles -->
+
+</head>
+<body class="is-loading">
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>Login Flow</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <p>In this tutorial, we will be implementing a simple login flow with the following requirements</p>
+<ul>
+<li>User should be able to enter his email and password.</li>
+<li>Sign In button
+<ul>
+<li>Disabled (grayish) when the email/password fields are empty. Colored using the main theme otherwise.</li>
+<li>Button text is &quot;Sign In&quot; but changes to &quot;Signing In&quot; once the user clicks on it.</li>
+</ul>
+</li>
+<li>It could be that the user has already entered his email somewhere in the app before kickstarting the login process. The input of the login flow will be the email that we would like to start with.</li>
+</ul>
+<div style:"text-align: center;"> 
+  <img style: src="/FeedbackTree/assets/media/login_app_screenshot.png" width="250"/> 
+</div>
+<p><br></p>
+<h3 id="getting-started"><a href="#getting-started" id="getting-started" class="anchor"></a>Getting Started</h3>
+<p>You can download the starter project <a href="https://drive.google.com/uc?export=download&amp;id=1AfNTKG-DSOS1At-iV0-HBVrDx5bZ5g_D">here</a>. The starter project includes:</p>
+<ul>
+<li>The dependencies needed, FeedbackTree, RxJava, and, RxBinding.</li>
+<li>The login XML layout.</li>
+<li>The <code>AuthenticationManager</code> that contains the authentication logic.</li>
+</ul>
+<h3 id="the-login-flow"><a href="#the-login-flow" id="the-login-flow" class="anchor"></a>The Login Flow</h3>
+<p>Create a new package called <strong>login</strong> under <strong>flows</strong> package and add to it a new Kotlin file called <strong>LoginFlow.kt</strong>, then. add the code below to it:</p>
+<pre><code class="language-kotlin">import com.feedbacktree.flow.core.*
+import io.reactivex.Observable
+
+val LoginFlow = Flow&lt;String, State, Event, Unit, LoginScreen&gt;( // 1
+    id = &quot;LoginFlow&quot;,
+    initialState = { lastEmailUsed -&gt; State(email = lastEmailUsed) }, // 2
+    stepper = { state, event -&gt;
+        when (event) {
+            is Event.EnteredEmail -&gt; state.copy(email = event.email).advance()
+            is Event.EnteredPassword -&gt; state.copy(password = event.password).advance()
+            Event.ClickedLogin -&gt; state.copy(isLoggingIn = true).advance()
+            is Event.ReceivedLogInResponse -&gt; {
+                if (event.success) {
+                    endFlow() // 3
+                } else {
+                    state.copy(isLoggingIn = false).advance() // 4
+                }
+            }
+        }
+    },
+    feedbacks = listOf(),
+    render = { state, context -&gt; 
+        LoginScreen(state, context.sink) 
+    }
+)
+
+data class State(
+    val email: String = &quot;&quot;,
+    val password: String = &quot;&quot;,
+    val isLoggingIn: Boolean = false
+)
+
+sealed class Event {
+    data class EnteredEmail(val email: String) : Event()
+    data class EnteredPassword(val password: String) : Event()
+    object ClickedLogin : Event()
+    data class ReceivedLogInResponse(val success: Boolean) : Event()
+}
+
+data class LoginScreen(
+    private val state: State,
+    val sink: (Event) -&gt; Unit
+) {
+    val emailText: String
+        get() = state.email
+
+    val passwordText: String
+        get() = state.password
+
+    val loginButtonTitle: String // 5
+        get() = if (state.isLoggingIn) &quot;Signing In&quot; else &quot;Sign In&quot;
+
+    val isLoginButtonEnabled: Boolean
+        get() = state.email.isNotEmpty() &amp;&amp; state.password.isNotEmpty()
+}
+</code></pre>
+<p>Here's the breakdown of the code above:</p>
+<ol>
+<li>Here is the signature of the FeedbackTree Flow <code>Flow&lt;Input, State, Event, Output, Screen&gt;</code>:
+<ul>
+<li>The <code>Input</code> of the  <code>LoginFlow</code> is a String that represents the last email used.</li>
+<li>The <code>State</code> of the Flow</li>
+<li>The <code>Event</code> that is used to update the state of the <code>Flow</code></li>
+<li>The <code>Output</code> is of type <code>Unit</code> which means the <code>Flow</code> can complete.</li>
+<li>The <code>Screen</code> produced is a <code>LoginScreen</code>.</li>
+</ul>
+</li>
+<li>We build the initial state using the String input.</li>
+<li>When the login succeeds, we will terminate the flow.</li>
+<li>When the login fails, we set back <code>isLoggingIn</code> in to false. Ideally, we  should tell the user that something went wrong. We will do this in the next sections</li>
+<li>When we are logging in we will change the sign in button title to &quot;Signing In&quot; to tell the user that the operation is running.</li>
+</ol>
+<h5 id="where-is-the-sign-in-logic"><a href="#where-is-the-sign-in-logic" id="where-is-the-sign-in-logic" class="anchor"></a>Where is the Sign in logic?</h5>
+<p>You use <code>Feedbacks</code> to perform side effects, like calling an API, reading from a bluetooth device, running database operations or even updating the UI...<br />
+We have seen in the Counter tutorial a way to build a UI binding <code>Feedback</code> using the <code>bind</code> operator. Here we will use the <code>react</code> operator to perform the authentication logic.</p>
+<pre><code class="language-kotlin">private data class LoginQuery(
+    val email: String,
+    val password: String
+)
+private fun loginFeedback(): Feedback&lt;State, Event&gt; = react&lt;State, LoginQuery, Event&gt;(
+    query = { state -&gt; // 1
+        if (state.isLoggingIn) {
+            LoginQuery(email = state.email, password = state.password)
+        } else {
+            null
+        }
+    },
+    effects = { queryResult -&gt; // 2
+        val authenticationSuccess: Observable&lt;Boolean&gt; = AuthenticationManager.login(
+            email = queryResult.email,
+            password = queryResult.password
+        ) // 3
+        authenticationSuccess.map { loginSucceeded -&gt;
+            Event.ReceivedLogInResponse(loginSucceeded) // 4
+        }
+    }
+)
+</code></pre>
+<p>A <code>react</code> feedback loop is a declarative way to perform side effects. Here's a detailed breakdown of what how the Feedback above will run:</p>
+<ol>
+<li>For every state the flow gets into, the <code>query</code> will be evaluated. As soon the evaluated value is different than <code>null</code>, the <code>effects</code> will kickstart.</li>
+<li>The <code>effects</code> is a block of code that takes the <code>queryResult</code>, evaluated in the <code>query</code> block, perform the side effect like executing the authentication logic, and emit back an <code>Event</code> when done. The signature of the effets is <code>(Query) -&gt; Observable&lt;Event&gt;</code></li>
+<li><code>authenticationSuccess</code> is an <code>Observable&lt;Boolean&gt;</code> that will perform the authentication logic and return true when done.</li>
+<li>map the <code>Observable&lt;Boolean&gt;</code> into an <code>Observable&lt;Event&gt;</code> that is returned to the <code>effects</code> block. The events being produced will be sent back to the <code>Flow</code> to update the state.</li>
+</ol>
+<p>Now it's time to add the <code>loginFeedback()</code> to the list of <code>feedbacks</code> in the <code>Flow</code></p>
+<pre><code class="language-kotlin">val LoginFlow = Flow&lt;String, State, Event, Unit, LoginScreen&gt;(
+    ...
+    feedbacks = listOf(loginFeedback()),
+    ...
+)
+</code></pre>
+<h3 id="the-login-ui"><a href="#the-login-ui" id="the-login-ui" class="anchor"></a>The Login UI</h3>
+<p>The <code>LoginFlow</code> renders a <code>LoginScreen</code>. The <code>LoginScreen</code> is a UI representation of the state. What we need to complete the puzzle is some code that will create the corresponding Login View, update its ui elements when the state updates and consume clicks and events generated by the user and pass them back to the Flow.</p>
+<p>In the <strong>login</strong> package, add a new file called <strong>LoginLayoutBinder.kt</strong> and the code below to it:</p>
+<pre><code class="language-kotlin">import android.widget.Button
+import com.feedbacktree.flow.ui.views.LayoutBinder
+import com.feedbacktree.tutorials.R
+import com.feedbacktree.utils.FTEditText
+import com.jakewharton.rxbinding3.view.clicks
+import com.jakewharton.rxbinding3.widget.textChanges
+
+val LoginLayoutBinder = LayoutBinder.create(
+    layoutId = R.layout.login,
+    sink = LoginScreen::sink,
+) { view -&gt;
+    val emailEditText: FTEditText = view.findViewById(R.id.inputEmail) // 3
+    val passwordEditText: FTEditText = view.findViewById(R.id.inputPassword)
+    val btnLogin: Button = view.findViewById(R.id.btnLogin)
+
+    bind { screen -&gt;
+        subscriptions = listOf(
+            screen.map { it.emailText }.subscribe { emailEditText.text = it }, // 2
+            screen.map { it.passwordText }.subscribe { passwordEditText.text = it },
+            screen.map { it.loginButtonTitle }.subscribe { btnLogin.text = it },
+            screen.map { it.isLoginButtonEnabled }.subscribe { btnLogin.isEnabled = it }
+        )
+        events = listOf(
+            emailEditText.textChanges().map { Event.EnteredEmail(it.toString()) }, // 1
+            passwordEditText.textChanges().map { Event.EnteredPassword(it.toString()) },
+            btnLogin.clicks().map { Event.ClickedLogin } // 4
+        )
+    }
+}
+</code></pre>
+<ol>
+<li><code>emailEditText.textChanges().map { Event.EnteredEmail(it.toString()) }</code> uses the <code>textChanges()</code> from <a href="https://github.com/JakeWharton/RxBinding">RxBinding</a> to capture the <code>emailEditText</code> updates and map it to an <code>Event</code>.</li>
+<li>We subscribe the <code>emailText</code>  in <code>screen.map { it.emailText }.subscribe { emailEditText.text = it }</code> for two puposes:
+<ol>
+<li>The <code>Flow</code> can start with the last email that was used to login. So the <code>emailEditText</code> can initially be non-empty.</li>
+<li>It is recommended to always rely on the state as the single source of truth.  In other terms, store the values of the textfields in the state and use what's in the state to drive the UI. This technique comes handy when the device configuration changes and a new layout is be inflated which would allow FeedbackTree to automatically refill the new layout from what is stored in the state.</li>
+</ol>
+</li>
+<li>If you haven't noticed yet, we are doing a two-way binding for the <code>emailEditText.text</code> property, which means that we set the <code>emailEditText.text</code> in subscriptions and listen to the text changes in the events.<br />
+The problem of the <code>EditText</code> is that watchers are notified when the <code>text</code> is updated <strong>programmatically</strong> which will cause <strong>infinte</strong> update cycles/loops when two-way binding is applied. The <code>FTEditText</code> breaks the infinite update cycles. The <code>FTEditText</code> mainly removes the <code>TextWatchers</code>  and updates the <code>text</code> property before adding back the watchers that were removed. You can check <a href="https://github.com/eliekarouz/FeedbackTree/blob/master/app/src/main/java/com/feedbacktree/example/util/FTEditText.kt">here</a> the full implementation in case you want to apply the same logic for other controls like switches.</li>
+<li>We are using  <code>clicks()</code> from <a href="https://github.com/JakeWharton/RxBinding">RxBinding</a> to capture the the View clicks.</li>
+</ol>
+<h3 id="starting-the-flow"><a href="#starting-the-flow" id="starting-the-flow" class="anchor"></a>Starting the Flow</h3>
+<p>Combining all the pieces together:</p>
+<pre><code class="language-kotlin">import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.feedbacktree.flow.core.startFlow
+import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.tutorials.flows.login.LoginFlow
+import com.feedbacktree.tutorials.flows.login.LoginLayoutBinder
+import io.reactivex.disposables.Disposable
+
+class MainActivity : AppCompatActivity() {
+
+    var disposable: Disposable? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val viewRegistry = ViewRegistry(LoginLayoutBinder) // 1
+
+        disposable = startFlow(
+            input = &quot;developer@feedbacktree.com&quot;, // 2
+            flow = LoginFlow,
+            viewRegistry = viewRegistry,
+            onOutput = {
+                // Do something with the output if you want
+            })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // 3 
+        if (isFinishing) {
+            disposable?.dispose()
+            disposable = null
+        }
+    }
+}
+</code></pre>
+<ol>
+<li>A <code>ViewRegistry</code> is a lookup table that FeedbackTree uses to create the corresponding layout when some <code>Screen</code> is produced by the <code>Flow</code>. We are registering the <code>LoginLayoutBinder</code> <code>companion object</code> from the previous section to the <code>viewRegistry</code> variable.</li>
+<li>Start the <code>LoginFlow</code> with the last email used.</li>
+<li>Terminate the flow when the activity finishes.</li>
+</ol>
+<h3 id="where-to-go-from-here"><a href="#where-to-go-from-here" id="where-to-go-from-here" class="anchor"></a>Where to Go From Here?</h3>
+<p>In this tutorial you learned how to create a non-UI feedback loop that will perform the authentication. In the next tutorial, we will see how to start children flows.</p>
+<p>The full code can be downloaded from <a href="https://drive.google.com/uc?export=download&amp;id=1ZQ1ETlCp_aKbPlK0vDDEZu3QMJuUlK76">here</a></p>
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+                <div class="float-left">
+                    <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Counter" class="button special small pill">
+                        <span>&larr;</span> Counter Flow
+                    </a>
+                </div>
+            
+            
+                <div class="float-right">
+                    <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/ARootFlow" class="button special small pill">
+                        A Root Flow<span>&rarr;</span>
+                    </a>
+                </div>
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.20.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+</body>
+</html>

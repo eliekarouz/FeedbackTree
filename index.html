@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Home</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.20.0"};
+</script>
+
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<!-- end:inject styles -->
+
+</head>
+<body class="is-loading">
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>Home</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <h1 id="feedbacktree"><a href="#feedbacktree" id="feedbacktree" class="anchor"></a>FeedbackTree</h1>
+<p><strong>The API is not stable yet as we are still experimenting with the concept.</strong></p>
+<p>FeedbackTree is a unidirectional data flow architecture for Android which relies heavily on state mahines to perform all types of side effects, like network calls, bluetooth, UI updates as well as navigation.</p>
+<h4 id="why-feedbacktree"><a href="#why-feedbacktree" id="why-feedbacktree" class="anchor"></a>Why FeedbackTree?</h4>
+<ul>
+<li>Organizes the code around the business rules.</li>
+<li>Reactive Declarative UI</li>
+<li>Built-in navigation</li>
+<li>Logic can be easily unit tested
+<ul>
+<li>Most logic is placed in the <code>Stepper</code> which is pure function.</li>
+<li>Side effect are isolated and testing can be done with a TestScheduler.</li>
+</ul>
+</li>
+</ul>
+<h4 id="core-concepts"><a href="#core-concepts" id="core-concepts" class="anchor"></a>Core concepts</h4>
+<ul>
+<li>Business rules are wrapped in a Flow. You kickstart the Flow with some input and wait for the output to be produced.</li>
+<li>The Flow is driven by a state machine.</li>
+<li>You emit Events to advance the Flow.</li>
+<li>Stepper is used to progress or complete a Flow based on the Events received. It is a pure function which
+makes unit testing very straightforward.</li>
+<li>Feedback loops are used separate business logic from side effects like network calls, database operations, timers, bluetooth...</li>
+</ul>
+<h4 id="installation"><a href="#installation" id="installation" class="anchor"></a>Installation</h4>
+<p>The project recently migrated from <code>jitpack</code> to <code>Maven Central</code></p>
+<p>Add it in your root build.gradle:</p>
+<pre><code class="language-groovy">allprojects {
+  repositories {
+    mavenCentral()
+  }
+}
+</code></pre>
+<h5 id="android-projects"><a href="#android-projects" id="android-projects" class="anchor"></a>Android Projects</h5>
+<p>Add this to your build.gradle (app)</p>
+<pre><code class="language-groovy">dependencies {
+  implementation &quot;com.github.eliekarouz.feedbacktree:feedbacktree:0.13.1&quot;
+  implementation &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;
+}
+</code></pre>
+<h5 id="kotlin-multiplatform"><a href="#kotlin-multiplatform" id="kotlin-multiplatform" class="anchor"></a>Kotlin Multiplatform</h5>
+<p>We are only supporting the concept of <code>Step</code> and <code>Stepper</code> in Kotlin multiplatform (iOS/Android only).<br />
+We might provide additional multiplatform support in the future.
+To include these concepts to a multipatform module, add this dependency to commonMain.</p>
+<pre><code class="language-groovy">dependencies {
+    api &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;
+}
+</code></pre>
+<p>If you are targeting iOS you will also need to export the dependencies:</p>
+<pre><code>framework(&quot;Example&quot;) {
+    export &quot;com.github.eliekarouz.feedbacktree:core:0.13.1&quot;
+    transitiveExport = true
+}
+</code></pre>
+<h5 id="versions"><a href="#versions" id="versions" class="anchor"></a>Versions</h5>
+<table>
+<thead>
+<tr><th>Kotlin</th><th>FeedbackTree</th></tr>
+</thead>
+<tbody>
+<tr><td>1.3.72</td><td>0.10.2</td></tr>
+<tr><td>1.4.0</td><td>0.11</td></tr>
+<tr><td>1.4.10</td><td>0.11.1</td></tr>
+<tr><td>1.4.30</td><td>0.13.1</td></tr>
+</tbody>
+</table>
+<h4 id="acknowledgements"><a href="#acknowledgements" id="acknowledgements" class="anchor"></a>Acknowledgements</h4>
+<p>The following repos were a great source of inspiration:</p>
+<ul>
+<li><a href="https://www.github.com/notests/rxfeedback.swift" target="_blank">RxFeedback</a></li>
+<li><a href="https://www.github.com/square/workflow" target="_blank">Workflow</a></li>
+</ul>
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.20.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+</body>
+</html>

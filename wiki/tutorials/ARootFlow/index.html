@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.21.0"/>
+<link rel="icon" href="https://eliekarouz.github.io/FeedbackTree/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>A Root Flow</title>
+
+
+<meta name="description" content="A unidirectional architecture for Android">
+
+
+
+<link rel="prev" href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Login">
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.21.0","baseUrl":"https://eliekarouz.github.io/FeedbackTree","environment":"prod","version":"0.20.0"};
+</script>
+
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+    <!-- start:inject meta-components -->
+    
+        
+            
+        
+    
+    <!-- end:inject meta-components -->
+
+
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_main.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/editorial_orchidCustomizations.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/assets/css/orchidSearch.css"  />
+<link rel="stylesheet" type="text/css" href="https://eliekarouz.github.io/FeedbackTree/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<!-- end:inject styles -->
+
+</head>
+<body class="is-loading">
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            
+                <header id="header">
+    <a href="https://eliekarouz.github.io/FeedbackTree" class="logo">Feedback Tree</a>
+    <ul class="icons">
+    
+    
+        <li>
+            <a href="https://github.com/eliekarouz/FeedbackTree" class="icon fa-github">
+                <span class="label">github</span>
+            </a>
+        </li>
+    
+    
+    </ul>
+</header>
+            
+            
+            
+            
+                <section id="pageContent">
+                    <header class="major"><h2>A Root Flow</h2></header>
+                    <article>
+                        
+    <!-- start:inject components -->
+    
+        
+            
+                
+                    
+                        <p>In this tutorial, you will learn how to kickstart the <strong>Counter</strong> and <strong>Login</strong> flows that you created in the previous tutorials from a screen that shows you the list of tutorials. Basically, you will understand why there is &quot;Tree&quot; in FeedbackTree.</p>
+<div style:"text-align: center;"> 
+  <img style: src="/FeedbackTree/assets/media/tutorials_screenshot.png" width="250"/> 
+</div>
+<p><br></p>
+<h3 id="getting-started"><a href="#getting-started" id="getting-started" class="anchor"></a>Getting Started</h3>
+<p>You can download the <strong>starter</strong> project from here. It includes:</p>
+<ul>
+<li>The flows that were built in the previous tutorials with some adjustements that we will discuss below.</li>
+<li>The XML layout to display the screen above.</li>
+</ul>
+<h3 id="the-tutorials-flow"><a href="#the-tutorials-flow" id="the-tutorials-flow" class="anchor"></a>The Tutorials Flow</h3>
+<p>In the <strong>tutorialsroot</strong> package under the <strong>flows</strong> package, create a new Kotlin file called <strong>TutorialsFlow.kt</strong>, then. add the code below to it:</p>
+<pre><code class="language-kotlin">import com.feedbacktree.flow.core.Flow
+import com.feedbacktree.flow.core.advance
+import com.feedbacktree.tutorials.flows.counter.CounterFlow
+import com.feedbacktree.tutorials.flows.login.LoginFlow
+
+data class State(
+    val tutorials: List&lt;Tutorial&gt; = listOf(
+        Tutorial.Counter, Tutorial.Login
+    ), // 1
+    val selectedTutorial: Tutorial? = null // 2
+)
+
+sealed class Event {
+    data class SelectedTutorial(val tutorial: Tutorial) : Event()
+    object CompletedTutorial : Event()
+}
+
+val TutorialsFlow = Flow&lt;Unit, State, Event, Nothing, Any&gt;(
+    id = &quot;TutorialsFlow&quot;,
+    initialState = { State() },
+    stepper = { state, event -&gt;
+        when (event) {
+            is Event.SelectedTutorial -&gt; state.copy(selectedTutorial = event.tutorial).advance()
+            Event.CompletedTutorial -&gt; state.copy(selectedTutorial = null).advance()
+        }
+    },
+    feedbacks = listOf(),
+    render = { state, context -&gt;
+        when (state.selectedTutorial) {
+            null -&gt; TutorialsScreen(state, context.sink) // 3
+	          // 4
+            Tutorial.Counter -&gt; context.renderChild(CounterFlow, onResult = { 
+                context.sendEvent(Event.CompletedTutorial)
+            })
+            Tutorial.Login -&gt; context.renderChild(input = &quot;&quot;, flow = LoginFlow, onResult = {
+                context.sendEvent(Event.CompletedTutorial)
+            })
+        }
+    }
+)
+
+data class TutorialsScreen(
+    val state: State,
+    val sink: (Event) -&gt; Unit
+) {
+
+    data class Row(
+        val title: String,
+        val onClickEvent: Event
+    )
+
+    val rows: List&lt;Row&gt; = state.tutorials.mapIndexed { index, demo -&gt;
+            Row(
+                title = &quot;${index + 1}. ${demo.title}&quot;,
+                onClickEvent = Event.SelectedTutorial(demo)
+            )
+        }
+}
+</code></pre>
+<p>Here's the breakdown of the code:</p>
+<ol>
+<li>
+<p>The state holds the list of tutorials that the user can select.</p>
+</li>
+<li>
+<p>The <code>selectedTutorial</code> becomes not null when the user selects a tutorial. You can take a closer look at the stepper for more details.</p>
+</li>
+<li>
+<p>When the no tutorial is selected render the <code>TutorialsScreen</code>. FeedbackTree will take care of inflating the Tutorials layout.</p>
+</li>
+<li>
+<p>When a tutorial is selected, you call <code>context.renderChild</code> to kickstart a child flow:</p>
+<ul>
+<li><code>context.renderChild</code> returns what the <code>render</code> function of the child flow returns. For instance,
+<ul>
+<li>The <code>render</code> method of <code>CounterFlow</code>, produces <code>CounterScreens</code>. Thus, the <code>context.renderChild(CounterFlow...)</code>will return <code>CounterScreens</code></li>
+<li>The render method of the <code>LoginFlow</code> produces <code>LoginScreens</code>.Thus, the <code>context.renderChild(..., LoginFlow, ...)</code> will return <code>LoginScreens</code></li>
+<li>The returned screen by the subflows is returned back by the <code>render</code> method of the <code>TutorialsFlow</code>. FeedbackTree will display in these case either the <code>Counter</code> layout or the the <code>Login</code> layout.</li>
+</ul>
+</li>
+<li><code>context.renderChild</code> takes the input of the Flow:
+<ul>
+<li>The input of the <code>CounterFlow</code> is Unit, you don't have to specify anything when calling <code>context.renderChild</code> or even starting the flow from an Activity just like in the Counter tutorial.</li>
+<li>The input of the LoginFlow is a String, the email to start the flow with. Calling <code>context.renderChild</code> requires you to specify the <code>input</code>.</li>
+</ul>
+</li>
+<li>We have seen in previous tutorials, that a flow can complete using the <code>endFlow/endFlowWith()</code> methods. the <code>onResult</code> block is used to collect the output <code>flow</code>.
+<ul>
+<li>When a flow completes, you send an <code>Event.CompletedTutorial</code> to update the state through <code>context.sendEvent</code>.</li>
+<li>Once the <code>CompletedTutorial</code> event is sent, the state gets updated and the <code>render</code> is called again. This time, the <code>selectedTutorial</code> is null, and, the <code>TutorialsScreen</code> is displayed.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="the-tutorials-ui"><a href="#the-tutorials-ui" id="the-tutorials-ui" class="anchor"></a>The Tutorials UI</h3>
+<p>Create a new file called <strong>TutorialsLayoutBinder.kt</strong> and add the code below it:</p>
+<pre><code class="language-kotlin">import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.feedbacktree.flow.ui.views.LayoutBinder
+import com.feedbacktree.tutorials.R
+import com.feedbacktree.utils.actionBarTitle
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
+
+val TutorialsLayoutBinder = LayoutBinder.create(
+    layoutId = R.layout.root_menu,
+    sink = TutorialsScreen::sink
+) { view -&gt;
+
+    view.actionBarTitle = &quot;Feedback Tree Tutorials&quot; // 1
+
+   // 2
+    val adapter = TutorialsAdapter()
+    val recyclerView: RecyclerView = view.findViewById(R.id.tutorialsRecyclerView)
+    recyclerView.layoutManager = LinearLayoutManager(view.context)
+    recyclerView.adapter = adapter
+
+    bind { screen -&gt;
+        subscriptions = listOf(
+            screen.map { it.rows }.subscribe { adapter.updateDataSet(it) } // 3
+        )
+        events = listOf(
+            adapter.events // 4
+        )
+    }
+}
+
+private class TutorialsAdapter(private var rows: List&lt;TutorialsScreen.Row&gt; = listOf()) :
+    RecyclerView.Adapter&lt;TutorialsAdapter.ViewHolder&gt;() {
+
+    private val _events = PublishSubject.create&lt;Event&gt;()
+    val events: Observable&lt;Event&gt; = _events
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textView: TextView = view.findViewById(android.R.id.text1)
+    }
+
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(viewGroup.context)
+            .inflate(android.R.layout.simple_list_item_1, viewGroup, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val row = rows[position]
+        viewHolder.textView.text = row.title
+        viewHolder.itemView.setOnClickListener {
+            _events.onNext(row.onClickEvent) // 5
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return rows.size
+    }
+
+    fun updateDataSet(rows: List&lt;TutorialsScreen.Row&gt;) {
+        this.rows = rows
+        notifyDataSetChanged()
+    }
+}
+</code></pre>
+<p>Let's take a closer look at the code above:</p>
+<ol>
+<li>You can set the <code>ActionBar</code> title property through this extension. Basically this <code>View</code> extension method does nothing but access the Activity from the <code>view.context</code> like this <code>this.context as AppCompatActivity).supportActionBar</code></li>
+<li>This code sets the <code>Adapter</code> to the recycler view.</li>
+<li>Every time a new <code>TutorialsScreen</code> is produced by the flow, the <code>rows</code> data classes will be sent to the adapter and the <code>recyclerView</code> will refresh its content.</li>
+<li>Forward adapter events like user clicks to the flow.</li>
+<li>You can notice that the <code>TutorialsScreen.Row</code> data class has the <code>onClickEvent</code> already there, so when the user clicks on a row that event is just ready to be sent to the flow.</li>
+</ol>
+<h5 id="app-view-registry"><a href="#app-view-registry" id="app-view-registry" class="anchor"></a>App View Registry</h5>
+<p>In the <strong>tutorials</strong> package create a Kotlin file called <strong>AppViewRegistry.kt</strong> and add the code below to it:</p>
+<pre><code class="language-kotlin">import com.feedbacktree.flow.ui.views.core.ViewRegistry
+import com.feedbacktree.tutorials.flows.counter.CounterLayoutBinder
+import com.feedbacktree.tutorials.flows.login.LoginLayoutBinder
+import com.feedbacktree.tutorials.flows.tutorialsroot.TutorialsLayoutBinder
+
+val appViewRegistry = ViewRegistry(
+    TutorialsLayoutBinder,
+    CounterLayoutBinder,
+    LoginLayoutBinder
+)
+</code></pre>
+<p>You can notice that we created a variable called <code>appViewRegistry</code> that contains the different <code>Binders</code> that we created so far.
+You need to add all the <code>LayoutBinders</code> into one registry that we are going to use when we start the &quot;root&quot; flow from the activity.</p>
+<h5 id="starting-the-root-flow"><a href="#starting-the-root-flow" id="starting-the-root-flow" class="anchor"></a>Starting The Root Flow</h5>
+<p>In the <strong>MainActivity.kt</strong>, let's paste this code and run the app:</p>
+<pre><code class="language-kotlin">import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.feedbacktree.flow.core.startFlow
+import com.feedbacktree.tutorials.flows.tutorialsroot.TutorialsFlow
+import io.reactivex.disposables.Disposable
+
+class MainActivity : AppCompatActivity() {
+
+    var disposable: Disposable? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        disposable = startFlow(flow = TutorialsFlow, viewRegistry = appViewRegistry)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (isFinishing) {
+            disposable?.dispose()
+            disposable = null
+        }
+    }
+}
+</code></pre>
+<h3 id="handling-the-back"><a href="#handling-the-back" id="handling-the-back" class="anchor"></a>Handling the Back</h3>
+<p>When you were trying the app, you tapped on the <strong>Counter</strong> tutorial, you were able to go inside and try the counter but when you tapped on the back button, the app exited instead of going back to the list of Tutorials. Handling backward navigation is going to be the focus of this section:</p>
+<p>Let's start by adding overriding <code>onBackPressed()</code> of the <code>MainActivity</code> .</p>
+<pre><code class="language-kotlin">
+class MainActivity : AppCompatActivity() {
+		...
+  
+    override fun onBackPressed() {
+        if (!HandlesBack.Helper.onBackPressed(findViewById(R.id.workflow_layout))) {
+            super.onBackPressed()
+        }
+    }
+}
+</code></pre>
+<p>This code will be responsible of forwarding the back-presses into FeedbackTree's rendering layer. If FeedbackTree, doesn't capture the back-presses, the <code>super.onBackPressed()</code> is called, and, the activity terminates.</p>
+<h5 id="capturing-back-presses-in-the-counter-flow"><a href="#capturing-back-presses-in-the-counter-flow" id="capturing-back-presses-in-the-counter-flow" class="anchor"></a>Capturing back-presses in the Counter flow</h5>
+<p>FeedbackTree provides a way to capture back-presses through a <code>View</code> extension. In the <strong>CounterLayoutBinder.kt</strong> modify the binding <code>events</code> add the necssary code to listen the to back-presses:</p>
+<pre><code class="language-kotlin">events = listOf(
+    incrementButton.clicks().map { Event.Increment },
+    decrementButton.clicks().map { Event.Decrement },
+    view.backPresses().map { Event.BackPressed }, // &lt;- Add this code
+)
+</code></pre>
+<p>The code obviously won't compile because we need to add a <code>BackPressed</code> Event and update the <strong>CounterFlow</strong> accordingly:</p>
+<pre><code class="language-kotlin">sealed class Event {
+    object Increment : Event()
+    object Decrement : Event()
+    object BackPressed : Event() // &lt;- Add this code
+}
+</code></pre>
+<p>And,</p>
+<pre><code class="language-kotlin">val CounterFlow = Flow&lt;Unit, State, Event, Unit, CounterScreen&gt;(
+    initialState = { State(counter = 0) },
+    stepper = { state, event -&gt;
+        when (event) {
+            Event.Increment -&gt; state.copy(
+                counter = state.counter + 1
+            ).advance()
+            Event.Decrement -&gt; state.copy(
+                counter = max(0, state.counter - 1)
+            ).advance()
+            Event.BackPressed -&gt; endFlow() // &lt;- Add this code to end the flow
+        }
+    },
+    feedbacks = listOf(),
+    render = { state, context -&gt;
+        CounterScreen(state, context.sink)
+    }
+)
+</code></pre>
+<p>Now, if you run the app and tap on back when you are in the <strong>Counter</strong> tutorial, the app will go back to the list of tutorials.
+If you tap back again one more time, the app will exit because no view is subscrived to the back-presses and <code>HandlesBack.Helper.onBackPressed</code> that we added to the <code>MainActivity</code> will return false.</p>
+<h3 id="where-to-go-from-here"><a href="#where-to-go-from-here" id="where-to-go-from-here" class="anchor"></a>Where to Go From Here?</h3>
+<p>In this tutorial you learned how to start sub-flows, to handle back presses, and, to use the view registry with multiple screens.
+We recommend to visit the <a href="../howtoguides/summary.md">How-to Guides</a> to learn the different FeedbackTree use cases and if you want to understand more about FeedbackTree internels the <a href="../reference/summary.md">Reference</a> guide is a good start.</p>
+
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+                    </article>
+                </section>
+            
+        </div>
+        <hr>
+
+        <!-- Page Footer -->
+        <div class="inner">
+    <footer id="footer">
+        <div class="clearfix">
+            
+                <div class="float-left">
+                    <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials/Login" class="button special small pill">
+                        <span>&larr;</span> Login Flow
+                    </a>
+                </div>
+            
+            
+        </div>
+    </footer>
+</div>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+    <div class="inner">
+
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form data-orchid-search="">
+                <input type="text" name="query" id="query" placeholder="Search"/>
+            </form>
+            <div class="box" id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div class="box" id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+
+        <!-- Menu -->
+        <nav id="siteNav" class="menu">
+            <header class="major">
+                <h2>Feedback Tree</h2>
+            </header>
+            <ul class="top-level">
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/tutorials">Tutorials</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/howtoguides">How-To Guides</a>
+    </li>
+    
+
+                
+                    
+    
+    <li>
+        <a href="https://eliekarouz.github.io/FeedbackTree/wiki/reference">Reference</a>
+    </li>
+    
+
+                
+            </ul>
+        </nav>
+        
+
+        <!-- Section -->
+        <section>
+            <p class="text-center">
+                Currently 0.20.0. Created with <a href="https://orchid.run">Orchid </a> and <b>Orchid Editorial Theme</b>.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright text-center">&copy; Feedback Tree. All rights reserved.<br>Design by <a href="https://html5up.net">HTML5 UP</a></p>
+        </footer>
+
+    </div>
+</div>
+
+</div>
+
+<!-- start:inject scripts -->
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_util.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_main.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/Editorial/98fd982a/assets/js/editorial_orchidCustomizations.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/lunr/lunr.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/assets/js/orchidSearch.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://eliekarouz.github.io/FeedbackTree/ajax/libs/prism/1.17.1/components/prism-groovy.min.js"></script>
+<!-- end:inject scripts -->
+
+</body>
+</html>

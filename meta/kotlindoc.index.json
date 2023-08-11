@@ -1,0 +1,987 @@
+{
+  "ownKey": "kotlindoc",
+  "childrenPages": {"com": {
+    "ownKey": "com",
+    "childrenPages": {"feedbacktree": {
+      "ownKey": "feedbacktree",
+      "childrenPages": {"flow": {
+        "ownKey": "flow",
+        "childrenPages": {
+          "core": {
+            "ownKey": "core",
+            "childrenPages": {
+              "RenderingContext": {
+                "ownKey": "RenderingContext",
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/core",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "RenderingContext",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/RenderingContext"
+                  },
+                  "description": "",
+                  "title": "RenderingContext",
+                  "content": "<p>sink<\/p>\n<p>sink<\/p>\n<p>sendEvent<\/p>\n<p>complete<\/p>\n<p>renderChild<\/p>\n<p>renderChild<\/p>\n"
+                }]
+              },
+              "FlowViewModel": {
+                "ownKey": "FlowViewModel",
+                "childrenPages": {"Factory": {
+                  "ownKey": "Factory",
+                  "ownPages": [{
+                    "reference": {
+                      "path": "com/feedbacktree/flow/core/FlowViewModel",
+                      "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                      "fileName": "Factory",
+                      "extension": "html",
+                      "usePrettyUrl": true,
+                      "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/FlowViewModel/Factory"
+                    },
+                    "description": "",
+                    "title": "Factory",
+                    "content": "<p><init><\/p>\n<p>create<\/p>\n"
+                  }]
+                }},
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/core",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "FlowViewModel",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/FlowViewModel"
+                  },
+                  "description": "",
+                  "title": "FlowViewModel",
+                  "content": "<p><init><\/p>\n<p>output<\/p>\n<p>screens<\/p>\n<p>onCleared<\/p>\n"
+                }]
+              },
+              "Feedback": {
+                "ownKey": "Feedback",
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/core",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "Feedback",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Feedback"
+                  },
+                  "description": "",
+                  "title": "Feedback",
+                  "content": ""
+                }]
+              },
+              "Observables": {
+                "ownKey": "Observables",
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/core",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "Observables",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Observables"
+                  },
+                  "description": "",
+                  "title": "Observables",
+                  "content": "<p><init><\/p>\n"
+                }]
+              },
+              "BindingsBuilder": {
+                "ownKey": "BindingsBuilder",
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/core",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "BindingsBuilder",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/BindingsBuilder"
+                  },
+                  "description": "",
+                  "title": "BindingsBuilder",
+                  "content": "<p><init><\/p>\n<p>subscriptions<\/p>\n<p>events<\/p>\n"
+                }]
+              },
+              "ObservableSchedulerContext": {
+                "ownKey": "ObservableSchedulerContext",
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/core",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "ObservableSchedulerContext",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/ObservableSchedulerContext"
+                  },
+                  "description": "",
+                  "title": "ObservableSchedulerContext",
+                  "content": "<p>Tuple of observable sequence and corresponding scheduler context on which that observable sequence receives elements.<init>\nTuple of observable sequence and corresponding scheduler context on which that observable sequence receives elements.\nsource<\/p>\n<p>scheduler<\/p>\n"
+                }]
+              },
+              "Flow": {
+                "ownKey": "Flow",
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/core",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "Flow",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core/Flow"
+                  },
+                  "description": "",
+                  "title": "Flow",
+                  "content": "<p><init><\/p>\n<p><init><\/p>\n<p>id<\/p>\n<p>initialState<\/p>\n<p>stepper<\/p>\n<p>feedbacks<\/p>\n<p>render<\/p>\n"
+                }]
+              }
+            },
+            "ownPages": [{
+              "reference": {
+                "path": "com/feedbacktree/flow",
+                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                "fileName": "core",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/core"
+              },
+              "description": "",
+              "title": "com.feedbacktree.flow.core",
+              "content": "<p>react\nState State type of the system.\nQuery Subset of state used to control the feedback loop.<p>When query returns some value, that value is being passed into <code>effects<\/code> lambda to decide which effects should be performed.\nIn case new <code>query<\/code> is different from the previous one, new effects are calculated by using <code>effects<\/code> lambda and then performed.<\/p><p>When <code>query<\/code> returns null, feedback loops doesn't perform any effect.<\/p>\nreact\nState State type of the system.\nQuery Subset of state used to control the feedback loop.<p>When query returns some value, that value is being passed into <code>effects<\/code> lambda to decide which effects should be performed.\nIn case new <code>query<\/code> is different from the previous one, new effects are calculated by using <code>effects<\/code> lambda and then performed.<\/p><p>When <code>query<\/code> returns null, feedback loops doesn't perform any effect.<\/p>\nreact\nFor every uniquely identifiable Query, effects closure is invoked with the initial value of the Query and future Querys corresponding to the same identifier.\nSubsequent equal values of Query are not emitted from the effects state parameter.\nreactSet\nState State type of the system.\nQuery Subset of state used to control the feedback loop.<p>When <code>query<\/code> returns some set of values, each value is being passed into <code>effects<\/code> lambda to decide which effects should be performed.<\/p><p>Effects are not interrupted for elements in the new <code>query<\/code> that were present in the <code>old<\/code> query.\nEffects are cancelled for elements present in <code>old<\/code> query but not in <code>new<\/code> query.\nIn case new elements are present in <code>new<\/code> query (and not in <code>old<\/code> query) they are being passed to the <code>effects<\/code> lambda and resulting effects are being performed.<\/p>\nenqueue<\/p>\n<p>bind\nBi-directional binding of a system State to external state machine and events from it.<p>Note that bind does not enqueue any event to the scheduler.<\/p>\nbindWithScheduler\nBi-directional binding of a system State to external state machine and events from it.\nMethod is useful when you want to use the <a href=\"#\">Scheduler<\/a> on which the the feedback is running.\nstartFlow<\/p>\n<p>startFlow<\/p>\n<p>startFlow<\/p>\n<p>startFlow<\/p>\n<p>startModalsFlow\nUtility that can be used to start Flows which produce Modals.\nIt's useful when you need to use FeedbackTree in a areas that are not using it yet.<\/p>\n"
+            }]
+          },
+          "ui": {
+            "ownKey": "ui",
+            "childrenPages": {
+              "core": {
+                "ownKey": "core",
+                "childrenPages": {
+                  "Named": {
+                    "ownKey": "Named",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/core",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "Named",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/Named"
+                      },
+                      "description": "",
+                      "title": "Named",
+                      "content": "<p>Allows screens that do not implement Compatible themselves to be distinguished\nby more than just their type. Instances are compatible if they have the same name\nand have compatible fields.<init>\nAllows screens that do not implement Compatible themselves to be distinguished\nby more than just their type. Instances are compatible if they have the same name\nand have compatible fields.\ncompatibilityKey\nInstances of the same type are compatible iff they have the same compatibilityKey.\nwrapped<\/p>\n<p>name<\/p>\n<p>toString<\/p>\n"
+                    }]
+                  },
+                  "BackStackScreen": {
+                    "ownKey": "BackStackScreen",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/core",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "BackStackScreen",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/BackStackScreen"
+                      },
+                      "description": "",
+                      "title": "BackStackScreen",
+                      "content": "<p><init><\/p>\n<p><init><\/p>\n<p>top<\/p>\n<p>backStack<\/p>\n<p>stack\n: screens that have are / have been displayed, ending in the current screen<\/p>\n"
+                    }]
+                  },
+                  "Compatible": {
+                    "ownKey": "Compatible",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/core",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "Compatible",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/Compatible"
+                      },
+                      "description": "",
+                      "title": "Compatible",
+                      "content": "<p>Implemented by objects whose compatibility requires more nuance\nthan just being of the same type.<p>Screens that don't implement this interface directly can be distinguished\nby wrapping them with Named.<\/p>\ncompatibilityKey\nInstances of the same type are compatible iff they have the same compatibilityKey.<\/p>\n"
+                    }]
+                  },
+                  "modals": {
+                    "ownKey": "modals",
+                    "childrenPages": {
+                      "AlertModal": {
+                        "ownKey": "AlertModal",
+                        "childrenPages": {
+                          "Button": {
+                            "ownKey": "Button",
+                            "ownPages": [{
+                              "reference": {
+                                "path": "com/feedbacktree/flow/ui/core/modals/AlertModal",
+                                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                "fileName": "Button",
+                                "extension": "html",
+                                "usePrettyUrl": true,
+                                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/Button"
+                              },
+                              "description": "",
+                              "title": "Button",
+                              "content": ""
+                            }]
+                          },
+                          "Event": {
+                            "ownKey": "Event",
+                            "childrenPages": {
+                              "ButtonClicked": {
+                                "ownKey": "ButtonClicked",
+                                "ownPages": [{
+                                  "reference": {
+                                    "path": "com/feedbacktree/flow/ui/core/modals/AlertModal/Event",
+                                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                    "fileName": "ButtonClicked",
+                                    "extension": "html",
+                                    "usePrettyUrl": true,
+                                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/Event/ButtonClicked"
+                                  },
+                                  "description": "",
+                                  "title": "ButtonClicked",
+                                  "content": "<p><init><\/p>\n<p>button<\/p>\n"
+                                }]
+                              },
+                              "Canceled": {
+                                "ownKey": "Canceled",
+                                "ownPages": [{
+                                  "reference": {
+                                    "path": "com/feedbacktree/flow/ui/core/modals/AlertModal/Event",
+                                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                    "fileName": "Canceled",
+                                    "extension": "html",
+                                    "usePrettyUrl": true,
+                                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/Event/Canceled"
+                                  },
+                                  "description": "",
+                                  "title": "Canceled",
+                                  "content": ""
+                                }]
+                              }
+                            },
+                            "ownPages": [{
+                              "reference": {
+                                "path": "com/feedbacktree/flow/ui/core/modals/AlertModal",
+                                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                "fileName": "Event",
+                                "extension": "html",
+                                "usePrettyUrl": true,
+                                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/Event"
+                              },
+                              "description": "",
+                              "title": "Event",
+                              "content": ""
+                            }]
+                          },
+                          "AlertModalBuilder": {
+                            "ownKey": "AlertModalBuilder",
+                            "ownPages": [{
+                              "reference": {
+                                "path": "com/feedbacktree/flow/ui/core/modals/AlertModal",
+                                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                                "fileName": "AlertModalBuilder",
+                                "extension": "html",
+                                "usePrettyUrl": true,
+                                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal/AlertModalBuilder"
+                              },
+                              "description": "",
+                              "title": "AlertModalBuilder",
+                              "content": "<p><init><\/p>\n<p>title<\/p>\n<p>message<\/p>\n<p>cancelEvent<\/p>\n<p>contentScreen<\/p>\n<p>positive<\/p>\n<p>negative<\/p>\n<p>neutral<\/p>\n"
+                            }]
+                          }
+                        },
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/core/modals",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "AlertModal",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/AlertModal"
+                          },
+                          "description": "",
+                          "title": "AlertModal",
+                          "content": "<p><init><\/p>\n<p>buttons<\/p>\n<p>message<\/p>\n<p>title<\/p>\n<p>cancelable<\/p>\n<p>contentScreen<\/p>\n<p>onEvent<\/p>\n<p>equals<\/p>\n<p>hashCode<\/p>\n"
+                        }]
+                      },
+                      "ModalContainerScreen": {
+                        "ownKey": "ModalContainerScreen",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/core/modals",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "ModalContainerScreen",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/ModalContainerScreen"
+                          },
+                          "description": "",
+                          "title": "ModalContainerScreen",
+                          "content": "<p><init><\/p>\n<p><init><\/p>\n<p>baseScreen<\/p>\n<p>modals<\/p>\n"
+                        }]
+                      },
+                      "Modal": {
+                        "ownKey": "Modal",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/core/modals",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "Modal",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals/Modal"
+                          },
+                          "description": "",
+                          "title": "Modal",
+                          "content": ""
+                        }]
+                      }
+                    },
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/core",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "modals",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core/modals"
+                      },
+                      "description": "",
+                      "title": "com.feedbacktree.flow.ui.core.modals",
+                      "content": ""
+                    }]
+                  }
+                },
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/ui",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "core",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/core"
+                  },
+                  "description": "",
+                  "title": "com.feedbacktree.flow.ui.core",
+                  "content": "<p>compatible\nNormally returns true if me and you are instances of the same class.\nIf that common class implements Compatible, both instances must also\nhave the same Compatible.compatibilityKey.<p>A convenient way to take control over the matching behavior of objects that\ndon't implement Compatible is to wrap them with Named.<\/p>\ngoTo\nHelper for Lists that are used as back-stacks, where the last element is considered\nto be the top / current value of the stack.<p>Returns a transformation of the receiver by popping back to the first element\nthat is compatible with next. If no matching frame is found, adds next\nto the end.<\/p><\/p>\n"
+                }]
+              },
+              "views": {
+                "ownKey": "views",
+                "childrenPages": {
+                  "LayoutBinderBuilder": {
+                    "ownKey": "LayoutBinderBuilder",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "LayoutBinderBuilder",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/LayoutBinderBuilder"
+                      },
+                      "description": "",
+                      "title": "LayoutBinderBuilder",
+                      "content": "<p><init><\/p>\n<p>feedbacks<\/p>\n<p>bind<\/p>\n<p>react<\/p>\n<p>react<\/p>\n<p>react<\/p>\n<p>reactSet<\/p>\n"
+                    }]
+                  },
+                  "core": {
+                    "ownKey": "core",
+                    "childrenPages": {
+                      "HandlesBack": {
+                        "ownKey": "HandlesBack",
+                        "childrenPages": {"Helper": {
+                          "ownKey": "Helper",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/core/HandlesBack",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "Helper",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/HandlesBack/Helper"
+                            },
+                            "description": "",
+                            "title": "Helper",
+                            "content": "<p>setBackHandler\nSets a handler that always consumes the back event. Convenient for use\nwith method references.\nsetConditionalBackHandler\nSets a handler that can return <code>true<\/code> if it has consumed the back\nevent, or <code>false<\/code> if processing should continue.\nonBackPressed\nTo be called by a container when the back button is pressed. Calls the given\nview's HandlesBack.onBackPressed method, or the handler registered on it\nvia setConditionalBackHandler or setBackHandler.<\/p>\n"
+                          }]
+                        }},
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/core",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "HandlesBack",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/HandlesBack"
+                          },
+                          "description": "",
+                          "title": "HandlesBack",
+                          "content": "<p>Implemented by objects that want the option to intercept back button taps.\nCan be implemented by <a href=\"#\">View<\/a> subclasses, or can be attached to a stock view via\nHelper.setBackHandler.<p>When implemented by a container view, the onBackPressed methods or tags of its\nsubviews should be invoked first, via Helper.onBackPressed<\/p><p>To kick things off, override <a href=\"#\">android.app.Activity.onBackPressed<\/a> to call<\/p>\n<a href=\"#\">workflowOnBackPressed<\/a> or <a href=\"#\">WorkflowFragment.onBackPressed<\/a><\/p><p><b>NB<\/b> This is all expected to be scrapped as soon as\n<a href=\"https://developer.android.com/reference/androidx/activity/OnBackPressedDispatcher.html\">OnBackPressedDispatcher<\/a>\nstabilizes.<\/p>\n<p>onBackPressed\nReturns <code>true<\/code> if back event was handled, <code>false<\/code> if someone higher in\nthe chain should.<\/p>\n"
+                        }]
+                      },
+                      "DisposeScreenBinding": {
+                        "ownKey": "DisposeScreenBinding",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/core",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "DisposeScreenBinding",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/DisposeScreenBinding"
+                          },
+                          "description": "",
+                          "title": "DisposeScreenBinding",
+                          "content": "<p>Function attached to aview created by ViewRegistry, to allow cleanup of resources\nwhen the view is removed from the window hierarchy.<\/p>\n"
+                        }]
+                      },
+                      "ViewBinding": {
+                        "ownKey": "ViewBinding",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/core",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "ViewBinding",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewBinding"
+                          },
+                          "description": "",
+                          "title": "ViewBinding",
+                          "content": "<p>Factory for <a href=\"#\">View<\/a> instances that can show screens of typeScreenT.\nUse <a href=\"#\">LayoutBinder.create<\/a> to work with XML layout resources, or\nBuilderBinding to create views from code.<p>Sets of bindings are gathered in ViewRegistry instances.<\/p>\ntype<\/p>\n<p>buildView\nReturns a View ready to display initialScreen (and any succeeding values)\nvia <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                        }]
+                      },
+                      "ShowScreen": {
+                        "ownKey": "ShowScreen",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/core",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "ShowScreen",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ShowScreen"
+                          },
+                          "description": "",
+                          "title": "ShowScreen",
+                          "content": "<p>Function attached to a view created by ViewRegistry, to allow it\nto respond to <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                        }]
+                      },
+                      "ViewRegistry": {
+                        "ownKey": "ViewRegistry",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/core",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "ViewRegistry",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ViewRegistry"
+                          },
+                          "description": "",
+                          "title": "ViewRegistry",
+                          "content": "<p><init><\/p>\n<p><init><\/p>\n<p>buildView\nCreates a <a href=\"#\">View<\/a> to display initialScreen, which can be updated via calls\nto <a href=\"#\">View.showScreen<\/a>.\nbuildView\nCreates a <a href=\"#\">View<\/a> to display initialScreen, and which can handle calls\nto <a href=\"#\">View.showScreen<\/a>.\nplus<\/p>\n<p>plus<\/p>\n"
+                        }]
+                      },
+                      "BuilderBinding": {
+                        "ownKey": "BuilderBinding",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/core",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "BuilderBinding",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/BuilderBinding"
+                          },
+                          "description": "",
+                          "title": "BuilderBinding",
+                          "content": "<p class=\"..\">A ViewBinding that allows ViewRegistry.buildView to dispense <a href=\"#\">View<\/a>s that need\nto be generated from code. (Use <a href=\"#\">LayoutBinder<\/a> to work with XML layout resources.)<p>Typical usage is to have a custom builder or view's <code>companion object<\/code> implement\nViewBinding by delegating to a BuilderBinding, like this:<\/p><pre><code class=\"language-\">    class MyView(\ncontext: Context,\nattributeSet: AttributeSet?\n) : FrameLayout(context, attributeSet) {\nprivate fun update(screen:  MyScreen)<\/p>\n<pre><code>  companion object : ViewBuilder&lt;MyScreen&gt;\n  by BuilderBinding(\n      type = MyScreen::class,\n      builder = { _, initialViewModel, context, _ -&gt;\n        MyView(context).apply {\n          layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)\n          bindShowScreen(initialScreen, ::update)\n        }\n  )\n}&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This pattern allows us to assemble a ViewRegistry out of the\n<\/code><\/pre>\n<p class=\"..\">custom classes themselves.<\/p><pre><code class=\"language-\">    val TicTacToeViewBuilders = ViewRegistry(\nMyView, GamePlayLayoutRunner, GameOverLayoutRunner\n)<\/code><\/pre><p>Note in particular the ViewRegistry argument to the viewConstructor lambda. This allows\nnested screns to be displayed via nested calls to ViewRegistry.buildView.<\/p><init>\nA ViewBinding that allows ViewRegistry.buildView to dispense <a href=\"#\">View<\/a>s that need\nto be generated from code. (Use <a href=\"#\">LayoutBinder<\/a> to work with XML layout resources.)<p>Typical usage is to have a custom builder or view's <code>companion object<\/code> implement\nViewBinding by delegating to a BuilderBinding, like this:<\/p><pre><code class=\"language-\">    class MyView(\ncontext: Context,\nattributeSet: AttributeSet?\n) : FrameLayout(context, attributeSet) {\nprivate fun update(screen:  MyScreen)<\/p>\n<pre><code>  companion object : ViewBuilder&lt;MyScreen&gt;\n  by BuilderBinding(\n      type = MyScreen::class,\n      builder = { _, initialViewModel, context, _ -&gt;\n        MyView(context).apply {\n          layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)\n          bindShowScreen(initialScreen, ::update)\n        }\n  )\n}&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This pattern allows us to assemble a ViewRegistry out of the\n<\/code><\/pre>\n<p>custom classes themselves.<\/p><pre><code class=\"language-\">    val TicTacToeViewBuilders = ViewRegistry(\nMyView, GamePlayLayoutRunner, GameOverLayoutRunner\n)<\/code><\/pre><p>Note in particular the ViewRegistry argument to the viewConstructor lambda. This allows\nnested screns to be displayed via nested calls to ViewRegistry.buildView.<\/p>\ntype<\/p>\n<p>buildView\nReturns a View ready to display initialScreen (and any succeeding values)\nvia <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                        }]
+                      },
+                      "ShowScreenTag": {
+                        "ownKey": "ShowScreenTag",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/core",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "ShowScreenTag",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core/ShowScreenTag"
+                          },
+                          "description": "",
+                          "title": "ShowScreenTag",
+                          "content": "<p><init><\/p>\n<p>showing<\/p>\n<p>showScreen<\/p>\n"
+                        }]
+                      }
+                    },
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "core",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/core"
+                      },
+                      "description": "",
+                      "title": "com.feedbacktree.flow.ui.views.core",
+                      "content": "<p>setBackHandler\nSets a handler that always consumes the back event. Convenient for use\nwith method references.<p>Outside of HandlesBack.Helper because when it's there, IntelliJ can't find it for auto-import\nfor some reason.<\/p>\nbackPresses<\/p>\n<p>bindShowScreen\nEstablishes showScreen as the implementation of <a href=\"#\">View.showScreen<\/a>\nfor the receiver, possibly replacing the existing one. Calls showScreen\nto display initialScreen.<p>Intended for use by implementations of ViewBinding.buildView.<\/p>\ncanShowScreen\nTrue if this view is able to show screen.<p>Returns <code>false<\/code> if bindShowScreen has not been called, so it is always safe to\ncall this method. Otherwise returns the compatibility of the new\nscreen and the current one.<\/p>\nshowScreen\nShows screen in a view that has been initialized by bindShowScreen.\ndisposeScreenBinding\nInvokes cleanup code installed by bindShowScreen<\/p>\n"
+                    }]
+                  },
+                  "WorkflowLayout": {
+                    "ownKey": "WorkflowLayout",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "WorkflowLayout",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/WorkflowLayout"
+                      },
+                      "description": "",
+                      "title": "WorkflowLayout",
+                      "content": "<p>In most cases, if not all, you will be using com.feedbacktree.flow.core.startFlow or subclass FlowFragment\nrather than manage this class directly.<p>WorkflowLayout is the root <a href=\"#\">View<\/a> container that will be responsible of rendering the screens produced by\nthe root <a href=\"#\">Flow<\/a>.<\/p><init>\nIn most cases, if not all, you will be using com.feedbacktree.flow.core.startFlow or subclass FlowFragment\nrather than manage this class directly.<p>WorkflowLayout is the root <a href=\"#\">View<\/a> container that will be responsible of rendering the screens produced by\nthe root <a href=\"#\">Flow<\/a>.<\/p><\/p>\n<p>start\nSubscribes to screens, and uses registry to\nbuild a new view each time a new type of viewModel is received,\nmaking that view the only child of this one.<p>Views created this way may make recursive calls to ViewRegistry.buildView to make\nchildren of their own to handle nested screens.<\/p>\nonBackPressed\nReturns <code>true<\/code> if back event was handled, <code>false<\/code> if someone higher in\nthe chain should.\nonSaveInstanceState<\/p>\n<p>onRestoreInstanceState<\/p>\n"
+                    }]
+                  },
+                  "LayoutBinder": {
+                    "ownKey": "LayoutBinder",
+                    "childrenPages": {
+                      "LayoutResBinding": {
+                        "ownKey": "LayoutResBinding",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/LayoutBinder",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "LayoutResBinding",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/LayoutBinder/LayoutResBinding"
+                          },
+                          "description": "",
+                          "title": "LayoutResBinding",
+                          "content": "<p><init><\/p>\n<p>type<\/p>\n<p>layoutId<\/p>\n<p>build<\/p>\n<p>sink<\/p>\n<p>buildView\nReturns a View ready to display initialScreen (and any succeeding values)\nvia <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                        }]
+                      },
+                      "AndroidViewBinding": {
+                        "ownKey": "AndroidViewBinding",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/LayoutBinder",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "AndroidViewBinding",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/LayoutBinder/AndroidViewBinding"
+                          },
+                          "description": "",
+                          "title": "AndroidViewBinding",
+                          "content": "<p><init><\/p>\n<p>type<\/p>\n<p>viewBindingInflater<\/p>\n<p>build<\/p>\n<p>sink<\/p>\n<p>buildView\nReturns a View ready to display initialScreen (and any succeeding values)\nvia <a href=\"#\">View.showScreen<\/a>.<\/p>\n"
+                        }]
+                      }
+                    },
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "LayoutBinder",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/LayoutBinder"
+                      },
+                      "description": "",
+                      "title": "LayoutBinder",
+                      "content": "<p>create<\/p>\n<p>create<\/p>\n<p>create<\/p>\n<p>create<\/p>\n<p>create<\/p>\n<p>create<\/p>\n"
+                    }]
+                  },
+                  "NoEvent": {
+                    "ownKey": "NoEvent",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "NoEvent",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/NoEvent"
+                      },
+                      "description": "",
+                      "title": "NoEvent",
+                      "content": ""
+                    }]
+                  },
+                  "FlowFragment": {
+                    "ownKey": "FlowFragment",
+                    "childrenPages": {"Parameters": {
+                      "ownKey": "Parameters",
+                      "ownPages": [{
+                        "reference": {
+                          "path": "com/feedbacktree/flow/ui/views/FlowFragment",
+                          "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                          "fileName": "Parameters",
+                          "extension": "html",
+                          "usePrettyUrl": true,
+                          "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/FlowFragment/Parameters"
+                        },
+                        "description": "",
+                        "title": "Parameters",
+                        "content": "<p><init><\/p>\n<p>input<\/p>\n<p>flow<\/p>\n<p>viewRegistry<\/p>\n"
+                      }]
+                    }},
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "FlowFragment",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/FlowFragment"
+                      },
+                      "description": "",
+                      "title": "FlowFragment",
+                      "content": "<p>Extend this class in order to launch a flow inside a fragment.\nThis would allow you to smoothly integrate FeedbackTree to your project.<init>\nExtend this class in order to launch a flow inside a fragment.\nThis would allow you to smoothly integrate FeedbackTree to your project.\noutput\nYou an subscribe to this variable to collect the output produced by the flow.\nparameters\nYou will have to provide the different parameters input,\nthe flow, and, the viewRegistry.<p>The fragment will use the different parameters provided to start the flow when the activity is\ncreated.<\/p>\nonCreateView<\/p>\n<p>onActivityCreated<\/p>\n<p>onBackPressed\nIf your workflow needs to manage the back button, override <a href=\"#\">android.app.Activity.onBackPressed<\/a>\nand call this method, and have its views or LayoutBinders use HandlesBack or <code>view.backPresses()<\/code>.<p>e.g.:<\/p><pre><code class=\"language-\">    override fun onBackPressed() {\nval flowFragment =\nsupportFragmentManager.findFragmentByTag(MY_WORKFLOW) as? FlowFragment&lt;*, *, *&gt;\nif (flowFragment?.onBackPressed() != true) super.onBackPressed()\n}<\/code><\/pre>\nonDestroy<\/p>\n"
+                    }]
+                  },
+                  "modals": {
+                    "ownKey": "modals",
+                    "childrenPages": {
+                      "ModalContainer": {
+                        "ownKey": "ModalContainer",
+                        "childrenPages": {"Binding": {
+                          "ownKey": "Binding",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/modals/ModalContainer",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "Binding",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/ModalContainer/Binding"
+                            },
+                            "description": "",
+                            "title": "Binding",
+                            "content": "<p><init><\/p>\n"
+                          }]
+                        }},
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/modals",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "ModalContainer",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/ModalContainer"
+                          },
+                          "description": "",
+                          "title": "ModalContainer",
+                          "content": "<p>Containers used to display Modals.<p>The DialogRegistry is passed to the ModalContainer in order to specify how to create and update the dialog views.<\/p><init>\nContainers used to display Modals.<p>The DialogRegistry is passed to the ModalContainer in order to specify how to create and update the dialog views.<\/p><\/p>\n<p>onBackPressed\nReturns <code>true<\/code> if back event was handled, <code>false<\/code> if someone higher in\nthe chain should.\nonSaveInstanceState<\/p>\n<p>onRestoreInstanceState<\/p>\n"
+                        }]
+                      },
+                      "DialogBinding": {
+                        "ownKey": "DialogBinding",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/modals",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "DialogBinding",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/DialogBinding"
+                          },
+                          "description": "",
+                          "title": "DialogBinding",
+                          "content": "<p>type<\/p>\n<p>buildDialog<\/p>\n<p>updateDialog<\/p>\n<p>cleanUpDialog<\/p>\n"
+                        }]
+                      },
+                      "DialogRef": {
+                        "ownKey": "DialogRef",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/modals",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "DialogRef",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/DialogRef"
+                          },
+                          "description": "",
+                          "title": "DialogRef",
+                          "content": "<p><init><\/p>\n<p>modal<\/p>\n<p>dialog<\/p>\n<p>extra\noptional hook to allow DialogRegistrys to associate extra data with this dialog,\ne.g. its content view. Not considered for equality.\nequals<\/p>\n<p>hashCode<\/p>\n"
+                        }]
+                      },
+                      "AlertDialogBinding": {
+                        "ownKey": "AlertDialogBinding",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/modals",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "AlertDialogBinding",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/AlertDialogBinding"
+                          },
+                          "description": "",
+                          "title": "AlertDialogBinding",
+                          "content": "<p><init><\/p>\n<p>type<\/p>\n<p>buildDialog<\/p>\n<p>updateDialog<\/p>\n<p>cleanUpDialog<\/p>\n"
+                        }]
+                      },
+                      "DialogRegistry": {
+                        "ownKey": "DialogRegistry",
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/modals",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "DialogRegistry",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals/DialogRegistry"
+                          },
+                          "description": "",
+                          "title": "DialogRegistry",
+                          "content": "<p><init><\/p>\n<p><init><\/p>\n<p>bindings<\/p>\n<p>buildDialog\nCreates a DialogRef (aka <a href=\"#\">Dialog<\/a>) to display initialModal, which can be updated via calls\nto updateDialog.\nupdateDialog<\/p>\n<p>cleanUp<\/p>\n<p>plus<\/p>\n<p>plus<\/p>\n"
+                        }]
+                      }
+                    },
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "modals",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/modals"
+                      },
+                      "description": "",
+                      "title": "com.feedbacktree.flow.ui.views.modals",
+                      "content": ""
+                    }]
+                  },
+                  "ViewBindingInflater": {
+                    "ownKey": "ViewBindingInflater",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "ViewBindingInflater",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/ViewBindingInflater"
+                      },
+                      "description": "",
+                      "title": "ViewBindingInflater",
+                      "content": ""
+                    }]
+                  },
+                  "backstack": {
+                    "ownKey": "backstack",
+                    "childrenPages": {
+                      "ViewStateCache": {
+                        "ownKey": "ViewStateCache",
+                        "childrenPages": {"SavedState": {
+                          "ownKey": "SavedState",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/backstack/ViewStateCache",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "SavedState",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack/ViewStateCache/SavedState"
+                            },
+                            "description": "",
+                            "title": "SavedState",
+                            "content": "<p>Convenience for use in <a href=\"#\">View.onSaveInstanceState<\/a> and <a href=\"#\">View.onRestoreInstanceState<\/a>\nmethods of container views that have no other state of their own to save.<p>More interesting containers should create their own subclass of <a href=\"#\">BaseSavedState<\/a>\nrather than trying to extend this one.<\/p><init><\/p>\n<p><init><\/p>\n<p>viewStateCache<\/p>\n<p>writeToParcel<\/p>\n"
+                          }]
+                        }},
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/backstack",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "ViewStateCache",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack/ViewStateCache"
+                          },
+                          "description": "",
+                          "title": "ViewStateCache",
+                          "content": "<p>Handles persistence chores for container views that manage a set of Named screens,\nshowing a view for one at a time -- think back stacks or tab sets.<p>This class implements <a href=\"#\">Parcelable<\/a> so that it can be preserved from\na container view's own <a href=\"#\">View.saveHierarchyState<\/a> method. A simple container can\nreturn SavedState from that method rather than creating its own persistence class.<\/p><init><\/p>\n<p>prune\nTo be called when the set of hidden views changes but the visible view remains\nthe same. Any cached view state held for screens that are not\ncom.feedbacktree.flow.ui.core.compatible those in retaining will be dropped.\nupdate<\/p>\n<p>restore\nReplaces the state of the receiver with that of from. Typical usage is to call this from\na container view's <a href=\"#\">View.onRestoreInstanceState<\/a>.\ndescribeContents<\/p>\n<p>writeToParcel<\/p>\n"
+                        }]
+                      },
+                      "BackStackContainer": {
+                        "ownKey": "BackStackContainer",
+                        "childrenPages": {"Companion": {
+                          "ownKey": "Companion",
+                          "ownPages": [{
+                            "reference": {
+                              "path": "com/feedbacktree/flow/ui/views/backstack/BackStackContainer",
+                              "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                              "fileName": "Companion",
+                              "extension": "html",
+                              "usePrettyUrl": true,
+                              "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack/BackStackContainer/Companion"
+                            },
+                            "description": "",
+                            "title": "Companion",
+                            "content": ""
+                          }]
+                        }},
+                        "ownPages": [{
+                          "reference": {
+                            "path": "com/feedbacktree/flow/ui/views/backstack",
+                            "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                            "fileName": "BackStackContainer",
+                            "extension": "html",
+                            "usePrettyUrl": true,
+                            "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack/BackStackContainer"
+                          },
+                          "description": "",
+                          "title": "BackStackContainer",
+                          "content": "<p>A container view that can display a stream of BackStackScreen instances.<p>This view is back button friendly -- it implements HandlesBack, delegating\nto displayed views that implement that interface themselves.<\/p><init><\/p>\n<p><init>\nA container view that can display a stream of BackStackScreen instances.<p>This view is back button friendly -- it implements HandlesBack, delegating\nto displayed views that implement that interface themselves.<\/p><\/p>\n<p>performTransition\nCalled from <a href=\"#\">View.showScreen<\/a> to swap between views.\nSubclasses can override to customize visual effects. There is no need to call super.\nNote that views are showing screens of type Named<code>&lt;BackStackScreen&lt;*&gt;&gt;<\/code>.\nonBackPressed\nReturns <code>true<\/code> if back event was handled, <code>false<\/code> if someone higher in\nthe chain should.\nonSaveInstanceState<\/p>\n<p>onRestoreInstanceState<\/p>\n"
+                        }]
+                      }
+                    },
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/ui/views",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "backstack",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views/backstack"
+                      },
+                      "description": "",
+                      "title": "com.feedbacktree.flow.ui.views.backstack",
+                      "content": ""
+                    }]
+                  }
+                },
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/ui",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "views",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/ui/views"
+                  },
+                  "description": "",
+                  "title": "com.feedbacktree.flow.ui.views",
+                  "content": ""
+                }]
+              }
+            }
+          },
+          "utils": {
+            "ownKey": "utils",
+            "childrenPages": {
+              "Optional": {
+                "ownKey": "Optional",
+                "childrenPages": {
+                  "Some": {
+                    "ownKey": "Some",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/utils/Optional",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "Some",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/Optional/Some"
+                      },
+                      "description": "",
+                      "title": "Some",
+                      "content": "<p><init><\/p>\n<p>data<\/p>\n"
+                    }]
+                  },
+                  "None": {
+                    "ownKey": "None",
+                    "ownPages": [{
+                      "reference": {
+                        "path": "com/feedbacktree/flow/utils/Optional",
+                        "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                        "fileName": "None",
+                        "extension": "html",
+                        "usePrettyUrl": true,
+                        "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/Optional/None"
+                      },
+                      "description": "",
+                      "title": "None",
+                      "content": "<p><init><\/p>\n"
+                    }]
+                  }
+                },
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/utils",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "Optional",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/Optional"
+                  },
+                  "description": "",
+                  "title": "Optional",
+                  "content": ""
+                }]
+              },
+              "Logger": {
+                "ownKey": "Logger",
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/utils",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "Logger",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/Logger"
+                  },
+                  "description": "",
+                  "title": "Logger",
+                  "content": "<p>In case you want to have your custom logger, feel free to implement this interface and\nset logger to the what you have created.\nYou can also set the logLevel that fits your needs. The default value is LogLevel.Info<\/p>\n<p>info<\/p>\n<p>debug<\/p>\n<p>verbose<\/p>\n<p>error<\/p>\n"
+                }]
+              },
+              "LogLevel": {
+                "ownKey": "LogLevel",
+                "ownPages": [{
+                  "reference": {
+                    "path": "com/feedbacktree/flow/utils",
+                    "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                    "fileName": "LogLevel",
+                    "extension": "html",
+                    "usePrettyUrl": true,
+                    "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils/LogLevel"
+                  },
+                  "description": "",
+                  "title": "LogLevel",
+                  "content": ""
+                }]
+              }
+            },
+            "ownPages": [{
+              "reference": {
+                "path": "com/feedbacktree/flow",
+                "baseUrl": "https://eliekarouz.github.io/FeedbackTree",
+                "fileName": "utils",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://eliekarouz.github.io/FeedbackTree/com/feedbacktree/flow/utils"
+              },
+              "description": "",
+              "title": "com.feedbacktree.flow.utils",
+              "content": "<p>mapNotNull\nThe returned stream will emit value(T) if value(T) is not null.<\/p>\n"
+            }]
+          }
+        }
+      }}
+    }}
+  }}
+}
